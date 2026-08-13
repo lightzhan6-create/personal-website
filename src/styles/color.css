@@ -23,6 +23,9 @@
   --muted-foreground:   var(--gray-11);
   --accent:             light-dark(#0f766e, #5eead4);
   --accent-subtle:      light-dark(#e6fffb, #123b39);
+  --surface-strong:     light-dark(#181817, #e9e7e1);
+  --surface-strong-text: light-dark(#f5f3ed, #181817);
+  --surface-strong-muted: light-dark(#bebbb2, #56544e);
   --destructive:        var(--red-11);
   --border:             var(--gray-6);
   --ring:               var(--accent);

@@ -20,9 +20,12 @@ import MetaHead from "@/components/MetaHead.astro"
 import Sidebar from "@/components/Sidebar.astro"
 import { SITE } from "@/consts"
 
-type Props = { crumbs?: { label: string; href: string }[] }
+type Props = {
+  crumbs?: { label: string; href: string }[]
+  variant?: "default" | "home"
+}
 
-const { crumbs } = Astro.props
+const { crumbs, variant = "default" } = Astro.props
 ---
 
 <html lang={SITE.locale} dir={SITE.dir}>
@@ -30,7 +33,7 @@ const { crumbs } = Astro.props
     <slot name="head" />
   </MetaHead>
   <body>
-    <page-grid>
+    <page-grid data-layout={variant}>
       <page-header>
         <page-nav>
           <Sidebar crumbs={crumbs}
@@ -134,6 +137,14 @@ const { crumbs } = Astro.props
       inline-size: 100%;
       max-inline-size: var(--measure);
       margin-inline: auto;
+    }
+  }
+
+  page-grid[data-layout="home"] page-content {
+    grid-column: 3 / 13;
+
+    @media (width < 64rem) {
+      grid-column: 1 / -1;
     }
   }
 </style>
