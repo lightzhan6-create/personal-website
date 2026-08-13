@@ -8,3 +8,9 @@
     border-image: var(--bar-border-image);
   }
 }
+
+page-grid[data-layout="home"] [data-bar] {
+  background-color: color-mix(in oklab, var(--tech-surface) 90%, transparent);
+  border-block-end: 1px solid var(--tech-line);
+  backdrop-filter: saturate(180%) blur(10px);
+}

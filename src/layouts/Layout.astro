@@ -147,4 +147,36 @@ const { crumbs, variant = "default" } = Astro.props
       grid-column: 1 / -1;
     }
   }
+
+  page-grid[data-layout="home"] {
+    display: block;
+    max-width: none;
+    padding: 0;
+
+    page-header {
+      display: block;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 0;
+    }
+
+    page-nav {
+      position: static;
+      width: auto;
+    }
+
+    page-content {
+      display: flex;
+      grid-column: auto;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+
+      page-footer {
+        width: min(100% - 2 * clamp(1.25rem, 3.5vw, 3.5rem), 75rem);
+        margin: var(--space-l) auto var(--space-m);
+      }
+    }
+  }
 </style>

@@ -206,4 +206,90 @@ const section = NAVIGATION.find(
       padding-block-start: 0.15rem;
     }
   }
+
+  :global(page-grid[data-layout="home"]) aside {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    width: min(100%, 75rem);
+    height: 4.5rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 3.5vw, 3.5rem);
+  }
+
+  :global(page-grid[data-layout="home"]) sidebar-inner {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+
+    > a {
+      gap: 0.55rem;
+      font-size: 1.05rem;
+      letter-spacing: -0.04em;
+
+      svg {
+        inline-size: 1.5rem;
+        block-size: 1.5rem;
+        color: var(--tech-teal-deep);
+      }
+    }
+  }
+
+  :global(page-grid[data-layout="home"]) nav ul {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+
+    a {
+      padding: 0.55rem 0.65rem;
+      border-radius: 0.45rem;
+      color: var(--tech-ink-2);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 180ms ease, background-color 180ms ease;
+
+      &:hover,
+      &[aria-current="page"] {
+        color: var(--tech-teal-deep);
+        background: var(--tech-mint);
+      }
+    }
+  }
+
+  :global(page-grid[data-layout="home"]) sidebar-toggle {
+    margin-inline: 0 0;
+  }
+
+  @media (width < 58rem) {
+    :global(page-grid[data-layout="home"]) aside {
+      height: auto;
+      min-height: 4rem;
+      align-items: flex-start;
+      padding-block: 0.65rem;
+    }
+
+    :global(page-grid[data-layout="home"]) sidebar-inner {
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+    }
+
+    :global(page-grid[data-layout="home"]) nav {
+      order: 3;
+      flex-basis: 100%;
+    }
+
+    :global(page-grid[data-layout="home"]) nav ul {
+      justify-content: space-between;
+      gap: 0.1rem;
+    }
+
+    :global(page-grid[data-layout="home"]) nav ul a {
+      padding: 0.35rem 0.15rem;
+      background: transparent !important;
+      font-size: 0.77rem;
+    }
+  }
 </style>

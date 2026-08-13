@@ -16,6 +16,33 @@ const selectedProjects = (await getCollection("projects"))
     return bDate - aDate
   })
   .slice(0, 1)
+
+const coreAreas = [
+  {
+    number: "01",
+    title: "International B2B Sales",
+    label: "Global business practice",
+    description:
+      "Global customer development, business communication and B2B sales.",
+    points: ["Customer development", "Business communication", "Sales operations"],
+  },
+  {
+    number: "02",
+    title: "Electronics Manufacturing",
+    label: "Industry and process",
+    description:
+      "SMT, THT, production equipment, automation and electronics manufacturing.",
+    points: ["SMT / THT", "Production equipment", "Automation"],
+  },
+  {
+    number: "03",
+    title: "AI Operations",
+    label: "Applied workflow design",
+    description:
+      "AI tools, workflows, automation and practical use of AI in daily work.",
+    points: ["AI tools", "Workflow design", "Practical automation"],
+  },
+]
 ---
 
 <Layout variant="home">
@@ -27,160 +54,204 @@ const selectedProjects = (await getCollection("projects"))
   <div class="portfolio-home">
     <section class="hero" aria-labelledby="home-title">
       <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-topline" data-enter>
-        <p>Independent portfolio</p>
-        <p>International / Industrial / Operational</p>
-      </div>
-
-      <div class="hero-title-wrap">
-        <p class="hero-index" data-enter>01 — PERSONAL PRACTICE</p>
-        <h1 id="home-title" data-enter>LIGHT</h1>
-      </div>
-
-      <div class="hero-footer" data-enter>
-        <p class="hero-statement">
-          At the intersection of international B2B sales, electronics manufacturing and AI-assisted workflows.
-        </p>
-        <div class="hero-disciplines" aria-label="Professional focus">
-          <span>International Sales</span>
-          <span>Electronics Manufacturing</span>
-          <span>AI Operations</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="profile-section section-space" aria-labelledby="about-heading">
-      <div class="section-marker" data-enter>
-        <span>02</span>
-        <span>About</span>
-      </div>
-      <div class="profile-copy" data-enter>
-        <h2 id="about-heading">Commercial thinking, grounded in how work actually moves.</h2>
-        <div>
-          <p>
-            I work with the conversations, systems and operational details behind international growth. This is a personal space for notes on manufacturing, overseas sales and AI tools that make valuable work easier to repeat.
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy" data-enter>
+          <p class="eyebrow"><span></span> Personal practice / 2026</p>
+          <h1 id="home-title">LIGHT</h1>
+          <p class="hero-focus">
+            International Sales <span aria-hidden="true">&middot;</span>
+            Electronics Manufacturing <span aria-hidden="true">&middot;</span> AI Operations
           </p>
-          <a class="inline-link" href="/about">More about Light <span aria-hidden="true">&rarr;</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="disciplines" aria-labelledby="disciplines-heading">
-      <div class="disciplines-intro section-space">
-        <div class="section-marker section-marker-light" data-enter>
-          <span>03</span>
-          <span>Core areas</span>
-        </div>
-        <h2 id="disciplines-heading" data-enter>Three disciplines. One practical point of view.</h2>
-      </div>
-
-      <div class="discipline-list">
-        <article class="discipline-row" data-enter>
-          <p class="discipline-number">01</p>
-          <h3>International<br />B2B Sales</h3>
-          <p>Overseas customer development, international communication and the daily operating rhythm behind a considered sales process.</p>
-        </article>
-        <article class="discipline-row" data-enter>
-          <p class="discipline-number">02</p>
-          <h3>Electronics<br />Manufacturing</h3>
-          <p>SMT / THT equipment, automation and the manufacturing context that turns a technical product into a useful solution.</p>
-        </article>
-        <article class="discipline-row" data-enter>
-          <p class="discipline-number">03</p>
-          <h3>AI<br />Operations</h3>
-          <p>AI-assisted workflows, practical automation and clearer systems for recurring operational work.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="selected-work section-space" aria-labelledby="selected-work-heading">
-      <div class="section-heading" data-enter>
-        <div class="section-marker">
-          <span>04</span>
-          <span>Selected work / focus</span>
-        </div>
-        <h2 id="selected-work-heading">Work in progress, organised with intent.</h2>
-      </div>
-
-      <div class="work-list">
-        {
-          selectedProjects.map((project) => (
-            <a
-              class="work-row work-row-link"
-              href={project.data.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-enter
-            >
-              <p class="work-type">Selected project / {project.data.startDate && formatDate(project.data.startDate)}</p>
-              <h3>{project.data.name}</h3>
-              <p class="work-description">{project.data.description}</p>
-              <span class="work-arrow" aria-hidden="true">&nearr;</span>
-            </a>
-          ))
-        }
-        <article class="work-row" data-enter>
-          <p class="work-type">Focus area / details to be added</p>
-          <h3>International B2B systems</h3>
-          <p class="work-description">[A selection of approaches, working methods and observations will be added here.]</p>
-          <span class="work-arrow" aria-hidden="true">&mdash;</span>
-        </article>
-        <article class="work-row" data-enter>
-          <p class="work-type">Focus area / details to be added</p>
-          <h3>AI-assisted workflows</h3>
-          <p class="work-description">[Examples of practical AI operations and automation are in development.]</p>
-          <span class="work-arrow" aria-hidden="true">&mdash;</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="writing-section section-space" aria-labelledby="writing-heading">
-      <div class="section-heading section-heading-inline" data-enter>
-        <div>
-          <div class="section-marker">
-            <span>05</span>
-            <span>Writing</span>
+          <p class="hero-description">
+            Working across global B2B business, electronics manufacturing and AI-assisted workflows.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#areas">Explore focus areas <span aria-hidden="true">&rarr;</span></a>
+            <a class="button button-secondary" href="/about">About Light</a>
           </div>
-          <h2 id="writing-heading">Notes from the field.</h2>
         </div>
-        <a class="inline-link" href="/blog">All writing <span aria-hidden="true">&rarr;</span></a>
-      </div>
 
-      {
-        latestPosts.length > 0 ? (
-          <div class="writing-list">
-            {latestPosts.map((post, index) => (
-              <a class="writing-row" href={`/blog/${post.id}`} data-enter>
-                <span class="writing-number">0{index + 1}</span>
-                <div>
+        <div class="hero-visual" aria-label="Three connected areas of practice" data-enter>
+          <div class="visual-topline">
+            <span>WORK MAP</span>
+            <span>01 / 03</span>
+          </div>
+          <div class="visual-core">
+            <span class="visual-orbit visual-orbit-one"></span>
+            <span class="visual-orbit visual-orbit-two"></span>
+            <span class="visual-node visual-node-one">B2B</span>
+            <span class="visual-node visual-node-two">SMT</span>
+            <span class="visual-node visual-node-three">AI</span>
+            <span class="visual-center">L</span>
+          </div>
+          <div class="visual-legend">
+            <div><span class="legend-marker marker-teal"></span><span>Global business</span></div>
+            <div><span class="legend-marker marker-green"></span><span>Manufacturing systems</span></div>
+            <div><span class="legend-marker marker-dark"></span><span>Operational intelligence</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about-section section" aria-labelledby="about-heading">
+      <div class="section-container about-layout">
+        <div class="section-intro" data-enter>
+          <p class="eyebrow"><span></span> 01 / About</p>
+          <p class="section-index">PERSONAL<br />PERSPECTIVE</p>
+        </div>
+        <div class="about-content" data-enter>
+          <h2 id="about-heading">Business, process and technology should make sense together.</h2>
+          <div class="about-body">
+            <p>
+              I work with the conversations, systems and operational details behind international growth. This is a personal space for notes on manufacturing, overseas sales and AI tools that make valuable work easier to repeat.
+            </p>
+            <a class="text-link" href="/about">More about Light <span aria-hidden="true">&rarr;</span></a>
+          </div>
+          <dl class="about-details">
+            <div><dt>Perspective</dt><dd>Commercial and operational</dd></div>
+            <div><dt>Working context</dt><dd>International and technical</dd></div>
+            <div><dt>Method</dt><dd>Practical, clear and iterative</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas" class="areas-section section" aria-labelledby="areas-heading">
+      <div class="section-container">
+        <header class="section-header section-header-centered" data-enter>
+          <p class="eyebrow"><span></span> 02 / Core areas</p>
+          <h2 id="areas-heading">Three connected areas of practice.</h2>
+          <p>Each one informs how I think about people, process and practical work.</p>
+        </header>
+
+        <div class="area-grid">
+          {
+            coreAreas.map((area, index) => (
+              <article class:list={["area-card", `area-card-${index + 1}`]} data-enter>
+                <div class="area-card-topline">
+                  <span>{area.number}</span>
+                  <span>{area.label}</span>
+                </div>
+                <div class="area-card-icon" aria-hidden="true">
+                  <span>{area.number}</span>
+                </div>
+                <h3>{area.title}</h3>
+                <p>{area.description}</p>
+                <ul aria-label={`${area.title} focus areas`}>
+                  {area.points.map((point) => <li>{point}</li>)}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects-section section" aria-labelledby="projects-heading">
+      <div class="section-container">
+        <header class="section-header projects-header" data-enter>
+          <div>
+            <p class="eyebrow"><span></span> 03 / Selected focus</p>
+            <h2 id="projects-heading">Work shaped around useful systems.</h2>
+          </div>
+          <p>Current work and future case material, presented without invented outcomes.</p>
+        </header>
+
+        <div class="project-showcase">
+          {
+            selectedProjects.map((project) => (
+              <a
+                class="project-feature"
+                href={project.data.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-enter
+              >
+                <div class="project-feature-visual" aria-hidden="true">
+                  <span class="project-signal signal-one"></span>
+                  <span class="project-signal signal-two"></span>
+                  <span class="project-signal signal-three"></span>
+                  <span class="project-monogram">L</span>
+                  <span class="project-grid-label">PERSONAL WEBSITE<br />ONGOING</span>
+                </div>
+                <div class="project-feature-copy">
+                  <p class="project-label">Selected project / {project.data.startDate && formatDate(project.data.startDate)}</p>
+                  <h3>{project.data.name}</h3>
+                  <p>{project.data.description}</p>
+                  <span class="text-link">View project <span aria-hidden="true">&nearr;</span></span>
+                </div>
+              </a>
+            ))
+          }
+
+          <article class="focus-panel" data-enter>
+            <div class="focus-panel-index">02</div>
+            <div>
+              <p class="project-label">Focus area / details to be added</p>
+              <h3>International B2B systems</h3>
+              <p>[Approaches, working methods and observations will be added here.]</p>
+            </div>
+          </article>
+          <article class="focus-panel focus-panel-dark" data-enter>
+            <div class="focus-panel-index">03</div>
+            <div>
+              <p class="project-label">Focus area / details to be added</p>
+              <h3>AI-assisted workflows</h3>
+              <p>[Practical examples of operations and automation are in development.]</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="writing-section section" aria-labelledby="writing-heading">
+      <div class="section-container writing-layout">
+        <header class="section-header writing-header" data-enter>
+          <p class="eyebrow"><span></span> 04 / Writing</p>
+          <h2 id="writing-heading">Notes from the field.</h2>
+          <p>Manufacturing, international B2B, AI tools and industry observations.</p>
+          <a class="text-link" href="/blog">Browse all writing <span aria-hidden="true">&rarr;</span></a>
+        </header>
+
+        {
+          latestPosts.length > 0 ? (
+            <div class="post-list">
+              {latestPosts.map((post, index) => (
+                <a class="post-card" href={`/blog/${post.id}`} data-enter>
+                  <div class="post-card-topline">
+                    <span>ARTICLE {String(index + 1).padStart(2, "0")}</span>
+                    <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+                  </div>
                   <h3>{post.data.title}</h3>
                   <p>{post.data.description}</p>
-                </div>
-                <p class="writing-meta">
-                  <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-                  {post.data.tags?.[0] && <span>#{post.data.tags[0]}</span>}
-                </p>
-              </a>
-            ))}
-          </div>
-        ) : (
-          <p class="empty-state">[Writing will appear here when published.]</p>
-        )
-      }
+                  <span class="post-card-link">Read article <span aria-hidden="true">&rarr;</span></span>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-state">[Writing will appear here when published.]</p>
+          )
+        }
+      </div>
     </section>
 
     <section id="contact" class="contact-section" aria-labelledby="contact-heading">
       <div class="contact-grid" aria-hidden="true"></div>
-      <div class="section-marker section-marker-light" data-enter>
-        <span>06</span>
-        <span>Contact</span>
-      </div>
-      <div class="contact-content" data-enter>
-        <h2 id="contact-heading">Let's connect.</h2>
-        <p>International Sales <span>&middot;</span> Electronics Manufacturing <span>&middot;</span> AI</p>
-        <p class="contact-copy">For thoughtful conversations and future collaborations, contact details will be added here.</p>
-        <p class="contact-placeholder">Preferred email: [to be added]</p>
-        <a href="https://github.com/lightzhan6-create" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">&nearr;</span></a>
+      <div class="section-container contact-layout">
+        <div class="contact-intro" data-enter>
+          <p class="eyebrow"><span></span> 05 / Contact</p>
+          <p>OPEN TO THOUGHTFUL<br />CONVERSATIONS</p>
+        </div>
+        <div class="contact-content" data-enter>
+          <h2 id="contact-heading">Let's connect.</h2>
+          <p class="contact-focus">International Sales <span>&middot;</span> Electronics Manufacturing <span>&middot;</span> AI</p>
+          <p class="contact-copy">For thoughtful conversations and future collaborations, contact details will be added here.</p>
+          <div class="contact-actions">
+            <span class="contact-placeholder">Preferred email: [to be added]</span>
+            <a class="button button-accent" href="https://github.com/lightzhan6-create" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">&nearr;</span></a>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -188,615 +259,924 @@ const selectedProjects = (await getCollection("projects"))
 
 <style>
   .portfolio-home {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(5rem, 12vw, 10rem);
-    padding-block-end: var(--space-2xl);
+    --home-max-width: 75rem;
+    --home-pad: clamp(1.25rem, 3.5vw, 3.5rem);
+    color: var(--tech-ink);
+    overflow: hidden;
   }
 
-  .hero,
-  .contact-section {
-    position: relative;
-    overflow: hidden;
-    color: var(--surface-strong-text);
-    background: var(--surface-strong);
+  .portfolio-home :is(h1, h2, h3, p) {
+    margin: 0;
+  }
+
+  .section-container,
+  .hero-inner {
+    width: min(100% - (2 * var(--home-pad)), var(--home-max-width));
+    margin-inline: auto;
+  }
+
+  .section {
+    padding-block: clamp(4.5rem, 8vw, 7.5rem);
+  }
+
+  .eyebrow,
+  .section-index,
+  .project-label,
+  .post-card-topline,
+  .focus-panel-index,
+  .visual-topline,
+  .contact-placeholder {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--tech-signal-dark);
+  }
+
+  .eyebrow span {
+    width: 1.75rem;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.85rem 1.45rem;
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+  }
+
+  .button-primary {
+    color: white;
+    background: var(--tech-teal-deep);
+    box-shadow: var(--tech-shadow-sm);
+  }
+
+  .button-primary:hover {
+    color: white;
+    background: var(--tech-deep);
+    box-shadow: var(--tech-shadow);
+  }
+
+  .button-secondary {
+    color: var(--tech-teal-deep);
+    border-color: var(--tech-teal-deep);
+    background: color-mix(in oklab, var(--tech-surface) 80%, transparent);
+  }
+
+  .button-secondary:hover {
+    color: white;
+    border-color: var(--tech-deep);
+    background: var(--tech-deep);
+  }
+
+  .button-accent {
+    color: var(--tech-deep);
+    background: var(--tech-signal);
+    box-shadow: var(--tech-shadow-sm);
+  }
+
+  .button-accent:hover {
+    color: white;
+    background: var(--tech-signal-dark);
+    box-shadow: var(--tech-shadow);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    color: var(--tech-teal-deep);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .text-link span {
+    transition: transform 180ms ease;
+  }
+
+  .text-link:hover span {
+    transform: translateX(0.3rem);
   }
 
   .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-block-size: min(50rem, calc(100svh - var(--page-offset-top) - var(--space-l)));
-    padding: clamp(1.25rem, 2.75vw, 2.75rem);
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-items: center;
+    min-height: min(48rem, calc(100svh - 4.5rem));
+    overflow: hidden;
+    background:
+      radial-gradient(54rem 30rem at 91% 0%, color-mix(in oklab, var(--tech-teal) 18%, transparent), transparent 64%),
+      linear-gradient(180deg, var(--tech-mint) 0%, var(--tech-surface) 100%);
+    border-block-end: 1px solid var(--tech-line);
   }
 
   .hero-grid,
   .contact-grid {
     position: absolute;
     inset: 0;
-    opacity: 0.6;
+    z-index: -2;
     pointer-events: none;
+    opacity: 0.55;
     background-image:
-      linear-gradient(to right, color-mix(in oklab, var(--surface-strong-text) 8%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in oklab, var(--surface-strong-text) 8%, transparent) 1px, transparent 1px);
-    background-size: clamp(2.75rem, 7vw, 5.5rem) clamp(2.75rem, 7vw, 5.5rem);
-    mask-image: linear-gradient(to bottom, black, transparent 84%);
+      linear-gradient(to right, color-mix(in oklab, var(--tech-teal-deep) 9%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--tech-teal-deep) 9%, transparent) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    mask-image: linear-gradient(to right, transparent 0%, black 45%, transparent 100%);
   }
 
-  .hero::after {
+  .hero-glow {
     position: absolute;
-    inset-inline-end: -0.09em;
-    inset-block-start: 11%;
-    z-index: 0;
-    color: color-mix(in oklab, var(--accent) 55%, transparent);
-    font-family: var(--font-mono);
-    font-size: clamp(13rem, 33vw, 29rem);
-    font-weight: var(--font-weight-medium);
-    line-height: 0.7;
-    content: "L";
-    pointer-events: none;
+    inset: auto -15% -30% auto;
+    z-index: -1;
+    width: min(46rem, 62vw);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in oklab, var(--tech-teal) 45%, transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4rem color-mix(in oklab, var(--tech-teal) 4%, transparent), 0 0 0 8rem color-mix(in oklab, var(--tech-teal) 3%, transparent);
   }
 
-  .hero-topline,
-  .hero-title-wrap,
-  .hero-footer,
-  .contact-content,
-  .contact-section > .section-marker {
-    position: relative;
-    z-index: 1;
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(20rem, 0.82fr);
+    gap: clamp(2.5rem, 7vw, 7rem);
+    align-items: center;
+    padding-block: clamp(4.5rem, 9vw, 7.5rem);
   }
 
-  .hero-topline {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-s);
-    color: var(--surface-strong-muted);
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
-
-  .hero-title-wrap {
-    margin-block: auto;
-    padding-block: clamp(4.5rem, 12vw, 10rem) var(--space-l);
-  }
-
-  .hero-index,
-  .section-marker,
-  .work-type,
-  .writing-number,
-  .writing-meta,
-  .contact-placeholder {
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    letter-spacing: 0.03em;
-  }
-
-  .hero-index {
-    margin: 0 0 var(--space-xs);
-    color: var(--accent);
-  }
-
-  .hero h1,
-  .portfolio-home h2,
-  .portfolio-home h3,
-  .portfolio-home p {
-    margin: 0;
+  .hero-copy {
+    max-width: 42rem;
   }
 
   .hero h1 {
-    max-inline-size: 100%;
-    font-size: clamp(5rem, 16.2vw, 15.5rem);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: -0.105em;
-    line-height: 0.7;
-    text-indent: -0.09em;
+    margin-block: 0.85rem 1.25rem;
+    color: var(--tech-ink);
+    font-size: clamp(5.5rem, 13.8vw, 11.5rem);
+    font-weight: 700;
+    letter-spacing: -0.09em;
+    line-height: 0.72;
+    text-indent: -0.085em;
   }
 
-  .hero-footer {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-    gap: var(--space-l-xl);
-    align-items: end;
-    padding-block-start: var(--space-m);
-    border-block-start: 1px solid color-mix(in oklab, var(--surface-strong-text) 22%, transparent);
+  .hero-focus {
+    max-width: 41rem;
+    color: var(--tech-ink-2);
+    font-size: clamp(1.16rem, 1.75vw, 1.45rem);
+    font-weight: 650;
+    line-height: 1.34;
   }
 
-  .hero-statement {
-    max-inline-size: 45rem;
-    font-size: clamp(1.15rem, 2vw, 1.65rem);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.25;
+  .hero-focus span,
+  .contact-focus span {
+    color: var(--tech-teal);
   }
 
-  .hero-disciplines {
-    display: grid;
-    gap: var(--space-3xs);
-    color: var(--surface-strong-muted);
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+  .hero-description {
+    max-width: 37rem;
+    margin-block: 1.4rem 1.85rem !important;
+    color: var(--tech-muted);
+    font-size: clamp(1.06rem, 1.35vw, 1.2rem);
+    line-height: 1.65;
   }
 
-  .hero-disciplines span::before {
-    display: inline-block;
-    inline-size: 0.9rem;
-    margin-inline-end: 0.5rem;
-    color: var(--accent);
-    content: "—";
-  }
-
-  .section-space {
-    padding-inline: clamp(0rem, 3vw, 2.5rem);
-  }
-
-  .section-marker {
+  .hero-actions {
     display: flex;
-    gap: var(--space-xs);
-    color: var(--accent);
-    text-transform: uppercase;
+    flex-wrap: wrap;
+    gap: 0.8rem;
   }
 
-  .section-marker span:first-child {
-    color: var(--muted-foreground);
+  .hero-visual {
+    position: relative;
+    min-height: 29rem;
+    overflow: hidden;
+    color: var(--tech-ink);
+    background:
+      linear-gradient(145deg, color-mix(in oklab, var(--tech-surface) 94%, transparent), color-mix(in oklab, var(--tech-mint) 70%, transparent)),
+      var(--tech-surface);
+    border: 1px solid var(--tech-line-strong);
+    border-radius: 1.1rem;
+    box-shadow: var(--tech-shadow-lg);
   }
 
-  .section-marker-light {
-    color: var(--accent);
+  .hero-visual::before,
+  .hero-visual::after {
+    position: absolute;
+    content: "";
+    pointer-events: none;
   }
 
-  .section-marker-light span:first-child {
-    color: var(--surface-strong-muted);
+  .hero-visual::before {
+    inset: 1rem;
+    border: 1px solid color-mix(in oklab, var(--tech-teal) 26%, transparent);
+    border-radius: 0.7rem;
   }
 
-  .profile-section {
+  .hero-visual::after {
+    inset: auto 1rem 1rem auto;
+    width: 4.2rem;
+    aspect-ratio: 1;
+    border-right: 2px solid var(--tech-signal);
+    border-bottom: 2px solid var(--tech-signal);
+  }
+
+  .visual-topline,
+  .visual-legend {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .visual-topline {
+    padding: 1.5rem 1.5rem 0;
+    color: var(--tech-muted);
+  }
+
+  .visual-core {
+    position: relative;
     display: grid;
-    grid-template-columns: minmax(11rem, 0.65fr) minmax(0, 1.35fr);
-    gap: var(--space-xl-2xl);
-    align-items: start;
+    place-items: center;
+    height: 21rem;
   }
 
-  .profile-copy {
+  .visual-orbit {
+    position: absolute;
+    display: block;
+    border: 1px solid color-mix(in oklab, var(--tech-teal) 45%, transparent);
+    border-radius: 50%;
+  }
+
+  .visual-orbit-one {
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+
+  .visual-orbit-two {
+    width: 20rem;
+    height: 20rem;
+    border-color: color-mix(in oklab, var(--tech-signal) 45%, transparent);
+  }
+
+  .visual-center {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(16rem, 0.8fr);
-    gap: var(--space-l-xl);
+    width: 6.5rem;
+    aspect-ratio: 1;
+    place-items: center;
+    color: white;
+    background: var(--tech-deep);
+    border: 0.5rem solid color-mix(in oklab, var(--tech-teal) 28%, var(--tech-surface));
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--tech-teal), 0 1.2rem 2.4rem color-mix(in oklab, var(--tech-deep) 22%, transparent);
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1;
   }
 
-  .portfolio-home h2 {
-    font-size: clamp(2rem, 4vw, 4rem);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: -0.06em;
+  .visual-node {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    width: 3.25rem;
+    aspect-ratio: 1;
+    place-items: center;
+    color: var(--tech-deep);
+    background: var(--tech-signal);
+    border: 3px solid var(--tech-surface);
+    border-radius: 50%;
+    box-shadow: var(--tech-shadow-sm);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 500;
+  }
+
+  .visual-node-one { transform: translate(-7.5rem, -5.6rem); }
+  .visual-node-two { transform: translate(7.8rem, -3.5rem); background: var(--tech-teal); color: white; }
+  .visual-node-three { transform: translate(2.4rem, 7.8rem); background: var(--tech-deep); color: white; }
+
+  .visual-legend {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.48rem;
+    padding: 0 1.5rem 1.5rem;
+    color: var(--tech-muted);
+    font-size: 0.77rem;
+    line-height: 1.2;
+  }
+
+  .visual-legend div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .legend-marker {
+    display: block;
+    width: 0.58rem;
+    height: 0.58rem;
+    border-radius: 50%;
+  }
+
+  .marker-teal { background: var(--tech-teal); }
+  .marker-green { background: var(--tech-signal); }
+  .marker-dark { background: var(--tech-deep); }
+
+  .about-section,
+  .writing-section {
+    background: var(--tech-alt);
+  }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.45fr) minmax(0, 1.55fr);
+    gap: clamp(2.5rem, 8vw, 9rem);
+  }
+
+  .section-index {
+    margin-top: 1.75rem !important;
+    color: var(--tech-muted);
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.82fr);
+    gap: 2rem clamp(2rem, 5vw, 5rem);
+  }
+
+  .about-content h2,
+  .section-header h2,
+  .contact-content h2 {
+    color: var(--tech-ink);
+    font-size: clamp(2.2rem, 4.5vw, 4.25rem);
+    font-weight: 700;
+    letter-spacing: -0.065em;
     line-height: 0.96;
   }
 
-  .profile-copy > div {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-m);
-    color: var(--prose-foreground);
-    font-size: var(--step-1);
-    line-height: 1.48;
+  .about-body {
+    padding-top: 0.35rem;
   }
 
-  .inline-link {
-    width: fit-content;
-    color: var(--foreground);
-    font-size: var(--step-0);
-    font-weight: var(--font-weight-medium);
-    text-decoration-color: var(--accent);
-    text-underline-offset: 0.2em;
+  .about-body p {
+    color: var(--tech-muted);
+    font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+    line-height: 1.65;
   }
 
-  .inline-link span {
-    display: inline-block;
-    margin-inline-start: 0.2rem;
-    transition: transform 180ms ease;
+  .about-body .text-link {
+    margin-top: 1.4rem;
   }
 
-  .inline-link:hover span {
-    transform: translateX(0.28rem);
-  }
-
-  .disciplines {
-    padding-block: clamp(4rem, 9vw, 8rem);
-    color: var(--surface-strong-text);
-    background: var(--surface-strong);
-  }
-
-  .disciplines-intro {
+  .about-details {
+    grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: minmax(11rem, 0.65fr) minmax(0, 1.35fr);
-    gap: var(--space-xl-2xl);
-    margin-block-end: var(--space-xl);
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+    border-block: 1px solid var(--tech-line);
   }
 
-  .disciplines h2 {
-    max-inline-size: 17ch;
+  .about-details div {
+    padding: 1.2rem 1rem 1.25rem 0;
+    border-inline-end: 1px solid var(--tech-line);
   }
 
-  .discipline-list {
-    border-block: 1px solid color-mix(in oklab, var(--surface-strong-text) 20%, transparent);
+  .about-details div + div {
+    padding-inline-start: 1.25rem;
   }
 
-  .discipline-row {
-    display: grid;
-    grid-template-columns: minmax(5rem, 0.5fr) minmax(15rem, 1.1fr) minmax(15rem, 0.8fr);
-    gap: var(--space-l-xl);
-    align-items: end;
-    padding: clamp(1.5rem, 3.5vw, 3.25rem) clamp(0rem, 3vw, 2.5rem);
-    border-block-end: 1px solid color-mix(in oklab, var(--surface-strong-text) 20%, transparent);
-    transition: background-color 180ms ease;
-  }
+  .about-details div:last-child { border-inline-end: 0; }
 
-  .discipline-row:last-child {
-    border-block-end: 0;
-  }
-
-  .discipline-row:hover {
-    background: color-mix(in oklab, var(--surface-strong-text) 5%, transparent);
-  }
-
-  .discipline-number {
-    align-self: start;
-    color: var(--accent);
+  .about-details dt {
+    margin-bottom: 0.35rem;
+    color: var(--tech-signal-dark);
     font-family: var(--font-mono);
-    font-size: var(--step--1);
-  }
-
-  .discipline-row h3 {
-    font-size: clamp(2.1rem, 4.6vw, 4.75rem);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: -0.075em;
-    line-height: 0.85;
-  }
-
-  .discipline-row > p:last-child {
-    max-inline-size: 26rem;
-    color: var(--surface-strong-muted);
-    font-size: var(--step-1);
-    line-height: 1.4;
-  }
-
-  .section-heading {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-s);
-    margin-block-end: var(--space-xl);
-  }
-
-  .section-heading-inline {
-    flex-direction: row;
-    align-items: end;
-    justify-content: space-between;
-    gap: var(--space-l);
-  }
-
-  .section-heading h2 {
-    max-inline-size: 15ch;
-  }
-
-  .work-list {
-    border-block-start: 1px solid var(--border);
-  }
-
-  .work-row {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(10rem, 0.5fr) minmax(0, 1.05fr) minmax(15rem, 0.9fr) auto;
-    gap: var(--space-m-l);
-    align-items: center;
-    padding: var(--space-l) 0;
-    border-block-end: 1px solid var(--border);
-  }
-
-  .work-row-link {
-    color: inherit;
-    text-decoration: none;
-    transition: color 180ms ease, padding-inline 180ms ease;
-  }
-
-  .work-row-link:hover {
-    padding-inline: var(--space-xs);
-    color: var(--accent);
-  }
-
-  .work-type {
-    color: var(--muted-foreground);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .work-row h3 {
-    font-size: clamp(1.6rem, 3.5vw, 3rem);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: -0.055em;
-    line-height: 0.95;
+  .about-details dd {
+    margin: 0;
+    color: var(--tech-ink-2);
+    font-size: 0.96rem;
+    font-weight: 600;
+    line-height: 1.35;
   }
 
-  .work-description {
-    color: var(--prose-foreground);
-    line-height: 1.4;
+  .areas-section { background: var(--tech-surface); }
+
+  .section-header { max-width: 48rem; }
+
+  .section-header h2 { margin-top: 0.8rem; }
+
+  .section-header > p:last-child {
+    margin-top: 1rem;
+    color: var(--tech-muted);
+    font-size: 1.05rem;
+    line-height: 1.55;
   }
 
-  .work-arrow {
-    color: var(--accent);
-    font-size: var(--step-2);
+  .section-header-centered {
+    margin-inline: auto;
+    text-align: center;
   }
 
-  .writing-section {
-    padding-block-start: var(--space-xl);
-    border-block-start: 1px solid var(--border);
-  }
+  .section-header-centered .eyebrow { justify-content: center; }
 
-  .writing-list {
-    border-block-start: 1px solid var(--border);
-  }
-
-  .writing-row {
+  .area-grid {
     display: grid;
-    grid-template-columns: minmax(3rem, 0.2fr) minmax(0, 1.2fr) minmax(10rem, 0.45fr);
-    gap: var(--space-m);
-    align-items: start;
-    padding-block: var(--space-m);
-    color: inherit;
-    border-block-end: 1px solid var(--border);
-    text-decoration: none;
-    transition: color 180ms ease;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: clamp(2.8rem, 5vw, 4.5rem);
   }
 
-  .writing-row:hover {
-    color: var(--accent);
-  }
-
-  .writing-number,
-  .writing-meta {
-    color: var(--muted-foreground);
-  }
-
-  .writing-row h3 {
-    margin-block-end: var(--space-3xs);
-    font-size: var(--step-2);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-  }
-
-  .writing-row div > p {
-    color: var(--prose-foreground);
-    line-height: 1.4;
-  }
-
-  .writing-meta {
+  .area-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3xs);
-    text-align: end;
+    min-height: 30rem;
+    padding: 1.45rem;
+    overflow: hidden;
+    background: var(--tech-card);
+    border: 1px solid var(--tech-line);
+    border-top: 4px solid var(--tech-teal);
+    border-radius: 0.82rem;
+    box-shadow: var(--tech-shadow-sm);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .area-card-2 { border-top-color: var(--tech-signal); }
+  .area-card-3 { border-top-color: var(--tech-deep); }
+
+  .area-card:hover {
+    z-index: 1;
+    transform: translateY(-0.35rem);
+    border-color: var(--tech-line-strong);
+    box-shadow: var(--tech-shadow);
+  }
+
+  .area-card-topline,
+  .post-card-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--tech-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .area-card-icon {
+    display: grid;
+    width: 4rem;
+    aspect-ratio: 1;
+    place-items: center;
+    margin-block: auto 1.6rem;
+    color: white;
+    background: var(--tech-teal-deep);
+    border-radius: 0.72rem;
+    box-shadow: inset 0 0 0 0.5rem color-mix(in oklab, white 8%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .area-card-2 .area-card-icon { color: var(--tech-deep); background: var(--tech-signal); }
+  .area-card-3 .area-card-icon { background: var(--tech-deep); }
+
+  .area-card h3 {
+    max-width: 12ch;
+    color: var(--tech-ink);
+    font-size: clamp(1.65rem, 2.2vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1.03;
+  }
+
+  .area-card > p {
+    margin-top: 0.85rem !important;
+    color: var(--tech-muted);
+    line-height: 1.55;
+  }
+
+  .area-card ul {
+    display: grid;
+    gap: 0.42rem;
+    margin: 1.4rem 0 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--tech-line);
+    list-style: none;
+  }
+
+  .area-card li {
+    color: var(--tech-ink-2);
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+
+  .area-card li::before {
+    margin-right: 0.55rem;
+    color: var(--tech-teal);
+    content: "\2022";
+  }
+
+  .projects-section { background: var(--tech-surface); }
+
+  .projects-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(16rem, 0.8fr);
+    gap: 2rem 4rem;
+    max-width: none;
+    align-items: end;
+  }
+
+  .projects-header > p {
+    margin: 0 !important;
+    max-width: 23rem;
+  }
+
+  .project-showcase {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin-top: clamp(2.8rem, 5vw, 4.5rem);
+  }
+
+  .project-feature {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.88fr) minmax(0, 1.12fr);
+    overflow: hidden;
+    color: inherit;
+    background: var(--tech-card);
+    border: 1px solid var(--tech-line);
+    border-radius: 0.9rem;
+    box-shadow: var(--tech-shadow-sm);
+    text-decoration: none;
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .project-feature:hover {
+    color: inherit;
+    transform: translateY(-0.3rem);
+    border-color: var(--tech-teal);
+    box-shadow: var(--tech-shadow);
+  }
+
+  .project-feature-visual {
+    position: relative;
+    min-height: 22rem;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, color-mix(in oklab, var(--tech-teal) 82%, var(--tech-deep)), var(--tech-deep));
+  }
+
+  .project-feature-visual::before {
+    position: absolute;
+    inset: 1.4rem;
+    border: 1px solid color-mix(in oklab, white 35%, transparent);
+    border-radius: 0.6rem;
+    content: "";
+  }
+
+  .project-feature-visual::after {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 17rem;
+    height: 17rem;
+    border: 1px solid color-mix(in oklab, white 30%, transparent);
+    border-radius: 50%;
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .project-monogram {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    z-index: 1;
+    color: white;
+    font-size: clamp(7rem, 14vw, 11rem);
+    font-weight: 700;
+    letter-spacing: -0.1em;
+    line-height: 0.7;
+    transform: translate(-52%, -50%);
+  }
+
+  .project-signal {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: 0.85rem;
+    aspect-ratio: 1;
+    background: var(--tech-signal);
+    border: 3px solid color-mix(in oklab, var(--tech-deep) 70%, white);
+    border-radius: 50%;
+  }
+
+  .signal-one { top: 22%; left: 25%; }
+  .signal-two { top: 29%; right: 19%; background: white; }
+  .signal-three { right: 27%; bottom: 20%; background: var(--tech-teal); }
+
+  .project-grid-label {
+    position: absolute;
+    inset: auto auto 1.8rem 1.8rem;
+    z-index: 1;
+    color: color-mix(in oklab, white 82%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    line-height: 1.55;
+  }
+
+  .project-feature-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(2rem, 4vw, 4rem);
+  }
+
+  .project-label { color: var(--tech-signal-dark); }
+
+  .project-feature h3,
+  .focus-panel h3 {
+    margin-block: 0.8rem !important;
+    color: var(--tech-ink);
+    font-size: clamp(2rem, 3.4vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+  }
+
+  .project-feature-copy > p:not(.project-label),
+  .focus-panel > div:last-child > p:last-child {
+    max-width: 34rem;
+    color: var(--tech-muted);
+    line-height: 1.55;
+  }
+
+  .project-feature .text-link { margin-top: 1.6rem; }
+
+  .focus-panel {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: 1.25rem;
+    min-height: 16rem;
+    padding: clamp(1.5rem, 3vw, 2.35rem);
+    background: var(--tech-alt);
+    border: 1px solid var(--tech-line);
+    border-radius: 0.82rem;
+  }
+
+  .focus-panel-index { color: var(--tech-teal); }
+
+  .focus-panel h3 { font-size: clamp(1.7rem, 2.5vw, 2.4rem); }
+
+  .focus-panel-dark {
+    color: white;
+    background: var(--tech-deep);
+    border-color: var(--tech-deep);
+  }
+
+  .focus-panel-dark .focus-panel-index,
+  .focus-panel-dark .project-label { color: var(--tech-signal); }
+
+  .focus-panel-dark h3 { color: white; }
+
+  .focus-panel-dark > div:last-child > p:last-child { color: color-mix(in oklab, white 70%, transparent); }
+
+  .writing-layout {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.45fr) minmax(0, 1.55fr);
+    gap: clamp(2.5rem, 8vw, 9rem);
+  }
+
+  .writing-header .text-link { margin-top: 1.75rem; }
+
+  .post-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .post-card {
+    display: flex;
+    min-height: 13.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 3vw, 2.1rem);
+    color: inherit;
+    background: var(--tech-card);
+    border: 1px solid var(--tech-line);
+    border-radius: 0.82rem;
+    box-shadow: var(--tech-shadow-sm);
+    text-decoration: none;
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .post-card:hover {
+    color: inherit;
+    transform: translateY(-0.25rem);
+    border-color: var(--tech-teal);
+    box-shadow: var(--tech-shadow);
+  }
+
+  .post-card h3 {
+    margin-top: 1.75rem !important;
+    color: var(--tech-ink);
+    font-size: clamp(1.45rem, 2.2vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+  }
+
+  .post-card > p {
+    margin-top: 0.65rem !important;
+    color: var(--tech-muted);
+    line-height: 1.5;
+  }
+
+  .post-card-link {
+    margin-top: auto;
+    padding-top: 1.4rem;
+    color: var(--tech-teal-deep);
+    font-weight: 700;
   }
 
   .empty-state {
-    color: var(--muted-foreground);
+    color: var(--tech-muted);
     font-family: var(--font-mono);
-    font-size: var(--step--1);
+    font-size: 0.86rem;
   }
 
   .contact-section {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    background: var(--tech-deep);
+  }
+
+  .contact-grid {
+    z-index: 0;
+    opacity: 0.28;
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, white 16%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, white 16%, transparent) 1px, transparent 1px);
+    mask-image: none;
+  }
+
+  .contact-section::after {
+    position: absolute;
+    inset: -14rem -5rem auto auto;
+    width: 32rem;
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in oklab, var(--tech-signal) 60%, transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4rem color-mix(in oklab, var(--tech-teal) 12%, transparent), 0 0 0 8rem color-mix(in oklab, var(--tech-teal) 7%, transparent);
+    content: "";
+  }
+
+  .contact-layout {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: minmax(10rem, 0.65fr) minmax(0, 1.35fr);
-    gap: var(--space-xl-2xl);
-    padding: clamp(2rem, 5vw, 5rem) clamp(1.25rem, 4vw, 4rem);
+    grid-template-columns: minmax(10rem, 0.45fr) minmax(0, 1.55fr);
+    gap: clamp(2.5rem, 8vw, 9rem);
+    padding-block: clamp(4.5rem, 8vw, 7rem);
   }
 
-  .contact-content h2 {
-    margin-block: var(--space-xs) var(--space-s);
-    font-size: clamp(4rem, 10vw, 9rem);
-    letter-spacing: -0.09em;
-    line-height: 0.78;
+  .contact-intro > p:last-child {
+    margin-top: 1.75rem !important;
+    color: color-mix(in oklab, white 65%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
   }
 
-  .contact-content > p:nth-of-type(1) {
-    color: var(--surface-strong-text);
-    font-size: clamp(1.05rem, 2vw, 1.35rem);
-    font-weight: var(--font-weight-medium);
-  }
+  .contact-content h2 { color: white; font-size: clamp(3.25rem, 7.5vw, 7.5rem); }
 
-  .contact-content > p:nth-of-type(1) span {
-    color: var(--accent);
+  .contact-focus {
+    max-width: 39rem;
+    margin-top: 1rem !important;
+    color: white;
+    font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+    font-weight: 650;
+    line-height: 1.5;
   }
 
   .contact-copy {
-    max-inline-size: 37rem;
-    margin-block: var(--space-l) var(--space-xs) !important;
-    color: var(--surface-strong-muted);
-    font-size: var(--step-1);
-    line-height: 1.45;
+    max-width: 38rem;
+    margin-top: 1.5rem !important;
+    color: color-mix(in oklab, white 72%, transparent);
+    font-size: 1.08rem;
+    line-height: 1.6;
   }
 
-  .contact-placeholder {
-    color: var(--surface-strong-muted);
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 1.8rem;
   }
 
-  .contact-content > a {
-    display: inline-flex;
-    gap: var(--space-2xs);
-    margin-block-start: var(--space-l);
-    color: var(--surface-strong-text);
-    font-size: var(--step-1);
-    font-weight: var(--font-weight-medium);
-    text-decoration-color: var(--accent);
-    text-underline-offset: 0.2em;
-  }
-
-  .contact-content > a span {
-    transition: transform 180ms ease;
-  }
-
-  .contact-content > a:hover span {
-    transform: translate(0.2rem, -0.2rem);
-  }
+  .contact-placeholder { color: color-mix(in oklab, white 62%, transparent); }
 
   [data-enter] {
-    animation: rise-in 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: rise-in 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .hero-title-wrap[data-enter] {
-    animation-delay: 90ms;
-  }
-
-  .hero-footer[data-enter],
-  .profile-copy[data-enter] {
-    animation-delay: 180ms;
-  }
-
-  .discipline-row:nth-child(2)[data-enter],
-  .work-row:nth-child(2)[data-enter],
-  .writing-row:nth-child(2)[data-enter] {
-    animation-delay: 70ms;
-  }
-
-  .discipline-row:nth-child(3)[data-enter],
-  .work-row:nth-child(3)[data-enter],
-  .writing-row:nth-child(3)[data-enter] {
-    animation-delay: 140ms;
-  }
+  .hero-visual[data-enter] { animation-delay: 100ms; }
+  .area-card:nth-child(2)[data-enter], .focus-panel:nth-child(2)[data-enter] { animation-delay: 85ms; }
+  .area-card:nth-child(3)[data-enter], .focus-panel:nth-child(3)[data-enter] { animation-delay: 170ms; }
 
   @keyframes rise-in {
-    from {
-      opacity: 0;
-      transform: translateY(0.9rem);
+    from { opacity: 0; transform: translateY(0.9rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (width < 58rem) {
+    .hero-inner,
+    .about-layout,
+    .writing-layout,
+    .contact-layout,
+    .projects-header,
+    .project-feature {
+      grid-template-columns: 1fr;
     }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .hero-inner { gap: 2.5rem; }
+    .hero-copy { max-width: 48rem; }
+    .hero-visual { max-width: 34rem; min-height: 25rem; }
+    .about-layout, .writing-layout, .contact-layout { gap: 2rem; }
+    .about-content { grid-template-columns: 1fr; }
+    .about-details { grid-column: auto; }
+    .area-grid { grid-template-columns: repeat(3, minmax(15rem, 1fr)); overflow-x: auto; padding-bottom: 0.8rem; }
+    .area-card { min-height: 27rem; }
+    .project-feature-visual { min-height: 18rem; }
+    .project-showcase { grid-template-columns: 1fr; }
+  }
+
+  @media (width < 40rem) {
+    .section { padding-block: 4rem; }
+    .hero { min-height: auto; }
+    .hero-inner { padding-block: 4rem 3.5rem; }
+    .hero h1 { font-size: clamp(5.2rem, 27vw, 7.2rem); }
+    .hero-focus { font-size: 1.08rem; }
+    .button { width: 100%; }
+    .hero-visual { min-height: 22rem; }
+    .visual-core { height: 16.5rem; }
+    .visual-orbit-one { width: 9.5rem; height: 9.5rem; }
+    .visual-orbit-two { width: 15.5rem; height: 15.5rem; }
+    .visual-node-one { transform: translate(-5.7rem, -4.2rem); }
+    .visual-node-two { transform: translate(5.8rem, -2.7rem); }
+    .visual-node-three { transform: translate(1.8rem, 5.8rem); }
+    .about-details { grid-template-columns: 1fr; }
+    .about-details div, .about-details div + div { padding: 1rem 0; border-inline-end: 0; border-block-end: 1px solid var(--tech-line); }
+    .about-details div:last-child { border-block-end: 0; }
+    .section-header h2, .about-content h2 { font-size: clamp(2.2rem, 10vw, 3.3rem); }
+    .area-grid { grid-template-columns: 1fr; overflow: visible; }
+    .area-card { min-height: 23rem; }
+    .project-feature-copy { padding: 1.5rem; }
+    .focus-panel { grid-template-columns: 1fr; min-height: auto; }
+    .contact-layout { padding-block: 4rem; }
+    .contact-content h2 { font-size: clamp(3.35rem, 18vw, 5rem); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       scroll-behavior: auto !important;
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-    }
-  }
-
-  @media (width < 56rem) {
-    .hero-footer,
-    .profile-section,
-    .profile-copy,
-    .disciplines-intro,
-    .contact-section {
-      grid-template-columns: 1fr;
-    }
-
-    .profile-section,
-    .disciplines-intro,
-    .contact-section {
-      gap: var(--space-l);
-    }
-
-    .discipline-row,
-    .work-row,
-    .writing-row {
-      grid-template-columns: minmax(3rem, 0.2fr) minmax(0, 1fr);
-      gap: var(--space-xs) var(--space-m);
-    }
-
-    .discipline-row > p:last-child,
-    .work-description,
-    .writing-meta {
-      grid-column: 2;
-    }
-
-    .work-arrow {
-      display: none;
-    }
-
-    .writing-meta {
-      align-items: start;
-      flex-direction: row;
-      text-align: start;
-    }
-  }
-
-  @media (width < 36rem) {
-    .portfolio-home {
-      gap: var(--space-3xl);
-    }
-
-    .hero {
-      min-block-size: calc(100svh - var(--bar-nav-height));
-      padding: var(--space-s);
-    }
-
-    .hero-topline {
-      display: block;
-    }
-
-    .hero-topline p:last-child {
-      display: none;
-    }
-
-    .hero-title-wrap {
-      padding-block: var(--space-xl) var(--space-l);
-    }
-
-    .hero h1 {
-      font-size: clamp(4.75rem, 25vw, 7rem);
-    }
-
-    .hero-footer {
-      gap: var(--space-m);
-    }
-
-    .hero-disciplines {
-      grid-template-columns: 1fr 1fr;
-      font-size: 0.74rem;
-    }
-
-    .hero-disciplines span:last-child {
-      grid-column: 1 / -1;
-    }
-
-    .section-space {
-      padding-inline: 0;
-    }
-
-    .discipline-row,
-    .work-row,
-    .writing-row {
-      grid-template-columns: 1fr;
-    }
-
-    .discipline-row > p:last-child,
-    .work-description,
-    .writing-meta {
-      grid-column: auto;
-    }
-
-    .discipline-number,
-    .writing-number {
-      margin-block-end: var(--space-2xs);
-    }
-
-    .discipline-row h3 {
-      font-size: clamp(2.65rem, 13vw, 3.7rem);
-    }
-
-    .section-heading-inline {
-      align-items: start;
-      flex-direction: column;
-    }
-
-    .contact-section {
-      padding-inline: var(--space-s);
-    }
-
-    .contact-content h2 {
-      font-size: clamp(4rem, 20vw, 5.5rem);
     }
   }
 </style>

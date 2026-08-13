@@ -26,6 +26,26 @@
   --surface-strong:     light-dark(#181817, #e9e7e1);
   --surface-strong-text: light-dark(#f5f3ed, #181817);
   --surface-strong-muted: light-dark(#bebbb2, #56544e);
+
+  /* Homepage industrial / technology palette, inspired by the reference site's
+     restrained teal, signal-green, and pale technical-surface system. */
+  --tech-teal:          light-dark(#0aa5a5, #52d1ca);
+  --tech-teal-deep:     light-dark(#087a7a, #31aaa4);
+  --tech-deep:          light-dark(#123b42, #061f24);
+  --tech-mint:          light-dark(#eef9f8, #0d2e31);
+  --tech-signal:        light-dark(#90c641, #b5dd68);
+  --tech-signal-dark:   light-dark(#597f1e, #c8e883);
+  --tech-ink:           light-dark(#1d2b2e, #edf7f6);
+  --tech-ink-2:         light-dark(#36494d, #c4d6d4);
+  --tech-muted:         light-dark(#5b6d70, #9eb4b2);
+  --tech-line:          light-dark(#d8e5e4, #284548);
+  --tech-line-strong:   light-dark(#b9cfcc, #426468);
+  --tech-surface:       light-dark(#ffffff, #102528);
+  --tech-alt:           light-dark(#f6f8f7, #0b1d20);
+  --tech-card:          light-dark(#ffffff, #143135);
+  --tech-shadow-sm:     0 1px 2px rgba(18, 59, 66, 0.06), 0 1px 3px rgba(18, 59, 66, 0.08);
+  --tech-shadow:        0 10px 30px rgba(18, 59, 66, 0.12);
+  --tech-shadow-lg:     0 20px 48px rgba(18, 59, 66, 0.16);
   --destructive:        var(--red-11);
   --border:             var(--gray-6);
   --ring:               var(--accent);
