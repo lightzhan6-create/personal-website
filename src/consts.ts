@@ -3,8 +3,9 @@ import GitHub from "@/assets/icons/github.svg"
 import RSS from "@/assets/icons/rss.svg"
 
 export const SITE = {
-  title: "Lightzhan6",
-  description: "Personal notes, selected projects, and things I am building.",
+  title: "Light",
+  description:
+    "International B2B sales, electronics manufacturing, and AI-assisted workflows.",
   locale: "en-US",
   dir: "ltr",
   defaultPageImage: "/static/site-card.svg",
@@ -12,8 +13,11 @@ export const SITE = {
 } as const
 
 export const NAVIGATION = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Projects" },
+  { href: "/#contact", label: "Contact" },
 ]
 
 export const SOCIALS: { href: string; label: string; icon: SvgComponent }[] = [

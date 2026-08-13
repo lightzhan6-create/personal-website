@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Lightzhan6 Personal Website</title>
-  <desc id="desc">Lightzhan6 personal website social-sharing image.</desc>
+  <title id="title">Light — International B2B Sales, Electronics Manufacturing, and AI Operations</title>
+  <desc id="desc">Light's personal website for notes on international sales, electronics manufacturing, and AI-assisted workflows.</desc>
   <rect width="1200" height="630" fill="#f8fafc"/>
   <rect x="0" y="0" width="18" height="630" fill="#0f766e"/>
   <rect x="72" y="102" width="1056" height="426" rx="28" fill="#ffffff" stroke="#d1d5db" stroke-width="4"/>
-  <text x="144" y="290" fill="#0f172a" font-family="Arial, sans-serif" font-size="86" font-weight="700">Lightzhan6</text>
-  <text x="144" y="370" fill="#475569" font-family="Arial, sans-serif" font-size="38">Personal Website</text>
+  <text x="144" y="270" fill="#0f172a" font-family="Arial, sans-serif" font-size="94" font-weight="700">Light</text>
+  <text x="144" y="350" fill="#475569" font-family="Arial, sans-serif" font-size="34">International Sales · Electronics Manufacturing · AI Operations</text>
 </svg>

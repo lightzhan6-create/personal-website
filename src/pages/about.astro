@@ -1,0 +1,163 @@
+---
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
+---
+
+<Layout crumbs={[{ label: "About", href: "/about" }]}>
+  <MetaPage
+    slot="head"
+    title="About"
+    description="About Light: international B2B sales, electronics manufacturing, and AI-assisted workflows."
+  />
+  <prose-content class="about-page">
+    <header class="about-hero">
+      <p class="eyebrow">About</p>
+      <h1>Light</h1>
+      <p>
+        I work across international B2B sales, electronics manufacturing and
+        AI-assisted operations.
+      </p>
+    </header>
+
+    <section aria-labelledby="about-approach">
+      <h2 id="about-approach">My approach</h2>
+      <p>
+        I am interested in the practical work that connects a product, a market
+        and a working system. That includes clear international communication,
+        the realities of electronics manufacturing, and using AI in ways that
+        make everyday work more useful and repeatable.
+      </p>
+    </section>
+
+    <section aria-labelledby="about-focus">
+      <h2 id="about-focus">Focus areas</h2>
+      <div class="about-grid">
+        <article>
+          <h3>International B2B sales</h3>
+          <p>Overseas customer development, international communication and practical sales operations.</p>
+        </article>
+        <article>
+          <h3>Electronics manufacturing</h3>
+          <p>SMT / THT equipment, automation and the broader manufacturing context around them.</p>
+        </article>
+        <article>
+          <h3>AI operations</h3>
+          <p>AI tools, workflow design and lightweight automation for day-to-day work.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="about-writing">
+      <h2 id="about-writing">What I will write about</h2>
+      <ul>
+        <li>SMT / THT and electronics manufacturing</li>
+        <li>International B2B sales and overseas customer development</li>
+        <li>AI tools, AI workflows and practical automation</li>
+        <li>Observations from industry and operational work</li>
+      </ul>
+    </section>
+
+    <aside class="about-placeholder" aria-label="Profile details to be added">
+      <strong>Profile details</strong>
+      <p>[Location, preferred contact channel and additional background will be added here.]</p>
+    </aside>
+  </prose-content>
+</Layout>
+
+<style>
+  .about-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .about-page :global(section) {
+    margin: 0;
+  }
+
+  .about-hero {
+    padding-block: clamp(1.5rem, 4vw, 3rem) var(--space-l-xl);
+    border-block-end: 1px solid var(--border);
+  }
+
+  .about-hero h1 {
+    margin-block: var(--space-xs) var(--space-s);
+    font-size: clamp(3.6rem, 10vw, 6rem);
+    letter-spacing: -0.08em;
+    line-height: 0.85;
+  }
+
+  .about-hero > p:last-child {
+    max-inline-size: 34rem;
+    color: var(--prose-foreground);
+    font-size: var(--step-1);
+    line-height: 1.45;
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .about-page h2 {
+    margin-block: 0 var(--space-xs);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    letter-spacing: -0.04em;
+  }
+
+  .about-page h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .about-page :global(section > p) {
+    max-inline-size: 42rem;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xs);
+  }
+
+  .about-grid article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    min-block-size: 12rem;
+    padding: var(--space-m);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .about-grid p {
+    margin: 0;
+    color: var(--prose-foreground);
+  }
+
+  .about-placeholder {
+    padding: var(--space-m);
+    background: var(--accent-subtle);
+    border-inline-start: 3px solid var(--accent);
+  }
+
+  .about-placeholder p {
+    margin: var(--space-3xs) 0 0;
+    color: var(--muted-foreground);
+  }
+
+  @media (width < 48rem) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-grid article {
+      min-block-size: auto;
+    }
+  }
+</style>

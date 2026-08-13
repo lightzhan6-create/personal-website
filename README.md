@@ -1,4 +1,4 @@
-# Lightzhan6 Personal Website
+# Light Personal Website
 
 A static personal website built with Astro. It keeps the existing Astro content
 architecture, responsive layout, native CSS design system, RSS feed, sitemap,

@@ -12,7 +12,7 @@ import { headingNamespace } from "./src/lib/heading-namespace"
 import { headingAnchors } from "./src/lib/heading-anchors"
 
 export default defineConfig({
-  site: "https://smthlpsz.de5.net",
+  site: "https://personal-website-8ui.pages.dev",
   compressHTML: true,
   prefetch: { prefetchAll: true },
   integrations: [
