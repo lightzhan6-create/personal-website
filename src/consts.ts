@@ -1,27 +1,26 @@
 import type { SvgComponent } from "astro/types"
-import Email from "@/assets/icons/email.svg"
 import GitHub from "@/assets/icons/github.svg"
 import RSS from "@/assets/icons/rss.svg"
-import Twitter from "@/assets/icons/twitter.svg"
 
 export const SITE = {
-  title: "astro-erudite",
-  description: "An opinionated, unstyled blogging template built with Astro.",
+  title: "Lightzhan6",
+  description: "Personal notes, selected projects, and things I am building.",
   locale: "en-US",
   dir: "ltr",
-  defaultPageImage: "/static/opengraph-image.png",
-  defaultPostImage: "/static/1200x630.png",
+  defaultPageImage: "/static/site-card.svg",
+  defaultPostImage: "/static/site-card.svg",
 } as const
 
 export const NAVIGATION = [
   { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Projects" },
-  { href: "/authors", label: "Authors" },
 ]
 
 export const SOCIALS: { href: string; label: string; icon: SvgComponent }[] = [
-  { href: "https://github.com/jktrn", label: "GitHub", icon: GitHub },
-  { href: "https://twitter.com/enscrbe", label: "Twitter", icon: Twitter },
-  { href: "mailto:jason@enscribe.dev", label: "Email", icon: Email },
+  {
+    href: "https://github.com/lightzhan6-create",
+    label: "GitHub",
+    icon: GitHub,
+  },
   { href: "/rss.xml", label: "RSS", icon: RSS },
 ]

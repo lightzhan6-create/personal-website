@@ -9,9 +9,13 @@ const posts = await getPosts()
 
 <Layout>
   <MetaPage slot="head" title="Blog" />
-  <ul>
-    {posts.map((post) => <BlogCard post={post} />)}
-  </ul>
+  {posts.length > 0 ? (
+      <ul>
+        {posts.map((post) => <BlogCard post={post} />)}
+      </ul>
+    ) : (
+      <prose-content><p>No posts published yet.</p></prose-content>
+    )}
 </Layout>
 
 <style>
