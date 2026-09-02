@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="<!-- SITE_LANGUAGE -->">
+
+<head>
+    <!-- 安全网：外壳一旦被误嵌进 iframe（例如 iframe 内点了指向 / 的链接），
+         立即换成首页内容，避免外壳自我嵌套。必须放在最前、解析期即执行。 -->
+    <script>window.__FREECAT_SHELL_DOCUMENT__ = true; if (window.self !== window.top) { window.location.replace('/home'); }</script>
+    <!-- INCLUDE:head-base -->
+    <title><!-- SITE_TITLE --></title>
+    <!-- SHELL_SEO_HEAD -->
+    <!-- SHELL_JSONLD -->
+    <style>
+        /* 外壳：顶栏常驻，正文放进满视口 iframe（iframe 内部自己滚动）。
+           外壳自身不滚动，所以音频所在的这份文档永不被导航销毁 → 真正无缝。 */
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        #freecat-content-frame {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+            background: transparent;
+            color-scheme: normal;
+        }
+    </style>
+</head>
+
+<body data-freecat-shell-root="true"
+    class="bg-background-light dark:bg-background-dark font-display text-[#1e293b] dark:text-slate-200 transition-colors duration-200">
+
+    <!-- INCLUDE:header -->
+
+    <!-- 正文承载层：默认静态 src=/home（首页内容页；`/` 与 /home 同内容，
+         无后缀是 Cloudflare Pages 的规范地址，/home.html 会被 308 多跳一次）；
+         若外壳运行在 /posts/foo、/search 等干净路径下，下面的内联脚本在解析期
+         就改写为目标页，保证只加载一次、不二次跳转。 -->
+    <iframe id="freecat-content-frame" title="页面内容" src="/home"
+        allow="autoplay; fullscreen; clipboard-write"></iframe>
+    <script>
+        (function () {
+            var frame = document.getElementById('freecat-content-frame');
+            if (!frame) return;
+            var path = window.location.pathname || '/';
+            var raw = path + (window.location.search || '') + (window.location.hash || '');
+            var legacyHash = String(window.location.hash || '');
+            if ((path === '/' || path === '/index.html') && /^#\/(?!\/)/.test(legacyHash)) {
+                raw = legacyHash.replace(/^#/, '');
+                try { history.replaceState(history.state, '', raw); } catch (err) {}
+            }
+
+            var url;
+            try {
+                url = new URL(raw || '/', window.location.origin);
+            } catch (err) {
+                return;
+            }
+            if (url.origin !== window.location.origin) return;
+            if (url.pathname === '/' || url.pathname === '/index.html' || url.pathname === '/index' || url.pathname === '/home.html' || url.pathname === '/home' || url.pathname === '/shell.html' || url.pathname === '/shell') return;
+
+            raw = url.pathname + url.search + url.hash;
+            // 只接受站内根相对路径（/ 开头但非 //），其余一律回首页，避免被注入跨站地址。
+            if (raw && raw !== '/' && /^\/(?!\/)/.test(raw)) {
+                frame.src = raw;
+            }
+        })();
+    </script>
+
+    <!-- INCLUDE:scripts-end -->
+</body>
+
+</html>

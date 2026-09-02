@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="<!-- SITE_LANGUAGE -->">
+
+<head>
+    <!-- INCLUDE:head-base -->
+
+    <title><!-- PROJECT_TITLE --> - <!-- SITE_TITLE --></title>
+
+    <!-- PROJECT_SEO_HEAD -->
+
+    <style>
+        .freecat-project-detail-page {
+            min-height: 100vh;
+            padding: 4.5rem 1.5rem 6rem;
+            background: var(--freecat-page-background, #f5f7fa);
+        }
+
+        .freecat-project-detail-container {
+            width: min(1100px, 100%);
+            margin: 0 auto;
+        }
+
+        .freecat-project-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #64748b;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition:
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .freecat-project-back:hover {
+            color: #16a34a;
+            transform: translateX(-2px);
+        }
+
+        .freecat-project-hero {
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            border: 1px solid #dce3ec;
+            border-radius: 12px;
+            background: #ffffff;
+        }
+
+        .freecat-project-cover {
+            display: block;
+            width: 100%;
+            max-height: 620px;
+            object-fit: contain;
+            background: #f8fafc;
+        }
+
+        .freecat-project-hero-content {
+            padding: 2.75rem 3rem 3rem;
+        }
+
+        .freecat-project-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-bottom: 1.15rem;
+        }
+
+        .freecat-project-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 28px;
+            padding: 0.25rem 0.8rem;
+            border-radius: 999px;
+            background: #ecfdf5;
+            color: #047857;
+            font-size: 0.82rem;
+            line-height: 1;
+        }
+
+        .freecat-project-badge-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .freecat-project-featured {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .freecat-project-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(2.3rem, 6vw, 4.6rem);
+            font-weight: 800;
+            line-height: 1.06;
+            letter-spacing: -0.04em;
+        }
+
+        .freecat-project-summary {
+            max-width: 780px;
+            margin: 1.15rem 0 0;
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .freecat-project-meta {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0 0;
+            padding-top: 1.75rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .freecat-project-meta div {
+            min-width: 0;
+        }
+
+        .freecat-project-meta dt {
+            margin-bottom: 0.35rem;
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        .freecat-project-meta dd {
+            margin: 0;
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .freecat-project-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 240px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .freecat-project-content,
+        .freecat-project-toc,
+        .freecat-project-related {
+            border: 1px solid #dce3ec;
+            border-radius: 12px;
+            background: #ffffff;
+        }
+
+        .freecat-project-content {
+            min-width: 0;
+            padding: 3rem;
+        }
+
+        .freecat-project-content h1,
+        .freecat-project-content h2,
+        .freecat-project-content h3,
+        .freecat-project-content h4 {
+            color: #0f172a;
+            line-height: 1.35;
+        }
+
+        .freecat-project-content h1 {
+            margin: 0 0 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 2rem;
+        }
+
+        .freecat-project-content h2 {
+            margin: 2.5rem 0 1rem;
+            font-size: 1.55rem;
+        }
+
+        .freecat-project-content h3 {
+            margin: 2rem 0 0.9rem;
+            font-size: 1.25rem;
+        }
+
+        .freecat-project-content p,
+        .freecat-project-content li {
+            color: #334155;
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .freecat-project-content img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 1.75rem auto;
+            border-radius: 10px;
+        }
+
+        .freecat-project-content a {
+            color: #16a34a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .freecat-project-content blockquote {
+            margin: 1.75rem 0;
+            padding: 1rem 1.25rem;
+            border-left: 4px solid #22c55e;
+            border-radius: 0 8px 8px 0;
+            background: #f8fafc;
+        }
+
+        .freecat-project-content pre {
+            overflow-x: auto;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .freecat-project-toc {
+            position: sticky;
+            top: 6.5rem;
+            padding: 1.4rem 1.3rem;
+        }
+
+        .freecat-project-toc h2 {
+            margin: 0 0 1rem;
+            color: #0f172a;
+            font-size: 1rem;
+        }
+
+        .freecat-project-toc ul {
+            display: grid;
+            gap: 0.65rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .freecat-project-toc li {
+            margin: 0;
+        }
+
+        .freecat-project-toc a {
+            color: #64748b;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            text-decoration: none;
+        }
+
+        .freecat-project-toc a:hover {
+            color: #16a34a;
+        }
+
+        .freecat-project-related {
+            margin-top: 2rem;
+            padding: 2rem 2.25rem;
+        }
+
+        .freecat-project-related > h2 {
+            margin: 0 0 1.25rem;
+            color: #0f172a;
+            font-size: 1.35rem;
+        }
+
+        .freecat-project-related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .freecat-project-related-card {
+            min-width: 0;
+            padding: 1.2rem;
+            border-radius: 9px;
+            background: #f8fafc;
+        }
+
+        .freecat-project-related-card h3 {
+            margin: 0 0 0.8rem;
+            color: #0f172a;
+            font-size: 0.95rem;
+        }
+
+        .freecat-project-related-card ul {
+            display: grid;
+            gap: 0.55rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .freecat-project-related-card li {
+            color: #64748b;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .freecat-project-related-card a {
+            color: #334155;
+            text-decoration: none;
+        }
+
+        .freecat-project-related-card a:hover {
+            color: #16a34a;
+        }
+
+        @media (max-width: 900px) {
+            .freecat-project-detail-page {
+                padding: 2rem 1rem 4rem;
+            }
+
+            .freecat-project-hero-content,
+            .freecat-project-content {
+                padding: 2rem 1.4rem;
+            }
+
+            .freecat-project-meta {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .freecat-project-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .freecat-project-toc {
+                position: static;
+                order: -1;
+            }
+
+            .freecat-project-related-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .freecat-project-title {
+                font-size: 2.25rem;
+            }
+
+            .freecat-project-summary {
+                font-size: 1rem;
+            }
+
+            .freecat-project-meta,
+            .freecat-project-related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .freecat-project-related {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        .dark .freecat-project-detail-page {
+            background: #111827;
+        }
+
+        .dark .freecat-project-hero,
+        .dark .freecat-project-content,
+        .dark .freecat-project-toc,
+        .dark .freecat-project-related {
+            border-color: #334155;
+            background: #1e293b;
+        }
+
+        .dark .freecat-project-title,
+        .dark .freecat-project-content h1,
+        .dark .freecat-project-content h2,
+        .dark .freecat-project-content h3,
+        .dark .freecat-project-content h4,
+        .dark .freecat-project-toc h2,
+        .dark .freecat-project-related > h2,
+        .dark .freecat-project-related-card h3 {
+            color: #f8fafc;
+        }
+
+        .dark .freecat-project-summary,
+        .dark .freecat-project-meta dd,
+        .dark .freecat-project-content p,
+        .dark .freecat-project-content li,
+        .dark .freecat-project-toc a,
+        .dark .freecat-project-related-card li {
+            color: #cbd5e1;
+        }
+
+        .dark .freecat-project-related-card,
+        .dark .freecat-project-content blockquote {
+            background: #0f172a;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- INCLUDE:header -->
+
+    <main class="freecat-project-detail-page">
+        <div class="freecat-project-detail-container">
+
+            <a class="freecat-project-back" href="/projects">
+                <span aria-hidden="true">←</span>
+                <span id="project-detail-back">返回项目列表</span>
+            </a>
+
+            <article class="freecat-project-hero">
+
+                <!-- PROJECT_COVER -->
+
+                <div class="freecat-project-hero-content">
+                    <div class="freecat-project-badges">
+                        <span
+                            class="freecat-project-badge"
+                            data-project-category>
+                            <!-- PROJECT_CATEGORY -->
+                        </span>
+
+                        <span
+                            class="freecat-project-badge freecat-project-badge-secondary"
+                            data-project-status>
+                            <!-- PROJECT_STATUS -->
+                        </span>
+
+                        <!-- PROJECT_FEATURED -->
+                    </div>
+
+                    <h1 class="freecat-project-title">
+                        <!-- PROJECT_TITLE -->
+                    </h1>
+
+                    <p class="freecat-project-summary">
+                        <!-- PROJECT_SUMMARY -->
+                    </p>
+
+                    <dl class="freecat-project-meta">
+                        <div>
+                            <dt id="project-detail-date-label">
+                                项目时间
+                            </dt>
+                            <dd>
+                                <!-- PROJECT_DATE -->
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt id="project-detail-location-label">
+                                项目地点
+                            </dt>
+                            <dd>
+                                <!-- PROJECT_LOCATION -->
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt id="project-detail-role-label">
+                                承担角色
+                            </dt>
+                            <dd>
+                                <!-- PROJECT_ROLE -->
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt id="project-detail-updated-label">
+                                最后更新
+                            </dt>
+                            <dd>
+                                <!-- PROJECT_UPDATED -->
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </article>
+
+            <div class="freecat-project-layout">
+                <article class="freecat-project-content">
+                    <!-- PROJECT_CONTENT -->
+                </article>
+
+                <aside class="freecat-project-toc">
+                    <h2 id="project-detail-toc-title">
+                        项目目录
+                    </h2>
+
+                    <nav
+                        id="project-detail-toc"
+                        aria-labelledby="project-detail-toc-title">
+                        <!-- PROJECT_TOC -->
+                    </nav>
+                </aside>
+            </div>
+
+            <section class="freecat-project-related">
+                <h2 id="project-detail-related-title">
+                    相关内容
+                </h2>
+
+                <div class="freecat-project-related-grid">
+                    <section class="freecat-project-related-card">
+                        <h3 id="project-detail-related-articles-title">
+                            相关文章
+                        </h3>
+
+                        <ul>
+                            <!-- PROJECT_RELATED_ARTICLES -->
+                        </ul>
+                    </section>
+
+                    <section class="freecat-project-related-card">
+                        <h3 id="project-detail-related-videos-title">
+                            相关视频
+                        </h3>
+
+                        <ul>
+                            <!-- PROJECT_RELATED_VIDEOS -->
+                        </ul>
+                    </section>
+
+                    <section class="freecat-project-related-card">
+                        <h3 id="project-detail-related-images-title">
+                            相关图片
+                        </h3>
+
+                        <ul>
+                            <!-- PROJECT_RELATED_IMAGES -->
+                        </ul>
+                    </section>
+
+                    <section class="freecat-project-related-card">
+                        <h3 id="project-detail-related-projects-title">
+                            相关项目
+                        </h3>
+
+                        <ul>
+                            <!-- PROJECT_RELATED_PROJECTS -->
+                        </ul>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- INCLUDE:footer -->
+    <!-- INCLUDE:floating-nav -->
+    <!-- INCLUDE:scripts-end -->
+</body>
+
+</html>

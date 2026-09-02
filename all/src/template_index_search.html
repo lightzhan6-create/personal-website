@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="<!-- SITE_LANGUAGE -->">
+
+<head>
+    <!-- INCLUDE:head-base -->
+    <title>Search - <!-- SITE_TITLE --></title>
+    <!-- SEARCH_SEO_HEAD -->
+    <!-- INCLUDE:home-layout-style -->
+</head>
+
+<body data-page="search"
+    class="bg-background-light dark:bg-background-dark font-display text-[#1e293b] dark:text-slate-200 transition-colors duration-200">
+    <div class="freecat-home-stage relative flex h-auto min-h-screen w-full flex-col">
+
+        <!-- INCLUDE:header -->
+
+        <!-- 主内容区：freecat-home-hero 标记让 main.js 跳过 layout-container 的 margin-top，
+             左/右两块各自承担让位顶栏的 padding-top。 -->
+        <div data-floating-nav-container class="layout-container page-blur-target freecat-home-hero flex h-full grow flex-col">
+            <div class="freecat-home-layout w-full">
+
+                <!-- INCLUDE:home-sidebar -->
+
+                <!-- 右侧搜索结果主体：inner 居中于视口，同时避开左侧 sidebar。 -->
+                <section class="freecat-home-posts">
+                    <div class="freecat-home-posts-inner w-full">
+                        <!-- Go Back 按钮 -->
+                        <div
+                            class="freecat-list-toolbar flex items-center justify-between gap-4 pb-2 mb-4">
+                            <a href="/" data-go-back
+                                class="group inline-flex items-center gap-2 h-10 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors duration-150">
+                                <svg class="text-xl t-btn-arrow-prev"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em"
+                                    height="1em">
+                                    <path
+                                        d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z">
+                                    </path>
+                                </svg>
+                                <span id="search-go-back" class="freecat-go-back-text text-sm">返回</span>
+                            </a>
+                            <!-- INCLUDE:update-sort-control -->
+                        </div>
+
+                        <!-- 搜索查询显示 -->
+                        <div id="search-query-display"
+                            class="mb-10 flex items-center justify-between gap-4 rounded-xl border border-gray-200 bg-gray-100 p-4 dark:border-gray-700 dark:bg-gray-800/50">
+                            <p id="search-empty-prompt" class="min-w-0 text-sm text-gray-600 dark:text-gray-400">
+                               请在上方搜索框中输入关键词。
+                            </p>
+                            <p id="search-active-query" class="hidden min-w-0 text-sm text-gray-600 dark:text-gray-400">
+                               <span id="searching-for-label">正在搜索：</span>
+                               <span id="current-query"
+                                   class="font-semibold text-[#1e293b] dark:text-slate-200"></span>
+                            </p>
+                            <span id="results-count" class="freecat-results-count hidden" data-count-ready="false"
+                                aria-label="Loading results">
+                                <svg class="freecat-results-count-icon" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path
+                                        d="M24 12L18.3431 17.6568L16.9289 16.2426L21.1716 12L16.9289 7.75735L18.3431 6.34314L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6568L0 12L5.65685 6.34314L7.07107 7.75735L2.82843 12Z">
+                                    </path>
+                                </svg>
+                                <span class="freecat-results-count-value" aria-hidden="true"></span>
+                            </span>
+                        </div>
+
+                        <!-- === 动态搜索结果注入区 === -->
+                        <div id="search-results" class="freecat-post-card-list">
+                            <!-- SEARCH_RESULTS_PLACEHOLDER -->
+                        </div>
+                        <!-- ===================== -->
+
+                        <!-- 无结果提示 (默认隐藏) -->
+                        <div id="no-results" class="hidden text-center py-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                                class="inline-block w-16 h-16 text-gray-300 dark:text-gray-600 mb-4">
+                                <path d="M2.39732 1.86908L4.15967 0.107422L23.2796 19.2273L21.5176 20.9897L18.0309 17.5031C16.4909 18.7351 14.5379 19.5 12.4 19.5C7.43168 19.5 3.4 15.4683 3.4 10.5C3.4 8.36211 4.16493 6.40911 5.39686 4.86908L2.39732 1.86908ZM6.81106 6.28332C5.95212 7.4458 5.4 8.91211 5.4 10.5C5.4 14.3675 8.5325 17.5 12.4 17.5C13.9879 17.5 15.4542 16.9479 16.6167 16.0889L6.81106 6.28332ZM12.4 1.5C17.3683 1.5 21.4 5.53168 21.4 10.5C21.4 12.4458 20.7888 14.2542 19.7556 15.7349L18.3115 14.2908C19.0606 13.2168 19.4 11.9035 19.4 10.5C19.4 6.6325 16.2675 3.5 12.4 3.5C10.9965 3.5 9.6832 3.83942 8.6092 4.58849L7.16511 3.14441C8.6458 2.11119 10.4542 1.5 12.4 1.5Z"/>
+                            </svg>
+                            <h3 id="search-no-results-title"
+                                class="text-xl font-extrabold text-gray-500 dark:text-gray-400 mb-2">
+                                没有找到结果
+                            </h3>
+                            <p id="search-no-results-description"
+                                class="text-gray-400 dark:text-gray-500">
+                                请尝试使用其他关键词搜索
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- INCLUDE:floating-nav -->
+
+        <!-- INCLUDE:footer -->
+    </div>
+
+    <!-- INCLUDE:scripts-end -->
+</body>
+
+</html>

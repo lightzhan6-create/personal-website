@@ -1,0 +1,254 @@
+.post-card-excerpt {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 400;
+    font-synthesis-weight: none;
+}
+
+.post-card-excerpt-limited {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
+    line-height: 22px;
+}
+
+.post-card-excerpt-lines-4 {
+    -webkit-line-clamp: 4;
+    max-height: 88px;
+}
+
+.post-card-excerpt-lines-13 {
+    -webkit-line-clamp: 13;
+    max-height: 286px;
+}
+
+.post-card-title {
+    font-family: "Freecat Figtree", "Freecat Post Card Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+
+.post-card-default-desktop-panel {
+    display: none;
+}
+
+.post-card-default-mobile-panel {
+    display: flex;
+}
+
+.freecat-post-card-list {
+    --freecat-post-card-pin-overhang: 0.5rem;
+    --freecat-post-card-mobile-height: 27rem;
+    box-sizing: border-box;
+    margin-top: calc(var(--freecat-post-card-pin-overhang) * -1);
+    margin-left: calc(var(--freecat-post-card-pin-overhang) * -1);
+    padding-top: var(--freecat-post-card-pin-overhang);
+    padding-left: var(--freecat-post-card-pin-overhang);
+    width: calc(100% + var(--freecat-post-card-pin-overhang));
+    overflow: visible;
+}
+
+@media (min-width: 768px) {
+    .freecat-post-card-list {
+        --freecat-post-card-pin-overhang: 0.75rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .freecat-post-card-list {
+        display: grid;
+        grid-auto-rows: var(--freecat-post-card-mobile-height);
+        grid-template-columns: 1fr;
+        row-gap: 1.25rem;
+    }
+
+    .freecat-post-card-list .post-card {
+        height: var(--freecat-post-card-mobile-height);
+    }
+
+    .freecat-post-card-list .post-card > div {
+        height: 100%;
+    }
+
+    .freecat-post-card-list .post-card.has-cover .lazy-image-frame {
+        flex: 1 1 auto;
+        height: auto;
+        min-height: 0;
+    }
+
+    .freecat-post-card-list .post-card.has-cover .post-card-excerpt-lines-4 {
+        min-height: 88px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .post-card-default-mobile-panel {
+        display: none;
+    }
+
+    .post-card-default-desktop-panel {
+        display: block;
+        height: 430px;
+        padding: 3rem 4rem;
+        border-radius: 8px;
+        background: #ffffff;
+    }
+
+    .dark .post-card-default-desktop-panel {
+        background: #1A2332;
+    }
+
+    .post-card-default-desktop-grid {
+        display: grid;
+        height: 100%;
+        min-width: 0;
+        grid-template-rows: minmax(0, 1fr) auto;
+        column-gap: 3.5rem;
+    }
+
+    .post-card.has-cover .post-card-default-desktop-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 43%);
+    }
+
+    .post-card.has-no-cover .post-card-default-desktop-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .post-card-default-desktop-copy {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        min-height: 0;
+        flex-direction: column;
+    }
+
+    .post-card-default-desktop-media {
+        grid-column: 2;
+        grid-row: 1;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .post-card-default-desktop-footer {
+        grid-column: 1;
+        grid-row: 2;
+    }
+}
+
+.freecat-date-text {
+    font-family: "Freecat Figtree", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 400;
+    font-synthesis-weight: none;
+}
+
+.freecat-published-date-text {
+    font-family: "Freecat Figtree", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    font-synthesis-weight: none;
+}
+
+.freecat-tag-text {
+    font-family: "Freecat Tag Figtree", "Freecat Tag Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 500;
+    font-synthesis-weight: none;
+}
+
+.tags-fit {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.tags-fit-inner {
+    width: max-content;
+    max-width: none;
+    transform-origin: left center;
+}
+
+.tags-fit-inner .freecat-tag-text {
+    flex: 0 0 auto;
+}
+
+.freecat-nav-text {
+    font-family: "Freecat Figtree", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    font-synthesis-weight: none;
+}
+
+.freecat-go-back-text {
+    font-family: "Freecat Figtree", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    font-synthesis-weight: none;
+}
+
+.freecat-search-input {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 400;
+    font-synthesis-weight: none;
+}
+
+.freecat-update-sort-label {
+    font-family: "Freecat Tag Noto Sans SC", "Freecat Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 500;
+    font-synthesis-weight: none;
+}
+
+.freecat-brand-text {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 800;
+    font-synthesis-weight: none;
+}
+
+.freecat-footer-copyright {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 400;
+    font-synthesis-weight: none;
+}
+
+.freecat-pagination-text {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 400;
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
+    font-synthesis-weight: none;
+}
+
+.freecat-pagination-strong {
+    font-family: "Freecat Figtree", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
+    font-synthesis-weight: none;
+}
+
+.freecat-sidebar-slogan,
+.freecat-about-title {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 800;
+    font-synthesis-weight: none;
+}
+
+.freecat-sidebar-description,
+.freecat-sidebar-recent-link,
+.freecat-about-description {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 400;
+    font-synthesis-weight: none;
+}
+
+.freecat-sidebar-recent-heading {
+    font-family: "Freecat Figtree", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    font-synthesis-weight: none;
+}
+
+.freecat-post-toc-title {
+    font-family: "Freecat Tag Noto Sans SC", "Freecat Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 500;
+    font-synthesis-weight: none;
+}
+
+#toc-container a {
+    font-family: "Freecat Figtree", "Freecat Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: 400;
+    font-synthesis-weight: none;
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="<!-- SITE_LANGUAGE -->">
+
+<head>
+    <!-- INCLUDE:head-base -->
+
+    <title>图库 - <!-- SITE_TITLE --></title>
+
+    <!-- GALLERY_SEO_HEAD -->
+
+    <style>
+        .gallery-filter[aria-pressed="true"] {
+            border-color: transparent;
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .gallery-card[hidden] {
+            display: none;
+        }
+
+        .gallery-card {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            overflow: hidden;
+            transition:
+                transform 180ms ease,
+                box-shadow 180ms ease,
+                border-color 180ms ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            border-color: #cbd5e1;
+            box-shadow: 0 18px 45px rgb(15 23 42 / 10%);
+        }
+
+        .dark .gallery-card:hover {
+            border-color: #475569;
+            box-shadow: 0 18px 45px rgb(0 0 0 / 28%);
+        }
+
+        #gallery-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            #gallery-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #gallery-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            #gallery-grid {
+                column-count: 4;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light font-display text-[#1e293b] transition-colors duration-200 dark:bg-background-dark dark:text-slate-200"
+>
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+
+        <!-- INCLUDE:header -->
+
+        <main
+            class="page-blur-target mt-[var(--freecat-page-top-offset)] grow px-5 pb-20 pt-10 sm:px-8 md:px-16 lg:px-28"
+        >
+            <div class="mx-auto w-full max-w-[1500px]">
+
+                <!-- 页面标题 -->
+                <section class="mb-10 text-center md:mb-14">
+                    <p
+                        class="mb-3 text-sm font-medium uppercase tracking-[0.22em] text-primary"
+                    >
+                        Photo Gallery
+                    </p>
+
+                    <h1
+                        class="mb-5 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl"
+                    >
+                        图库
+                    </h1>
+
+                    <p
+                        class="mx-auto max-w-3xl text-base leading-8 text-slate-500 dark:text-slate-400"
+                    >
+                        记录项目现场、工作过程、学习经历、旅行与生活中的视觉片段。
+                    </p>
+                </section>
+
+                <!-- 分类筛选 -->
+                <nav
+                    class="mb-10 flex flex-wrap justify-center gap-3"
+                    aria-label="图库分类筛选"
+                >
+                    <button
+                        type="button"
+                        class="gallery-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-gallery-filter="all"
+                        aria-pressed="true"
+                    >
+                        全部图片
+                    </button>
+
+                    <button
+                        type="button"
+                        class="gallery-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-gallery-filter="project"
+                        aria-pressed="false"
+                    >
+                        项目现场
+                    </button>
+
+                    <button
+                        type="button"
+                        class="gallery-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-gallery-filter="work"
+                        aria-pressed="false"
+                    >
+                        工作记录
+                    </button>
+
+                    <button
+                        type="button"
+                        class="gallery-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-gallery-filter="study"
+                        aria-pressed="false"
+                    >
+                        学习记录
+                    </button>
+
+                    <button
+                        type="button"
+                        class="gallery-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-gallery-filter="travel"
+                        aria-pressed="false"
+                    >
+                        旅行记录
+                    </button>
+
+                    <button
+                        type="button"
+                        class="gallery-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-gallery-filter="life"
+                        aria-pressed="false"
+                    >
+                        生活记录
+                    </button>
+
+                    <button
+                        type="button"
+                        class="gallery-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-gallery-filter="other"
+                        aria-pressed="false"
+                    >
+                        其他图片
+                    </button>
+                </nav>
+
+                <!-- 图片瀑布流 -->
+                <section
+                    id="gallery-grid"
+                    aria-label="图片列表"
+                >
+                    <!-- GALLERY_ITEMS -->
+                </section>
+
+                <!-- 暂无内容 -->
+                <section
+                    id="gallery-empty"
+                    class="hidden rounded-3xl border border-dashed border-slate-300 px-6 py-20 text-center dark:border-slate-700"
+                >
+                    <h2
+                        class="mb-3 text-2xl font-semibold text-slate-800 dark:text-white"
+                    >
+                        暂无图片
+                    </h2>
+
+                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                        当前分类的图片内容正在整理中。
+                    </p>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- INCLUDE:footer-no-social -->
+    </div>
+
+    <!-- INCLUDE:scripts-end -->
+
+    <script>
+        (() => {
+            const filterButtons =
+                Array.from(document.querySelectorAll(".gallery-filter"));
+
+            const galleryCards =
+                Array.from(document.querySelectorAll(".gallery-card"));
+
+            const emptyState =
+                document.getElementById("gallery-empty");
+
+            function filterGallery(category) {
+                let visibleCount = 0;
+
+                galleryCards.forEach((card) => {
+                    const cardCategory =
+                        card.dataset.galleryCategory || "";
+
+                    const shouldShow =
+                        category === "all" ||
+                        cardCategory === category;
+
+                    card.hidden = !shouldShow;
+
+                    if (shouldShow) {
+                        visibleCount += 1;
+                    }
+                });
+
+                emptyState.classList.toggle(
+                    "hidden",
+                    visibleCount !== 0
+                );
+            }
+
+            filterButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    const category =
+                        button.dataset.galleryFilter || "all";
+
+                    filterButtons.forEach((item) => {
+                        item.setAttribute(
+                            "aria-pressed",
+                            String(item === button)
+                        );
+                    });
+
+                    filterGallery(category);
+                });
+            });
+
+            filterGallery("all");
+        })();
+    </script>
+</body>
+
+</html>

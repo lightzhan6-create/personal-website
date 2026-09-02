@@ -1,0 +1,621 @@
+const fs = require('fs');
+const path = require('path');
+const dayjs = require('dayjs');
+const matter = require('gray-matter');
+const shared = require('../../shared/shared.js');
+const { autoSpacing, stripMarkdown, summarizeMarkdownUpdateText } = require('../markdown.js');
+const { renderPostContent } = require('./post-content.js');
+const seo = require('../seo.js');
+const { replacePlaceholders } = require('../template-engine.js');
+const { normalizePostFrontmatter, normalizePostTags } = require('../article-model.js');
+const { renderCopyButton } = require('../copy-button.js');
+const {
+    contentFileSlug,
+    isContentFile,
+    isMarkdownContentFile
+} = require('../content-files.js');
+
+function fileSlug(file) {
+    return contentFileSlug(file);
+}
+
+function readPostId(postIds, file) {
+    const raw = postIds && typeof postIds.get === 'function' ? postIds.get(file) : '';
+    const postId = String(raw == null ? '' : raw).trim();
+
+    if (!postId) {
+        return '';
+    }
+
+    if (!/^\d{16}$/.test(postId)) {
+        throw new Error(`Invalid post id for "${file}": "${postId}". Post ids must be 16 digits, for example 2026053115300001.`);
+    }
+
+    return postId;
+}
+
+function hasYamlFrontmatter(raw) {
+    return /^---(?:\r?\n|$)/.test(String(raw || ''));
+}
+
+function removeEmptyTocAside(html, toc) {
+    if (String(toc || '').trim()) return html;
+
+    return html.replace(
+        /\s*<aside\b[^>]*\bgroup\/toc\b[\s\S]*?<\/aside>/,
+        '\n                        <div class="w-72 2xl:w-80 flex-shrink-0" aria-hidden="true"></div>'
+    );
+}
+
+function versionedAssetUrl(href, assetVersion) {
+    if (!assetVersion) return href;
+    const separator = href.includes('?') ? '&' : '?';
+    return `${href}${separator}v=${encodeURIComponent(String(assetVersion))}`;
+}
+
+function postNotoFontHref(weightName) {
+    return `/assets/fonts/freecat-noto-sans-sc-${weightName}-subset.woff2`;
+}
+
+function renderFontPreload(href) {
+    return `<link rel="preload" href="${href}" as="font" type="font/woff2" crossorigin />`;
+}
+
+function renderPostFontPreloads(postId, assetVersion = '') {
+    const hrefs = [
+        '/assets/fonts/freecat-figtree-regular-subset.woff2',
+        '/assets/fonts/freecat-figtree-semi-bold-subset.woff2',
+        '/assets/fonts/freecat-figtree-extra-bold-subset.woff2',
+        postNotoFontHref('regular'),
+        postNotoFontHref('medium'),
+        postNotoFontHref('semi-bold'),
+        postNotoFontHref('extra-bold')
+    ].map(href => versionedAssetUrl(href, assetVersion));
+
+    return hrefs.map(renderFontPreload).join('\n    ');
+}
+
+function fontFace(family, href, weight, options = {}) {
+    const unicodeRange = options.unicodeRange ? `\n        unicode-range: ${options.unicodeRange};` : '';
+    return `@font-face {
+        font-family: "${family}";
+        src: url("${href}") format("woff2");
+        font-weight: ${weight};
+        font-style: normal;
+        font-display: block;${unicodeRange}
+    }`;
+}
+
+function renderPostFontFaceCss(postId, assetVersion = '') {
+    const figtreeRegular = versionedAssetUrl('/assets/fonts/freecat-figtree-regular-subset.woff2', assetVersion);
+    const figtreeSemiBold = versionedAssetUrl('/assets/fonts/freecat-figtree-semi-bold-subset.woff2', assetVersion);
+    const figtreeExtraBold = versionedAssetUrl('/assets/fonts/freecat-figtree-extra-bold-subset.woff2', assetVersion);
+    const regular = versionedAssetUrl(postNotoFontHref('regular'), assetVersion);
+    const medium = versionedAssetUrl(postNotoFontHref('medium'), assetVersion);
+    const semiBold = versionedAssetUrl(postNotoFontHref('semi-bold'), assetVersion);
+    const extraBold = versionedAssetUrl(postNotoFontHref('extra-bold'), assetVersion);
+    const figtreeRange = 'U+0000-00FF, U+0100-024F, U+2000-206F, U+20A0-20CF, U+2122, U+2190-21FF';
+
+    return [
+        fontFace('Freecat Figtree', figtreeRegular, '400', { unicodeRange: figtreeRange }),
+        fontFace('Freecat Figtree', figtreeSemiBold, '600', { unicodeRange: figtreeRange }),
+        fontFace('Freecat Tag Figtree', figtreeSemiBold, '500', { unicodeRange: figtreeRange }),
+        fontFace('Freecat Figtree', figtreeExtraBold, '800 1000', { unicodeRange: figtreeRange }),
+        fontFace('Freecat Noto Sans SC', regular, '350 449'),
+        fontFace('Freecat Noto Sans SC', medium, '450 549'),
+        fontFace('Freecat Noto Sans SC', semiBold, '600'),
+        fontFace('Freecat Noto Sans SC', extraBold, '750 849'),
+        fontFace('Freecat Tag Noto Sans SC', medium, '500')
+    ].join('\n\n    ');
+}
+
+function normalizeLatestUpdateSnapshot(raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const targets = Array.isArray(raw.targets) ? raw.targets : [];
+    const items = Array.isArray(raw.items)
+        ? raw.items
+            .map((item, index) => {
+                const text = String(item == null ? '' : item).trim();
+                const target = targets[index];
+                const targetText = target && typeof target === 'object'
+                    ? String(target.text == null ? '' : target.text).trim()
+                    : String(target == null ? '' : target).trim();
+                const targetLine = target && typeof target === 'object' && Number.isFinite(Number(target.line))
+                    ? Number(target.line)
+                    : 0;
+                return text ? { text, targetText, targetLine } : null;
+            })
+            .filter(Boolean)
+        : [];
+    if (items.length === 0) return null;
+    return { items };
+}
+
+function latestUpdateEntryText(entry) {
+    if (entry && typeof entry === 'object') return String(entry.text == null ? '' : entry.text).trim();
+    return String(entry == null ? '' : entry).trim();
+}
+
+function latestUpdateEntryTargetText(entry) {
+    if (entry && typeof entry === 'object') return String(entry.targetText == null ? '' : entry.targetText).trim();
+    return '';
+}
+
+function latestUpdateEntryTargetId(entry, fallbackId) {
+    if (entry && typeof entry === 'object' && entry.targetId) return String(entry.targetId);
+    return fallbackId;
+}
+
+function latestUpdateEntryTargetLine(entry) {
+    if (entry && typeof entry === 'object' && Number.isFinite(Number(entry.targetLine))) return Number(entry.targetLine);
+    return 0;
+}
+
+function decodeHtmlText(value) {
+    return String(value || '')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&#(\d+);/g, (match, code) => String.fromCharCode(Number(code)))
+        .replace(/&#x([0-9a-f]+);/gi, (match, code) => String.fromCharCode(parseInt(code, 16)));
+}
+
+function htmlToPlainText(html) {
+    return decodeHtmlText(String(html || '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+}
+
+function htmlAttribute(tag, name) {
+    const pattern = new RegExp(`\\b${name}=("[^"]*"|'[^']*')`, 'i');
+    const match = pattern.exec(String(tag || ''));
+    if (!match) return '';
+    return decodeHtmlText(match[1].slice(1, -1)).trim();
+}
+
+function htmlImageMatchText(html) {
+    const parts = [];
+    String(html || '').replace(/<img\b[^>]*>/gi, tag => {
+        [
+            htmlAttribute(tag, 'alt'),
+            htmlAttribute(tag, 'title'),
+            htmlAttribute(tag, 'data-src') || htmlAttribute(tag, 'src')
+        ].filter(Boolean).forEach(value => parts.push(value));
+        return tag;
+    });
+    return parts.join(' ');
+}
+
+function htmlLinkMatchText(html) {
+    const parts = [];
+    String(html || '').replace(/<a\b[^>]*>/gi, tag => {
+        const href = htmlAttribute(tag, 'href');
+        if (href) parts.push(href);
+        return tag;
+    });
+    return parts.join(' ');
+}
+
+function htmlEmbedMatchText(html) {
+    const parts = [];
+    String(html || '').replace(/<[^>]+\bdata-embed-url=("[^"]*"|'[^']*')[^>]*>/gi, tag => {
+        const url = htmlAttribute(tag, 'data-embed-url');
+        if (url) parts.push(url);
+        return tag;
+    });
+    return parts.join(' ');
+}
+
+function htmlToLatestUpdateMatchText(html) {
+    return [htmlToPlainText(html), htmlImageMatchText(html), htmlLinkMatchText(html), htmlEmbedMatchText(html)].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+}
+
+function normalizeLatestUpdateMatchText(value) {
+    return summarizeMarkdownUpdateText(value);
+}
+
+function compactLatestUpdateMatchText(value) {
+    return normalizeLatestUpdateMatchText(value)
+        .replace(/[\s_]/g, '')
+        .trim();
+}
+
+function isMarkdownHeadingText(value) {
+    return /^#{1,6}[ \t]+\S/.test(String(value || '').trim());
+}
+
+function isHtmlHeadingOpeningTag(openingTag) {
+    return /^<h[1-6]\b/i.test(String(openingTag || ''));
+}
+
+function exactLatestUpdateBlockMatched(openingTag, targetText, haystack, compactHaystack) {
+    if (!isHtmlHeadingOpeningTag(openingTag) || !isMarkdownHeadingText(targetText)) return true;
+    const exactNeedle = normalizeLatestUpdateMatchText(targetText);
+    const exactCompactNeedle = compactLatestUpdateMatchText(targetText);
+    return (exactNeedle && haystack === exactNeedle)
+        || (exactCompactNeedle && compactHaystack === exactCompactNeedle);
+}
+
+function openingTagId(openingTag) {
+    const match = /\bid="([^"]+)"/i.exec(String(openingTag || ''));
+    return match ? match[1] : '';
+}
+
+function elementLineRange(openingTag) {
+    const start = Number(htmlAttribute(openingTag, 'data-source-line'));
+    const end = Number(htmlAttribute(openingTag, 'data-source-line-end'));
+    if (!Number.isFinite(start) || start <= 0) return null;
+    return {
+        start,
+        end: Number.isFinite(end) && end >= start ? end : start
+    };
+}
+
+function lineMatchesElement(openingTag, targetLine) {
+    const line = Number(targetLine);
+    if (!Number.isFinite(line) || line <= 0) return true;
+    const range = elementLineRange(openingTag);
+    if (!range) return true;
+    return line >= range.start && line <= range.end;
+}
+
+function attachLatestUpdateId(openingTag, targetId) {
+    if (/\bid="/i.test(openingTag)) return openingTag;
+    return openingTag.replace(/^<([a-z][\w:-]*)\b/i, `<$1 id="${shared.escapeHtml(targetId)}"`);
+}
+
+function annotateLatestUpdateHtml(html, latestUpdate) {
+    const items = latestUpdate && Array.isArray(latestUpdate.items) ? latestUpdate.items : [];
+    if (items.length === 0) return { html, latestUpdate };
+
+    let annotatedHtml = String(html || '');
+    const annotatedItems = items.map((entry, index) => {
+        const baseEntry = entry && typeof entry === 'object'
+            ? { ...entry }
+            : { text: latestUpdateEntryText(entry) };
+        const fallbackId = `latest-update-${index + 1}`;
+        const targetId = latestUpdateEntryTargetId(entry, fallbackId);
+        const targetText = latestUpdateEntryTargetText(entry) || latestUpdateEntryText(entry);
+        const targetLine = latestUpdateEntryTargetLine(entry);
+        const needle = normalizeLatestUpdateMatchText(targetText);
+        const compactNeedle = compactLatestUpdateMatchText(targetText);
+        const fallbackNeedle = needle.length > 40 ? needle.slice(0, 40) : needle;
+        const compactFallbackNeedle = compactNeedle.length > 40 ? compactNeedle.slice(0, 40) : compactNeedle;
+        let resolvedId = targetId;
+        let matched = false;
+
+        if (!needle && !compactNeedle) return { ...baseEntry, targetId: resolvedId };
+
+        const blockPatterns = [
+            /(<figure\b[^>]*\bclass="[^"]*\bexternal-embed\b[^"]*"[^>]*>)([\s\S]*?<\/figure>)/gi,
+            /(<h[1-6]\b[^>]*>)([\s\S]*?<\/h[1-6]>)/gi,
+            /(<p\b[^>]*>)([\s\S]*?<\/p>)/gi,
+            /(<li\b[^>]*>)([\s\S]*?<\/li>)/gi,
+            /(<tr\b[^>]*>)([\s\S]*?<\/tr>)/gi,
+            /(<blockquote\b[^>]*>)([\s\S]*?<\/blockquote>)/gi,
+            /(<figcaption\b[^>]*>)([\s\S]*?<\/figcaption>)/gi,
+            /(<figure\b[^>]*>)([\s\S]*?<\/figure>)/gi,
+            /(<div\b[^>]*\bclass="[^"]*\bcallout\b[^"]*"[^>]*>)([\s\S]*?<\/div>)/gi,
+            /(<pre\b[^>]*>)([\s\S]*?<\/pre>)/gi,
+            /(<ul\b[^>]*>)([\s\S]*?<\/ul>)/gi,
+            /(<ol\b[^>]*>)([\s\S]*?<\/ol>)/gi,
+            /(<table\b[^>]*>)([\s\S]*?<\/table>)/gi
+        ];
+
+        for (const pattern of blockPatterns) {
+            if (matched) break;
+            annotatedHtml = annotatedHtml.replace(pattern, (match, openingTag, rest) => {
+                if (matched) return match;
+                const haystack = htmlToLatestUpdateMatchText(match);
+                const compactHaystack = compactLatestUpdateMatchText(haystack);
+                const normalizedMatched = needle && (
+                    haystack.indexOf(needle) !== -1
+                    || haystack.indexOf(fallbackNeedle) !== -1
+                );
+                const compactMatched = compactNeedle && (
+                    compactHaystack.indexOf(compactNeedle) !== -1
+                    || compactHaystack.indexOf(compactFallbackNeedle) !== -1
+                );
+                if (!haystack
+                    || (!normalizedMatched && !compactMatched)
+                    || !lineMatchesElement(openingTag, targetLine)
+                    || !exactLatestUpdateBlockMatched(openingTag, targetText, haystack, compactHaystack)) {
+                    return match;
+                }
+
+                resolvedId = openingTagId(openingTag) || targetId;
+                matched = true;
+                return `${attachLatestUpdateId(openingTag, targetId)}${rest}`;
+            });
+        }
+
+        return { ...baseEntry, targetId: resolvedId };
+    });
+
+    return {
+        html: annotatedHtml,
+        latestUpdate: { ...latestUpdate, items: annotatedItems }
+    };
+}
+
+function renderLatestUpdatePanel(post) {
+    const latestUpdate = post && post.latestUpdate;
+    const items = latestUpdate && Array.isArray(latestUpdate.items) ? latestUpdate.items : [];
+    if (items.length === 0) return '';
+
+    const itemsHtml = items
+        .map((item, index) => {
+            const itemHtml = shared.escapeHtml(autoSpacing(latestUpdateEntryText(item)));
+            const targetId = latestUpdateEntryTargetId(item, `latest-update-${index + 1}`);
+            return `<p><a class="freecat-post-latest-update-link" href="#${targetId}" data-latest-update-text="${itemHtml}">${itemHtml}</a></p>`;
+        })
+        .join('\n                                            ');
+
+    return `<div class="freecat-post-latest-update-shell">
+                        <aside class="freecat-post-latest-update-panel w-72 2xl:w-80 flex-shrink-0">
+                            <div class="h-full">
+                                <div class="freecat-post-latest-update-scroll h-full min-h-0">
+                                    <div id="latest-update-container" class="h-full overflow-x-hidden">
+                                        <div class="freecat-post-latest-update-content">
+                                            <h3 class="freecat-sidebar-recent-heading text-sm tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+                                                <span class="freecat-post-latest-update-title-note">最后更新内容</span>
+                                            </h3>
+                                        <div class="freecat-post-latest-update-body">
+                                            ${itemsHtml}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>`;
+}
+
+/**
+ * 读取 writing/ 目录下的所有 Markdown 文章并归一化为 post 对象数组。
+ * 跳过 frontmatter 标记 show: false 的文件。已按"置顶在前 + 时间倒序"排序。
+ */
+function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skipMissingGitDates = false }) {
+    const postFiles = fs.readdirSync(postsDir).filter(isContentFile);
+    const posts = [];
+    const seenPostIds = new Map();
+
+    postFiles.forEach(file => {
+        const filePath = path.join(postsDir, file);
+        const raw = fs.readFileSync(filePath, 'utf-8');
+        const slug = fileSlug(file);
+        const isMarkdown = isMarkdownContentFile(file);
+        const hasMetadata = hasYamlFrontmatter(raw);
+        const { data, content } = matter(raw);
+        const frontmatter = normalizePostFrontmatter(data);
+
+        if (frontmatter.show === false) {
+            console.log(`  跳过文章: ${file}`);
+            return;
+        }
+
+        const postId = readPostId(postIds, file);
+        if (!postId) {
+            return;
+        }
+
+        const existingFile = seenPostIds.get(postId);
+        if (existingFile) {
+            throw new Error(`Duplicate post id "${postId}" in "${existingFile}" and "${file}". Each article must have a unique post id.`);
+        }
+        seenPostIds.set(postId, file);
+
+        const storedModifiedDate = gitDates && typeof gitDates.get === 'function' ? gitDates.get(file) : null;
+        if (!storedModifiedDate) {
+            if (skipMissingGitDates) {
+                console.log(`  Skipping article until git-dates workflow updates snapshot: ${file}`);
+                return;
+            }
+            if (gitDates && typeof gitDates.assertHas === 'function') gitDates.assertHas(file);
+            throw new Error(`Missing Git modified date for "${file}".`);
+        }
+
+        const storedPublishDate = postDates && typeof postDates.get === 'function' ? postDates.get(file) : null;
+        const publishDate = frontmatter.date ? dayjs(frontmatter.date) : dayjs(storedPublishDate || storedModifiedDate || fs.statSync(filePath).birthtime);
+
+        let modifiedDate;
+        if (frontmatter.updated) modifiedDate = dayjs(frontmatter.updated);
+        else modifiedDate = dayjs(storedModifiedDate);
+
+        const cleanContent = stripMarkdown(content, { preserveLineBreaks: true });
+        const previewRaw = frontmatter.description || cleanContent;
+        const excerptRaw = frontmatter.description || (cleanContent.slice(0, 160) + (cleanContent.length > 160 ? '...' : ''));
+        const titleRaw = (frontmatter.title && String(frontmatter.title).trim()) ? frontmatter.title : slug;
+        const faqItems = seo.normalizeFaq(frontmatter.faq);
+        const latestUpdate = frontmatter.showLatestUpdate && latestUpdates && typeof latestUpdates.get === 'function'
+            ? normalizeLatestUpdateSnapshot(latestUpdates.get(file))
+            : null;
+
+        posts.push({
+            title: autoSpacing(titleRaw),
+            slug,
+            postId,
+            date: publishDate,
+            modifiedDate,
+            excerpt: autoSpacing(excerptRaw),
+            preview: autoSpacing(previewRaw),
+            summary: frontmatter.summary ? autoSpacing(frontmatter.summary) : '',
+            cover: isMarkdown && hasMetadata ? frontmatter.cover : '',
+            // 可选 frontmatter：cover_width / cover_height（整数像素）
+            // 给 <img> 写 width/height 属性，预留盒子，消除首屏 CLS。
+            coverWidth: frontmatter.coverWidth,
+            coverHeight: frontmatter.coverHeight,
+            tags: frontmatter.tags,
+            tag: frontmatter.tags,
+            // 尾斜杠 = Cloudflare Pages 对目录 index.html 的规范地址；
+            // 不带斜杠会被 308 到带斜杠版本，canonical/sitemap/内链必须直达 200。
+            link: `/posts/${postId}/`,
+            pinned: frontmatter.pinned,
+            allowCopyContent: frontmatter.allowCopyContent,
+            latestUpdate,
+            enableImageCaptions: frontmatter.enableImageCaptions,
+            author: frontmatter.author,
+            authorUrl: frontmatter.authorUrl,
+            noindex: frontmatter.noindex,
+            faq: faqItems,
+            content,
+            rawTitle: frontmatter.title
+        });
+    });
+
+    posts.sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return b.date.valueOf() - a.date.valueOf();
+    });
+
+    return posts;
+}
+
+/**
+ * 渲染单篇文章详情页 HTML。
+ */
+function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = '' }) {
+    const renderedPostContent = renderPostContent({ post });
+    const annotatedLatestUpdate = annotateLatestUpdateHtml(renderedPostContent.html, post.latestUpdate);
+    const finalContentHtml = annotatedLatestUpdate.html;
+    const toc = renderedPostContent.toc;
+    const safeTitle = shared.escapeHtml(post.title);
+
+    const tags = normalizePostTags(post);
+    const tagsHtml = tags.map(t => shared.renderTagSpan(t)).join('\n');
+    const copyContentButton = post.allowCopyContent
+        ? renderCopyButton({
+            className: 'freecat-post-copy-btn',
+            inputAttrs: ' data-copy-source="#freecat-article-copy-source" data-copy-target="#freecat-article-body"',
+            ariaLabel: '复制正文',
+            title: '复制正文'
+        })
+        : '';
+    const copyContentSource = post.allowCopyContent
+        ? `<script type="application/json" id="freecat-article-copy-source">${JSON.stringify(String(post.content || ''))}</script>`
+        : '';
+    const latestUpdatePanel = renderLatestUpdatePanel({ ...post, latestUpdate: annotatedLatestUpdate.latestUpdate });
+
+    const canonical = seo.pageUrl(siteConfig, post.link);
+    const rawCover = String(post.cover || '');
+    const ogImage = seo.absoluteUrl(siteConfig, rawCover || seo.defaultImage(siteConfig, seoConfig));
+
+    // 按需加载：扫描渲染后的 HTML，只为真正用到的特性引入对应 CSS/JS
+    const needsHighlight = /<pre[^>]*><code/i.test(finalContentHtml);
+    const needsKatex = /class="katex/i.test(finalContentHtml);
+    const needsMermaid = /data-diagram-type="mermaid"|class="(?:[^"]*\s)?mermaid-block(?:\s[^"]*)?"/i.test(finalContentHtml);
+    const needsEcharts = /class="(?:[^"]*\s)?echarts-block(?:\s[^"]*)?"|data-chart-options=/i.test(finalContentHtml);
+    const needsTwitterEmbed = /data-embed-provider="twitter"/i.test(finalContentHtml);
+    const needsAudioPlayer = /class="[^"]*\baudio-player\b/i.test(finalContentHtml);
+
+    const needsVideoPlayer = /🎬|🎥|📹|class="[^"]*\bvideo-player\b|<a [^>]*href="[^"]*\.(?:mp4|webm|ogv|mov|m4v|m3u8)(?:[?#]|\b)/i.test(finalContentHtml);
+    const needsMediaPlayer = needsAudioPlayer || needsVideoPlayer;
+
+    const chartJs = [
+        needsMermaid ? '<script src="https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js"></script>' : '',
+        needsEcharts ? '<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>' : ''
+    ].filter(Boolean).join('\n    ');
+    const highlightCss = needsHighlight
+        ? '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />'
+        : '';
+    const katexCss = needsKatex
+        ? '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />'
+        : '';
+    const mediaCss = needsMediaPlayer
+        ? '<link rel="stylesheet" href="/assets/media-player.css" />'
+        : '';
+    // 播放器三件套改为 defer：保证在 deferred 的 shared.js 之后按文档顺序执行
+    //（media-player-template.js 依赖 FreecatShared，media-player.js 与 audio/video-player.js 逐层依赖）。
+    const mediaJs = needsMediaPlayer
+        ? '<script src="/assets/media-player-template.js" defer></script>\n    <script src="/assets/media-player.js" defer></script>'
+        : '';
+    const audioCss = needsAudioPlayer
+        ? '<link rel="stylesheet" href="/assets/audio-player.css" />'
+        : '';
+    const audioJs = needsAudioPlayer
+        ? '<script src="/assets/audio-player.js" defer></script>'
+        : '';
+    const videoCss = needsVideoPlayer
+        ? '<link rel="stylesheet" href="/assets/video-player.css" />'
+        : '';
+    const videoJs = needsVideoPlayer
+        ? '<script src="/assets/video-player.js" defer></script>'
+        : '';
+    const embedJs = needsTwitterEmbed
+        ? '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
+        : '';
+
+    const pageTitle = `${post.title} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
+    const sharePublishDate = post.date.tz('Asia/Shanghai').format('YYYY.MM.DD');
+    const seoHead = seo.renderHeadTags({
+        title: pageTitle,
+        description: seo.articleSummary(post),
+        canonicalPath: post.link,
+        siteConfig,
+        seoConfig,
+        type: 'article',
+        image: rawCover || seo.defaultImage(siteConfig, seoConfig),
+        noindex: post.noindex,
+        tags,
+        publishedTime: post.date.toISOString(),
+        publishedDisplayDate: sharePublishDate,
+        modifiedTime: post.modifiedDate.toISOString(),
+        author: post.author
+    });
+    const jsonLd = seo.renderArticleJsonLd({ post, siteConfig, seoConfig, canonical, ogImage, tags, faqItems: post.faq || [] });
+
+    const html = replacePlaceholders(template, [
+        [/<!-- TITLE_PLACEHOLDER -->/g, safeTitle],
+        [/<!-- TITLE_H1_PLACEHOLDER -->/g, shared.processTitleHtml(safeTitle)],
+        ['<!-- TAGS_PLACEHOLDER -->', tagsHtml],
+        ['<!-- DATE_PLACEHOLDER -->', post.date.tz('Asia/Shanghai').format('YYYY-MM-DD')],
+        ['<!-- DATE_ISO_PLACEHOLDER -->', post.date.toISOString()],
+        ['<!-- MODIFIED_PLACEHOLDER -->', post.modifiedDate.tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm')],
+        ['<!-- POST_COPY_BUTTON_PLACEHOLDER -->', copyContentButton],
+        ['<!-- POST_COPY_SOURCE_PLACEHOLDER -->', copyContentSource],
+        ['<!-- LATEST_UPDATE_PLACEHOLDER -->', latestUpdatePanel],
+        ['<!-- CONTENT_PLACEHOLDER -->', finalContentHtml],
+        ['<!-- TOC_PLACEHOLDER -->', toc],
+        ['<!-- POST_SEO_HEAD -->', seoHead],
+        ['<!-- POST_HIGHLIGHT_CSS -->', highlightCss],
+        ['<!-- POST_KATEX_CSS -->', katexCss],
+        ['<!-- POST_FONT_PRELOADS -->', renderPostFontPreloads(post.postId, assetVersion)],
+        ['<!-- POST_FONT_FACE_CSS -->', renderPostFontFaceCss(post.postId, assetVersion)],
+        ['<!-- POST_CHART_JS -->', [chartJs, embedJs].filter(Boolean).join('\n    ')],
+        ['<!-- POST_MEDIA_CSS -->', mediaCss],
+        ['<!-- POST_MEDIA_JS -->', mediaJs],
+        ['<!-- POST_AUDIO_CSS -->', audioCss],
+        ['<!-- POST_AUDIO_JS -->', audioJs],
+        ['<!-- POST_VIDEO_CSS -->', videoCss],
+        ['<!-- POST_VIDEO_JS -->', videoJs],
+        ['<!-- POST_JSONLD -->', jsonLd]
+    ]);
+
+    return removeEmptyTocAside(html, toc);
+}
+
+function generateAll({ posts, template, siteConfig, seoConfig, outputDir, assetVersion = '' }) {
+    console.log('📄 Generating post pages...');
+    fs.mkdirSync(path.join(outputDir, 'posts'), { recursive: true });
+
+    posts.forEach(post => {
+        const html = renderPostPage({ post, template, siteConfig, seoConfig, assetVersion });
+        const postDir = path.join(outputDir, 'posts', post.postId);
+        fs.mkdirSync(postDir, { recursive: true });
+        const outFile = path.join(postDir, 'index.html');
+        fs.writeFileSync(outFile, html, 'utf-8');
+        console.log(`  Generated: posts/${post.postId}/index.html`);
+    });
+}
+
+module.exports = {
+    loadPosts,
+    renderPostPage,
+    generateAll,
+    normalizeLatestUpdateSnapshot,
+    renderLatestUpdatePanel,
+    renderPostFontPreloads,
+    renderPostFontFaceCss
+};

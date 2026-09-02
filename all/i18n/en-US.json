@@ -1,0 +1,100 @@
+{
+  "language": {
+    "code": "en-US",
+    "name": "English (US)",
+    "htmlLang": "en-US",
+    "direction": "ltr"
+  },
+  "navigation": {
+    "home": "Home",
+    "articles": "Articles",
+    "resume": "Resume",
+    "projects": "Project Library",
+    "gallery": "Gallery",
+    "videos": "Videos",
+    "about": "About",
+    "language": "Language"
+  },
+  "languageSelector": {
+    "title": "Choose a language",
+    "description": "Choose the language used by the website interface.",
+    "currentSelection": "Current selection"
+  },
+  "common": {
+    "search": "Search",
+    "back": "Back",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "viewDetails": "View Details",
+    "download": "Download",
+    "noContent": "No content is available yet.",
+    "lastUpdated": "Last updated"
+  },
+  "home": {
+    "recentUpdates": "Recent Updates",
+    "latestArticles": "Latest Articles"
+  },
+  "searchPage": {
+    "goBack": "Go Back",
+    "emptyPrompt": "Enter a search term in the search box above.",
+    "searchingFor": "Searching for:",
+    "noResultsTitle": "No results found",
+    "noResultsDescription": "Try searching with different keywords"
+  },
+  "projects": {
+    "pageTitle": "Projects & Solutions",
+    "pageDescription": "Projects I led or participated in, along with reusable solutions developed through practice.",
+    "all": "All Projects",
+    "lead": "Lead Projects",
+    "collaboration": "Collaborative Projects",
+    "solutions": "Solutions",
+    "empty": "No projects are available in this category.",
+    "viewProject": "View Project",
+    "backToList": "Back to Projects"
+  },
+  "gallery": {
+    "pageTitle": "Gallery",
+    "pageDescription": "Visual records of projects, work, learning, travel and everyday life.",
+    "all": "All Images",
+    "project": "Project",
+    "work": "Work",
+    "study": "Learning",
+    "travel": "Travel",
+    "life": "Life",
+    "other": "Other",
+    "empty": "No images are available in this category.",
+    "viewImage": "View Image",
+    "viewOriginal": "View Original",
+    "backToGallery": "Back to Gallery"
+  },
+  "videos": {
+    "pageTitle": "Video Library",
+    "pageDescription": "Videos related to projects, knowledge, learning and everyday life.",
+    "all": "All Videos",
+    "empty": "No videos are available on this platform.",
+    "viewVideo": "View Video",
+    "sourceLink": "View Original Video",
+    "backToVideos": "Back to Video Library"
+  },
+  "resume": {
+    "pageTitle": "Personal Profile",
+    "introduction": "Introduction",
+    "philosophy": "Personal Philosophy",
+    "coreCapabilities": "Core Capabilities",
+    "workExperience": "Work Experience",
+    "projectExperience": "Project Experience",
+    "knowledgeBase": "Knowledge Base",
+    "skillsAndTools": "Skills & Tools",
+    "education": "Education",
+    "certificates": "Certificates & Training",
+    "languages": "Languages"
+  },
+  "relatedContent": {
+    "title": "Related Content",
+    "articles": "Related Articles",
+    "videos": "Related Videos",
+    "images": "Related Images",
+    "projects": "Related Projects",
+    "empty": "No related content is available yet."
+  }
+}
