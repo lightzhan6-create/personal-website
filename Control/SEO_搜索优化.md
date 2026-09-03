@@ -1,5 +1,5 @@
 ---
-site_url:
+site_url: https://smtmachines.de5.net
 _01: 网站正式域名，用于生成 Sitemap、Canonical、Open Graph 链接、RSS 和 llms.txt，例如 https://example.com
 
 site_description: Light 的个人博客，记录外贸 B2B、SMT/THT 电子制造设备、AI 工具与日常思考。
