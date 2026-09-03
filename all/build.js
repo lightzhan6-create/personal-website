@@ -304,7 +304,7 @@ if (siteConfig.show_recent_posts === true) {
 
     recentPostsSidebarInnerHtml = `
                         <div class="flex flex-col flex-shrink-0 mt-8">
-                            <h3 id="recent-updates-heading" class="freecat-sidebar-recent-heading text-sm tracking-wider text-slate-600 dark:text-slate-300 mb-4 animate-fade-in-up" style="animation-delay: ${HEADING_DELAY}ms">
+                            <h3 id="recent-updates-heading" class="freecat-sidebar-recent-heading text-sm tracking-wider text-slate-600 dark:text-slate-300 mb-4 animate-fade-in-up" style="animation-delay: ${HEADING_DELAY}ms" data-i18n="home.recentUpdates">
                                 最近更新
                             </h3>
                             <ul class="flex flex-col divide-y divide-slate-200 dark:divide-slate-700">
