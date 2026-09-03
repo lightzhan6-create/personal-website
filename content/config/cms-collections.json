@@ -1,0 +1,93 @@
+{
+  "media_folder": "public/uploads",
+  "public_folder": "/uploads",
+  "collections": [
+    {
+      "name": "posts",
+      "label": "Blog Posts",
+      "folder": "content/posts",
+      "extension": "mdx",
+      "slug": "{{slug}}",
+      "fields": [
+        "title",
+        "slug",
+        "locale",
+        "translation_key",
+        "date",
+        "updated",
+        "description",
+        "category",
+        "tags",
+        "cover",
+        "gallery",
+        "author",
+        "youtube",
+        "seo_title",
+        "seo_description",
+        "pinned",
+        "show"
+      ]
+    },
+    {
+      "name": "projects",
+      "label": "Projects",
+      "folder": "content/projects",
+      "extension": "mdx",
+      "slug": "{{slug}}",
+      "fields": [
+        "title",
+        "slug",
+        "locale",
+        "translation_key",
+        "date",
+        "updated",
+        "description",
+        "category",
+        "tags",
+        "cover",
+        "gallery",
+        "author",
+        "youtube",
+        "seo_title",
+        "seo_description",
+        "status",
+        "role",
+        "location",
+        "featured",
+        "show"
+      ]
+    },
+    {
+      "name": "gallery",
+      "label": "Photo Gallery",
+      "folder": "content/gallery",
+      "extension": "mdx",
+      "fields": [
+        "image",
+        "title",
+        "date",
+        "description",
+        "alt",
+        "show"
+      ]
+    },
+    {
+      "name": "videos",
+      "label": "Videos",
+      "folder": "videos",
+      "extension": "md",
+      "fields": [
+        "id",
+        "title",
+        "platform",
+        "date",
+        "source_url",
+        "embed_url",
+        "cover",
+        "summary",
+        "tags",
+        "show"
+      ]
+    }
+  ]
+}

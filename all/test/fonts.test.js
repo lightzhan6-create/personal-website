@@ -240,7 +240,7 @@ function withFontSubsetFileMocks(html, manifest, callback) {
         if (current === normalized(path.join(rootDir, 'dist', 'posts', 'post-1'))) return true;
         if (current === normalized(path.join(rootDir, 'src'))) return true;
         if (current === normalized(path.join(rootDir, 'build'))) return true;
-        if (current === normalized(path.join(rootDir, '..', 'writing'))) return true;
+        if (current === normalized(path.join(rootDir, '..', 'content', 'posts'))) return true;
         if (current === normalized(path.join(rootDir, '..', 'Control'))) return true;
         return originalExistsSync(file);
     };
@@ -252,7 +252,7 @@ function withFontSubsetFileMocks(html, manifest, callback) {
         if (current === normalized(path.join(rootDir, 'dist', 'posts', 'post-1'))) return [dirent('index.html', 'file')];
         if (current === normalized(path.join(rootDir, 'src'))) return [dirent('source.js', 'file')];
         if (current === normalized(path.join(rootDir, 'build'))) return [dirent('build.js', 'file')];
-        if (current === normalized(path.join(rootDir, '..', 'writing'))) return [dirent('post.md', 'file')];
+        if (current === normalized(path.join(rootDir, '..', 'content', 'posts'))) return [dirent('post.md', 'file')];
         if (current === normalized(path.join(rootDir, '..', 'Control'))) return [dirent('config.md', 'file')];
         return originalReaddirSync(dir, options);
     };
@@ -262,7 +262,7 @@ function withFontSubsetFileMocks(html, manifest, callback) {
         if (current.includes('/fonts/') && /\.(woff2|ttf)$/.test(current)) return Buffer.from('font-source');
         if (current.endsWith('/src/source.js')) return 'SourceOnlyZ';
         if (current.endsWith('/build/build.js')) return 'BuildOnlyZ';
-        if (current.endsWith('/writing/post.md')) return 'WritingOnlyZ';
+        if (current.endsWith('/content/posts/post.md')) return 'WritingOnlyZ';
         if (current.endsWith('/Control/config.md')) return 'ControlOnlyZ';
         if (current.endsWith('/dist/index.html')) return html;
         if (current.endsWith('/dist/posts/post-1/index.html')) return html;
@@ -366,7 +366,7 @@ test('font subset refresh does not restore cache over current reusable subsets',
         if (current === normalized(path.join(rootDir, 'dist', 'posts'))) return true;
         if (current === normalized(path.join(rootDir, 'src'))) return true;
         if (current === normalized(path.join(rootDir, 'build'))) return true;
-        if (current === normalized(path.join(rootDir, '..', 'writing'))) return true;
+        if (current === normalized(path.join(rootDir, '..', 'content', 'posts'))) return true;
         if (current === normalized(path.join(rootDir, '..', 'Control'))) return true;
         return originalExistsSync(file);
     };
@@ -378,7 +378,7 @@ test('font subset refresh does not restore cache over current reusable subsets',
             if (
                 current === normalized(path.join(rootDir, 'src')) ||
                 current === normalized(path.join(rootDir, 'build')) ||
-                current === normalized(path.join(rootDir, '..', 'writing')) ||
+                current === normalized(path.join(rootDir, '..', 'content', 'posts')) ||
                 current === normalized(path.join(rootDir, '..', 'Control'))
             ) return [];
         }
@@ -506,7 +506,7 @@ test('font subset refresh reuses restored build cache before running the subsett
         if (current === normalized(path.join(rootDir, 'dist', 'posts'))) return true;
         if (current === normalized(path.join(rootDir, 'src'))) return true;
         if (current === normalized(path.join(rootDir, 'build'))) return true;
-        if (current === normalized(path.join(rootDir, '..', 'writing'))) return true;
+        if (current === normalized(path.join(rootDir, '..', 'content', 'posts'))) return true;
         if (current === normalized(path.join(rootDir, '..', 'Control'))) return true;
         return originalExistsSync(file);
     };
@@ -518,7 +518,7 @@ test('font subset refresh reuses restored build cache before running the subsett
             if (
                 current === normalized(path.join(rootDir, 'src')) ||
                 current === normalized(path.join(rootDir, 'build')) ||
-                current === normalized(path.join(rootDir, '..', 'writing')) ||
+                current === normalized(path.join(rootDir, '..', 'content', 'posts')) ||
                 current === normalized(path.join(rootDir, '..', 'Control'))
             ) return [];
         }

@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'writing/**'
+      - 'content/posts/**'
       - 'all/extract-git-dates.js'
       - 'all/build/git-dates.js'
       - 'all/build/latest-updates.js'

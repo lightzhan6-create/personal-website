@@ -17,7 +17,7 @@ _05: 作者主页链接，可留空；填写时建议使用完整网址。
 site_author_sameas:
 _06: 作者社交主页列表，用于帮助搜索引擎识别作者身份。
 
-site_default_image: /image/freecat.png
+site_default_image: /image/light-placeholder-avatar.svg
 _07: 默认分享图片；以后可以替换成自己的图片。
 
 google_html_marker:

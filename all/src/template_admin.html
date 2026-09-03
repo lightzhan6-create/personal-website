@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="<!-- SITE_LANGUAGE -->">
+
+<head>
+    <!-- INCLUDE:head-base -->
+    <title>Admin - <!-- SITE_TITLE --></title>
+    <!-- ADMIN_SEO_HEAD -->
+    <style>
+        .freecat-admin-page {
+            min-height: 100vh;
+            padding: 6rem 1.5rem;
+            background: var(--freecat-page-background, #f5f7fa);
+        }
+
+        .freecat-admin-panel {
+            width: min(880px, 100%);
+            margin: 0 auto;
+            border: 1px solid #dce3ec;
+            border-radius: 12px;
+            background: #fff;
+            padding: 2.5rem;
+        }
+
+        .freecat-admin-panel h1 {
+            margin: 0 0 1rem;
+            color: #0f172a;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.08;
+        }
+
+        .freecat-admin-panel p,
+        .freecat-admin-panel li {
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+
+        .freecat-admin-panel code {
+            border-radius: 4px;
+            background: #f1f5f9;
+            padding: 0.12rem 0.35rem;
+            color: #0f172a;
+        }
+
+        .dark .freecat-admin-page {
+            background: #111827;
+        }
+
+        .dark .freecat-admin-panel {
+            border-color: #334155;
+            background: #1e293b;
+        }
+
+        .dark .freecat-admin-panel h1 {
+            color: #f8fafc;
+        }
+
+        .dark .freecat-admin-panel p,
+        .dark .freecat-admin-panel li {
+            color: #cbd5e1;
+        }
+
+        .dark .freecat-admin-panel code {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-[#1e293b] dark:text-slate-200 transition-colors duration-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <!-- INCLUDE:header -->
+
+        <main class="freecat-admin-page page-blur-target mt-[var(--freecat-page-top-offset)]">
+            <section class="freecat-admin-panel">
+                <h1>Admin Reserved</h1>
+                <p>
+                    This page is reserved for a future Git-based CMS. The current site stays static and safe:
+                    content lives in <code>content/</code>, uploads live in <code>public/uploads/</code>,
+                    and publishing will later commit changes to GitHub.
+                </p>
+                <ul>
+                    <li>Posts: <code>content/posts</code></li>
+                    <li>Projects: <code>content/projects</code></li>
+                    <li>Images: <code>public/uploads/YYYY/MM</code></li>
+                    <li>Social links: <code>content/config/social-links.json</code></li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- INCLUDE:footer-no-social -->
+    </div>
+
+    <!-- INCLUDE:scripts-end -->
+</body>
+
+</html>

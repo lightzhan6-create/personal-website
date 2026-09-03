@@ -1966,3 +1966,62 @@ article {
         right: calc(50% + 498px);
     }
 }
+
+.freecat-youtube-section {
+    display: grid;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.freecat-youtube-embed {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+    border-radius: 12px;
+    background: #0f172a;
+}
+
+.freecat-youtube-embed iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.freecat-content-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 1rem;
+    margin: 2.25rem 0;
+}
+
+.freecat-content-gallery figure {
+    overflow: hidden;
+    margin: 0;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #e2e8f0;
+}
+
+.freecat-content-gallery img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.freecat-content-gallery figcaption {
+    padding: 0.75rem 0.9rem;
+    color: #64748b;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.dark .freecat-content-gallery figure {
+    background: #0f172a;
+    box-shadow: inset 0 0 0 1px #334155;
+}
+
+.dark .freecat-content-gallery figcaption {
+    color: #cbd5e1;
+}

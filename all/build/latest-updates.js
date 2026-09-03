@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { summarizeMarkdownUpdateText } = require('./markdown.js');
-const { isContentFile } = require('./content-files.js');
+const { listContentFiles } = require('./content-files.js');
 
 const WORD_UNDERSCORE_TOKEN = 'FREECATWORDUNDERSCORETOKEN';
 
@@ -316,7 +316,7 @@ function collectCommittedUpdate({ repoRoot, relativePath, options }) {
 
 function collectLatestUpdates({ repoRoot, postsDir, options = {} }) {
     const updates = {};
-    const files = fs.readdirSync(postsDir).filter(isContentFile);
+    const files = listContentFiles(postsDir);
 
     for (const file of files) {
         const filePath = path.join(postsDir, file);

@@ -53,6 +53,28 @@
     }
 }
 
+@media (max-width: 767px) {
+    .freecat-post-card-list {
+        --freecat-post-card-pin-overhang: 0rem;
+        margin-left: 0;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .freecat-post-card-list .post-card-pinned-badge {
+        left: 0.5rem !important;
+        top: 0.5rem !important;
+    }
+
+    .freecat-post-card-list .post-card-pinned .post-card-title {
+        padding-left: 2rem;
+    }
+
+    .freecat-post-card-list .tags-fit {
+        display: none;
+    }
+}
+
 @media (max-width: 1023px) {
     .freecat-post-card-list {
         display: grid;

@@ -1,0 +1,91 @@
+{
+  "extends": "en-GB",
+  "nav": {
+    "aria": "Navegación principal",
+    "home": "Inicio",
+    "articles": "Artículos",
+    "resume": "Currículum",
+    "projects": "Proyectos",
+    "gallery": "Galería",
+    "videos": "Vídeos",
+    "about": "Acerca de"
+  },
+  "language": {
+    "choose": "Elegir idioma",
+    "description": "Elige el idioma de la interfaz del sitio.",
+    "currentChoice": "Selección actual"
+  },
+  "common": {
+    "search": "Buscar",
+    "searchPlaceholder": "Buscar artículos...",
+    "closeSearch": "Cerrar búsqueda",
+    "tags": "Ver etiquetas",
+    "theme": "Cambiar tema",
+    "goBack": "Volver",
+    "lastUpdated": "Última actualización",
+    "author": "Autor",
+    "unfilled": "Sin especificar"
+  },
+  "home": {
+    "heroSubtitle": "Notas sobre exportación B2B, equipos SMT/THT, herramientas de IA y crecimiento personal.",
+    "recentUpdates": "Actualizaciones recientes",
+    "latestArticlesTitle": "Últimos artículos",
+    "latestArticlesDescription": "Artículos largos, notas del sector, experiencia B2B, herramientas de IA y crecimiento personal.",
+    "selectedProjectsTitle": "Proyectos seleccionados",
+    "selectedProjectsDescription": "Proyectos en los que participo o que vale la pena revisar.",
+    "recentPhotosTitle": "Fotos recientes",
+    "recentPhotosDescription": "Vista ligera de fotos recientes de proyectos, trabajo y vida.",
+    "socialLinksTitle": "Enlaces sociales",
+    "socialLinksDescription": "LinkedIn, YouTube, Facebook y Email se gestionan en un solo lugar.",
+    "viewArticles": "Ver artículos",
+    "viewProjects": "Ver proyectos",
+    "viewGallery": "Ver galería"
+  },
+  "about": {
+    "description": "Notas sobre exportación B2B, equipos de fabricación electrónica SMT/THT, herramientas de IA y revisiones de trabajo."
+  },
+  "resume": {
+    "profileLabel": "Perfil personal",
+    "headline": "Ventas B2B de exportación | Equipos SMT/THT | Flujos de trabajo con IA"
+  },
+  "articles": {
+    "title": "Artículos",
+    "allTitle": "Todos los artículos"
+  },
+  "projects": {
+    "pageLabel": "Registros de proyectos",
+    "pageTitle": "Registros de proyectos",
+    "pageDescription": "Proyectos de clientes, equipos, sitios web y registros prácticos.",
+    "all": "Todos los proyectos",
+    "lead": "Proyectos liderados",
+    "collaboration": "Proyectos colaborativos",
+    "solutions": "Soluciones",
+    "emptyTitle": "No hay proyectos",
+    "emptyDescription": "Aún no hay proyectos en esta categoría.",
+    "featured": "Proyecto destacado",
+    "view": "Ver proyecto",
+    "back": "Volver a proyectos",
+    "toc": "Contenido del proyecto",
+    "related": "Contenido relacionado"
+  },
+  "gallery": {
+    "pageTitle": "Galería",
+    "pageDescription": "Momentos de proyectos, trabajo y vida que vale la pena conservar.",
+    "emptyTitle": "No hay fotos",
+    "emptyDescription": "Las fotos subidas y publicadas aparecerán aquí."
+  },
+  "videos": {
+    "pageTitle": "Biblioteca de vídeos",
+    "pageDescription": "Vídeos sobre proyectos, conocimiento, aprendizaje y vida con enlaces originales.",
+    "all": "Todos los vídeos",
+    "emptyTitle": "No hay vídeos",
+    "emptyDescription": "Aún no hay vídeos para esta plataforma.",
+    "view": "Ver vídeo"
+  },
+  "search": {
+    "emptyPrompt": "Introduce una palabra clave en el cuadro de búsqueda superior.",
+    "searchingFor": "Buscando:",
+    "noResultsTitle": "No se encontraron resultados",
+    "noResultsDescription": "Prueba con otras palabras clave"
+  }
+}

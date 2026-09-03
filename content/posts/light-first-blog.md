@@ -1,13 +1,28 @@
 ---
 title: Light 的第一篇博客：为什么我要搭建这个网站
+slug: light-first-blog
+locale: zh-CN
+translation_key: light-first-blog
 date: 2026-09-02
+updated: 2026-09-02
+description: 这是 Light 个人博客的第一篇文章，用来记录外贸 B2B、SMT/THT 设备、AI 工具和个人成长。
+category: personal-growth
 tag:
   - 个人博客
   - 外贸B2B
   - SMT/THT
-cover: /image/southern-machinery-avatar.png
+tags:
+  - 个人博客
+  - 外贸B2B
+  - SMT/THT
+cover: /uploads/2026/09/light-neutral-cover.svg
+gallery:
+  - /uploads/2026/09/light-neutral-cover.svg
+author: Light
+youtube:
+seo_title: Light 的第一篇博客：为什么我要搭建这个网站
+seo_description: 这是 Light 个人博客的第一篇文章，用来记录外贸 B2B、SMT/THT 设备、AI 工具和个人成长。
 show_image_captions: false
-description: 这是 Light 个人博客的第一篇文章，用来记录外贸 B2B、SMT/THT 设备、AI 工具和个人成长。
 pinned: true
 show: true
 copy_content: false

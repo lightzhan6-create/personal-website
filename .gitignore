@@ -19,6 +19,11 @@
 all/dist/
 all/node_modules/
 
+# Local secrets
+.env
+.env.*
+!.env.example
+
 # Vercel
 .vercel/
 # BitFun snapshot data - auto managed

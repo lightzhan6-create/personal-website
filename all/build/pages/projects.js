@@ -12,11 +12,22 @@ const {
 } = require('../markdown.js');
 const { replacePlaceholders } = require('../template-engine.js');
 const seo = require('../seo.js');
+const { renderGallery, renderYouTubeEmbeds } = require('../media-embeds.js');
+const { listContentFiles } = require('../content-files.js');
 
 const CATEGORY_LABELS = {
     lead: '主导项目',
     collaborative: '协作项目',
-    solution: '解决方案'
+    solution: '解决方案',
+    'customer-project': '客户项目',
+    'equipment-project': '设备项目',
+    smt: 'SMT',
+    tht: 'THT',
+    pcb: 'PCB',
+    pcba: 'PCBA',
+    'ai-tools': 'AI 工具',
+    b2b: '外贸 B2B',
+    website: '网站项目'
 };
 
 const STATUS_LABELS = {
@@ -40,6 +51,12 @@ function normalizeId(value, filename) {
         .replace(/[^a-z0-9_-]/g, '')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
+}
+
+function categoryLabel(category) {
+    const value = String(category || '').trim();
+    if (!value) return CATEGORY_LABELS.collaborative;
+    return CATEGORY_LABELS[value] || value;
 }
 
 function formatDate(value) {
@@ -100,8 +117,8 @@ function loadProjects(projectsDir) {
         return [];
     }
 
-    const files = fs.readdirSync(projectsDir)
-        .filter((name) => /\.(md|markdown)$/i.test(name));
+    const files = listContentFiles(projectsDir)
+        .filter((name) => /\.(md|markdown|mdx)$/i.test(name));
 
     const projects = [];
     const usedIds = new Set();
@@ -116,7 +133,7 @@ function loadProjects(projectsDir) {
             return;
         }
 
-        const id = normalizeId(data.id, filename);
+        const id = normalizeId(data.slug || data.id, filename);
 
         if (!id) {
             throw new Error(
@@ -124,15 +141,16 @@ function loadProjects(projectsDir) {
             );
         }
 
-        if (usedIds.has(id)) {
-            throw new Error(`Duplicate project id: ${id}`);
+        const locale = String(data.locale || 'zh-CN').trim() || 'zh-CN';
+        const pathSegment = locale === 'zh-CN' ? id : `${locale}/${id}`;
+
+        if (usedIds.has(pathSegment)) {
+            throw new Error(`Duplicate project path: ${pathSegment}`);
         }
 
-        usedIds.add(id);
+        usedIds.add(pathSegment);
 
-        const category = CATEGORY_LABELS[data.category]
-            ? data.category
-            : 'collaborative';
+        const category = String(data.category || 'collaborative').trim();
 
         const status = STATUS_LABELS[data.status]
             ? data.status
@@ -140,12 +158,15 @@ function loadProjects(projectsDir) {
 
         projects.push({
             id,
+            pathSegment,
             filename,
             title: String(
                 data.title || path.parse(filename).name
             ).trim(),
+            locale,
+            translationKey: String(data.translation_key || data.translationKey || data.slug || id).trim(),
             category,
-            categoryLabel: CATEGORY_LABELS[category],
+            categoryLabel: categoryLabel(category),
             date: formatDate(data.date),
             updated: formatDate(data.updated || data.date),
             location: String(data.location || '未填写').trim(),
@@ -153,7 +174,14 @@ function loadProjects(projectsDir) {
             statusLabel: STATUS_LABELS[status],
             role: String(data.role || '未填写').trim(),
             cover: String(data.cover || '').trim(),
-            summary: String(data.summary || '').trim(),
+            summary: String(data.description || data.summary || '').trim(),
+            description: String(data.description || data.summary || '').trim(),
+            tags: normalizeStringArray(data.tags || data.tag),
+            gallery: normalizeStringArray(data.gallery),
+            youtube: normalizeStringArray(data.youtube || data.youtube_url || data.youtube_id),
+            author: String(data.author || '').trim(),
+            seoTitle: String(data.seo_title || data.seoTitle || '').trim(),
+            seoDescription: String(data.seo_description || data.seoDescription || '').trim(),
             featured: data.featured === true,
 
             relatedArticles: normalizeStringArray(
@@ -191,6 +219,7 @@ function renderCategoryBadge(project) {
     return `
         <span
             class="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300"
+            data-project-category-label="${escape(project.category)}"
         >
             ${escape(project.categoryLabel)}
         </span>
@@ -201,6 +230,7 @@ function renderStatusBadge(project) {
     return `
         <span
             class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+            data-project-status-label="${escape(project.status)}"
         >
             ${escape(project.statusLabel)}
         </span>
@@ -215,9 +245,26 @@ function renderFeaturedBadge(project) {
     return `
         <span
             class="inline-flex rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 dark:bg-amber-950/50 dark:text-amber-300"
+            data-i18n="projects.featured"
         >
             精选项目
         </span>
+    `;
+}
+
+function renderProjectTags(project) {
+    if (!project.tags.length) {
+        return '';
+    }
+
+    return `
+        <div class="mb-5 flex flex-wrap gap-2">
+            ${project.tags.map((tag) => `
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                    ${escape(tag)}
+                </span>
+            `).join('')}
+        </div>
     `;
 }
 
@@ -227,7 +274,9 @@ function renderProjectCover(project) {
             <div
                 class="flex aspect-[16/9] items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-sm text-slate-400 dark:from-slate-800 dark:to-slate-900 dark:text-slate-500"
             >
+                <span data-i18n="projects.noCover">
                 暂无项目封面
+                </span>
             </div>
         `;
     }
@@ -245,7 +294,7 @@ function renderProjectCover(project) {
 
 function renderProjectCard(project) {
     const projectUrl =
-        `/projects/${encodeURIComponent(project.id)}/`;
+        `/projects/${project.pathSegment || encodeURIComponent(project.id)}/`;
 
     return `
         <article
@@ -271,15 +320,17 @@ function renderProjectCard(project) {
                     <p
                         class="mb-5 line-clamp-3 text-sm leading-7 text-slate-500 dark:text-slate-400"
                     >
-                        ${escape(project.summary || '暂无项目摘要。')}
+                        ${project.summary ? escape(project.summary) : '<span data-i18n="projects.noSummary">暂无项目摘要。</span>'}
                     </p>
+
+                    ${renderProjectTags(project)}
 
                     <dl
                         class="mb-5 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 text-xs dark:border-slate-800"
                     >
                         <div>
                             <dt class="mb-1 text-slate-400">
-                                项目时间
+                                <span data-i18n="projects.date">项目时间</span>
                             </dt>
 
                             <dd class="text-slate-600 dark:text-slate-300">
@@ -289,7 +340,7 @@ function renderProjectCard(project) {
 
                         <div>
                             <dt class="mb-1 text-slate-400">
-                                承担角色
+                                <span data-i18n="projects.role">承担角色</span>
                             </dt>
 
                             <dd class="text-slate-600 dark:text-slate-300">
@@ -301,7 +352,7 @@ function renderProjectCard(project) {
                     <span
                         class="inline-flex items-center gap-2 text-sm font-medium text-primary"
                     >
-                        查看项目
+                        <span data-i18n="projects.view">查看项目</span>
                         <span aria-hidden="true">→</span>
                     </span>
                 </div>
@@ -320,6 +371,9 @@ function renderProjectMarkdown(project) {
     });
 
     html = addHeadingIds(html, headings);
+    html = [renderYouTubeEmbeds(project.youtube, project.title), html, renderGallery(project.gallery, project.title)]
+        .filter(Boolean)
+        .join('\n');
     html = autoSpacingHtml(html);
     html = applyParagraphAlignment(html);
 
@@ -327,6 +381,32 @@ function renderProjectMarkdown(project) {
         html,
         toc
     };
+}
+
+function renderProjectGalleryLinks(project) {
+    if (!project.gallery.length) {
+        return '<p data-i18n="projects.noGallery">暂未添加项目图片。</p>';
+    }
+
+    const items = project.gallery
+        .map((imagePath) => {
+            const href = String(imagePath || '').trim();
+            if (!href) return '';
+            return `
+                <li>
+                    <a
+                        href="${escape(href)}"
+                        class="text-primary hover:underline"
+                    >
+                        ${escape(href)}
+                    </a>
+                </li>
+            `;
+        })
+        .filter(Boolean)
+        .join('');
+
+    return items ? `<ul class="space-y-2">${items}</ul>` : '<p data-i18n="projects.noGallery">暂未添加项目图片。</p>';
 }
 
 function renderDetailCover(project) {
@@ -347,7 +427,7 @@ function renderDetailCover(project) {
 
 function renderRelatedArticles(project) {
     if (!project.relatedArticles.length) {
-        return '<p>暂未关联文章。</p>';
+        return '<p data-i18n="projects.noRelatedArticles">暂未关联文章。</p>';
     }
 
     const items = project.relatedArticles
@@ -375,7 +455,7 @@ function renderRelatedArticles(project) {
 
 function renderRelatedVideos(project) {
     if (!project.relatedVideos.length) {
-        return '<p>暂未关联视频。</p>';
+        return '<p data-i18n="projects.noRelatedVideos">暂未关联视频。</p>';
     }
 
     const items = project.relatedVideos
@@ -400,7 +480,7 @@ function renderRelatedVideos(project) {
 
 function renderRelatedGallery(project) {
     if (!project.relatedGallery.length) {
-        return '<p>暂未关联图片。</p>';
+        return '<p data-i18n="projects.noRelatedImages">暂未关联图片。</p>';
     }
 
     const items = project.relatedGallery
@@ -425,7 +505,7 @@ function renderRelatedGallery(project) {
 
 function renderRelatedProjects(project) {
     if (!project.relatedProjects.length) {
-        return '<p>暂未关联其他项目。</p>';
+        return '<p data-i18n="projects.noRelatedProjects">暂未关联其他项目。</p>';
     }
 
     const items = project.relatedProjects
@@ -447,7 +527,7 @@ function renderRelatedProjects(project) {
         .join('');
 
     if (!items) {
-        return '<p>暂未关联其他项目。</p>';
+        return '<p data-i18n="projects.noRelatedProjects">暂未关联其他项目。</p>';
     }
 
     return `<ul class="space-y-2">${items}</ul>`;
@@ -513,10 +593,10 @@ function generateDetailPages({
 
     projects.forEach((project) => {
         const rendered = renderProjectMarkdown(project);
-        const projectPath = `/projects/${project.id}/`;
+        const projectPath = `/projects/${project.pathSegment || project.id}/`;
 
         const pageTitle =
-            `${project.title} - ${
+            project.seoTitle || `${project.title} - ${
                 siteConfig.site_title ||
                 siteConfig.site_name ||
                 'FreeCat Blog'
@@ -525,6 +605,7 @@ function generateDetailPages({
         const seoHead = seo.renderHeadTags({
             title: pageTitle,
             description:
+                project.seoDescription ||
                 project.summary ||
                 seo.defaultDescription(siteConfig, seoConfig),
             canonicalPath: projectPath,
@@ -564,6 +645,7 @@ function generateDetailPages({
                 escape(project.location)
             ],
             ['<!-- PROJECT_ROLE -->', escape(project.role)],
+            ['<!-- PROJECT_AUTHOR -->', escape(project.author || 'Light')],
             [
                 '<!-- PROJECT_UPDATED -->',
                 escape(project.updated)
@@ -583,13 +665,17 @@ function generateDetailPages({
                 renderRelatedGallery(project)
             ],
             [
+                '<!-- PROJECT_RELATED_IMAGES -->',
+                renderProjectGalleryLinks(project)
+            ],
+            [
                 '<!-- PROJECT_RELATED_PROJECTS -->',
                 renderRelatedProjects(project)
             ]
         ]);
 
         const projectOutputDir =
-            path.join(projectsOutputDir, project.id);
+            path.join(projectsOutputDir, project.pathSegment || project.id);
 
         fs.mkdirSync(projectOutputDir, {
             recursive: true
@@ -602,7 +688,7 @@ function generateDetailPages({
         );
 
         console.log(
-            `  Generated: projects/${project.id}/index.html`
+            `  Generated: projects/${project.pathSegment || project.id}/index.html`
         );
     });
 }

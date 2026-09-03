@@ -1,0 +1,17 @@
+{
+  "extends": "en-GB",
+  "resume": {
+    "profileLabel": "Personal Profile",
+    "headline": "B2B Export Sales | SMT/THT Electronics Manufacturing Equipment | AI Workflows",
+    "tocIntro": "Profile",
+    "tocSlogan": "Personal Principles",
+    "tocSkills": "Core Skills",
+    "tocWork": "Work Experience",
+    "tocProjects": "Project Experience",
+    "tocKnowledge": "Knowledge Base",
+    "tocTools": "Skills and Tools",
+    "tocEducation": "Education",
+    "tocCertificates": "Certificates and Training",
+    "tocLanguages": "Languages"
+  }
+}

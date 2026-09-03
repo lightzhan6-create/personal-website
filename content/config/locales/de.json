@@ -1,0 +1,91 @@
+{
+  "extends": "en-GB",
+  "nav": {
+    "aria": "Hauptnavigation",
+    "home": "Startseite",
+    "articles": "Artikel",
+    "resume": "Lebenslauf",
+    "projects": "Projekte",
+    "gallery": "Galerie",
+    "videos": "Videos",
+    "about": "Über mich"
+  },
+  "language": {
+    "choose": "Sprache auswählen",
+    "description": "Wähle die Sprache der Website-Oberfläche.",
+    "currentChoice": "Aktuelle Auswahl"
+  },
+  "common": {
+    "search": "Suchen",
+    "searchPlaceholder": "Artikel suchen...",
+    "closeSearch": "Suche schließen",
+    "tags": "Tags anzeigen",
+    "theme": "Design wechseln",
+    "goBack": "Zurück",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "author": "Autor",
+    "unfilled": "Nicht angegeben"
+  },
+  "home": {
+    "heroSubtitle": "Notizen zu B2B-Export, SMT/THT-Anlagen, KI-Tools und persönlicher Entwicklung.",
+    "recentUpdates": "Neueste Updates",
+    "latestArticlesTitle": "Neueste Artikel",
+    "latestArticlesDescription": "Lange Beiträge, Branchennotizen, B2B-Exporterfahrung, KI-Tools und persönliche Entwicklung.",
+    "selectedProjectsTitle": "Ausgewählte Projekte",
+    "selectedProjectsDescription": "Projekte, an denen ich beteiligt bin oder die ich später sauber auswerten möchte.",
+    "recentPhotosTitle": "Neueste Fotos",
+    "recentPhotosDescription": "Eine kompakte Vorschau aktueller Projekt-, Arbeits- und Alltagsfotos.",
+    "socialLinksTitle": "Social Links",
+    "socialLinksDescription": "LinkedIn, YouTube, Facebook und E-Mail werden zentral verwaltet.",
+    "viewArticles": "Artikel ansehen",
+    "viewProjects": "Projekte ansehen",
+    "viewGallery": "Galerie ansehen"
+  },
+  "about": {
+    "description": "Notizen zu B2B-Export, SMT/THT-Elektronikfertigungsanlagen, KI-Tools und Arbeitsrückblicken."
+  },
+  "resume": {
+    "profileLabel": "Profil",
+    "headline": "B2B-Exportvertrieb | SMT/THT-Elektronikfertigungsanlagen | KI-Workflows"
+  },
+  "articles": {
+    "title": "Artikel",
+    "allTitle": "Alle Artikel"
+  },
+  "projects": {
+    "pageLabel": "Projektaufzeichnungen",
+    "pageTitle": "Projektaufzeichnungen",
+    "pageDescription": "Kundenprojekte, Anlagenprojekte, Website-Projekte und praktische Notizen.",
+    "all": "Alle Projekte",
+    "lead": "Leitende Projekte",
+    "collaboration": "Gemeinsame Projekte",
+    "solutions": "Lösungen",
+    "emptyTitle": "Keine Projekte",
+    "emptyDescription": "Für diese Kategorie gibt es noch keine Projekte.",
+    "featured": "Ausgewähltes Projekt",
+    "view": "Projekt ansehen",
+    "back": "Zurück zu Projekten",
+    "toc": "Projektinhalt",
+    "related": "Verwandte Inhalte"
+  },
+  "gallery": {
+    "pageTitle": "Galerie",
+    "pageDescription": "Projekt-, Arbeits- und Alltagsmomente, die erhalten bleiben sollen.",
+    "emptyTitle": "Keine Fotos",
+    "emptyDescription": "Hochgeladene und veröffentlichte Fotos erscheinen hier."
+  },
+  "videos": {
+    "pageTitle": "Videothek",
+    "pageDescription": "Videos zu Projekten, Wissen, Lernen und Alltag mit den Original-Links.",
+    "all": "Alle Videos",
+    "emptyTitle": "Keine Videos",
+    "emptyDescription": "Für diese Plattform gibt es noch keine Videos.",
+    "view": "Video ansehen"
+  },
+  "search": {
+    "emptyPrompt": "Gib oben einen Suchbegriff ein.",
+    "searchingFor": "Suche nach:",
+    "noResultsTitle": "Keine Ergebnisse gefunden",
+    "noResultsDescription": "Versuche es mit anderen Suchbegriffen"
+  }
+}

@@ -55,22 +55,25 @@
 <section class="mb-10 text-center md:mb-14">
     <p
         class="mb-3 text-sm font-medium uppercase tracking-[0.22em] text-primary"
+        data-i18n="projects.pageLabel"
     >
-        Projects &amp; Solutions
+        项目记录
     </p>
 
     <h1
         id="projects-page-title"
         class="mb-5 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl"
+        data-i18n="projects.pageTitle"
     >
-        项目与解决方案
+        项目记录
     </h1>
 
     <p
         id="projects-page-description"
         class="mx-auto max-w-3xl text-base leading-8 text-slate-500 dark:text-slate-400"
+        data-i18n="projects.pageDescription"
     >
-        记录我主导和协作参与的项目，以及在实践中整理形成的解决方案。
+        记录我做过、参与过或正在推进的客户项目、设备项目和网站项目。
     </p>
 </section>
 
@@ -78,6 +81,7 @@
 <nav
     class="mb-10 flex flex-wrap justify-center gap-3"
     aria-label="项目分类"
+    data-i18n-attr="aria-label:projects.filterAria"
 >
     <button
         id="projects-filter-all"
@@ -85,6 +89,7 @@
         class="projects-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
         data-project-filter="all"
         aria-pressed="true"
+        data-i18n="projects.all"
     >
         全部项目
     </button>
@@ -95,6 +100,7 @@
         class="projects-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
         data-project-filter="lead"
         aria-pressed="false"
+        data-i18n="projects.lead"
     >
         主导项目
     </button>
@@ -105,6 +111,7 @@
         class="projects-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
         data-project-filter="collaborative"
         aria-pressed="false"
+        data-i18n="projects.collaboration"
     >
         协作项目
     </button>
@@ -115,6 +122,7 @@
         class="projects-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
         data-project-filter="solution"
         aria-pressed="false"
+        data-i18n="projects.solutions"
     >
         解决方案
     </button>
@@ -125,6 +133,7 @@
     id="projects-grid"
     class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"
     aria-label="项目列表"
+    data-i18n-attr="aria-label:projects.pageTitle"
 >
     <!-- PROJECTS_ITEMS -->
 </section>
@@ -137,6 +146,7 @@
     <h2
         id="projects-empty-title"
         class="mb-3 text-2xl font-semibold text-slate-800 dark:text-white"
+        data-i18n="projects.emptyTitle"
     >
         暂无项目
     </h2>
@@ -144,6 +154,7 @@
     <p
         id="projects-empty-description"
         class="text-sm text-slate-500 dark:text-slate-400"
+        data-i18n="projects.emptyDescription"
     >
         当前分类的内容正在整理中。
     </p>

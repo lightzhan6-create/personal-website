@@ -1,0 +1,18 @@
+{
+  "linkedin": {
+    "enabled": false,
+    "url": ""
+  },
+  "youtube": {
+    "enabled": false,
+    "url": ""
+  },
+  "facebook": {
+    "enabled": false,
+    "url": ""
+  },
+  "email": {
+    "enabled": false,
+    "url": ""
+  }
+}

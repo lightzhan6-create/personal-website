@@ -31,11 +31,39 @@
                             <!-- PAGINATION_PLACEHOLDER -->
                         </div>
                         <div class="freecat-home-posts-column w-full min-w-0">
+                            <section class="home-content-section mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:p-6">
+                                <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                                    <div class="min-w-0">
+                                        <p class="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                                            <span data-i18n="home.latestArticlesLabel">
+                                            Latest Articles
+                                            </span>
+                                        </p>
+                                        <h2 class="text-xl font-semibold text-slate-900 dark:text-white" data-i18n="home.latestArticlesTitle">
+                                            最新文章
+                                        </h2>
+                                        <p class="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400" data-i18n="home.latestArticlesDescription">
+                                            长文章、行业内容、外贸 B2B 经验、AI 工具和个人成长记录。
+                                        </p>
+                                    </div>
+                                    <a class="home-section-link inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary" href="/posts/">
+                                        <span data-i18n="home.viewArticles">
+                                        View Articles
+                                        </span>
+                                        <span aria-hidden="true">→</span>
+                                    </a>
+                                </div>
+                            </section>
+
                             <!-- === 动态文章注入区 === -->
                             <div id="posts-list" class="freecat-post-card-list">
                                 <!-- POSTS_LIST_PLACEHOLDER -->
                             </div>
                             <!-- ===================== -->
+
+                            <div class="home-content-sections mt-6 grid gap-6">
+                                <!-- HOME_CONTENT_SECTIONS -->
+                            </div>
                         </div>
                     </div>
 

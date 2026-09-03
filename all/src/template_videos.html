@@ -76,18 +76,21 @@
                 <section class="mb-10 text-center md:mb-14">
                     <p
                         class="mb-3 text-sm font-medium uppercase tracking-[0.22em] text-primary"
+                        data-i18n="videos.pageLabel"
                     >
                         Video Library
                     </p>
 
                     <h1
                         class="mb-5 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl"
+                        data-i18n="videos.pageTitle"
                     >
                         视频库
                     </h1>
 
                     <p
                         class="mx-auto max-w-3xl text-base leading-8 text-slate-500 dark:text-slate-400"
+                        data-i18n="videos.pageDescription"
                     >
                         整理与项目、知识、学习和生活相关的视频，并集中维护各视频平台的原始链接。
                     </p>
@@ -97,12 +100,14 @@
                 <nav
                     class="mb-10 flex flex-wrap justify-center gap-3"
                     aria-label="视频平台筛选"
+                    data-i18n-attr="aria-label:videos.filterAria"
                 >
                     <button
                         type="button"
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="all"
                         aria-pressed="true"
+                        data-i18n="videos.all"
                     >
                         全部视频
                     </button>
@@ -112,6 +117,7 @@
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="youtube"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.youtube"
                     >
                         YouTube
                     </button>
@@ -119,8 +125,19 @@
                     <button
                         type="button"
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        data-video-filter="linkedin"
+                        aria-pressed="false"
+                        data-i18n="videos.platforms.linkedin"
+                    >
+                        LinkedIn
+                    </button>
+
+                    <button
+                        type="button"
+                        class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="tiktok"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.tiktok"
                     >
                         TikTok
                     </button>
@@ -130,6 +147,7 @@
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="facebook"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.facebook"
                     >
                         Facebook
                     </button>
@@ -139,6 +157,7 @@
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="douyin"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.douyin"
                     >
                         抖音
                     </button>
@@ -148,6 +167,7 @@
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="kuaishou"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.kuaishou"
                     >
                         快手
                     </button>
@@ -157,6 +177,7 @@
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="wechat-video"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.wechat-video"
                     >
                         视频号
                     </button>
@@ -166,6 +187,7 @@
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="xiaohongshu"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.xiaohongshu"
                     >
                         小红书
                     </button>
@@ -175,6 +197,7 @@
                         class="videos-filter rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm text-slate-600 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
                         data-video-filter="local"
                         aria-pressed="false"
+                        data-i18n="videos.platforms.local"
                     >
                         本地视频
                     </button>
@@ -184,6 +207,7 @@
                 <section
                     id="videos-grid"
                     aria-label="视频列表"
+                    data-i18n-attr="aria-label:videos.pageTitle"
                 >
                     <!-- VIDEOS_ITEMS -->
                 </section>
@@ -195,11 +219,12 @@
                 >
                     <h2
                         class="mb-3 text-2xl font-semibold text-slate-800 dark:text-white"
+                        data-i18n="videos.emptyTitle"
                     >
                         暂无视频
                     </h2>
 
-                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="videos.emptyDescription">
                         当前平台的视频内容正在整理中。
                     </p>
                 </section>

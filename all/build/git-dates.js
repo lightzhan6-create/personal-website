@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const { isContentFile } = require('./content-files.js');
+const { listContentFiles } = require('./content-files.js');
 
 const MISSING_GIT_DATE_CODE = 'MISSING_GIT_DATE';
 
@@ -46,7 +46,7 @@ function normalizeValueMap(raw) {
 }
 
 function listPostFiles(postsDir) {
-    return fs.readdirSync(postsDir).filter(isContentFile);
+    return listContentFiles(postsDir);
 }
 
 function hasConflictMarkers(text) {

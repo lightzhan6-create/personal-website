@@ -214,6 +214,56 @@
             color: #e2e8f0;
         }
 
+        .freecat-youtube-section {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .freecat-youtube-embed {
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            margin: 0;
+            border-radius: 12px;
+            background: #0f172a;
+        }
+
+        .freecat-youtube-embed iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .freecat-content-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 1rem;
+            margin: 2.25rem 0;
+        }
+
+        .freecat-content-gallery figure {
+            overflow: hidden;
+            margin: 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .freecat-content-gallery img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .freecat-content-gallery figcaption {
+            padding: 0.75rem 0.9rem;
+            color: #64748b;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
         .freecat-project-toc {
             position: sticky;
             top: 6.5rem;
@@ -386,6 +436,15 @@
         .dark .freecat-project-content blockquote {
             background: #0f172a;
         }
+
+        .dark .freecat-content-gallery figure {
+            border-color: #334155;
+            background: #0f172a;
+        }
+
+        .dark .freecat-content-gallery figcaption {
+            color: #cbd5e1;
+        }
     </style>
 </head>
 
@@ -397,7 +456,7 @@
 
             <a class="freecat-project-back" href="/projects">
                 <span aria-hidden="true">←</span>
-                <span id="project-detail-back">返回项目列表</span>
+                <span id="project-detail-back" data-i18n="projects.back">返回项目列表</span>
             </a>
 
             <article class="freecat-project-hero">
@@ -431,7 +490,7 @@
 
                     <dl class="freecat-project-meta">
                         <div>
-                            <dt id="project-detail-date-label">
+                            <dt id="project-detail-date-label" data-i18n="projects.date">
                                 项目时间
                             </dt>
                             <dd>
@@ -440,7 +499,7 @@
                         </div>
 
                         <div>
-                            <dt id="project-detail-location-label">
+                            <dt id="project-detail-location-label" data-i18n="projects.location">
                                 项目地点
                             </dt>
                             <dd>
@@ -449,7 +508,7 @@
                         </div>
 
                         <div>
-                            <dt id="project-detail-role-label">
+                            <dt id="project-detail-role-label" data-i18n="projects.role">
                                 承担角色
                             </dt>
                             <dd>
@@ -458,11 +517,20 @@
                         </div>
 
                         <div>
-                            <dt id="project-detail-updated-label">
+                            <dt id="project-detail-updated-label" data-i18n="common.lastUpdated">
                                 最后更新
                             </dt>
                             <dd>
                                 <!-- PROJECT_UPDATED -->
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt data-i18n="common.author">
+                                作者
+                            </dt>
+                            <dd>
+                                <!-- PROJECT_AUTHOR -->
                             </dd>
                         </div>
                     </dl>
@@ -475,7 +543,7 @@
                 </article>
 
                 <aside class="freecat-project-toc">
-                    <h2 id="project-detail-toc-title">
+                    <h2 id="project-detail-toc-title" data-i18n="projects.toc">
                         项目目录
                     </h2>
 
@@ -488,13 +556,13 @@
             </div>
 
             <section class="freecat-project-related">
-                <h2 id="project-detail-related-title">
+                <h2 id="project-detail-related-title" data-i18n="projects.related">
                     相关内容
                 </h2>
 
                 <div class="freecat-project-related-grid">
                     <section class="freecat-project-related-card">
-                        <h3 id="project-detail-related-articles-title">
+                        <h3 id="project-detail-related-articles-title" data-i18n="projects.relatedArticles">
                             相关文章
                         </h3>
 
@@ -504,7 +572,7 @@
                     </section>
 
                     <section class="freecat-project-related-card">
-                        <h3 id="project-detail-related-videos-title">
+                        <h3 id="project-detail-related-videos-title" data-i18n="projects.relatedVideos">
                             相关视频
                         </h3>
 
@@ -514,7 +582,7 @@
                     </section>
 
                     <section class="freecat-project-related-card">
-                        <h3 id="project-detail-related-images-title">
+                        <h3 id="project-detail-related-images-title" data-i18n="projects.relatedImages">
                             相关图片
                         </h3>
 
@@ -524,7 +592,7 @@
                     </section>
 
                     <section class="freecat-project-related-card">
-                        <h3 id="project-detail-related-projects-title">
+                        <h3 id="project-detail-related-projects-title" data-i18n="projects.relatedProjects">
                             相关项目
                         </h3>
 

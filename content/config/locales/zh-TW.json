@@ -1,0 +1,139 @@
+{
+  "extends": "zh-CN",
+  "nav": {
+    "aria": "主導覽",
+    "home": "首頁",
+    "articles": "文章",
+    "resume": "個人履歷",
+    "projects": "專案",
+    "gallery": "圖庫",
+    "videos": "影片",
+    "about": "關於"
+  },
+  "language": {
+    "choose": "選擇語言",
+    "description": "請選擇網站介面使用的語言。",
+    "currentChoice": "目前選擇"
+  },
+  "common": {
+    "search": "搜尋",
+    "searchPlaceholder": "搜尋文章……",
+    "closeSearch": "關閉搜尋",
+    "tags": "查看標籤",
+    "theme": "切換主題",
+    "goBack": "返回",
+    "lastUpdated": "最後更新",
+    "author": "作者",
+    "unfilled": "未填寫"
+  },
+  "home": {
+    "heroSubtitle": "記錄外貿 B2B、SMT/THT 設備、AI 工具與個人成長。",
+    "recentUpdates": "最近更新",
+    "latestArticlesTitle": "最新文章",
+    "latestArticlesDescription": "長文章、行業內容、外貿 B2B 經驗、AI 工具和個人成長記錄。",
+    "selectedProjectsTitle": "精選專案",
+    "selectedProjectsDescription": "展示你參與過、正在推進或值得複盤的專案記錄。",
+    "recentPhotosTitle": "最近照片",
+    "recentPhotosDescription": "輕量展示最近上傳的專案、工作和生活照片。",
+    "socialLinksTitle": "社群連結",
+    "socialLinksDescription": "統一管理 LinkedIn、YouTube、Facebook 和 Email。",
+    "socialLinksEmpty": "社群連結已統一預留。以後只需要填寫 content/config/social-links.json，首頁、About、履歷等位置會統一讀取。",
+    "selectedProjectsEmpty": "精選專案區域已預留。等你發布真實專案後，這裡會自動顯示。",
+    "recentPhotosEmpty": "最近照片區域已預留。上傳圖庫圖片並發布後，這裡會自動顯示最近照片。"
+  },
+  "about": {
+    "description": "記錄外貿 B2B、SMT/THT 電子製造設備、AI 工具和工作複盤。"
+  },
+  "resume": {
+    "headline": "外貿 B2B 銷售 | SMT/THT 電子製造設備 | AI 工作流",
+    "tocIntro": "個人簡介",
+    "tocSlogan": "個人理念",
+    "tocSkills": "核心能力",
+    "tocWork": "工作經歷",
+    "tocProjects": "專案經歷",
+    "tocKnowledge": "知識庫",
+    "tocTools": "技能與工具",
+    "tocEducation": "教育經歷",
+    "tocCertificates": "證書與培訓",
+    "tocLanguages": "語言能力"
+  },
+  "projects": {
+    "pageLabel": "專案記錄",
+    "pageTitle": "專案記錄",
+    "pageDescription": "記錄我做過、參與過或正在推進的客戶專案、設備專案和網站專案。",
+    "filterAria": "專案分類",
+    "all": "全部專案",
+    "lead": "主導專案",
+    "collaboration": "協作專案",
+    "emptyTitle": "暫無專案",
+    "emptyDescription": "目前分類的內容正在整理中。",
+    "featured": "精選專案",
+    "noCover": "暫無專案封面",
+    "noSummary": "暫無專案摘要。",
+    "date": "專案時間",
+    "location": "專案地點",
+    "role": "承擔角色",
+    "view": "查看專案",
+    "back": "返回專案列表",
+    "toc": "專案目錄",
+    "related": "相關內容",
+    "relatedArticles": "相關文章",
+    "relatedVideos": "相關影片",
+    "relatedImages": "相關圖片",
+    "relatedProjects": "相關專案",
+    "categories": {
+      "lead": "主導專案",
+      "collaborative": "協作專案",
+      "solution": "解決方案",
+      "customer-project": "客戶專案",
+      "equipment-project": "設備專案",
+      "ai-tools": "AI 工具",
+      "b2b": "外貿 B2B",
+      "website": "網站專案"
+    },
+    "statuses": {
+      "draft": "草稿",
+      "planning": "規劃中",
+      "ongoing": "進行中",
+      "active": "進行中",
+      "completed": "已完成",
+      "archived": "已封存"
+    }
+  },
+  "gallery": {
+    "pageTitle": "圖庫",
+    "pageDescription": "記錄專案、工作、生活與一些值得留下的瞬間。",
+    "listAria": "圖片列表",
+    "emptyTitle": "暫無圖片",
+    "emptyDescription": "後續上傳圖片並發布後，會統一顯示在這裡。",
+    "viewImage": "查看圖片"
+  },
+  "videos": {
+    "pageTitle": "影片庫",
+    "pageDescription": "整理與專案、知識、學習和生活相關的影片，並集中維護各影片平台的原始連結。",
+    "filterAria": "影片平台篩選",
+    "all": "全部影片",
+    "emptyTitle": "暫無影片",
+    "emptyDescription": "目前平台的影片內容正在整理中。",
+    "featured": "精選影片",
+    "noSummary": "暫無影片摘要。",
+    "duration": "影片時長",
+    "view": "查看影片",
+    "noPreview": "暫無影片預覽",
+    "noSource": "暫無原始影片連結",
+    "platforms": {
+      "douyin": "抖音",
+      "kuaishou": "快手",
+      "wechat-video": "視頻號",
+      "xiaohongshu": "小紅書",
+      "local": "本地影片"
+    }
+  },
+  "search": {
+    "emptyPrompt": "請在上方搜尋框中輸入關鍵字。",
+    "searchingFor": "正在搜尋：",
+    "noResultsTitle": "找不到結果",
+    "noResultsDescription": "請嘗試使用其他關鍵字搜尋",
+    "untagged": "未打標籤"
+  }
+}

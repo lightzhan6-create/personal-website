@@ -1,0 +1,91 @@
+{
+  "extends": "en-GB",
+  "nav": {
+    "aria": "Основная навигация",
+    "home": "Главная",
+    "articles": "Статьи",
+    "resume": "Резюме",
+    "projects": "Проекты",
+    "gallery": "Галерея",
+    "videos": "Видео",
+    "about": "О сайте"
+  },
+  "language": {
+    "choose": "Выберите язык",
+    "description": "Выберите язык интерфейса сайта.",
+    "currentChoice": "Текущий выбор"
+  },
+  "common": {
+    "search": "Поиск",
+    "searchPlaceholder": "Искать статьи...",
+    "closeSearch": "Закрыть поиск",
+    "tags": "Посмотреть теги",
+    "theme": "Сменить тему",
+    "goBack": "Назад",
+    "lastUpdated": "Последнее обновление",
+    "author": "Автор",
+    "unfilled": "Не указано"
+  },
+  "home": {
+    "heroSubtitle": "Заметки о B2B-экспорте, оборудовании SMT/THT, AI-инструментах и личном развитии.",
+    "recentUpdates": "Последние обновления",
+    "latestArticlesTitle": "Последние статьи",
+    "latestArticlesDescription": "Длинные статьи, отраслевые заметки, опыт B2B, AI-инструменты и личное развитие.",
+    "selectedProjectsTitle": "Избранные проекты",
+    "selectedProjectsDescription": "Проекты, в которых я участвую или которые стоит разобрать.",
+    "recentPhotosTitle": "Последние фото",
+    "recentPhotosDescription": "Краткий просмотр последних фото проектов, работы и жизни.",
+    "socialLinksTitle": "Социальные ссылки",
+    "socialLinksDescription": "LinkedIn, YouTube, Facebook и Email управляются в одном месте.",
+    "viewArticles": "Смотреть статьи",
+    "viewProjects": "Смотреть проекты",
+    "viewGallery": "Смотреть галерею"
+  },
+  "about": {
+    "description": "Заметки о B2B-экспорте, оборудовании SMT/THT для электроники, AI-инструментах и рабочих обзорах."
+  },
+  "resume": {
+    "profileLabel": "Профиль",
+    "headline": "B2B экспортные продажи | Оборудование SMT/THT | AI-рабочие процессы"
+  },
+  "articles": {
+    "title": "Статьи",
+    "allTitle": "Все статьи"
+  },
+  "projects": {
+    "pageLabel": "Записи проектов",
+    "pageTitle": "Записи проектов",
+    "pageDescription": "Клиентские проекты, оборудование, сайты и практические заметки.",
+    "all": "Все проекты",
+    "lead": "Ведущие проекты",
+    "collaboration": "Совместные проекты",
+    "solutions": "Решения",
+    "emptyTitle": "Нет проектов",
+    "emptyDescription": "В этой категории пока нет проектов.",
+    "featured": "Избранный проект",
+    "view": "Открыть проект",
+    "back": "Назад к проектам",
+    "toc": "Содержание проекта",
+    "related": "Связанные материалы"
+  },
+  "gallery": {
+    "pageTitle": "Галерея",
+    "pageDescription": "Моменты проектов, работы и жизни, которые стоит сохранить.",
+    "emptyTitle": "Нет фото",
+    "emptyDescription": "Загруженные и опубликованные фото появятся здесь."
+  },
+  "videos": {
+    "pageTitle": "Видеотека",
+    "pageDescription": "Видео о проектах, знаниях, обучении и жизни с оригинальными ссылками.",
+    "all": "Все видео",
+    "emptyTitle": "Нет видео",
+    "emptyDescription": "Для этой платформы пока нет видео.",
+    "view": "Смотреть видео"
+  },
+  "search": {
+    "emptyPrompt": "Введите ключевое слово в поле поиска выше.",
+    "searchingFor": "Поиск:",
+    "noResultsTitle": "Ничего не найдено",
+    "noResultsDescription": "Попробуйте другие ключевые слова"
+  }
+}

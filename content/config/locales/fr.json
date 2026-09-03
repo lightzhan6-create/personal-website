@@ -1,0 +1,91 @@
+{
+  "extends": "en-GB",
+  "nav": {
+    "aria": "Navigation principale",
+    "home": "Accueil",
+    "articles": "Articles",
+    "resume": "CV",
+    "projects": "Projets",
+    "gallery": "Galerie",
+    "videos": "Vidéos",
+    "about": "À propos"
+  },
+  "language": {
+    "choose": "Choisir une langue",
+    "description": "Choisissez la langue de l'interface du site.",
+    "currentChoice": "Sélection actuelle"
+  },
+  "common": {
+    "search": "Rechercher",
+    "searchPlaceholder": "Rechercher des articles...",
+    "closeSearch": "Fermer la recherche",
+    "tags": "Voir les tags",
+    "theme": "Changer de thème",
+    "goBack": "Retour",
+    "lastUpdated": "Dernière mise à jour",
+    "author": "Auteur",
+    "unfilled": "Non renseigné"
+  },
+  "home": {
+    "heroSubtitle": "Notes sur l'export B2B, les équipements SMT/THT, les outils IA et le développement personnel.",
+    "recentUpdates": "Mises à jour récentes",
+    "latestArticlesTitle": "Derniers articles",
+    "latestArticlesDescription": "Articles longs, notes sectorielles, expérience B2B, outils IA et développement personnel.",
+    "selectedProjectsTitle": "Projets sélectionnés",
+    "selectedProjectsDescription": "Projets auxquels je participe ou que je souhaite analyser.",
+    "recentPhotosTitle": "Photos récentes",
+    "recentPhotosDescription": "Aperçu léger des photos récentes de projets, de travail et de vie.",
+    "socialLinksTitle": "Liens sociaux",
+    "socialLinksDescription": "LinkedIn, YouTube, Facebook et Email sont gérés au même endroit.",
+    "viewArticles": "Voir les articles",
+    "viewProjects": "Voir les projets",
+    "viewGallery": "Voir la galerie"
+  },
+  "about": {
+    "description": "Notes sur l'export B2B, les équipements de fabrication électronique SMT/THT, les outils IA et les bilans de travail."
+  },
+  "resume": {
+    "profileLabel": "Profil personnel",
+    "headline": "Vente export B2B | Équipements SMT/THT | Workflows IA"
+  },
+  "articles": {
+    "title": "Articles",
+    "allTitle": "Tous les articles"
+  },
+  "projects": {
+    "pageLabel": "Archives de projets",
+    "pageTitle": "Archives de projets",
+    "pageDescription": "Projets clients, équipements, sites web et notes pratiques.",
+    "all": "Tous les projets",
+    "lead": "Projets pilotés",
+    "collaboration": "Projets collaboratifs",
+    "solutions": "Solutions",
+    "emptyTitle": "Aucun projet",
+    "emptyDescription": "Aucun projet n'est disponible dans cette catégorie.",
+    "featured": "Projet sélectionné",
+    "view": "Voir le projet",
+    "back": "Retour aux projets",
+    "toc": "Contenu du projet",
+    "related": "Contenu lié"
+  },
+  "gallery": {
+    "pageTitle": "Galerie",
+    "pageDescription": "Moments de projet, de travail et de vie à conserver.",
+    "emptyTitle": "Aucune photo",
+    "emptyDescription": "Les photos téléversées et publiées apparaîtront ici."
+  },
+  "videos": {
+    "pageTitle": "Bibliothèque vidéo",
+    "pageDescription": "Vidéos liées aux projets, aux connaissances, à l'apprentissage et à la vie, avec les liens originaux.",
+    "all": "Toutes les vidéos",
+    "emptyTitle": "Aucune vidéo",
+    "emptyDescription": "Aucune vidéo n'est disponible pour cette plateforme.",
+    "view": "Voir la vidéo"
+  },
+  "search": {
+    "emptyPrompt": "Saisissez un mot-clé dans le champ de recherche ci-dessus.",
+    "searchingFor": "Recherche :",
+    "noResultsTitle": "Aucun résultat",
+    "noResultsDescription": "Essayez avec d'autres mots-clés"
+  }
+}

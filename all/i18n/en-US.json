@@ -42,8 +42,8 @@
     "noResultsDescription": "Try searching with different keywords"
   },
   "projects": {
-    "pageTitle": "Projects & Solutions",
-    "pageDescription": "Projects I led or participated in, along with reusable solutions developed through practice.",
+    "pageTitle": "Project Records",
+    "pageDescription": "Customer, equipment, website, and AI workflow projects I worked on or am currently building.",
     "all": "All Projects",
     "lead": "Lead Projects",
     "collaboration": "Collaborative Projects",
@@ -54,16 +54,9 @@
   },
   "gallery": {
     "pageTitle": "Gallery",
-    "pageDescription": "Visual records of projects, work, learning, travel and everyday life.",
-    "all": "All Images",
-    "project": "Project",
-    "work": "Work",
-    "study": "Learning",
-    "travel": "Travel",
-    "life": "Life",
-    "other": "Other",
-    "empty": "No images are available in this category.",
-    "viewImage": "View Image",
+    "pageDescription": "Moments from projects, work, life, and things worth keeping.",
+    "empty": "No photos have been published yet.",
+    "viewImage": "View Photo",
     "viewOriginal": "View Original",
     "backToGallery": "Back to Gallery"
   },

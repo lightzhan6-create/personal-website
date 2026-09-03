@@ -15,6 +15,7 @@ const seo = require('../seo.js');
 
 const PLATFORM_LABELS = {
     youtube: 'YouTube',
+    linkedin: 'LinkedIn',
     tiktok: 'TikTok',
     facebook: 'Facebook',
     douyin: '抖音',
@@ -250,6 +251,7 @@ function renderPlatformBadge(video) {
     return `
         <span
             class="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300"
+            data-video-platform-label="${escape(video.platform)}"
         >
             ${escape(video.platformLabel)}
         </span>
@@ -260,6 +262,7 @@ function renderCategoryBadge(video) {
     return `
         <span
             class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+            data-video-category-label="${escape(video.category)}"
         >
             ${escape(video.categoryLabel)}
         </span>
@@ -274,6 +277,7 @@ function renderFeaturedBadge(video) {
     return `
         <span
             class="inline-flex rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 dark:bg-amber-950/50 dark:text-amber-300"
+            data-i18n="videos.featured"
         >
             精选视频
         </span>
@@ -347,21 +351,21 @@ function renderVideoCard(video) {
                     <p
                         class="mb-5 text-sm leading-7 text-slate-500 dark:text-slate-400"
                     >
-                        ${escape(video.summary || '暂无视频摘要。')}
+                        ${video.summary ? escape(video.summary) : '<span data-i18n="videos.noSummary">暂无视频摘要。</span>'}
                     </p>
 
                     <dl
                         class="mb-5 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 text-xs dark:border-slate-800"
                     >
                         <div>
-                            <dt class="mb-1 text-slate-400">发布日期</dt>
+                            <dt class="mb-1 text-slate-400" data-i18n="videos.date">发布日期</dt>
                             <dd class="text-slate-600 dark:text-slate-300">
                                 ${escape(video.date)}
                             </dd>
                         </div>
 
                         <div>
-                            <dt class="mb-1 text-slate-400">视频时长</dt>
+                            <dt class="mb-1 text-slate-400" data-i18n="videos.duration">视频时长</dt>
                             <dd class="text-slate-600 dark:text-slate-300">
                                 ${escape(video.duration)}
                             </dd>
@@ -371,7 +375,7 @@ function renderVideoCard(video) {
                     <span
                         class="inline-flex items-center gap-2 text-sm font-medium text-primary"
                     >
-                        查看视频
+                        <span data-i18n="videos.view">查看视频</span>
                         <span aria-hidden="true">→</span>
                     </span>
                 </div>
@@ -425,7 +429,7 @@ function renderPlayer(video) {
         <div
             class="video-player-shell flex items-center justify-center text-slate-400"
         >
-            暂无视频预览
+            <span data-i18n="videos.noPreview">暂无视频预览</span>
         </div>
     `;
 }
@@ -434,10 +438,14 @@ function renderSourceLink(video) {
     if (!video.sourceUrl) {
         return `
             <span class="text-sm text-slate-400">
-                暂无原始视频链接
+                <span data-i18n="videos.noSource">暂无原始视频链接</span>
             </span>
         `;
     }
+
+    const label = video.platform === 'linkedin'
+        ? { key: 'videos.viewOnLinkedIn', text: '在 LinkedIn 查看' }
+        : { key: 'videos.viewOnPlatform', text: '前往原平台观看' };
 
     return `
         <a
@@ -446,7 +454,7 @@ function renderSourceLink(video) {
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
         >
-            前往原平台观看
+            <span data-i18n="${label.key}">${escape(label.text)}</span>
             <span aria-hidden="true">↗</span>
         </a>
     `;

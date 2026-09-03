@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Light personal website placeholder cover</title>
+  <desc id="desc">A clean neutral cover image for Light personal website content.</desc>
+  <rect width="1600" height="1000" fill="#f8fafc"/>
+  <rect x="96" y="96" width="1408" height="808" rx="48" fill="#ffffff" stroke="#dbeafe" stroke-width="4"/>
+  <circle cx="1220" cy="210" r="118" fill="#dcfce7"/>
+  <circle cx="1390" cy="740" r="170" fill="#dbeafe"/>
+  <path d="M600 250h130l-80 196h160L578 736l62-210H506z" fill="#22c55e"/>
+  <path d="M730 250l-80 196h160L612 696l52-170H506l94-276z" fill="#2563eb" opacity=".84"/>
+  <text x="860" y="448" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="800" fill="#0f172a">Light</text>
+  <text x="864" y="530" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="500" fill="#475569">Personal Blog · B2B · SMT/THT · AI Notes</text>
+</svg>

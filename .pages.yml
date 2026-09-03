@@ -1,0 +1,291 @@
+media:
+  input: public/uploads
+  output: /uploads
+  rename: safe
+  extensions: [jpg, jpeg, png, webp, gif]
+
+content:
+  - name: posts
+    label: Blog Posts
+    type: collection
+    path: content/posts
+    filename:
+      template: "{fields.slug}.mdx"
+      field: create
+    view:
+      fields: [title, date, updated, category, tags]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+      - name: locale
+        label: Locale
+        type: string
+        default: zh-CN
+      - name: translation_key
+        label: Translation Key
+        type: string
+      - name: date
+        label: Publish Date
+        type: date
+        required: true
+      - name: updated
+        label: Updated Date
+        type: date
+      - name: description
+        label: Description
+        type: text
+      - name: category
+        label: Category
+        type: string
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: cover
+        label: Cover Image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: author
+        label: Author
+        type: string
+      - name: youtube
+        label: YouTube URL or Video ID
+        type: string
+      - name: seo_title
+        label: SEO Title
+        type: string
+      - name: seo_description
+        label: SEO Description
+        type: text
+      - name: show
+        label: Published
+        type: boolean
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: projects
+    label: Projects
+    type: collection
+    path: content/projects
+    filename:
+      template: "{fields.slug}.mdx"
+      field: create
+    view:
+      fields: [title, date, updated, category, tags]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+      - name: locale
+        label: Locale
+        type: string
+        default: zh-CN
+      - name: translation_key
+        label: Translation Key
+        type: string
+      - name: date
+        label: Project Date
+        type: date
+        required: true
+      - name: updated
+        label: Updated Date
+        type: date
+      - name: description
+        label: Description
+        type: text
+      - name: category
+        label: Category
+        type: string
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: cover
+        label: Cover Image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: author
+        label: Author
+        type: string
+      - name: youtube
+        label: YouTube URL or Video ID
+        type: string
+      - name: seo_title
+        label: SEO Title
+        type: string
+      - name: seo_description
+        label: SEO Description
+        type: text
+      - name: status
+        label: Status
+        type: string
+      - name: location
+        label: Location
+        type: string
+      - name: role
+        label: Role
+        type: string
+      - name: show
+        label: Published
+        type: boolean
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: gallery
+    label: Photo Gallery
+    type: collection
+    path: content/gallery
+    filename:
+      template: "{year}-{month}-{day}-{primary}.mdx"
+      field: create
+    view:
+      fields: [image, title, date, show]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: image
+        label: Image
+        type: image
+        required: true
+      - name: title
+        label: Title
+        type: string
+      - name: date
+        label: Date
+        type: date
+      - name: description
+        label: Description
+        type: text
+      - name: alt
+        label: Alt Text
+        type: string
+      - name: show
+        label: Published
+        type: boolean
+
+  - name: videos
+    label: Videos
+    type: collection
+    path: videos
+    filename:
+      template: "{fields.id}.md"
+      field: create
+    view:
+      fields: [title, platform, date, show]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: id
+        label: ID
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: platform
+        label: Platform
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+      - name: source_url
+        label: Source URL
+        type: string
+      - name: embed_url
+        label: YouTube Embed URL
+        type: string
+      - name: cover
+        label: Thumbnail
+        type: image
+      - name: summary
+        label: Description
+        type: text
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: show
+        label: Published
+        type: boolean
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: social_links
+    label: Social Links
+    type: file
+    path: content/config/social-links.json
+    format: json
+    fields:
+      - name: linkedin
+        label: LinkedIn
+        type: object
+        fields:
+          - name: url
+            type: string
+          - name: enabled
+            type: boolean
+      - name: youtube
+        label: YouTube
+        type: object
+        fields:
+          - name: url
+            type: string
+          - name: enabled
+            type: boolean
+      - name: facebook
+        label: Facebook
+        type: object
+        fields:
+          - name: url
+            type: string
+          - name: enabled
+            type: boolean
+      - name: email
+        label: Email
+        type: object
+        fields:
+          - name: url
+            type: string
+          - name: enabled
+            type: boolean

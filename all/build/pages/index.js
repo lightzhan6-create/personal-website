@@ -52,7 +52,114 @@ function renderPostCardForList(post, index = 0, options = {}) {
     });
 }
 
-function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, outputDir, recentPostsSidebarHtml }) {
+function renderHomeSection({ eyebrow, title, description, actionHref, actionLabel, bodyHtml }) {
+    const keyBase = String(eyebrow || '')
+        .trim()
+        .replace(/\s+([a-z])/gi, (_, char) => char.toUpperCase())
+        .replace(/\s+/g, '');
+    const sectionKey = keyBase ? keyBase.charAt(0).toLowerCase() + keyBase.slice(1) : '';
+    const labelKey = sectionKey ? ` data-i18n="home.${sectionKey}Label"` : '';
+    const titleKey = sectionKey ? ` data-i18n="home.${sectionKey}Title"` : '';
+    const descriptionKey = sectionKey ? ` data-i18n="home.${sectionKey}Description"` : '';
+    const actionKey = sectionKey && actionLabel ? ` data-i18n="home.${actionLabel.replace(/\s+(\w)/g, (_, char) => char.toUpperCase()).replace(/\s+/g, '').replace(/^View/, 'view')}"` : '';
+
+    return `
+        <section class="home-content-section rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:p-6">
+            <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div class="min-w-0">
+                    <p class="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"${labelKey}>${shared.escapeHtml(eyebrow)}</p>
+                    <h2 class="text-xl font-semibold text-slate-900 dark:text-white"${titleKey}>${shared.escapeHtml(title)}</h2>
+                    ${description ? `<p class="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400"${descriptionKey}>${shared.escapeHtml(description)}</p>` : ''}
+                </div>
+                ${actionHref && actionLabel ? `<a class="home-section-link inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary" href="${shared.escapeHtml(actionHref)}"><span${actionKey}>${shared.escapeHtml(actionLabel)}</span> <span aria-hidden="true">→</span></a>` : ''}
+            </div>
+            ${bodyHtml}
+        </section>
+    `;
+}
+
+function renderProjectSummary(project) {
+    const href = `/projects/${encodeURIComponent(project.id)}/`;
+    return `
+        <a class="home-project-item block border-t border-slate-100 py-4 transition hover:opacity-90 dark:border-slate-800" href="${shared.escapeHtml(href)}">
+            <div class="flex gap-4">
+                ${project.cover ? `<img class="h-20 w-28 shrink-0 rounded-lg object-cover" src="${shared.escapeHtml(project.cover)}" alt="${shared.escapeHtml(project.title)}" loading="lazy" decoding="async">` : ''}
+                <div class="min-w-0">
+                    <div class="mb-2 flex flex-wrap gap-2 text-[11px]">
+                        <span class="rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">${shared.escapeHtml(project.categoryLabel || '项目')}</span>
+                        <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-500 dark:bg-slate-800 dark:text-slate-300">${shared.escapeHtml(project.statusLabel || project.status || '')}</span>
+                    </div>
+                    <h3 class="line-clamp-2 text-sm font-semibold leading-6 text-slate-900 dark:text-white">${shared.escapeHtml(project.title)}</h3>
+                    <p class="mt-1 line-clamp-2 text-xs leading-5 text-slate-500 dark:text-slate-400">${shared.escapeHtml(project.description || project.summary || '暂无项目说明。')}</p>
+                </div>
+            </div>
+        </a>
+    `;
+}
+
+function renderSelectedProjects(projects = []) {
+    const visible = projects.filter(Boolean).slice(0, 3);
+    const bodyHtml = visible.length
+        ? `<div class="grid gap-3">${visible.map(renderProjectSummary).join('\n')}</div>`
+        : `<p class="text-sm leading-6 text-slate-500 dark:text-slate-400" data-i18n="home.selectedProjectsEmpty">精选项目区域已预留。等你发布真实项目后，这里会自动显示。</p>`;
+
+    return renderHomeSection({
+        eyebrow: 'Selected Projects',
+        title: '精选项目',
+        description: '展示你参与过、正在推进或值得复盘的项目记录。',
+        actionHref: '/projects/',
+        actionLabel: 'View Projects',
+        bodyHtml
+    });
+}
+
+function renderRecentPhotos(photos = []) {
+    const visible = photos.filter(Boolean).slice(0, 6);
+    const bodyHtml = visible.length
+        ? `<div class="home-photo-grid grid grid-cols-2 gap-3 sm:grid-cols-3">
+                ${visible.map((photo) => `
+                    <a class="block overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800" href="/gallery/" aria-label="${shared.escapeHtml(photo.title || photo.alt || 'View gallery photo')}">
+                        <img class="aspect-square w-full object-cover transition duration-200 hover:scale-[1.03]" src="${shared.escapeHtml(photo.image)}" alt="${shared.escapeHtml(photo.alt || photo.title || 'Gallery photo')}" loading="lazy" decoding="async">
+                    </a>
+                `).join('\n')}
+            </div>`
+        : `<p class="text-sm leading-6 text-slate-500 dark:text-slate-400" data-i18n="home.recentPhotosEmpty">最近照片区域已预留。上传图库图片并发布后，这里会自动显示最近照片。</p>`;
+
+    return renderHomeSection({
+        eyebrow: 'Recent Photos',
+        title: '最近照片',
+        description: '轻量展示最近上传的项目、工作和生活照片。',
+        actionHref: '/gallery/',
+        actionLabel: 'View Gallery',
+        bodyHtml
+    });
+}
+
+function renderSocialSummary(socialLinksHtml = '') {
+    const hasLinks = !/No social links enabled/i.test(String(socialLinksHtml || ''));
+    const bodyHtml = hasLinks
+        ? `<div class="freecat-about-social flex flex-wrap gap-5 [&_a]:h-7 [&_a]:w-7 [&_svg]:h-full [&_svg]:w-full">${socialLinksHtml}</div>`
+        : `<p class="text-sm leading-6 text-slate-500 dark:text-slate-400" data-i18n="home.socialLinksEmpty">社交链接已统一预留。以后只需要填写 content/config/social-links.json，首页、About、履历等位置会统一读取。</p>`;
+
+    return renderHomeSection({
+        eyebrow: 'Social Links',
+        title: '社交链接',
+        description: '统一管理 LinkedIn、YouTube、Facebook 和 Email。',
+        actionHref: '',
+        actionLabel: '',
+        bodyHtml
+    });
+}
+
+function renderHomeContentSections({ projects = [], photos = [], socialLinksHtml = '' }) {
+    return [
+        renderSelectedProjects(projects),
+        renderRecentPhotos(photos),
+        renderSocialSummary(socialLinksHtml)
+    ].join('\n');
+}
+
+function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, outputDir, recentPostsSidebarHtml, homeProjects = [], homePhotos = [], socialLinksHtml = '' }) {
     const totalPages = postsPerPage === 0 ? 1 : Math.ceil(posts.length / postsPerPage);
 
     for (let page = 1; page <= totalPages; page++) {
@@ -91,6 +198,7 @@ function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, out
             ['<!-- HOME_SEO_HEAD -->', seoHead],
             ['<!-- HOME_JSONLD -->', jsonLd],
             ['<!-- POSTS_LIST_PLACEHOLDER -->', postsHtml],
+            ['<!-- HOME_CONTENT_SECTIONS -->', renderHomeContentSections({ projects: homeProjects, photos: homePhotos, socialLinksHtml })],
             ['<!-- PAGINATION_BUTTONS_PLACEHOLDER -->', paginationBtns],
             ['<!-- PAGINATION_PLACEHOLDER -->', ''],
             ['<!-- RECENT_POSTS_SIDEBAR_PLACEHOLDER -->', recentPostsSidebarHtml || '']

@@ -190,7 +190,7 @@ test('latest update extraction ignores working tree whitespace-only body changes
     const repoRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'freecat-latest-update-'));
     t.after(() => fs.rmSync(repoRoot, { recursive: true, force: true }));
 
-    const postsDir = path.join(repoRoot, 'writing');
+    const postsDir = path.join(repoRoot, 'content', 'posts');
     const file = 'Example.md';
     const filePath = path.join(postsDir, file);
     fs.mkdirSync(postsDir, { recursive: true });

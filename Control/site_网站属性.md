@@ -2,7 +2,7 @@
 site_title: Light 的个人博客
 _01: 网页标题，显示在浏览器标签页上。
 
-site_favicon: /image/southern-machinery-avatar.png
+site_favicon: /image/light-placeholder-avatar.svg
 _02: 浏览器标签页图标。
 
 site_name: Light
