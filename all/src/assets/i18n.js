@@ -164,6 +164,22 @@
         });
     }
 
+    function applyLanguageToDocument(targetDocument, language) {
+        if (!targetDocument || !targetDocument.documentElement) return;
+        targetDocument.documentElement.lang = language;
+        applyDataI18n(targetDocument, currentDictionary);
+        applyStructuredLabels(targetDocument);
+        updateLanguageMenu(targetDocument, language);
+    }
+
+    function applyLanguageToFrames(language) {
+        document.querySelectorAll('iframe').forEach((frame) => {
+            try {
+                applyLanguageToDocument(frame.contentDocument, language);
+            } catch (error) {}
+        });
+    }
+
     async function applyLanguage(language, options = {}) {
         currentLanguage = normalizeLanguage(language);
         if (options.persist !== false) {
@@ -171,10 +187,19 @@
         }
 
         currentDictionary = await fetchLocale(currentLanguage);
-        document.documentElement.lang = currentLanguage;
-        applyDataI18n(document, currentDictionary);
-        applyStructuredLabels(document);
-        updateLanguageMenu(document, currentLanguage);
+        applyLanguageToDocument(document, currentLanguage);
+        applyLanguageToFrames(currentLanguage);
+    }
+
+    function bindFrameLanguageSync() {
+        document.querySelectorAll('iframe').forEach((frame) => {
+            if (frame.dataset.i18nFrameSync === 'true') return;
+            frame.dataset.i18nFrameSync = 'true';
+            frame.addEventListener('load', () => {
+                if (!currentDictionary || !Object.keys(currentDictionary).length) return;
+                applyLanguageToFrames(currentLanguage);
+            });
+        });
     }
 
     function bindLanguageMenu() {
@@ -205,5 +230,6 @@
     };
 
     bindLanguageMenu();
+    bindFrameLanguageSync();
     applyLanguage(currentLanguage, { persist: false }).catch(() => {});
 })();
