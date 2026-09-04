@@ -109,6 +109,14 @@
             setNodeText(node, getValue(dictionary, node.getAttribute('data-i18n')));
         });
 
+        root.querySelectorAll('[data-i18n-format]').forEach((node) => {
+            const template = getValue(dictionary, node.getAttribute('data-i18n-format'));
+            if (template === undefined || template === null) return;
+
+            const count = node.getAttribute('data-count') || '';
+            setNodeText(node, String(template).replace(/\{count\}/g, count));
+        });
+
         root.querySelectorAll('[data-i18n-attr]').forEach((node) => {
             String(node.getAttribute('data-i18n-attr') || '')
                 .split(';')

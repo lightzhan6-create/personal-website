@@ -129,10 +129,14 @@
     "pageLabel": "Photo Gallery",
     "pageTitle": "图库",
     "pageDescription": "记录项目、工作、生活与一些值得留下的瞬间。",
-    "listAria": "图片列表",
-    "emptyTitle": "暂无图片",
-    "emptyDescription": "后续上传图片并发布后，会统一显示在这里。",
-    "viewImage": "查看图片"
+    "albumLabel": "Gallery Album",
+    "listAria": "图集列表",
+    "emptyTitle": "暂无图集",
+    "emptyDescription": "后续发布 Gallery Album 后，会统一显示在这里。",
+    "viewAlbum": "查看图集",
+    "viewImage": "查看图片",
+    "back": "返回图库",
+    "photoCount": "{count} 张照片"
   },
   "videos": {
     "pageLabel": "Video Library",

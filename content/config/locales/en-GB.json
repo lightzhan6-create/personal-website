@@ -129,10 +129,14 @@
     "pageLabel": "Photo Gallery",
     "pageTitle": "Gallery",
     "pageDescription": "Project, work, life, and other moments worth keeping.",
-    "listAria": "Photo list",
-    "emptyTitle": "No photos",
-    "emptyDescription": "Uploaded and published photos will appear here.",
-    "viewImage": "View image"
+    "albumLabel": "Gallery Album",
+    "listAria": "Gallery album list",
+    "emptyTitle": "No photo sets",
+    "emptyDescription": "Published gallery albums will appear here.",
+    "viewAlbum": "View Album",
+    "viewImage": "View image",
+    "back": "Back to Gallery",
+    "photoCount": "{count} photos"
   },
   "videos": {
     "pageLabel": "Video Library",

@@ -9,9 +9,92 @@
     <!-- GALLERY_SEO_HEAD -->
 
     <style>
-        #gallery-grid {
+        #gallery-grid.gallery-album-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        #gallery-grid.gallery-photo-grid {
             column-count: 1;
             column-gap: 1rem;
+        }
+
+        .gallery-album-card {
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #ffffff;
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        }
+
+        .gallery-album-card:hover {
+            transform: translateY(-3px);
+            border-color: #cbd5e1;
+            box-shadow: 0 18px 45px rgb(15 23 42 / 8%);
+        }
+
+        .gallery-album-link {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .gallery-album-cover {
+            position: relative;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+
+        .gallery-album-cover img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 220ms ease;
+        }
+
+        .gallery-album-card:hover .gallery-album-cover img {
+            transform: scale(1.025);
+        }
+
+        .gallery-album-count {
+            position: absolute;
+            right: 0.75rem;
+            bottom: 0.75rem;
+            border-radius: 999px;
+            background: rgb(15 23 42 / 72%);
+            padding: 0.35rem 0.65rem;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+
+        .gallery-album-body {
+            display: grid;
+            gap: 0.55rem;
+            padding: 1.05rem;
+        }
+
+        .gallery-album-body h2 {
+            margin: 0;
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 650;
+            line-height: 1.45;
+        }
+
+        .gallery-album-body time {
+            color: #94a3b8;
+            font-size: 0.78rem;
+        }
+
+        .gallery-album-body p {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.88rem;
+            line-height: 1.7;
         }
 
         .gallery-photo {
@@ -166,6 +249,28 @@
             background: #1e293b;
         }
 
+        .dark .gallery-album-card {
+            border-color: #1e293b;
+            background: #0f172a;
+        }
+
+        .dark .gallery-album-card:hover {
+            border-color: #475569;
+            box-shadow: 0 18px 45px rgb(0 0 0 / 25%);
+        }
+
+        .dark .gallery-album-cover {
+            background: #1e293b;
+        }
+
+        .dark .gallery-album-body h2 {
+            color: #ffffff;
+        }
+
+        .dark .gallery-album-body p {
+            color: #cbd5e1;
+        }
+
         .dark .gallery-photo-caption {
             background: #0f172a;
             color: #cbd5e1;
@@ -176,13 +281,21 @@
         }
 
         @media (min-width: 560px) {
-            #gallery-grid {
+            #gallery-grid.gallery-album-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            #gallery-grid.gallery-photo-grid {
                 column-count: 2;
             }
         }
 
         @media (min-width: 960px) {
-            #gallery-grid {
+            #gallery-grid.gallery-album-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            #gallery-grid.gallery-photo-grid {
                 column-count: 3;
                 column-gap: 1.1rem;
             }
@@ -193,7 +306,11 @@
         }
 
         @media (min-width: 1360px) {
-            #gallery-grid {
+            #gallery-grid.gallery-album-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            #gallery-grid.gallery-photo-grid {
                 column-count: 4;
             }
         }
@@ -223,6 +340,8 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+            .gallery-album-card,
+            .gallery-album-cover img,
             .gallery-photo img,
             .gallery-lightbox-button {
                 transition: none !important;
@@ -242,32 +361,29 @@
             class="page-blur-target mt-[var(--freecat-page-top-offset)] grow px-5 pb-20 pt-10 sm:px-8 md:px-16 lg:px-28"
         >
             <div class="mx-auto w-full max-w-[1500px]">
+                <!-- GALLERY_BACK_LINK -->
 
                 <section class="mb-10 text-center md:mb-14">
                     <p
                         class="mb-3 text-sm font-medium uppercase tracking-[0.22em] text-primary"
-                        data-i18n="gallery.pageLabel"
                     >
-                        Photo Gallery
+                        <!-- GALLERY_PAGE_LABEL -->
                     </p>
 
                     <h1
                         class="mb-5 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl"
-                        data-i18n="gallery.pageTitle"
                     >
-                        图库
+                        <!-- GALLERY_PAGE_TITLE -->
                     </h1>
 
-                    <p
-                        class="mx-auto max-w-3xl text-base leading-8 text-slate-500 dark:text-slate-400"
-                        data-i18n="gallery.pageDescription"
-                    >
-                        记录项目、工作、生活与一些值得留下的瞬间。
-                    </p>
+                    <!-- GALLERY_PAGE_DESCRIPTION -->
                 </section>
+
+                <!-- GALLERY_ALBUM_INTRO -->
 
                 <section
                     id="gallery-grid"
+                    class="<!-- GALLERY_GRID_CLASS -->"
                     aria-label="图片列表"
                     data-i18n-attr="aria-label:gallery.listAria"
                 >

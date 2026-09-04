@@ -63,10 +63,12 @@
       "folder": "content/gallery",
       "extension": "mdx",
       "fields": [
-        "image",
         "title",
+        "slug",
         "date",
         "description",
+        "cover",
+        "images",
         "alt",
         "show"
       ]

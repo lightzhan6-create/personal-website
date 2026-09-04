@@ -6,7 +6,7 @@ This folder is the long-term content source for Light's personal website.
 
 - `posts/`: blog posts and industry articles.
 - `projects/`: customer projects, equipment projects, website projects, and AI workflow records.
-- `gallery/`: simple photo records for the unified Photo Gallery.
+- `gallery/`: Gallery Albums / Photo Sets. Each entry represents one topic, project, site visit, or record, with multiple related images.
 - `config/`: shared content configuration such as social links.
 
 ## Frontmatter
@@ -34,14 +34,19 @@ show: true
 
 Use ASCII slugs such as `smt-feeder-notes` or `pcba-project-review`.
 
-Gallery records are intentionally simpler:
+Gallery records are album-based. Use one Gallery entry for a related set of photos:
 
 ```yaml
-image: /uploads/2026/09/photo.jpg
-title:
-date:
-description:
-alt:
+title: JUKI PCB Conveyor Factory Test
+slug: juki-pcb-conveyor-factory-test
+date: 2026-09-02
+description: Short summary for the album card.
+cover: /uploads/2026/09/photo-01.jpg
+images:
+  - /uploads/2026/09/photo-01.jpg
+  - /uploads/2026/09/photo-02.jpg
+  - /uploads/2026/09/photo-03.jpg
+alt: JUKI PCB conveyor factory test photo set
 show: true
 ```
 

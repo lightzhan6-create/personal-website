@@ -118,8 +118,8 @@ function renderRecentPhotos(photos = []) {
     const bodyHtml = visible.length
         ? `<div class="home-photo-grid grid grid-cols-2 gap-3 sm:grid-cols-3">
                 ${visible.map((photo) => `
-                    <a class="block overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800" href="/gallery/" aria-label="${shared.escapeHtml(photo.title || photo.alt || 'View gallery photo')}">
-                        <img class="aspect-square w-full object-cover transition duration-200 hover:scale-[1.03]" src="${shared.escapeHtml(photo.image)}" alt="${shared.escapeHtml(photo.alt || photo.title || 'Gallery photo')}" loading="lazy" decoding="async">
+                    <a class="block overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800" href="${shared.escapeHtml(photo.href || '/gallery/')}" aria-label="${shared.escapeHtml(photo.title || photo.alt || 'View gallery album')}">
+                        <img class="aspect-square w-full object-cover transition duration-200 hover:scale-[1.03]" src="${shared.escapeHtml(photo.cover || photo.image)}" alt="${shared.escapeHtml(photo.alt || photo.title || 'Gallery album')}" loading="lazy" decoding="async">
                     </a>
                 `).join('\n')}
             </div>`

@@ -128,6 +128,55 @@ function readImageDimensions(image) {
     }
 }
 
+function normalizeStringList(value) {
+    if (Array.isArray(value)) return value;
+    if (typeof value === 'string') {
+        return value
+            .split(/\r?\n|,/)
+            .map((item) => item.trim())
+            .filter(Boolean);
+    }
+    return [];
+}
+
+function normalizePhotoEntry(entry, albumMeta = {}) {
+    const raw = typeof entry === 'object' && entry !== null
+        ? entry.src || entry.url || entry.image || entry.path
+        : entry;
+    const src = isSafeUrl(raw) ? String(raw).trim() : '';
+    if (!src) return null;
+
+    const dimensions = readImageDimensions(src) || {};
+    const title = typeof entry === 'object' && entry !== null
+        ? String(entry.title || '').trim()
+        : '';
+    const description = typeof entry === 'object' && entry !== null
+        ? String(entry.description || '').trim()
+        : '';
+    const alt = typeof entry === 'object' && entry !== null
+        ? String(entry.alt || title || albumMeta.alt || albumMeta.title || 'Gallery photo').trim()
+        : String(albumMeta.alt || albumMeta.title || 'Gallery photo').trim();
+
+    return {
+        src,
+        title,
+        description,
+        alt,
+        width: Number(dimensions.width) || 0,
+        height: Number(dimensions.height) || 0
+    };
+}
+
+function normalizeAlbumPhotos(data, albumMeta) {
+    const imageEntries = normalizeStringList(data.images);
+    if (!imageEntries.length && data.image) imageEntries.push(data.image);
+    if (!imageEntries.length && data.cover) imageEntries.push(data.cover);
+
+    return imageEntries
+        .map((entry) => normalizePhotoEntry(entry, albumMeta))
+        .filter(Boolean);
+}
+
 function loadGalleryItems(galleryDir) {
     if (!fs.existsSync(galleryDir)) {
         console.log('  Gallery directory not found.');
@@ -148,36 +197,44 @@ function loadGalleryItems(galleryDir) {
             return;
         }
 
-        const image = isSafeUrl(data.image) ? String(data.image).trim() : '';
-        if (!image) {
-            console.log(`  Skipping gallery item without image: ${filename}`);
-            return;
-        }
-
-        const id = normalizeId(data.id || data.slug, filename);
+        const id = normalizeId(data.slug || data.id, filename);
         if (!id) {
-            throw new Error(`Gallery item "${filename}" requires a valid English id.`);
+            throw new Error(`Gallery album "${filename}" requires a valid English slug.`);
         }
 
         if (usedIds.has(id)) {
-            throw new Error(`Duplicate gallery id: ${id}`);
+            throw new Error(`Duplicate gallery album slug: ${id}`);
         }
         usedIds.add(id);
 
         const title = String(data.title || '').trim();
         const description = String(data.description || data.summary || '').trim();
-        const dimensions = readImageDimensions(image) || {};
+        const alt = String(data.alt || title || description || 'Gallery photo set').trim();
+        const photos = normalizeAlbumPhotos(data, { title, alt });
+
+        if (!photos.length) {
+            console.log(`  Skipping gallery album without images: ${filename}`);
+            return;
+        }
+
+        const cover = isSafeUrl(data.cover) ? String(data.cover).trim() : photos[0].src;
+        const coverDimensions = readImageDimensions(cover) || {};
 
         items.push({
             id,
+            slug: id,
             filename,
-            image,
             title,
             date: formatDate(data.date),
             description,
-            alt: String(data.alt || title || description || 'Gallery photo').trim(),
-            width: Number(dimensions.width) || 0,
-            height: Number(dimensions.height) || 0
+            alt,
+            cover,
+            image: cover,
+            width: Number(coverDimensions.width) || photos[0].width || 0,
+            height: Number(coverDimensions.height) || photos[0].height || 0,
+            images: photos,
+            photoCount: photos.length,
+            href: `/gallery/${encodeURIComponent(id)}/`
         });
     });
 
@@ -190,13 +247,44 @@ function loadGalleryItems(galleryDir) {
     return items;
 }
 
-function renderPhoto(item, index) {
-    const hasMeta = item.title || item.date || item.description;
+function renderAlbumCard(item) {
     const sizeAttrs = item.width && item.height
         ? ` width="${item.width}" height="${item.height}"`
         : '';
-    const aspectStyle = item.width && item.height
-        ? ` style="--gallery-photo-ratio:${item.width}/${item.height}"`
+    const photoCountLabel = `${item.photoCount} ${item.photoCount === 1 ? 'photo' : 'photos'}`;
+
+    return `
+        <article class="gallery-album-card">
+            <a href="${escape(item.href)}" class="gallery-album-link" aria-label="${escape(item.title || item.alt || 'View photo set')}">
+                <div class="gallery-album-cover">
+                    <img
+                        src="${escape(item.cover)}"
+                        alt="${escape(item.alt)}"${sizeAttrs}
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <span class="gallery-album-count" data-i18n-format="gallery.photoCount" data-count="${item.photoCount}">
+                        ${escape(photoCountLabel)}
+                    </span>
+                </div>
+                <div class="gallery-album-body">
+                    <h2>${escape(item.title || 'Untitled photo set')}</h2>
+                    ${item.date ? `<time datetime="${escape(item.date)}">${escape(item.date)}</time>` : ''}
+                    ${item.description ? `<p>${escape(item.description)}</p>` : ''}
+                </div>
+            </a>
+        </article>
+    `;
+}
+
+function renderPhoto(photo, album, index) {
+    const title = photo.title || album.title;
+    const description = photo.description || '';
+    const sizeAttrs = photo.width && photo.height
+        ? ` width="${photo.width}" height="${photo.height}"`
+        : '';
+    const aspectStyle = photo.width && photo.height
+        ? ` style="--gallery-photo-ratio:${photo.width}/${photo.height}"`
         : '';
 
     return `
@@ -205,20 +293,19 @@ function renderPhoto(item, index) {
                 type="button"
                 class="gallery-photo-button"
                 data-gallery-index="${index}"
-                aria-label="${escape(item.title || item.alt || '查看图片')}"
+                aria-label="${escape(title || photo.alt || '查看图片')}"
             >
                 <img
-                    src="${escape(item.image)}"
-                    alt="${escape(item.alt)}"${sizeAttrs}
+                    src="${escape(photo.src)}"
+                    alt="${escape(photo.alt)}"${sizeAttrs}
                     loading="lazy"
                     decoding="async"
                 >
             </button>
-            ${hasMeta ? `
+            ${(title || description) ? `
             <figcaption class="gallery-photo-caption">
-                ${item.title ? `<strong>${escape(item.title)}</strong>` : ''}
-                ${item.date ? `<time datetime="${escape(item.date)}">${escape(item.date)}</time>` : ''}
-                ${item.description ? `<span>${escape(item.description)}</span>` : ''}
+                ${title ? `<strong>${escape(title)}</strong>` : ''}
+                ${description ? `<span>${escape(description)}</span>` : ''}
             </figcaption>
             ` : ''}
         </figure>
@@ -233,26 +320,52 @@ function renderEmptyState(items) {
         >
             <h2 class="mb-3 text-2xl font-semibold text-slate-800 dark:text-white">
                 <span data-i18n="gallery.emptyTitle">
-                暂无图片
+                暂无图集
                 </span>
             </h2>
             <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="gallery.emptyDescription">
-                后续上传图片并发布后，会统一显示在这里。
+                后续发布 Gallery Album 后，会统一显示在这里。
             </p>
         </section>
     `;
 }
 
-function renderLightboxData(items) {
-    return JSON.stringify(items.map((item) => ({
-        src: item.image,
-        title: item.title,
-        date: item.date,
-        description: item.description,
-        alt: item.alt,
-        width: item.width,
-        height: item.height
-    }))).replace(/</g, '\\u003c');
+function renderLightboxData(album) {
+    const photos = album
+        ? album.images.map((photo) => ({
+            src: photo.src,
+            title: photo.title || album.title,
+            date: album.date,
+            description: photo.description || album.description,
+            alt: photo.alt,
+            width: photo.width,
+            height: photo.height
+        }))
+        : [];
+
+    return JSON.stringify(photos).replace(/</g, '\\u003c');
+}
+
+function renderBackLink() {
+    return `
+        <a href="/gallery/" class="mb-7 inline-flex items-center gap-2 text-sm text-slate-500 transition hover:text-primary dark:text-slate-400">
+            <span aria-hidden="true">←</span>
+            <span data-i18n="gallery.back">返回图库</span>
+        </a>
+    `;
+}
+
+function renderAlbumIntro(album) {
+    const photoCountLabel = `${album.photoCount} ${album.photoCount === 1 ? 'photo' : 'photos'}`;
+    return `
+        <div class="gallery-album-intro mx-auto mb-10 max-w-3xl text-center">
+            <div class="mb-4 flex flex-wrap justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                ${album.date ? `<time datetime="${escape(album.date)}">${escape(album.date)}</time>` : ''}
+                <span data-i18n-format="gallery.photoCount" data-count="${album.photoCount}">${escape(photoCountLabel)}</span>
+            </div>
+            ${album.description ? `<p class="text-base leading-8 text-slate-500 dark:text-slate-400">${escape(album.description)}</p>` : ''}
+        </div>
+    `;
 }
 
 function generateListPage({
@@ -270,18 +383,65 @@ function generateListPage({
         canonicalPath: '/gallery',
         siteConfig,
         seoConfig,
-        image: items[0] ? items[0].image : seo.defaultImage(siteConfig, seoConfig)
+        image: items[0] ? items[0].cover : seo.defaultImage(siteConfig, seoConfig)
     });
 
     const html = replacePlaceholders(template, [
         ['<!-- GALLERY_SEO_HEAD -->', seoHead],
-        ['<!-- GALLERY_ITEMS -->', items.map(renderPhoto).join('\n')],
+        ['<!-- GALLERY_BACK_LINK -->', ''],
+        ['<!-- GALLERY_PAGE_LABEL -->', '<span data-i18n="gallery.pageLabel">Photo Gallery</span>'],
+        ['<!-- GALLERY_PAGE_TITLE -->', '<span data-i18n="gallery.pageTitle">图库</span>'],
+        ['<!-- GALLERY_PAGE_DESCRIPTION -->', '<p class="mx-auto max-w-3xl text-base leading-8 text-slate-500 dark:text-slate-400" data-i18n="gallery.pageDescription">记录项目、工作、生活与一些值得留下的瞬间。</p>'],
+        ['<!-- GALLERY_ALBUM_INTRO -->', ''],
+        ['<!-- GALLERY_GRID_CLASS -->', 'gallery-album-grid'],
+        ['<!-- GALLERY_ITEMS -->', items.map(renderAlbumCard).join('\n')],
         ['<!-- GALLERY_EMPTY_STATE -->', renderEmptyState(items)],
-        ['<!-- GALLERY_LIGHTBOX_DATA -->', renderLightboxData(items)]
+        ['<!-- GALLERY_LIGHTBOX_DATA -->', renderLightboxData(null)]
     ]);
 
     fs.writeFileSync(path.join(outputDir, 'gallery.html'), html, 'utf-8');
     console.log('  Generated: gallery.html');
+}
+
+function generateDetailPages({
+    items,
+    template,
+    siteConfig,
+    seoConfig,
+    outputDir
+}) {
+    const galleryOutputDir = path.join(outputDir, 'gallery');
+    fs.mkdirSync(galleryOutputDir, { recursive: true });
+
+    items.forEach((album) => {
+        const pageTitle = `${album.title || 'Gallery Album'} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
+        const seoHead = seo.renderHeadTags({
+            title: pageTitle,
+            description: album.description || 'Gallery photo set.',
+            canonicalPath: `/gallery/${album.id}/`,
+            siteConfig,
+            seoConfig,
+            image: album.cover
+        });
+
+        const html = replacePlaceholders(template, [
+            ['<!-- GALLERY_SEO_HEAD -->', seoHead],
+            ['<!-- GALLERY_BACK_LINK -->', renderBackLink()],
+            ['<!-- GALLERY_PAGE_LABEL -->', '<span data-i18n="gallery.albumLabel">Gallery Album</span>'],
+            ['<!-- GALLERY_PAGE_TITLE -->', escape(album.title || 'Untitled photo set')],
+            ['<!-- GALLERY_PAGE_DESCRIPTION -->', ''],
+            ['<!-- GALLERY_ALBUM_INTRO -->', renderAlbumIntro(album)],
+            ['<!-- GALLERY_GRID_CLASS -->', 'gallery-photo-grid'],
+            ['<!-- GALLERY_ITEMS -->', album.images.map((photo, index) => renderPhoto(photo, album, index)).join('\n')],
+            ['<!-- GALLERY_EMPTY_STATE -->', ''],
+            ['<!-- GALLERY_LIGHTBOX_DATA -->', renderLightboxData(album)]
+        ]);
+
+        const detailDir = path.join(galleryOutputDir, album.id);
+        fs.mkdirSync(detailDir, { recursive: true });
+        fs.writeFileSync(path.join(detailDir, 'index.html'), html, 'utf-8');
+        console.log(`  Generated: gallery/${album.id}/index.html`);
+    });
 }
 
 function generate({
@@ -301,8 +461,15 @@ function generate({
         seoConfig,
         outputDir
     });
+    generateDetailPages({
+        items,
+        template: listTemplate,
+        siteConfig,
+        seoConfig,
+        outputDir
+    });
 
-    console.log(`  Published gallery items: ${items.length}`);
+    console.log(`  Published gallery albums: ${items.length}`);
 }
 
 module.exports = {

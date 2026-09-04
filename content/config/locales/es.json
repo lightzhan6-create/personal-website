@@ -114,8 +114,13 @@
   "gallery": {
     "pageTitle": "Galería",
     "pageDescription": "Momentos de proyectos, trabajo y vida que vale la pena conservar.",
-    "emptyTitle": "No hay fotos",
-    "emptyDescription": "Las fotos subidas y publicadas aparecerán aquí."
+    "albumLabel": "Álbum de galería",
+    "listAria": "Lista de álbumes",
+    "emptyTitle": "No hay álbumes",
+    "emptyDescription": "Los álbumes publicados aparecerán aquí.",
+    "viewAlbum": "Ver álbum",
+    "back": "Volver a la galería",
+    "photoCount": "{count} fotos"
   },
   "videos": {
     "pageLabel": "Biblioteca de vídeos",
