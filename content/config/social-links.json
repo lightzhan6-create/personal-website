@@ -1,18 +1,18 @@
 {
   "linkedin": {
-    "enabled": false,
-    "url": ""
+    "enabled": true,
+    "url": "https://www.linkedin.com/in/zhan-light-a6b5b53a1/"
   },
   "youtube": {
-    "enabled": false,
-    "url": ""
-  },
-  "facebook": {
-    "enabled": false,
-    "url": ""
+    "enabled": true,
+    "url": "https://www.youtube.com/@Light-SMT/featured"
   },
   "email": {
-    "enabled": false,
-    "url": ""
+    "enabled": true,
+    "url": "mailto:light@smthelp.com"
+  },
+  "whatsapp": {
+    "enabled": true,
+    "url": "https://wa.me/8617688548420"
   }
 }

@@ -135,27 +135,10 @@ function renderRecentPhotos(photos = []) {
     });
 }
 
-function renderSocialSummary(socialLinksHtml = '') {
-    const hasLinks = !/No social links enabled/i.test(String(socialLinksHtml || ''));
-    const bodyHtml = hasLinks
-        ? `<div class="freecat-about-social flex flex-wrap gap-5 [&_a]:h-7 [&_a]:w-7 [&_svg]:h-full [&_svg]:w-full">${socialLinksHtml}</div>`
-        : `<p class="text-sm leading-6 text-slate-500 dark:text-slate-400" data-i18n="home.socialLinksEmpty">社交链接已统一预留。以后只需要填写 content/config/social-links.json，首页、About、履历等位置会统一读取。</p>`;
-
-    return renderHomeSection({
-        eyebrow: 'Social Links',
-        title: '社交链接',
-        description: '统一管理 LinkedIn、YouTube、Facebook 和 Email。',
-        actionHref: '',
-        actionLabel: '',
-        bodyHtml
-    });
-}
-
-function renderHomeContentSections({ projects = [], photos = [], socialLinksHtml = '' }) {
+function renderHomeContentSections({ projects = [], photos = [] }) {
     return [
         renderSelectedProjects(projects),
-        renderRecentPhotos(photos),
-        renderSocialSummary(socialLinksHtml)
+        renderRecentPhotos(photos)
     ].join('\n');
 }
 
@@ -198,7 +181,7 @@ function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, out
             ['<!-- HOME_SEO_HEAD -->', seoHead],
             ['<!-- HOME_JSONLD -->', jsonLd],
             ['<!-- POSTS_LIST_PLACEHOLDER -->', postsHtml],
-            ['<!-- HOME_CONTENT_SECTIONS -->', renderHomeContentSections({ projects: homeProjects, photos: homePhotos, socialLinksHtml })],
+            ['<!-- HOME_CONTENT_SECTIONS -->', renderHomeContentSections({ projects: homeProjects, photos: homePhotos })],
             ['<!-- PAGINATION_BUTTONS_PLACEHOLDER -->', paginationBtns],
             ['<!-- PAGINATION_PLACEHOLDER -->', ''],
             ['<!-- RECENT_POSTS_SIDEBAR_PLACEHOLDER -->', recentPostsSidebarHtml || '']

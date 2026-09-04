@@ -272,13 +272,24 @@ function generateSocialLinks(socialConfig, siteConfig) {
     if (enabled.length === 0) return '<!-- No social links enabled -->';
 
     return enabled.map((platform, index) => {
-        const capitalizedName = platform.name.charAt(0).toUpperCase() + platform.name.slice(1);
+        const labelMap = {
+            email: 'Email',
+            whatsapp: 'WhatsApp',
+            linkedin: 'LinkedIn',
+            youtube: 'YouTube',
+            facebook: 'Facebook',
+            github: 'GitHub',
+            rss: 'RSS'
+        };
+        const capitalizedName = labelMap[platform.name] || (platform.name.charAt(0).toUpperCase() + platform.name.slice(1));
         const rawUrl = String(platform.url || '').trim();
         // 放行 http(s) / mailto / tel / 同站根相对路径（单 / 开头但非 //）；其它（含 javascript:）一律置为 #
         const safeHref = /^(https?:|mailto:|tel:)/i.test(rawUrl) || /^\/(?!\/)/.test(rawUrl)
             ? shared.escapeHtml(rawUrl)
             : '#';
         const safeAria = shared.escapeHtml(capitalizedName);
+        const isExternal = /^https?:\/\//i.test(rawUrl);
+        const linkAttrs = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
         // 图标渲染：用户在 Control/social_社交媒体.md 填了 *_icon_url 且是合法 URL（http(s) / 同站根路径）→ 渲染成 <img>；
         // 否则回退到 SOCIAL_DEFAULTS 提供的内置 SVG（platform.iconSvg）。
         const rawIconUrl = String(platform.iconUrl || '').trim();
@@ -286,11 +297,11 @@ function generateSocialLinks(socialConfig, siteConfig) {
         const iconHtml = isSafeIconUrl
             ? `<img src="${shared.escapeHtml(rawIconUrl)}" alt="${safeAria}" class="w-full h-full object-contain" loading="lazy" />`
             : platform.iconSvg;
-        return `<a class="block w-6 h-6 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-[color,opacity] duration-300 ease-out hover:opacity-95"
+        return `<a class="freecat-social-icon block w-6 h-6 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 transition-[color,opacity,transform] duration-200 ease-out hover:-translate-y-0.5 hover:opacity-95"
                 href="${safeHref}"
                 aria-label="${safeAria}"
-                target="_blank"
-                rel="noopener noreferrer"
+                title="${safeAria}"
+                ${linkAttrs}
                 style="--freecat-social-index:${index}">
                 ${iconHtml}
             </a>`;
@@ -449,6 +460,7 @@ function createEngine({ templatesDir, partialsDir, siteConfig, seoConfig = {}, s
         out = replacePlaceholder(out, /<!-- THEME_SCRIPT -->/g, themeScript);
         out = replacePlaceholder(out, /<!-- SHELL_BOOTSTRAP_SCRIPT -->/g, shellBootstrapScript);
         out = replacePlaceholder(out, /<!-- SOCIAL_LINKS -->/g, socialLinks);
+        out = replacePlaceholder(out, /<!-- SIDEBAR_SOCIAL_LINKS -->/g, socialLinks);
         out = replacePlaceholder(out, /<!-- TAG_MENU_ITEMS -->/g, tagMenuItemsHtml);
         out = replacePlaceholder(out, /<!-- DISCOVERY_LINKS -->/g, discoveryLinks);
         out = replacePlaceholder(out, /<!-- SEARCH_ENGINE_HTML_MARKERS -->/g, searchEngineHtmlMarkers);

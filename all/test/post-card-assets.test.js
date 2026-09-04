@@ -195,11 +195,14 @@ test('sidebar and about text use build-time Figtree and Noto Sans SC font classe
     assert.doesNotMatch(buildJs, />\s*Update\s*</);
 });
 
-test('about social links follow the home sidebar reveal rhythm', () => {
-    assert.match(transitionsCss, /\.freecat-about-social > a\s*\{[\s\S]*animation-delay:\s*calc\(150ms \+ \(var\(--freecat-social-index,\s*0\) \* 50ms\)\);/);
-    assert.doesNotMatch(transitionsCss, /\.freecat-about-social > a\s*\{[\s\S]*animation-delay:\s*calc\(380ms/);
-    assert.match(aboutTemplate, /class="freecat-about-social[^"]*\bmt-8\b[^"]*\bmd:mt-10\b/);
-    assert.doesNotMatch(aboutTemplate, /class="freecat-about-social[^"]*\bmt-10\b[^"]*\bmd:mt-14\b/);
+test('social links render from the sidebar and global footer slots', () => {
+    const footerTemplate = readProjectFile('src', 'partials', 'footer.html');
+    const footerNoSocialTemplate = readProjectFile('src', 'partials', 'footer-no-social.html');
+
+    assert.match(homeSidebar, /class="freecat-sidebar-social[^"]*"[\s\S]*<!-- SIDEBAR_SOCIAL_LINKS -->/);
+    assert.match(footerTemplate, /class="freecat-footer-social[^"]*"[\s\S]*<!-- SOCIAL_LINKS -->/);
+    assert.match(footerNoSocialTemplate, /class="freecat-footer-social[^"]*"[\s\S]*<!-- SOCIAL_LINKS -->/);
+    assert.doesNotMatch(aboutTemplate, /<!-- SOCIAL_LINKS -->/);
 });
 
 test('header brand link only uses content-sized click target', () => {
