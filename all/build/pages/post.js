@@ -11,23 +11,12 @@ const { normalizePostFrontmatter, normalizePostTags } = require('../article-mode
 const { renderCopyButton } = require('../copy-button.js');
 const {
     contentFileSlug,
-    isMarkdownContentFile,
-    listContentFiles
+    isContentFile,
+    isMarkdownContentFile
 } = require('../content-files.js');
 
 function fileSlug(file) {
     return contentFileSlug(file);
-}
-
-function normalizePublicSlug(value) {
-    const source = String(value || '').trim().toLowerCase();
-    if (!source) return '';
-    const slug = source
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9_-]/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '');
-    return slug;
 }
 
 function readPostId(postIds, file) {
@@ -384,19 +373,13 @@ function renderLatestUpdatePanel(post) {
 }
 
 /**
- * 读取 content/posts/ 目录下的所有 Markdown/MDX 文章并归一化为 post 对象数组。
+ * 读取 writing/ 目录下的所有 Markdown 文章并归一化为 post 对象数组。
  * 跳过 frontmatter 标记 show: false 的文件。已按"置顶在前 + 时间倒序"排序。
  */
 function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skipMissingGitDates = false }) {
-    if (!fs.existsSync(postsDir)) {
-        console.log('  Posts directory not found.');
-        return [];
-    }
-
-    const postFiles = listContentFiles(postsDir);
+    const postFiles = fs.readdirSync(postsDir).filter(isContentFile);
     const posts = [];
     const seenPostIds = new Map();
-    const seenPublicSlugs = new Map();
 
     postFiles.forEach(file => {
         const filePath = path.join(postsDir, file);
@@ -422,18 +405,6 @@ function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skip
             throw new Error(`Duplicate post id "${postId}" in "${existingFile}" and "${file}". Each article must have a unique post id.`);
         }
         seenPostIds.set(postId, file);
-
-        const locale = String(frontmatter.locale || 'zh-CN').trim() || 'zh-CN';
-        const publicSlug = normalizePublicSlug(frontmatter.slug);
-        const slugOrId = publicSlug || postId;
-        const publicPathSegment = locale === 'zh-CN'
-            ? slugOrId
-            : `${locale}/${slugOrId}`;
-        const existingSlugFile = seenPublicSlugs.get(publicPathSegment);
-        if (existingSlugFile) {
-            throw new Error(`Duplicate post slug "${publicPathSegment}" in "${existingSlugFile}" and "${file}".`);
-        }
-        seenPublicSlugs.set(publicPathSegment, file);
 
         const storedModifiedDate = gitDates && typeof gitDates.get === 'function' ? gitDates.get(file) : null;
         if (!storedModifiedDate) {
@@ -464,20 +435,13 @@ function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skip
         posts.push({
             title: autoSpacing(titleRaw),
             slug,
-            locale,
-            translationKey: frontmatter.translationKey,
-            publicSlug,
-            publicPathSegment,
             postId,
             date: publishDate,
             modifiedDate,
             excerpt: autoSpacing(excerptRaw),
             preview: autoSpacing(previewRaw),
             summary: frontmatter.summary ? autoSpacing(frontmatter.summary) : '',
-            category: frontmatter.category,
             cover: isMarkdown && hasMetadata ? frontmatter.cover : '',
-            gallery: frontmatter.gallery,
-            youtube: frontmatter.youtube,
             // 可选 frontmatter：cover_width / cover_height（整数像素）
             // 给 <img> 写 width/height 属性，预留盒子，消除首屏 CLS。
             coverWidth: frontmatter.coverWidth,
@@ -486,15 +450,13 @@ function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skip
             tag: frontmatter.tags,
             // 尾斜杠 = Cloudflare Pages 对目录 index.html 的规范地址；
             // 不带斜杠会被 308 到带斜杠版本，canonical/sitemap/内链必须直达 200。
-            link: `/posts/${publicPathSegment}/`,
+            link: `/posts/${postId}/`,
             pinned: frontmatter.pinned,
             allowCopyContent: frontmatter.allowCopyContent,
             latestUpdate,
             enableImageCaptions: frontmatter.enableImageCaptions,
             author: frontmatter.author,
             authorUrl: frontmatter.authorUrl,
-            seoTitle: frontmatter.seoTitle,
-            seoDescription: frontmatter.seoDescription,
             noindex: frontmatter.noindex,
             faq: faqItems,
             content,
@@ -585,11 +547,11 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
         ? '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
         : '';
 
-    const pageTitle = post.seoTitle || `${post.title} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
+    const pageTitle = `${post.title} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
     const sharePublishDate = post.date.tz('Asia/Shanghai').format('YYYY.MM.DD');
     const seoHead = seo.renderHeadTags({
         title: pageTitle,
-        description: post.seoDescription || seo.articleSummary(post),
+        description: seo.articleSummary(post),
         canonicalPath: post.link,
         siteConfig,
         seoConfig,
@@ -640,11 +602,11 @@ function generateAll({ posts, template, siteConfig, seoConfig, outputDir, assetV
 
     posts.forEach(post => {
         const html = renderPostPage({ post, template, siteConfig, seoConfig, assetVersion });
-        const postDir = path.join(outputDir, 'posts', post.publicPathSegment || post.postId);
+        const postDir = path.join(outputDir, 'posts', post.postId);
         fs.mkdirSync(postDir, { recursive: true });
         const outFile = path.join(postDir, 'index.html');
         fs.writeFileSync(outFile, html, 'utf-8');
-        console.log(`  Generated: posts/${post.publicPathSegment || post.postId}/index.html`);
+        console.log(`  Generated: posts/${post.postId}/index.html`);
     });
 }
 

@@ -1,17 +1,11 @@
-<!--
-    partials/scripts-end.html
-    全站统一的页脚 script 引用与加载顺序（唯一声明处）。
-
-    template_post.html 通过 INCLUDE:scripts-end 复用本清单，
-    post 专属脚本在其后追加。
-
-    顺序约束：
-    1. shared.js 必须最先；
-    2. post-card-template.js 必须先于 search-core.js；
-    3. i18n.js 负责全站公共界面的多语言切换；
-    4. main.js 必须最后。
--->
-
+<!-- partials/scripts-end.html · 全站统一的页脚 script 引用与加载顺序（唯一声明处）。
+     template_post.html 通过 INCLUDE:scripts-end 复用本清单，post 专属脚本在其后追加。
+     顺序约束：
+       1. shared.js 必须最先（所有模块依赖 FreecatShared）；
+       2. post-card-template.js 先于 search-core.js（后者工厂参数依赖前者）；
+       3. main.js 必须最后（composition root，校验并装配以上全部模块）。
+     构建期 build/bundle.js 会按本清单顺序把这些文件串接为 /assets/freecat-app.js，
+     并把页面里的引用改写为单条 bundle 引用；本清单仍是加载顺序的唯一声明处。 -->
 <script src="/assets/shared.js" defer></script>
 <script src="/assets/browser-platform.js" defer></script>
 <script src="/assets/runtime.js" defer></script>
@@ -30,9 +24,4 @@
 <script src="/assets/header-search.js" defer></script>
 <script src="/assets/search-page.js" defer></script>
 <script src="/assets/avatar-shadow.js" defer></script>
-
-<!-- 网站公共界面多语言程序 -->
-<script src="/assets/i18n.js" defer></script>
-
-<!-- main.js 必须保持最后 -->
 <script src="/assets/main.js" defer></script>

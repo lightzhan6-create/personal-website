@@ -26,7 +26,6 @@ ${body}
 }
 
 function mockArticleFiles(t, files) {
-    t.mock.method(fs, 'existsSync', (filePath) => path.normalize(filePath).replace(/\\/g, '/') === 'content/posts');
     t.mock.method(fs, 'readdirSync', () => Object.keys(files));
     t.mock.method(fs, 'readFileSync', (filePath) => {
         const file = path.basename(filePath);
@@ -67,7 +66,7 @@ function mapStore(values) {
 
 function loadMockPosts({ postIds = { 'Original Title.md': '2026053115300001' } } = {}) {
     return loadPosts({
-        postsDir: 'content/posts',
+        postsDir: 'writing',
         gitDates: dateStore(),
         postDates: publishStore(),
         postIds: mapStore(postIds)
@@ -198,7 +197,7 @@ test('incomplete article snapshots skip only those articles', (t) => {
     });
 
     const posts = loadPosts({
-        postsDir: 'content/posts',
+        postsDir: 'writing',
         gitDates: mapStore({
             'Included.md': MODIFIED_AT
         }),
