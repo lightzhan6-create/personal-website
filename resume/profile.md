@@ -1,6 +1,6 @@
 ---
 name: Light
-headline: 外贸 B2B 销售 | SMT/THT 电子制造设备 | AI 工作流
+headline: B2B Export Sales | SMT/THT Electronics Manufacturing Equipment | AI Workflows
 avatar: /image/southern-machinery-avatar.png
 location:
 email:
@@ -8,130 +8,174 @@ resume_file:
 show_resume_download: false
 ---
 
-# 个人简介
+# Profile
 
-你好，我是 Light。
+Hi, I'm Light.
 
-我从事 SMT/THT 电子制造设备相关的外贸 B2B 销售，关注客户需求判断、产品资料整理、报价沟通、网站内容和 AI 辅助工作流。
+I work in international B2B sales in the electronics manufacturing industry, with a focus on SMT/THT equipment, automation solutions, spare parts, and production support.
 
-这个博客会用来记录工作中的方法、项目复盘、产品知识、客户沟通经验，以及我对个人成长和效率工具的思考。
+My daily work involves understanding customer requirements, reviewing equipment applications, preparing quotations and technical information, following projects, and coordinating with customers across different markets.
 
-## Slogan / 个人理念
+I also use this website to document what I learn from electronics manufacturing, customer development, equipment projects, AI tools, and digital workflows.
 
-> 把复杂工作拆清楚，把有效经验留下来。
+Rather than treating this site as a traditional resume, I want it to become a long-term record of the work, knowledge, projects, and lessons I accumulate over time.
 
-### 关于实践
+## Personal Principles
 
-真正有价值的经验，不只是把事情做完，还要理解客户为什么需要、方案为什么成立，以及下一次怎样更快判断重点。
+### Understand the problem first. Then find the right solution.
 
-### 关于记录
+Good B2B sales is not only about sending quotations or product catalogs.
 
-未经整理的经历容易被遗忘。持续记录，是把客户问题、产品知识和销售判断转化为长期能力的方法。
+The more important part is understanding:
 
-### 关于成长
+- What the customer is actually trying to solve
+- Where the current production bottleneck is
+- Whether standard equipment is suitable
+- What needs to be customized
+- What information is still missing before making a recommendation
 
-成长不只是获得更多答案，也是逐渐学会提出更准确的问题，并把沟通变得更专业、更可靠。
+I believe useful experience comes from continuously reviewing real projects, customer questions, mistakes, and successful solutions.
 
-## 核心能力
+## Core Skills
 
-- 外贸 B2B 客户沟通
-- SMT/THT 设备资料整理
-- 产品落地页与官网内容
-- 报价单与方案表达
-- 客户背调与需求判断
-- 邮件跟进与销售复盘
-- AI 工具辅助整理
-- 持续学习
+- Customer development and follow-up
+- Requirement analysis
+- Technical and commercial communication
+- Quotation preparation
+- Project follow-up
+- Long-term customer relationship development
+- SMT/THT equipment and production processes
+- PCB handling equipment
+- Automatic insertion equipment
+- Reflow soldering equipment
+- Feeders, nozzles, grippers and customized tooling
+- Spare parts and replacement solutions
+- Understanding customer applications
+- Identifying production bottlenecks
+- Comparing equipment configurations
+- Collecting technical requirements
+- Coordinating between customers and engineering teams
+- Technical product content
+- Website content management
+- Industry research
+- AI-assisted research and writing
+- Video and image content preparation
+- Knowledge organization
 
-## 工作经历
+## Work Experience
 
-### SMT/THT 电子制造设备外贸销售
+### SMT / THT / Automation Equipment
 
-**外贸 B2B 销售｜持续更新**
+My work focuses on supporting overseas customers with electronics manufacturing equipment, spare parts, and automation solutions.
 
-- 整理自动插件机、PCB 分板机、铆钉机、接驳台、上下板机、输送线等设备资料。
-- 根据客户邮件、项目背景和行业线索判断需求优先级。
-- 准备英文产品文案、报价资料、落地页内容和跟进话术。
-- 记录客户沟通过程中的有效问题、常见误区和可复用经验。
+Typical responsibilities include:
 
-## 项目经历
+- Understanding customer PCB, component and production requirements
+- Recommending suitable SMT/THT equipment and configurations
+- Preparing quotations, technical documents and product information
+- Following customer inquiries and ongoing projects
+- Coordinating customized feeders, nozzles, grippers, fixtures and handling solutions
+- Supporting equipment testing, shipment preparation and after-sales communication
+- Developing and maintaining international customer relationships
 
-### 个人博客与内容沉淀
+I regularly work with customers and projects involving EMS factories, PCB/PCBA manufacturers, equipment distributors, engineering teams, and electronics manufacturers.
 
-**站点维护与内容整理｜2026 年至今**
+## Project Experience
 
-用这个博客沉淀外贸销售、设备知识、AI 工具和个人成长记录。
+### Equipment and Production Support
 
-- 整理产品页面、项目记录和文章模板。
-- 记录客户开发、资料准备和内容发布流程。
-- 逐步建立可复用的外贸 B2B 内容库。
+I have participated in or followed projects involving:
 
-> 项目系统完成后，这里将自动关联完整项目详情。
+- PCB conveyors and handling systems
+- Loaders and unloaders
+- Reflow ovens
+- Automatic axial and radial insertion machines
+- Odd-form and terminal insertion applications
+- Customized feeders and component feeding systems
+- PCB cleaning and automation equipment
+- Spare parts and replacement solutions
 
-## 知识库
+Some projects require standard machines. Others start with a much smaller problem — a difficult component, an unusual feeding method, a special fixture, or a production process that still depends heavily on manual work.
 
-### 项目管理
+These are often the most interesting projects because they require understanding the process before selecting the equipment.
 
-- 客户需求判断
-- 邮件跟进节奏
-- 项目资料归档
-- 销售复盘
+## Knowledge Base
 
-### 专业知识
+### 2026 – Present
 
-- 自动插件机
-- PCB 分板机
-- SMT 周边设备
-- THT 自动化设备
+I built this personal website to organize and publish my work-related knowledge, project records, industry observations, videos, and personal notes.
 
-### 内容与学习
+The site includes:
 
-- 知识管理
-- 英文内容创作
-- AI 工具实践
-- 个人成长
+- Electronics manufacturing articles
+- SMT/THT project records
+- Equipment videos
+- Project photo albums
+- Industry news and market observations
+- AI and digital workflow notes
 
-## 技能与工具
+The goal is to gradually build a reusable knowledge base instead of allowing useful experience to remain scattered across emails, files, chats, and individual projects.
 
-### 专业技能
+Topics I regularly work with or study include:
 
-- 客户沟通
-- 产品资料整理
-- 方案与报价表达
-- 信息检索与分析
+- SMT production equipment
+- THT automation
+- PCB handling
+- Reflow soldering
+- Automatic insertion
+- Feeders and component feeding
+- PCB/PCBA manufacturing
+- Factory automation
+- Equipment spare parts
+- Electronics manufacturing supply chains
+- Customer development
+- Customer background research
+- Requirement analysis
+- Follow-up strategy
+- Quotation preparation
+- Project communication
+- Sales review and documentation
 
-### 软件与工具
+I also follow developments in:
+
+- PCB and PCBA manufacturing
+- EMS companies
+- Semiconductor and AI hardware investment
+- Electronics manufacturing capacity expansion
+- Material prices and supply-chain changes
+- New factory and production-line investment
+- International B2B communication
+- Customer requirement analysis
+- Equipment and product research
+- Quotation and proposal preparation
+- Technical information organization
+- Customer follow-up
+- Industry research
+
+## Skills and Tools
 
 - Microsoft Office
-- Markdown
 - GitHub
-- Obsidian
+- Markdown / MDX
+- Cloudflare
+- Website content management
+- AI tools
+- Image processing
+- Video content preparation
 
-### 内容与数字工具
+I use AI tools as part of my daily workflow for:
 
-- 网站维护
-- AI 工具
-- 图片处理
-- 视频处理
+- Research
+- Customer background analysis
+- Content organization
+- Technical information comparison
+- Draft preparation
+- Website development
+- Knowledge management
 
-## 教育经历
+AI is most useful to me when it improves the speed of information processing while keeping the final judgment with the person doing the work.
 
-### 学校或学习机构
+## Languages
 
-**专业或学习方向｜开始时间—结束时间**
-
-- 主要课程或学习内容
-- 相关成果
-
-## 证书与培训
-
-### 证书或培训名称
-
-**颁发机构｜获得时间**
-
-这里填写证书或培训的简要说明。
-
-## 语言能力
-
-- 中文
-- 英语
+- Chinese — Native
+- English — Professional working communication
