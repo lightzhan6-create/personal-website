@@ -1,7 +1,7 @@
 {
   "modified": {
     "_template.mdx": "2026-09-03T15:53:27+08:00",
-    "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T07:58:18.119Z",
+    "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T16:06:53+08:00",
     "light-first-blog.md": "2026-09-03T15:53:27+08:00"
   },
   "published": {
@@ -62,6 +62,314 @@
       ],
       "source": "commit",
       "commit": "b21b5dab845d"
+    },
+    "august-31-september-6-electronics-manufacturing-weekly-brief.md": {
+      "items": [
+        "This week, several signals stood out across the electronics manufacturing industry: AI demand is reaching PCB and substrate production, manufacturers continue expanding geographically, and material costs are becoming more important for high-performance electronics.",
+        "AI Demand Is Moving Directly Into PCB Manufacturing",
+        "Publication date: September 2–3, 2026",
+        "Sources: Maeil Business Newspaper / Shennan Circuits",
+        "AI infrastructure demand is increasingly visible at the PCB manufacturing level.",
+        "South Korea's Simmtech announced a KRW 400 billion investment to expand its Cheongju production base, targeting AI-server memory-module substrates, high-density semiconductor substrates and system-IC applications.",
+        "In China, Shennan Circuits reported first-half revenue of RMB 15.296 billion, up 46.33% year-on-year. Its PCB business benefited from stronger demand for AI servers, switches and optical modules, while packaging-substrate revenue increased more than 100%.",
+        "The important signal is that AI investment is no longer concentrated only around GPUs and semiconductor fabs. It is creating physical demand for higher-density PCBs, substrates, power electronics, networking hardware and supporting production capacity.",
+        "Impact",
+        "AI-server growth is translating directly into PCB and substrate expansion, supporting demand for advanced PCB manufacturing, inspection, PCBA and automation equipment.",
+        "Panasonic Raises PCB Material Prices - Some Categories by 30%",
+        "Publication date: September 2, 2026",
+        "Source: DIGITIMES",
+        "Panasonic reportedly introduced another PCB-material price increase effective from September.",
+        "Some standard PCB and IC-substrate CCL and prepreg products increased by as much as 30%, while several high-speed, low-loss and flexible materials increased by around 15%.",
+        "This is particularly relevant to AI servers, telecom equipment and high-speed networking products. These applications increasingly require higher-performance laminate systems, meaning material costs can become a significant part of the PCB quotation.",
+        "The development also shows why watching copper alone is not enough. Even when copper prices are relatively stable, changes in resin, glass fiber, energy, logistics and specialized laminate materials can still push PCB production costs significantly higher.",
+        "Impact",
+        "Higher CCL and prepreg prices could increase costs for high-layer-count PCB, AI-server boards, networking hardware and other high-performance PCBA projects.",
+        "Taiwan Suppliers Plan Another $20 Billion of U.S. Investment",
+        "Publication date: September 2, 2026",
+        "Source: Reuters",
+        "Taiwanese companies are planning approximately US$20 billion in additional investment in the United States, according to Taiwan's economy minister.",
+        "The significance extends beyond semiconductor fabs. Taiwan's electronics ecosystem includes semiconductors, servers, PCB and substrate manufacturing, power systems, components and contract manufacturing.",
+        "As AI hardware production becomes more geographically distributed, suppliers are increasingly being asked to build capacity closer to customers.",
+        "For electronics manufacturers, every new factory eventually needs more than production space. It needs SMT equipment, PCB handling, inspection, THT processes, material management, testing and factory automation.",
+        "Impact",
+        "Regional manufacturing expansion should create additional opportunities for PCB/PCBA suppliers, EMS companies and electronics production-equipment manufacturers.",
+        "India Adds Another Major AI Data-Center Investment",
+        "Publication date: September 5, 2026",
+        "Source: Reuters",
+        "A Tata Consultancy Services subsidiary and its partners plan to invest up to 700 billion rupees, approximately US$7.4 billion, in a 1-gigawatt AI data-center campus in India.",
+        "Although a data-center investment may appear removed from SMT or PCB production, the physical hardware requirements are substantial.",
+        "AI infrastructure requires servers, switches, optical modules, storage systems, high-power PSUs, UPS equipment, liquid-cooling controls, power-distribution electronics and large quantities of PCB assemblies.",
+        "This is one reason AI investment continues to influence conventional electronics manufacturing. Growth at the data-center level eventually translates into orders for semiconductors, components, PCBs, PCBA, power electronics and final system assembly.",
+        "Impact",
+        "Continued AI infrastructure investment supports longer-term demand for server PCB/PCBA, networking equipment, power electronics, cooling systems and EMS manufacturing.",
+        "Southern Machinery From Standard Equipment to Customized Solutions",
+        "As electronics factories expand, not every production problem can be solved with a standard machine.",
+        "A customer may already have a complete SMT line but still face a bottleneck with a special connector, terminal, odd-form component or manual THT process. Sometimes the issue is even smaller: the existing machine works, but the factory needs a customized feeder, nozzle, gripper, fixture or PCB handling solution to automate one particular process.",
+        "This is an important part of what Southern Machinery supports.",
+        "We can start from the customer's PCB, component and actual production problem, then evaluate the feeding method, insertion process, cycle time and line configuration before proposing the equipment.",
+        "For larger projects, Southern Machinery can also support complete SMT/THT production-line planning and integration, including PCB loading/unloading, conveyors, insertion processes, inspection, soldering, cleaning and other automation requirements.",
+        "The goal is simple:",
+        "Not just to supply a machine, but to solve the process that is limiting the customer's production.",
+        "Materials & Cost Watch",
+        "Latest available market close within the covered week:",
+        "Metal movements were relatively moderate, but the more important cost signal this week came from PCB laminate materials. Panasonic's reported 15-30% increases on several CCL and prepreg categories could have a more immediate impact on PCB quotations than the week's relatively small copper movement.",
+        "Direct impact",
+        "Higher laminate prices add pressure to PCB manufacturing costs, while copper and tin remain important inputs for copper foil, plating and SMT/THT soldering.",
+        "Key Takeaway",
+        "Three signals are worth carrying into next week.",
+        "First, AI demand is reaching the PCB factory floor. Simmtech's investment and Shennan Circuits' growth show that AI servers are already creating real demand for PCB and substrate capacity.",
+        "Second, electronics manufacturing continues to spread geographically. New U.S. investment and India's AI infrastructure expansion reinforce the need for more regional manufacturing capacity and supporting automation.",
+        "Third, production complexity is increasing alongside production volume. Higher-performance PCBs, new components and more automated factories mean that standard equipment will not solve every application.",
+        "For Southern Machinery, that is where customized engineering becomes important - from a special feeder, nozzle or gripper for one component, to SMT/THT equipment and complete production-line support.",
+        "If you have a PCB, component or production process that is difficult to automate, sometimes the best starting point is simply to show us the problem.",
+        "What is the most difficult process to automate on your production line today?",
+        "Sources / References",
+        "Maeil Business Newspaper Shennan Circuits DIGITIMES Reuters"
+      ],
+      "targets": [
+        {
+          "text": "This week, several signals stood out across the electronics manufacturing industry: AI demand is reaching PCB and substrate production, manufacturers continue expanding geographically, and material costs are becoming more important for high-performance electronics.",
+          "line": 35
+        },
+        {
+          "text": "## AI Demand Is Moving Directly Into PCB Manufacturing",
+          "line": 37
+        },
+        {
+          "text": "Publication date: September 2–3, 2026",
+          "line": 39
+        },
+        {
+          "text": "Sources: Maeil Business Newspaper / Shennan Circuits",
+          "line": 41
+        },
+        {
+          "text": "AI infrastructure demand is increasingly visible at the PCB manufacturing level.",
+          "line": 43
+        },
+        {
+          "text": "South Korea's Simmtech announced a KRW 400 billion investment to expand its Cheongju production base, targeting AI-server memory-module substrates, high-density semiconductor substrates and system-IC applications.",
+          "line": 45
+        },
+        {
+          "text": "In China, Shennan Circuits reported first-half revenue of RMB 15.296 billion, up 46.33% year-on-year. Its PCB business benefited from stronger demand for AI servers, switches and optical modules, while packaging-substrate revenue increased more than 100%.",
+          "line": 47
+        },
+        {
+          "text": "The important signal is that AI investment is no longer concentrated only around GPUs and semiconductor fabs. It is creating physical demand for higher-density PCBs, substrates, power electronics, networking hardware and supporting production capacity.",
+          "line": 49
+        },
+        {
+          "text": "### Impact",
+          "line": 51
+        },
+        {
+          "text": "**AI-server growth is translating directly into PCB and substrate expansion, supporting demand for advanced PCB manufacturing, inspection, PCBA and automation equipment.**",
+          "line": 53
+        },
+        {
+          "text": "## Panasonic Raises PCB Material Prices - Some Categories by 30%",
+          "line": 55
+        },
+        {
+          "text": "Publication date: September 2, 2026",
+          "line": 57
+        },
+        {
+          "text": "Source: DIGITIMES",
+          "line": 59
+        },
+        {
+          "text": "Panasonic reportedly introduced another PCB-material price increase effective from September.",
+          "line": 61
+        },
+        {
+          "text": "Some standard PCB and IC-substrate CCL and prepreg products increased by as much as 30%, while several high-speed, low-loss and flexible materials increased by around 15%.",
+          "line": 63
+        },
+        {
+          "text": "This is particularly relevant to AI servers, telecom equipment and high-speed networking products. These applications increasingly require higher-performance laminate systems, meaning material costs can become a significant part of the PCB quotation.",
+          "line": 65
+        },
+        {
+          "text": "The development also shows why watching copper alone is not enough. Even when copper prices are relatively stable, changes in resin, glass fiber, energy, logistics and specialized laminate materials can still push PCB production costs significantly higher.",
+          "line": 67
+        },
+        {
+          "text": "### Impact",
+          "line": 69
+        },
+        {
+          "text": "**Higher CCL and prepreg prices could increase costs for high-layer-count PCB, AI-server boards, networking hardware and other high-performance PCBA projects.**",
+          "line": 71
+        },
+        {
+          "text": "## Taiwan Suppliers Plan Another $20 Billion of U.S. Investment",
+          "line": 73
+        },
+        {
+          "text": "Publication date: September 2, 2026",
+          "line": 75
+        },
+        {
+          "text": "Source: Reuters",
+          "line": 77
+        },
+        {
+          "text": "Taiwanese companies are planning approximately US$20 billion in additional investment in the United States, according to Taiwan's economy minister.",
+          "line": 79
+        },
+        {
+          "text": "The significance extends beyond semiconductor fabs. Taiwan's electronics ecosystem includes semiconductors, servers, PCB and substrate manufacturing, power systems, components and contract manufacturing.",
+          "line": 81
+        },
+        {
+          "text": "As AI hardware production becomes more geographically distributed, suppliers are increasingly being asked to build capacity closer to customers.",
+          "line": 83
+        },
+        {
+          "text": "For electronics manufacturers, every new factory eventually needs more than production space. It needs SMT equipment, PCB handling, inspection, THT processes, material management, testing and factory automation.",
+          "line": 85
+        },
+        {
+          "text": "### Impact",
+          "line": 87
+        },
+        {
+          "text": "**Regional manufacturing expansion should create additional opportunities for PCB/PCBA suppliers, EMS companies and electronics production-equipment manufacturers.**",
+          "line": 89
+        },
+        {
+          "text": "## India Adds Another Major AI Data-Center Investment",
+          "line": 91
+        },
+        {
+          "text": "Publication date: September 5, 2026",
+          "line": 93
+        },
+        {
+          "text": "Source: Reuters",
+          "line": 95
+        },
+        {
+          "text": "A Tata Consultancy Services subsidiary and its partners plan to invest up to 700 billion rupees, approximately US$7.4 billion, in a 1-gigawatt AI data-center campus in India.",
+          "line": 97
+        },
+        {
+          "text": "Although a data-center investment may appear removed from SMT or PCB production, the physical hardware requirements are substantial.",
+          "line": 99
+        },
+        {
+          "text": "AI infrastructure requires servers, switches, optical modules, storage systems, high-power PSUs, UPS equipment, liquid-cooling controls, power-distribution electronics and large quantities of PCB assemblies.",
+          "line": 101
+        },
+        {
+          "text": "This is one reason AI investment continues to influence conventional electronics manufacturing. Growth at the data-center level eventually translates into orders for semiconductors, components, PCBs, PCBA, power electronics and final system assembly.",
+          "line": 103
+        },
+        {
+          "text": "### Impact",
+          "line": 105
+        },
+        {
+          "text": "**Continued AI infrastructure investment supports longer-term demand for server PCB/PCBA, networking equipment, power electronics, cooling systems and EMS manufacturing.**",
+          "line": 107
+        },
+        {
+          "text": "## Southern Machinery | From Standard Equipment to Customized Solutions",
+          "line": 109
+        },
+        {
+          "text": "As electronics factories expand, not every production problem can be solved with a standard machine.",
+          "line": 111
+        },
+        {
+          "text": "A customer may already have a complete SMT line but still face a bottleneck with a special connector, terminal, odd-form component or manual THT process. Sometimes the issue is even smaller: the existing machine works, but the factory needs a customized feeder, nozzle, gripper, fixture or PCB handling solution to automate one particular process.",
+          "line": 113
+        },
+        {
+          "text": "This is an important part of what Southern Machinery supports.",
+          "line": 115
+        },
+        {
+          "text": "We can start from the customer's PCB, component and actual production problem, then evaluate the feeding method, insertion process, cycle time and line configuration before proposing the equipment.",
+          "line": 117
+        },
+        {
+          "text": "For larger projects, Southern Machinery can also support complete SMT/THT production-line planning and integration, including PCB loading/unloading, conveyors, insertion processes, inspection, soldering, cleaning and other automation requirements.",
+          "line": 119
+        },
+        {
+          "text": "The goal is simple:",
+          "line": 121
+        },
+        {
+          "text": "**Not just to supply a machine, but to solve the process that is limiting the customer's production.**",
+          "line": 123
+        },
+        {
+          "text": "## Materials & Cost Watch",
+          "line": 125
+        },
+        {
+          "text": "Latest available market close within the covered week:",
+          "line": 127
+        },
+        {
+          "text": "Metal movements were relatively moderate, but the more important cost signal this week came from PCB laminate materials. Panasonic's reported 15-30% increases on several CCL and prepreg categories could have a more immediate impact on PCB quotations than the week's relatively small copper movement.",
+          "line": 136
+        },
+        {
+          "text": "### Direct impact",
+          "line": 138
+        },
+        {
+          "text": "**Higher laminate prices add pressure to PCB manufacturing costs, while copper and tin remain important inputs for copper foil, plating and SMT/THT soldering.**",
+          "line": 140
+        },
+        {
+          "text": "## Key Takeaway",
+          "line": 142
+        },
+        {
+          "text": "Three signals are worth carrying into next week.",
+          "line": 144
+        },
+        {
+          "text": "First, AI demand is reaching the PCB factory floor. Simmtech's investment and Shennan Circuits' growth show that AI servers are already creating real demand for PCB and substrate capacity.",
+          "line": 146
+        },
+        {
+          "text": "Second, electronics manufacturing continues to spread geographically. New U.S. investment and India's AI infrastructure expansion reinforce the need for more regional manufacturing capacity and supporting automation.",
+          "line": 148
+        },
+        {
+          "text": "Third, production complexity is increasing alongside production volume. Higher-performance PCBs, new components and more automated factories mean that standard equipment will not solve every application.",
+          "line": 150
+        },
+        {
+          "text": "For Southern Machinery, that is where customized engineering becomes important - from a special feeder, nozzle or gripper for one component, to SMT/THT equipment and complete production-line support.",
+          "line": 152
+        },
+        {
+          "text": "If you have a PCB, component or production process that is difficult to automate, sometimes the best starting point is simply to show us the problem.",
+          "line": 154
+        },
+        {
+          "text": "**What is the most difficult process to automate on your production line today?**",
+          "line": 156
+        },
+        {
+          "text": "## Sources / References",
+          "line": 158
+        },
+        {
+          "text": "- Maeil Business Newspaper",
+          "line": 160
+        }
+      ],
+      "source": "commit",
+      "commit": "c573777a4f12"
     },
     "light-first-blog.md": {
       "items": [
