@@ -23,7 +23,7 @@ youtube:
 seo_title: Light 的第一篇博客：为什么我要搭建这个网站
 seo_description: 这是 Light 个人博客的第一篇文章，用来记录外贸 B2B、SMT/THT 设备、AI 工具和个人成长。
 show_image_captions: false
-pinned: true
+pinned: false
 show: true
 copy_content: false
 show_latest_update: false
