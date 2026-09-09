@@ -174,6 +174,7 @@ function loadProjects(projectsDir) {
             statusLabel: STATUS_LABELS[status],
             role: String(data.role || '未填写').trim(),
             cover: String(data.cover || '').trim(),
+            externalUrl: String(data.external_url || data.externalUrl || '').trim(),
             summary: String(data.description || data.summary || '').trim(),
             description: String(data.description || data.summary || '').trim(),
             tags: normalizeStringArray(data.tags || data.tag),
@@ -294,14 +295,19 @@ function renderProjectCover(project) {
 
 function renderProjectCard(project) {
     const projectUrl =
+        project.externalUrl ||
         `/projects/${project.pathSegment || encodeURIComponent(project.id)}/`;
+
+    const linkAttrs = project.externalUrl
+        ? ' target="_self"'
+        : '';
 
     return `
         <article
             class="project-card overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
             data-project-category="${escape(project.category)}"
         >
-            <a href="${projectUrl}" class="block">
+            <a href="${escape(projectUrl)}" class="block"${linkAttrs}>
                 ${renderProjectCover(project)}
 
                 <div class="p-6">

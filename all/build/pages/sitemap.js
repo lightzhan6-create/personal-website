@@ -3,6 +3,11 @@ const path = require('path');
 const seo = require('../seo.js');
 const { renderPostContent } = require('./post-content.js');
 
+const PRODUCT_ROUTES = [
+    '/products/sc-900-multi-blades-v-cut-pcb-separator/',
+    '/products/s-d602-led-depaneler/'
+];
+
 // RSS / AI 检索文件的文章数上限。理由：
 //   - RSS 设计本质是“推送增量更新”，不是“历史归档”（归档由 sitemap.xml + /all.html 承担）。
 //   - 文章 >100 篇后，feed.xml 体积会让阅读器轮询带宽显著上升（每订阅者每月数 GB）。
@@ -103,6 +108,14 @@ function generateSitemap({ posts, siteConfig, outputDir }) {
     if (latestModIso) lines.push(`    <lastmod>${latestModIso}</lastmod>`);
     lines.push('    <priority>0.5</priority>');
     lines.push('  </url>');
+
+    PRODUCT_ROUTES.forEach(productRoute => {
+        lines.push('  <url>');
+        lines.push(`    <loc>${xmlEscape(baseUrl + productRoute)}</loc>`);
+        lines.push('    <priority>0.8</priority>');
+        lines.push('    <changefreq>monthly</changefreq>');
+        lines.push('  </url>');
+    });
 
     indexedPosts.forEach(post => {
         lines.push('  <url>');
