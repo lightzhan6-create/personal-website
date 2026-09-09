@@ -189,24 +189,21 @@ test('sidebar and about text use build-time Figtree and Noto Sans SC font classe
     assert.match(buildJs, /DEFAULT_RECENT_POSTS_LIMIT\s*=\s*8;/);
     assert.match(buildJs, /class="freecat-sidebar-recent-link[^"]*\btext-sm\b/);
     assert.doesNotMatch(buildJs, /class="freecat-sidebar-recent-link[^"]*\btext-\[13px\]\b/);
-    assert.match(buildJs, /class="freecat-sidebar-recent-heading\b[\s\S]*>\s*最近更新\s*</);
-    assert.match(buildJs, /class="freecat-sidebar-recent-heading[^"]*\btext-sm\b[\s\S]*>\s*最近更新\s*</);
+    assert.match(buildJs, /class="freecat-sidebar-recent-heading\b[\s\S]*>\s*Update\s*</);
+    assert.match(buildJs, /class="freecat-sidebar-recent-heading[^"]*\btext-sm\b[\s\S]*>\s*Update\s*</);
     assert.doesNotMatch(buildJs, /class="freecat-sidebar-recent-heading[^"]*\btext-\[13px\]\b/);
-    assert.doesNotMatch(buildJs, />\s*Update\s*</);
+    assert.doesNotMatch(buildJs, />\s*最近更新\s*</);
 });
 
-test('social links render from the sidebar and global footer slots', () => {
-    const footerTemplate = readProjectFile('src', 'partials', 'footer.html');
-    const footerNoSocialTemplate = readProjectFile('src', 'partials', 'footer-no-social.html');
-
-    assert.match(homeSidebar, /class="freecat-sidebar-social[^"]*"[\s\S]*<!-- SIDEBAR_SOCIAL_LINKS -->/);
-    assert.match(footerTemplate, /class="freecat-footer-social[^"]*"[\s\S]*<!-- SOCIAL_LINKS -->/);
-    assert.match(footerNoSocialTemplate, /class="freecat-footer-social[^"]*"[\s\S]*<!-- SOCIAL_LINKS -->/);
-    assert.doesNotMatch(aboutTemplate, /<!-- SOCIAL_LINKS -->/);
+test('about social links follow the home sidebar reveal rhythm', () => {
+    assert.match(transitionsCss, /\.freecat-about-social > a\s*\{[\s\S]*animation-delay:\s*calc\(150ms \+ \(var\(--freecat-social-index,\s*0\) \* 50ms\)\);/);
+    assert.doesNotMatch(transitionsCss, /\.freecat-about-social > a\s*\{[\s\S]*animation-delay:\s*calc\(380ms/);
+    assert.match(aboutTemplate, /class="freecat-about-social[^"]*\bmt-8\b[^"]*\bmd:mt-10\b/);
+    assert.doesNotMatch(aboutTemplate, /class="freecat-about-social[^"]*\bmt-10\b[^"]*\bmd:mt-14\b/);
 });
 
 test('header brand link only uses content-sized click target', () => {
-    const brandLinkClass = header.match(/<a[\s\S]*?href="\/"[\s\S]*?class="([^"]*)"[\s\S]*?freecat-brand-text/)?.[1] || '';
+    const brandLinkClass = header.match(/<a href="\/" class="([^"]*)">[\s\S]*?freecat-brand-text/)?.[1] || '';
 
     assert.match(brandLinkClass, /\binline-flex\b/);
     assert.match(brandLinkClass, /\bshrink-0\b/);
@@ -215,11 +212,11 @@ test('header brand link only uses content-sized click target', () => {
 
 test('go back and update sort labels use requested font assets', () => {
     for (const template of [postTemplate, searchTemplate, allTemplate]) {
-        assert.match(template, /class="freecat-go-back-text text-sm">(Go Back|返回)<\/span>/);
+        assert.match(template, /class="freecat-go-back-text text-sm">Go Back<\/span>/);
         assert.doesNotMatch(template, /<span class="text-sm font-bold">Go Back<\/span>/);
     }
 
-    assert.match(updateSortControl, /class="freecat-update-sort-label"[\s\S]*>\s*按更新排序\s*<\/span>/);
+    assert.match(updateSortControl, /class="freecat-update-sort-label">按更新排序<\/span>/);
     assert.match(allTemplate, /<!-- INCLUDE:update-sort-control -->/);
     assert.match(searchTemplate, /<!-- INCLUDE:update-sort-control -->/);
     assert.match(allTemplate, /class="[^"]*\bfreecat-list-toolbar\b/);

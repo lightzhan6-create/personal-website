@@ -1,6 +1,5 @@
 const { autoSpacingHtml, applyParagraphAlignment, parseMarkdown, extractHeadingsAndGenerateTOC, addHeadingIds } = require('../markdown.js');
 const seo = require('../seo.js');
-const { renderGallery, renderYouTubeEmbeds } = require('../media-embeds.js');
 
 function renderPostContent({ post, includeHeadingIds = true, includeFaq = true } = {}) {
     const { toc, headings } = extractHeadingsAndGenerateTOC(post.content);
@@ -14,10 +13,7 @@ function renderPostContent({ post, includeHeadingIds = true, includeFaq = true }
         contentHtml = addHeadingIds(contentHtml, articleHeadings);
     }
 
-    const youtubeHtml = renderYouTubeEmbeds(post.youtube || [], post.title);
-    const galleryHtml = renderGallery(post.gallery || [], post.title);
-
-    let finalContentHtml = autoSpacingHtml([youtubeHtml, contentHtml, galleryHtml].filter(Boolean).join('\n'));
+    let finalContentHtml = autoSpacingHtml(contentHtml);
     finalContentHtml = applyParagraphAlignment(finalContentHtml);
     if (includeFaq) finalContentHtml += seo.renderFaqHtml(post.faq || []);
 

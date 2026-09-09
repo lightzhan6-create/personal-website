@@ -63,7 +63,7 @@ test('search page result count reserves space before rendering the numeric badge
     assert.match(searchPageJs, /resultsCountDisplay\.dataset\.countReady\s*=\s*'true';/, 'countReady flips after the number is set');
     assert.match(searchPageJs, /setSearchResultsCount\(results\.length\);/, 'badge updates from real result counts');
     assert.doesNotMatch(searchPageJs, /resultsCountDisplay\.textContent\s*=\s*`\(\$\{results\.length\} results\)`;/, 'no legacy "(N results)" text format');
-    assert.match(searchTemplate, /id="search-empty-prompt"[\s\S]*请在上方搜索框中输入关键词。/);
+    assert.match(searchTemplate, /id="search-empty-prompt"[\s\S]*Enter a search term in the search box above\./);
     assert.match(searchTemplate, /id="search-active-query" class="hidden /);
     assert.match(searchTemplate, /id="results-count" class="freecat-results-count hidden" data-count-ready="false"/);
     assert.match(searchTemplate, /class="freecat-results-count-icon"[\s\S]*M24 12L18\.3431 17\.6568/);
@@ -180,9 +180,8 @@ test('fixed header has a stable css height before runtime measurement', () => {
 
 test('mobile fixed header lets the brand title shrink before nav buttons overflow', () => {
     assert.match(transitionsCss, /@media \(max-width:\s*767px\)\s*\{[\s\S]*header\.fixed\s*\{[\s\S]*padding-left:\s*0\.5rem\s*!important;[\s\S]*padding-right:\s*0\.5rem\s*!important;/);
-    assert.match(transitionsCss, /header\.fixed\s+\.header-blur-target\s*>\s*a:first-child\s*\{[\s\S]*flex:\s*0 1 auto;[\s\S]*max-width:\s*none;[\s\S]*min-width:\s*0;/);
-    assert.match(transitionsCss, /header\.fixed\s+\.header-blur-target\s*>\s*div:first-of-type\s*\{[\s\S]*position:\s*absolute;[\s\S]*right:\s*0;[\s\S]*gap:\s*0\.25rem;/);
-    assert.match(transitionsCss, /header\.fixed\s+#search-toggle,\s*header\.fixed\s+#theme-toggle\s*\{[\s\S]*display:\s*flex\s*!important;/);
+    assert.match(transitionsCss, /header\.fixed\s+\.header-blur-target\s*>\s*a:first-child\s*\{[\s\S]*flex:\s*1 1 auto;[\s\S]*max-width:\s*none;[\s\S]*min-width:\s*0;/);
+    assert.match(transitionsCss, /header\.fixed\s+\.header-blur-target\s*>\s*div:first-of-type\s*\{[\s\S]*flex:\s*0 0 auto;[\s\S]*gap:\s*0\.375rem;/);
 });
 
 test('header offset sync ignores impossible measured heights', () => {
@@ -295,7 +294,7 @@ test('home soft pagination syncs shell history and saved scroll before post navi
 
 test('header search opens a blank overlay and closes from blank space', () => {
     assert.match(headerSearchJs, /function ensureSearchResultsOverlay\(\)\s*\{/, 'header-search.js owns the results overlay');
-    assert.match(header, /id="search-results-overlay"[\s\S]*data-open="false"[\s\S]*data-prebuilt="true"/, 'header prebuilds the blank overlay container');
+    assert.match(header, /id="search-results-overlay"[\s\S]*data-open="false" data-prebuilt="true"/, 'header prebuilds the blank overlay container');
     assert.match(transitionsCss, /#search-results-overlay\[data-open="false"\]\s*\{[\s\S]*display:\s*none;/, 'prebuilt overlay stays hidden until search opens');
     assert.match(headerSearchJs, /const offset = header \? header\.offsetHeight : 0;/, 'overlay sits flush under the header');
     assert.doesNotMatch(headerSearchJs, /header\.offsetHeight \+ 12/);
