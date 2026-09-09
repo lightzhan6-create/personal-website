@@ -49,7 +49,8 @@ const { generateSitemap, generateRobotsTxt, generateLlmsTxt, generateFeed, gener
 const DEFAULT_POSTS_PER_PAGE = 8;
 const DEFAULT_RECENT_POSTS_LIMIT = 8;
 const DIRS = {
-    posts: path.join(__dirname, '..', 'writing'),
+    // Keep the original published article source used by this blog.
+    posts: path.join(__dirname, '..', 'content', 'posts'),
     assets: path.join(__dirname, 'src', 'assets'),
     shared: path.join(__dirname, 'shared'),
     images: path.join(__dirname, 'image'),

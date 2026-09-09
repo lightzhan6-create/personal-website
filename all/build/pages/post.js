@@ -19,6 +19,17 @@ function fileSlug(file) {
     return contentFileSlug(file);
 }
 
+function legacyPostLink(frontmatter, fallbackSlug) {
+    const rawSlug = String(frontmatter.slug || '').trim();
+    const rawLocale = String(frontmatter.locale || '').trim();
+    if (!rawSlug && !rawLocale) return '';
+
+    const slug = (rawSlug || fallbackSlug).replace(/^\/+|\/+$/g, '');
+    // Chinese is the site's default locale; older URLs omitted that segment.
+    const locale = rawLocale === 'zh-CN' ? '' : rawLocale.replace(/^\/+|\/+$/g, '');
+    return `/posts/${[locale, slug].filter(Boolean).join('/')}/`;
+}
+
 function readPostId(postIds, file) {
     const raw = postIds && typeof postIds.get === 'function' ? postIds.get(file) : '';
     const postId = String(raw == null ? '' : raw).trim();
@@ -373,7 +384,7 @@ function renderLatestUpdatePanel(post) {
 }
 
 /**
- * 读取 writing/ 目录下的所有 Markdown 文章并归一化为 post 对象数组。
+ * 读取 content/posts/ 目录下的所有 Markdown 文章并归一化为 post 对象数组。
  * 跳过 frontmatter 标记 show: false 的文件。已按"置顶在前 + 时间倒序"排序。
  */
 function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skipMissingGitDates = false }) {
@@ -436,6 +447,7 @@ function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skip
             title: autoSpacing(titleRaw),
             slug,
             postId,
+            legacyLink: legacyPostLink(data, slug),
             date: publishDate,
             modifiedDate,
             excerpt: autoSpacing(excerptRaw),
@@ -602,11 +614,17 @@ function generateAll({ posts, template, siteConfig, seoConfig, outputDir, assetV
 
     posts.forEach(post => {
         const html = renderPostPage({ post, template, siteConfig, seoConfig, assetVersion });
-        const postDir = path.join(outputDir, 'posts', post.postId);
-        fs.mkdirSync(postDir, { recursive: true });
-        const outFile = path.join(postDir, 'index.html');
-        fs.writeFileSync(outFile, html, 'utf-8');
-        console.log(`  Generated: posts/${post.postId}/index.html`);
+        const routes = [`/posts/${post.postId}/`];
+        if (post.legacyLink && !routes.includes(post.legacyLink)) routes.push(post.legacyLink);
+
+        routes.forEach(route => {
+            const routeParts = String(route).split('/').filter(Boolean);
+            const postDir = path.join(outputDir, ...routeParts);
+            fs.mkdirSync(postDir, { recursive: true });
+            const outFile = path.join(postDir, 'index.html');
+            fs.writeFileSync(outFile, html, 'utf-8');
+            console.log(`  Generated: ${routeParts.join('/')}/index.html`);
+        });
     });
 }
 

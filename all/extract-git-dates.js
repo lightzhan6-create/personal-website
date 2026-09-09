@@ -8,7 +8,7 @@ const { collectLatestUpdates } = require('./build/latest-updates.js');
 console.log('Extracting article date snapshots...');
 
 const repoRoot = path.join(__dirname, '..');
-const postsDir = path.join(repoRoot, 'writing');
+const postsDir = path.join(repoRoot, 'content', 'posts');
 const datesFile = path.join(__dirname, 'git-dates.json');
 
 function normalizePath(filePath) {
