@@ -41,6 +41,8 @@ const indexPage = require('./build/pages/index.js');
 const allPage = require('./build/pages/all.js');
 const searchPage = require('./build/pages/search.js');
 const aboutPage = require('./build/pages/about.js');
+const videosPage = require('./build/pages/videos.js');
+const galleryPage = require('./build/pages/gallery.js');
 const notFoundPage = require('./build/pages/notfound.js');
 const shellPage = require('./build/pages/shell.js');
 const { generateSitemap, generateRobotsTxt, generateLlmsTxt, generateFeed, generateOpenSearchXml } = require('./build/pages/sitemap.js');
@@ -57,6 +59,9 @@ const DIRS = {
     images: path.join(__dirname, 'image'),
     products: path.join(__dirname, '..', 'public', 'products'),
     productUploads: path.join(__dirname, '..', 'public', 'uploads', 'products'),
+    publicUploads: path.join(__dirname, '..', 'public', 'uploads'),
+    videos: path.join(__dirname, '..', 'videos'),
+    gallery: path.join(__dirname, '..', 'content', 'gallery'),
     output: path.join(__dirname, 'dist'),
     templates: path.join(__dirname, 'src'),
     partials: path.join(__dirname, 'src', 'partials'),
@@ -253,6 +258,9 @@ const tplPost = engine.loadTemplate('template_post.html');
 const tplIndexAll = engine.loadTemplate('template_index_all.html');
 const tplSearch = engine.loadTemplate('template_index_search.html');
 const tplAbout = engine.loadTemplate('template_index_About.html');
+const tplVideos = engine.loadTemplate('template_videos.html');
+const tplVideo = engine.loadTemplate('template_video.html');
+const tplGallery = engine.loadTemplate('template_gallery.html');
 const tplNotFound = engine.loadTemplate('template_index_404.html');
 const tplShell = engine.loadTemplate('template_shell.html');
 
@@ -310,6 +318,8 @@ shellPage.generate({ template: tplShell, siteConfig, seoConfig, outputDir: DIRS.
 allPage.generate({ posts: allPosts, template: tplIndexAll, siteConfig, seoConfig, outputDir: DIRS.output });
 searchPage.generate({ posts: allPosts, template: tplSearch, siteConfig, seoConfig, outputDir: DIRS.output, recentPostsSidebarHtml: recentPostsSidebarHomeWrapperHtml });
 aboutPage.generate({ template: tplAbout, siteConfig, seoConfig, aboutConfig, outputDir: DIRS.output });
+videosPage.generate({ videosDir: DIRS.videos, listTemplate: tplVideos, detailTemplate: tplVideo, siteConfig, seoConfig, outputDir: DIRS.output });
+galleryPage.generate({ galleryDir: DIRS.gallery, listTemplate: tplGallery, siteConfig, seoConfig, outputDir: DIRS.output });
 notFoundPage.generateNotFoundPage({ template: tplNotFound, outputDir: DIRS.output });
 generateSitemap({ posts: allPosts, siteConfig, seoConfig, outputDir: DIRS.output });
 generateRobotsTxt({ siteConfig, seoConfig, outputDir: DIRS.output });
@@ -325,6 +335,7 @@ console.log('📦 Moving assets and configs...');
 if (fs.existsSync(DIRS.assets)) copyDir(DIRS.assets, path.join(DIRS.output, 'assets'), { ignore: ['posts'] });
 if (fs.existsSync(DIRS.shared)) copyDir(DIRS.shared, path.join(DIRS.output, 'assets'));
 if (fs.existsSync(DIRS.images)) copyDir(DIRS.images, path.join(DIRS.output, 'image'));
+if (fs.existsSync(DIRS.publicUploads)) copyDir(DIRS.publicUploads, path.join(DIRS.output, 'uploads'), { ignore: ['products'] });
 if (fs.existsSync(DIRS.products)) copyDir(DIRS.products, path.join(DIRS.output, 'products'));
 if (fs.existsSync(DIRS.productUploads)) copyDir(DIRS.productUploads, path.join(DIRS.output, 'uploads', 'products'));
 
