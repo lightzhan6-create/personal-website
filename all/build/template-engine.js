@@ -449,6 +449,7 @@ function createEngine({ templatesDir, partialsDir, siteConfig, seoConfig = {}, s
         out = replacePlaceholder(out, /<!-- THEME_SCRIPT -->/g, themeScript);
         out = replacePlaceholder(out, /<!-- SHELL_BOOTSTRAP_SCRIPT -->/g, shellBootstrapScript);
         out = replacePlaceholder(out, /<!-- SOCIAL_LINKS -->/g, socialLinks);
+        out = replacePlaceholder(out, /<!-- SIDEBAR_SOCIAL_LINKS -->/g, socialLinks);
         out = replacePlaceholder(out, /<!-- TAG_MENU_ITEMS -->/g, tagMenuItemsHtml);
         out = replacePlaceholder(out, /<!-- DISCOVERY_LINKS -->/g, discoveryLinks);
         out = replacePlaceholder(out, /<!-- SEARCH_ENGINE_HTML_MARKERS -->/g, searchEngineHtmlMarkers);

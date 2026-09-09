@@ -9,6 +9,10 @@ const BEHANCE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24
 const TIKTOK_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8.24537V15.5C16 19.0899 13.0899 22 9.5 22C5.91015 22 3 19.0899 3 15.5C3 11.9101 5.91015 9 9.5 9C10.0163 9 10.5185 9.06019 11 9.17393V12.3368C10.5454 12.1208 10.0368 12 9.5 12C7.567 12 6 13.567 6 15.5C6 17.433 7.567 19 9.5 19C11.433 19 13 17.433 13 15.5V2H16C16 4.76142 18.2386 7 21 7V10C19.1081 10 17.3696 9.34328 16 8.24537Z"></path></svg>';
 const FACEBOOK_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47062 14 5.5 16 5.5H17.5V2.1401C17.1743 2.09685 15.943 2 14.6429 2C11.9284 2 10 3.65686 10 6.69971V9.5H7V13.5H10V22H14V13.5Z"></path></svg>';
 const RSS_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17C5.20914 17 7 18.7909 7 21H3V17ZM3 10C9.07513 10 14 14.9249 14 21H12C12 16.0294 7.97056 12 3 12V10ZM3 3C12.9411 3 21 11.0589 21 21H19C19 12.1634 11.8366 5 3 5V3Z"></path></svg>';
+const LINKEDIN_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 8.5A2.5 2.5 0 1 0 6.5 3a2.5 2.5 0 0 0 0 5.5ZM4 21h5V9H4v12Zm7 0h5v-6.2c0-1.63.3-3.3 2.4-3.3 2.07 0 2.1 1.97 2.1 3.41V21h5v-7.08c0-3.48-.75-6.16-4.82-6.16-1.96 0-3.27 1.08-3.81 2.1h-.07V9H11v12Z"></path></svg>';
+const YOUTUBE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"></path></svg>';
+const WHATSAPP_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.1 4.1 4.2-1.1A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.5.7.7-2.4-.2-.3A8 8 0 1 1 12 20Zm4.4-5.9c-.2-.1-1.3-.7-1.5-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7 1-.1.2-.3.2-.5.1-1.5-.7-2.5-1.3-3.5-2.9-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.5l-.7-1.6c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3 1 2.6 1.1 2.8.1.2 2 3.1 4.8 4.3 1.8.8 2.2.6 2.6.6.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1-.1-.2-.3-.3-.5-.4Z"></path></svg>';
+const EMAIL_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>';
 
 const SOCIAL_DEFAULTS = {
     twitter_enabled: true,
@@ -29,12 +33,24 @@ const SOCIAL_DEFAULTS = {
     facebook_enabled: false,
     facebook_icon: FACEBOOK_ICON,
     facebook_url: 'https://www.facebook.com/',
+    linkedin_enabled: false,
+    linkedin_icon: LINKEDIN_ICON,
+    linkedin_url: '',
+    youtube_enabled: false,
+    youtube_icon: YOUTUBE_ICON,
+    youtube_url: '',
+    whatsapp_enabled: false,
+    whatsapp_icon: WHATSAPP_ICON,
+    whatsapp_url: '',
+    email_enabled: false,
+    email_icon: EMAIL_ICON,
+    email_url: '',
     rss_enabled: true,
     rss_icon: RSS_ICON,
     rss_url: '/feed.xml'
 };
 
 // 平台顺序（与原 build.js 保持一致；rss 作为站内订阅入口放最后，避免抢占主社交位）
-const SOCIAL_PLATFORM_ORDER = ['twitter', 'instagram', 'github', 'behance', 'tiktok', 'facebook', 'rss'];
+const SOCIAL_PLATFORM_ORDER = ['linkedin', 'youtube', 'whatsapp', 'email', 'twitter', 'instagram', 'github', 'behance', 'tiktok', 'facebook', 'rss'];
 
 module.exports = { SOCIAL_DEFAULTS, SOCIAL_PLATFORM_ORDER };
