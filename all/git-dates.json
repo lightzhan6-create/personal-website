@@ -1,68 +1,17 @@
 {
   "modified": {
-    "_template.mdx": "2026-09-03T15:53:27+08:00",
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T16:06:53+08:00",
     "light-first-blog.md": "2026-09-07T16:21:04+08:00"
   },
   "published": {
-    "_template.mdx": "2026-09-02T06:54:33.214Z",
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T07:58:07.184Z",
     "light-first-blog.md": "2026-09-02T06:15:27.347Z"
   },
   "post_ids": {
-    "_template.mdx": "2026090214554701",
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026090715585501",
     "light-first-blog.md": "2026090214554702"
   },
   "latest_updates": {
-    "_template.mdx": {
-      "items": [
-        "文章正文标题",
-        "这里开始写正文。",
-        "背景",
-        "说明为什么写这篇文章。",
-        "重点内容",
-        "第一条重点。 第二条重点。 第三条重点。",
-        "总结",
-        "写出结论或下一步行动。"
-      ],
-      "targets": [
-        {
-          "text": "# 文章正文标题",
-          "line": 25
-        },
-        {
-          "text": "这里开始写正文。",
-          "line": 27
-        },
-        {
-          "text": "## 背景",
-          "line": 29
-        },
-        {
-          "text": "说明为什么写这篇文章。",
-          "line": 31
-        },
-        {
-          "text": "## 重点内容",
-          "line": 33
-        },
-        {
-          "text": "1. 第一条重点。",
-          "line": 35
-        },
-        {
-          "text": "## 总结",
-          "line": 39
-        },
-        {
-          "text": "写出结论或下一步行动。",
-          "line": 41
-        }
-      ],
-      "source": "commit",
-      "commit": "b21b5dab845d"
-    },
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": {
       "items": [
         "This week, several signals stood out across the electronics manufacturing industry: AI demand is reaching PCB and substrate production, manufacturers continue expanding geographically, and material costs are becoming more important for high-performance electronics.",
