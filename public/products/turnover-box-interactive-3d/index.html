@@ -280,5 +280,41 @@ copyRfq?.addEventListener('click',async()=>{
 </script>
 
 <a class="floating-wa" href="https://wa.me/8613632779310?text=Hello%20Leon%2C%20I%27m%20interested%20in%20a%20custom%20ESD%20divider%20tray." target="_blank" rel="noopener" aria-label="Chat with Leon Hong on WhatsApp"><span class="wa-dot">WA</span><span class="wa-label">WhatsApp Leon</span></a>
+<script>
+(() => {
+  const replacements = [
+    ['Chat with Leon Hong', 'Chat with Light'],
+    ['WhatsApp Leon', 'WhatsApp Light'],
+    ['Email Leon', 'Email Light'],
+    ['Leon Hong', 'Light'],
+    ['Southern Machinery · SMT Sales & Service', 'Light · B2B Export Sales'],
+    ['leon-hong-southern-machinery', 'zhan-light-a6b5b53a1'],
+    ['leon@smthelp.com', 'light@smthelp.com'],
+    ['+86 136 3277 9310', '+86 176 8854 8420'],
+    ['8613632779310', '8617688548420'],
+    ['Contact Leon', 'Contact Light'],
+    ['Leon', 'Light']
+  ];
+  const rewrite = (value) => replacements.reduce((result, [from, to]) => result.split(from).join(to), String(value));
+
+  document.querySelectorAll('[href], [aria-label]').forEach((element) => {
+    ['href', 'aria-label'].forEach((attribute) => {
+      if (element.hasAttribute(attribute)) element.setAttribute(attribute, rewrite(element.getAttribute(attribute)));
+    });
+  });
+
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+  textNodes.forEach((node) => { node.nodeValue = rewrite(node.nodeValue); });
+
+  document.querySelectorAll('meta[content]').forEach((element) => {
+    element.setAttribute('content', rewrite(element.getAttribute('content')));
+  });
+  document.querySelectorAll('script[type="application/ld+json"]').forEach((element) => {
+    element.textContent = rewrite(element.textContent);
+  });
+})();
+</script>
 </body>
 </html>
