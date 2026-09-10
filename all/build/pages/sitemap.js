@@ -5,7 +5,8 @@ const { renderPostContent } = require('./post-content.js');
 
 const PRODUCT_ROUTES = [
     '/products/sc-900-multi-blades-v-cut-pcb-separator/',
-    '/products/s-d602-led-depaneler/'
+    '/products/s-d602-led-depaneler/',
+    '/products/turnover-box-interactive-3d/'
 ];
 
 // RSS / AI 检索文件的文章数上限。理由：
