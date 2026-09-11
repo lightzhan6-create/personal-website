@@ -338,6 +338,9 @@ if (fs.existsSync(DIRS.images)) copyDir(DIRS.images, path.join(DIRS.output, 'ima
 if (fs.existsSync(DIRS.publicUploads)) copyDir(DIRS.publicUploads, path.join(DIRS.output, 'uploads'), { ignore: ['products'] });
 if (fs.existsSync(DIRS.products)) copyDir(DIRS.products, path.join(DIRS.output, 'products'));
 if (fs.existsSync(DIRS.productUploads)) copyDir(DIRS.productUploads, path.join(DIRS.output, 'uploads', 'products'));
+const googleVerificationFile = 'googlec5718c50be1a6fe5.html';
+const googleVerificationSource = path.join(__dirname, '..', 'public', googleVerificationFile);
+if (fs.existsSync(googleVerificationSource)) fs.copyFileSync(googleVerificationSource, path.join(DIRS.output, googleVerificationFile));
 
 // ===== 6.6 生成 JS bundle（CSS bundle 需等 Tailwind 编译完成，见第 8 步之后）=====
 console.log('🧩 Writing JS bundles...');
