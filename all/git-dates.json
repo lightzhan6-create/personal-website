@@ -1,7 +1,7 @@
 {
   "modified": {
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T16:06:53+08:00",
-    "custom-juki-gripper-nozzle-line-choke-case-study.md": "2026-09-11T01:32:36.523Z",
+    "custom-juki-gripper-nozzle-line-choke-case-study.md": "2026-09-11T09:37:52+08:00",
     "light-first-blog.md": "2026-09-07T16:21:04+08:00"
   },
   "published": {
@@ -322,6 +322,389 @@
       ],
       "source": "commit",
       "commit": "c573777a4f12"
+    },
+    "custom-juki-gripper-nozzle-line-choke-case-study.md": {
+      "items": [
+        "Sometimes the part causing trouble on an SMT line is not large, expensive, or especially complicated.",
+        "It can simply be a component that is awkward to pick up.",
+        "This was the situation with a line choke used on a power supply board. The component itself is not unusual, but its shape makes automatic handling less straightforward than a normal chip component.",
+        "It has exposed leads, copper windings, uneven surfaces, and very little flat area for a conventional vacuum nozzle.",
+        "Power supply board with line choke component",
+        "So instead of starting with the question, “Which nozzle should we use?”, the better question was:",
+        "How can this component actually be picked up safely and repeatably?",
+        "Understanding the Component Geometry",
+        "The first thing we looked at was the component from different angles.",
+        "A top view alone does not tell you enough.",
+        "From the bottom and side views, you can see the lead positions, winding height, structural gaps, and the areas that could potentially be used for gripping.",
+        "Line choke component views showing windings and leads",
+        "That matters because a vacuum nozzle needs a reasonably flat and sealed contact surface.",
+        "For this line choke, that was not ideal.",
+        "The component geometry pointed us toward a different approach: mechanical gripping instead of vacuum pickup.",
+        "Why a Custom Gripper Made More Sense",
+        "A standard vacuum nozzle works very well when the component gives you a clean contact surface.",
+        "But when the surface is irregular, narrow, or interrupted by windings and gaps, vacuum pickup becomes less reliable.",
+        "A gripper works differently.",
+        "Instead of relying on an air seal, it holds the component mechanically from selected sides.",
+        "For this JUKI application, we used a custom pneumatic gripper nozzle with opposing jaws.",
+        "Custom JUKI-compatible gripper holding a line choke",
+        "The goal was not simply to make something that could “grab” the component.",
+        "It also had to match two sides of the application:",
+        "the component itself the JUKI machine interface",
+        "That means dimensions, jaw position, opening range, component center, installation height, clearance, orientation and actuation all have to work together.",
+        "Checking the Tool Against the Actual Part",
+        "One small but important step was simply putting the tool and the actual component together and checking the physical relationship.",
+        "The jaws need enough opening clearance to approach the component without touching the leads.",
+        "At the same time, the closing stroke needs to be controlled well enough to hold the component without applying unnecessary force.",
+        "Custom gripper nozzle close-up",
+        "This is why actual samples are so useful.",
+        "A drawing gives dimensions, but a real part often shows details that are easy to miss on paper.",
+        "Gripper and line choke shown with a measurement reference",
+        "Bench Pickup Test",
+        "Before talking about full production performance, we first checked the basic mechanical idea.",
+        "The test was simple:",
+        "approach → grip → lift → hold → release",
+        "Bench pickup test sequence for the line choke",
+        "The gripper was able to pick up and hold the line choke under the demonstrated test conditions.",
+        "Bench pickup test only proves the basic mechanical concept. It does not by itself prove full production performance.",
+        "That is a useful first result, but it is important not to overstate it.",
+        "A successful bench test does not automatically mean that the tooling is fully validated for continuous production.",
+        "The next step should always be machine-side testing.",
+        "Once the gripper is installed on the actual JUKI machine, I would pay attention to several things:",
+        "Is pickup repeatable over many cycles? Does the component enter the jaws consistently? Is the component stable during XY movement and rotation? Can the vision system recognize the component correctly? Is placement position accurate? Does the component release cleanly? Is there enough clearance around feeders and nearby hardware? Do the jaws and springs remain stable after repeated use?",
+        "These details are what separate a working prototype from a production-ready solution.",
+        "The Same Pattern Applies to Other Odd-Form Components",
+        "The same type of issue appears with many odd-shaped components:",
+        "coils transformers relays connectors sensors shielding parts camera modules terminals",
+        "Sometimes the answer is a custom vacuum tip.",
+        "Sometimes it is a soft-contact nozzle.",
+        "Sometimes it is a multi-hole design.",
+        "And sometimes, like in this case, a mechanical gripper makes more sense.",
+        "There is no single “best nozzle” for every application.",
+        "The component geometry and production process should decide the solution.",
+        "Information Needed for a Similar JUKI Application",
+        "For a similar JUKI application, the most useful information would be:",
+        "Clear photos from the top, bottom and sides A dimensional drawing or physical sample Component length, width, height and weight JUKI machine model and placement-head information Existing nozzle or machine-interface photos A short video showing the current pickup problem Expected production conditions and cycle requirements",
+        "In many cases, a few good photos and a sample already tell us much more than a long email description.",
+        "Final Takeaway",
+        "This is a good example of why I do not think automation problems should always start with the machine.",
+        "Sometimes the machine is fine.",
+        "The real bottleneck is one component, one feeder, one nozzle, one fixture or one small process that is still unstable.",
+        "Solving that small point can sometimes be more useful than replacing a much larger piece of equipment.",
+        "For me, that is also the interesting part of SMT/THT automation:",
+        "understanding the actual production problem first, and then deciding what kind of tooling or equipment really makes sense.",
+        "If you are dealing with a component that is difficult to pick, feed or insert, sending a few photos of the part is often the easiest place to start.",
+        "Common Questions",
+        "Is this an OEM JUKI product?",
+        "No. This is a customized compatible gripper solution for a JUKI application. It should not be described as an OEM JUKI product unless the origin is specifically verified.",
+        "Can this gripper handle other components?",
+        "Possibly, but it depends on the dimensions and available gripping areas. Different components may require changes to the jaw geometry or opening range.",
+        "Does the bench test prove production readiness?",
+        "No. It confirms the basic mechanical concept. Final validation should still be done on the intended machine under actual production conditions."
+      ],
+      "targets": [
+        {
+          "text": "Sometimes the part causing trouble on an SMT line is not large, expensive, or especially complicated.",
+          "line": 41
+        },
+        {
+          "text": "It can simply be a component that is awkward to pick up.",
+          "line": 43
+        },
+        {
+          "text": "This was the situation with a line choke used on a power supply board. The component itself is not unusual, but its shape makes automatic handling less straightforward than a normal chip component.",
+          "line": 45
+        },
+        {
+          "text": "It has exposed leads, copper windings, uneven surfaces, and very little flat area for a conventional vacuum nozzle.",
+          "line": 47
+        },
+        {
+          "text": "![Power supply board with line choke component](/uploads/2026/09/line-choke-power-supply-board.png)",
+          "line": 49
+        },
+        {
+          "text": "So instead of starting with the question, “Which nozzle should we use?”, the better question was:",
+          "line": 51
+        },
+        {
+          "text": "**How can this component actually be picked up safely and repeatably?**",
+          "line": 53
+        },
+        {
+          "text": "## Understanding the Component Geometry",
+          "line": 55
+        },
+        {
+          "text": "The first thing we looked at was the component from different angles.",
+          "line": 57
+        },
+        {
+          "text": "A top view alone does not tell you enough.",
+          "line": 59
+        },
+        {
+          "text": "From the bottom and side views, you can see the lead positions, winding height, structural gaps, and the areas that could potentially be used for gripping.",
+          "line": 61
+        },
+        {
+          "text": "![Line choke component views showing windings and leads](/uploads/2026/09/line-choke-component-views.png)",
+          "line": 63
+        },
+        {
+          "text": "That matters because a vacuum nozzle needs a reasonably flat and sealed contact surface.",
+          "line": 65
+        },
+        {
+          "text": "For this line choke, that was not ideal.",
+          "line": 67
+        },
+        {
+          "text": "The component geometry pointed us toward a different approach: mechanical gripping instead of vacuum pickup.",
+          "line": 69
+        },
+        {
+          "text": "## Why a Custom Gripper Made More Sense",
+          "line": 71
+        },
+        {
+          "text": "A standard vacuum nozzle works very well when the component gives you a clean contact surface.",
+          "line": 73
+        },
+        {
+          "text": "But when the surface is irregular, narrow, or interrupted by windings and gaps, vacuum pickup becomes less reliable.",
+          "line": 75
+        },
+        {
+          "text": "A gripper works differently.",
+          "line": 77
+        },
+        {
+          "text": "Instead of relying on an air seal, it holds the component mechanically from selected sides.",
+          "line": 79
+        },
+        {
+          "text": "For this JUKI application, we used a custom pneumatic gripper nozzle with opposing jaws.",
+          "line": 81
+        },
+        {
+          "text": "![Custom JUKI-compatible gripper holding a line choke](/uploads/2026/09/juki-gripper-line-choke.png)",
+          "line": 83
+        },
+        {
+          "text": "The goal was not simply to make something that could “grab” the component.",
+          "line": 85
+        },
+        {
+          "text": "It also had to match two sides of the application:",
+          "line": 87
+        },
+        {
+          "text": "- the component itself",
+          "line": 89
+        },
+        {
+          "text": "That means dimensions, jaw position, opening range, component center, installation height, clearance, orientation and actuation all have to work together.",
+          "line": 92
+        },
+        {
+          "text": "## Checking the Tool Against the Actual Part",
+          "line": 94
+        },
+        {
+          "text": "One small but important step was simply putting the tool and the actual component together and checking the physical relationship.",
+          "line": 96
+        },
+        {
+          "text": "The jaws need enough opening clearance to approach the component without touching the leads.",
+          "line": 98
+        },
+        {
+          "text": "At the same time, the closing stroke needs to be controlled well enough to hold the component without applying unnecessary force.",
+          "line": 100
+        },
+        {
+          "text": "![Custom gripper nozzle close-up](/uploads/2026/09/custom-gripper-nozzle-close-up.png)",
+          "line": 102
+        },
+        {
+          "text": "This is why actual samples are so useful.",
+          "line": 104
+        },
+        {
+          "text": "A drawing gives dimensions, but a real part often shows details that are easy to miss on paper.",
+          "line": 106
+        },
+        {
+          "text": "![Gripper and line choke shown with a measurement reference](/uploads/2026/09/gripper-line-choke-dimensions.png)",
+          "line": 108
+        },
+        {
+          "text": "## Bench Pickup Test",
+          "line": 110
+        },
+        {
+          "text": "Before talking about full production performance, we first checked the basic mechanical idea.",
+          "line": 112
+        },
+        {
+          "text": "The test was simple:",
+          "line": 114
+        },
+        {
+          "text": "**approach → grip → lift → hold → release**",
+          "line": 116
+        },
+        {
+          "text": "![Bench pickup test sequence for the line choke](/uploads/2026/09/juki-gripper-bench-pickup-test.png)",
+          "line": 118
+        },
+        {
+          "text": "The gripper was able to pick up and hold the line choke under the demonstrated test conditions.",
+          "line": 120
+        },
+        {
+          "text": "Bench pickup test only proves the basic mechanical concept. It does not by itself prove full production performance.",
+          "line": 122
+        },
+        {
+          "text": "That is a useful first result, but it is important not to overstate it.",
+          "line": 124
+        },
+        {
+          "text": "A successful bench test does not automatically mean that the tooling is fully validated for continuous production.",
+          "line": 126
+        },
+        {
+          "text": "The next step should always be machine-side testing.",
+          "line": 128
+        },
+        {
+          "text": "Once the gripper is installed on the actual JUKI machine, I would pay attention to several things:",
+          "line": 130
+        },
+        {
+          "text": "- Is pickup repeatable over many cycles?",
+          "line": 132
+        },
+        {
+          "text": "These details are what separate a working prototype from a production-ready solution.",
+          "line": 141
+        },
+        {
+          "text": "## The Same Pattern Applies to Other Odd-Form Components",
+          "line": 143
+        },
+        {
+          "text": "The same type of issue appears with many odd-shaped components:",
+          "line": 145
+        },
+        {
+          "text": "- coils",
+          "line": 147
+        },
+        {
+          "text": "Sometimes the answer is a custom vacuum tip.",
+          "line": 156
+        },
+        {
+          "text": "Sometimes it is a soft-contact nozzle.",
+          "line": 158
+        },
+        {
+          "text": "Sometimes it is a multi-hole design.",
+          "line": 160
+        },
+        {
+          "text": "And sometimes, like in this case, a mechanical gripper makes more sense.",
+          "line": 162
+        },
+        {
+          "text": "There is no single “best nozzle” for every application.",
+          "line": 164
+        },
+        {
+          "text": "The component geometry and production process should decide the solution.",
+          "line": 166
+        },
+        {
+          "text": "## Information Needed for a Similar JUKI Application",
+          "line": 168
+        },
+        {
+          "text": "For a similar JUKI application, the most useful information would be:",
+          "line": 170
+        },
+        {
+          "text": "1. Clear photos from the top, bottom and sides",
+          "line": 172
+        },
+        {
+          "text": "In many cases, a few good photos and a sample already tell us much more than a long email description.",
+          "line": 180
+        },
+        {
+          "text": "## Final Takeaway",
+          "line": 182
+        },
+        {
+          "text": "This is a good example of why I do not think automation problems should always start with the machine.",
+          "line": 184
+        },
+        {
+          "text": "Sometimes the machine is fine.",
+          "line": 186
+        },
+        {
+          "text": "The real bottleneck is one component, one feeder, one nozzle, one fixture or one small process that is still unstable.",
+          "line": 188
+        },
+        {
+          "text": "Solving that small point can sometimes be more useful than replacing a much larger piece of equipment.",
+          "line": 190
+        },
+        {
+          "text": "For me, that is also the interesting part of SMT/THT automation:",
+          "line": 192
+        },
+        {
+          "text": "understanding the actual production problem first, and then deciding what kind of tooling or equipment really makes sense.",
+          "line": 194
+        },
+        {
+          "text": "If you are dealing with a component that is difficult to pick, feed or insert, sending a few photos of the part is often the easiest place to start.",
+          "line": 196
+        },
+        {
+          "text": "## Common Questions",
+          "line": 198
+        },
+        {
+          "text": "### Is this an OEM JUKI product?",
+          "line": 200
+        },
+        {
+          "text": "No. This is a customized compatible gripper solution for a JUKI application. It should not be described as an OEM JUKI product unless the origin is specifically verified.",
+          "line": 202
+        },
+        {
+          "text": "### Can this gripper handle other components?",
+          "line": 204
+        },
+        {
+          "text": "Possibly, but it depends on the dimensions and available gripping areas. Different components may require changes to the jaw geometry or opening range.",
+          "line": 206
+        },
+        {
+          "text": "### Does the bench test prove production readiness?",
+          "line": 208
+        },
+        {
+          "text": "No. It confirms the basic mechanical concept. Final validation should still be done on the intended machine under actual production conditions.",
+          "line": 210
+        }
+      ],
+      "source": "commit",
+      "commit": "781362d452ef"
     },
     "light-first-blog.md": {
       "items": [
