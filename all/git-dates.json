@@ -1,6 +1,6 @@
 {
   "modified": {
-    "7-common-problems-in-pcba-production-and-equipment-solutions.md": "2026-09-12T02:30:34.389Z",
+    "7-common-problems-in-pcba-production-and-equipment-solutions.md": "2026-09-12T10:37:04+08:00",
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T16:06:53+08:00",
     "custom-juki-gripper-nozzle-line-choke-case-study.md": "2026-09-11T09:37:52+08:00",
     "light-first-blog.md": "2026-09-07T16:21:04+08:00"
@@ -18,6 +18,479 @@
     "light-first-blog.md": "2026090214554702"
   },
   "latest_updates": {
+    "7-common-problems-in-pcba-production-and-equipment-solutions.md": {
+      "items": [
+        "PCBA production is rarely about one machine or one process.",
+        "A complete electronics manufacturing line may involve solder paste printing, component placement, reflow soldering, inspection, through-hole assembly, cleaning, testing, and final handling.",
+        "The challenge is that a small problem at one stage can easily become a much larger problem later.",
+        "From my experience working with SMT and THT equipment, here are several common problems that electronics manufacturers face — and the equipment or process improvements that can help solve them.",
+        "Automated SMT production line with loader, pick-and-place machine, reflow oven and unloader",
+        "1. Solder Paste Printing Problems",
+        "Many PCBA defects actually begin before a single component is placed.",
+        "Common problems include:",
+        "Too much or too little solder paste Poor stencil alignment Blocked stencil apertures Uneven solder paste height Solder paste drying or changing viscosity",
+        "These issues may later cause insufficient solder joints, bridging, tombstoning, or open circuits.",
+        "This is why many SMT lines use SPI — Solder Paste Inspection immediately after printing.",
+        "SPI systems can measure solder paste height, area, volume, and position before the PCB enters the pick-and-place machine.",
+        "Finding a printing problem early is much cheaper than finding it after reflow.",
+        "2. Component Placement Errors",
+        "Modern pick-and-place machines can place thousands of components per hour, but speed alone does not guarantee quality.",
+        "Production problems can still happen because of:",
+        "Incorrect feeder setup Nozzle wear Component pickup failure Wrong component orientation Feeder vibration instability Poor component recognition",
+        "For standard SMD components, these problems are normally managed through machine vision, feeder maintenance, and nozzle inspection.",
+        "However, unusual components such as connectors, LEDs, transformers, switches, or odd-shaped parts may require customized feeders or gripper nozzles.",
+        "This is especially common when manufacturers move from manual assembly toward higher automation.",
+        "Sometimes the problem is not the placement machine itself.",
+        "The real limitation is how the component is presented to the machine.",
+        "3. Reflow Soldering Problems",
+        "Reflow soldering is one of the most critical processes in SMT production.",
+        "Typical defects include:",
+        "Cold solder joints Solder bridging Tombstoning Component shifting Insufficient wetting Excessive oxidation PCB deformation",
+        "The temperature profile is extremely important.",
+        "The PCB needs to pass through preheating, soaking, reflow, and cooling stages under controlled conditions.",
+        "For this reason, manufacturers often focus on:",
+        "Heating-zone stability Conveyor stability Temperature uniformity Nitrogen atmosphere PCB support systems Thermal profiling",
+        "Thin or large PCBs can also bend during heating.",
+        "For some applications, center support systems or adjustable PCB support pins can help reduce deformation during reflow.",
+        "For power electronics and semiconductor applications, the requirement may be even higher.",
+        "Vacuum reflow technology can be used to reduce voids inside solder joints, especially for applications such as power modules, DBC or AMB substrates, and high-reliability electronics.",
+        "4. Inspection Finds the Problem Too Late",
+        "One of the most expensive situations in electronics manufacturing is discovering a defect after several downstream processes have already been completed.",
+        "This is why inspection is increasingly integrated directly into the production line.",
+        "Common inspection equipment includes:",
+        "Automatic Optical Inspection",
+        "Automatic Optical Inspection can detect defects such as:",
+        "Missing components Wrong components Polarity errors Solder defects Component offset",
+        "Both 2D and 3D AOI systems are widely used depending on the application.",
+        "X-Ray Inspection",
+        "X-Ray inspection becomes important when the solder joint cannot be seen directly.",
+        "Typical applications include:",
+        "BGA QFN Power modules Hidden solder joints Voids",
+        "AOI and X-Ray do not replace process control.",
+        "Their real value is helping manufacturers understand where the process is becoming unstable.",
+        "5. THT Assembly Still Depends Too Much on Manual Labor",
+        "Many people associate modern electronics production with SMT, but through-hole components are still widely used.",
+        "Examples include:",
+        "Large capacitors Connectors Transformers Relays Radial components Axial components Mechanical components",
+        "These parts are common in automotive electronics, industrial control, power electronics, appliances, LED products, and many other applications.",
+        "The challenge is that THT assembly can require a large amount of manual labor.",
+        "For higher-volume production, manufacturers may consider:",
+        "Radial insertion machines Axial insertion machines Odd-form insertion machines Bowl feeders Vibratory feeders Customized component feeding systems",
+        "Automation does not always mean automating every component.",
+        "In many factories, the most practical strategy is to automate the repetitive components first and keep low-volume or complex components for manual assembly.",
+        "This hybrid approach can often provide a better return on investment.",
+        "6. Soldering After THT Insertion Creates New Challenges",
+        "After through-hole insertion, the next challenge is soldering.",
+        "Traditional wave soldering is still widely used for high-volume production.",
+        "However, modern PCB designs are becoming more complex.",
+        "Some boards contain both SMT and THT components, while certain areas cannot be exposed to a full wave soldering process.",
+        "In these situations, selective soldering can be a useful solution.",
+        "Selective soldering applies flux and solder only to specific areas of the PCB.",
+        "It is especially suitable for:",
+        "Mixed SMT/THT assemblies High-value PCBs Low-to-medium production volumes Components with difficult soldering locations Applications requiring tighter process control",
+        "The correct choice between wave soldering and selective soldering depends heavily on the PCB design, production volume, component layout, and quality requirements.",
+        "7. PCB Cleaning Is Often Overlooked",
+        "Cleaning is sometimes treated as a secondary process.",
+        "But contamination can create long-term reliability problems.",
+        "PCBA contamination may include:",
+        "Flux residue Dust Ionic contamination Oil Fingerprints Small particles",
+        "For high-reliability electronics, medical electronics, automotive electronics, industrial control, and conformal coating applications, cleanliness can become especially important.",
+        "Different applications may require different cleaning methods, including:",
+        "Inline PCB cleaning Batch cleaning Water-based cleaning Solvent cleaning Brush or air cleaning Plasma cleaning",
+        "There is no single cleaning machine suitable for every PCBA.",
+        "The first question should always be:",
+        "What contamination are you trying to remove?",
+        "Only after answering that question does it make sense to select the cleaning process.",
+        "Final Takeaway",
+        "When a factory experiences production defects, replacing one machine is not always the answer.",
+        "A reflow defect may actually begin with solder paste printing.",
+        "A placement problem may come from the feeder rather than the placement machine.",
+        "A soldering defect may actually come from PCB design or component lead condition.",
+        "A cleaning problem may be caused by the wrong flux chemistry.",
+        "This is why PCBA production should be viewed as a complete process rather than a collection of individual machines.",
+        "The best equipment solution usually starts with understanding:",
+        "PCB size and structure Component types Production volume Current process Existing equipment Main defects Automation target Quality requirements",
+        "Once these factors are clear, equipment selection becomes much easier.",
+        "For EMS and electronics manufacturers, the goal is not simply to add more machines.",
+        "The goal is to make the production process more stable, repeatable, and efficient."
+      ],
+      "targets": [
+        {
+          "text": "PCBA production is rarely about one machine or one process.",
+          "line": 36
+        },
+        {
+          "text": "A complete electronics manufacturing line may involve solder paste printing, component placement, reflow soldering, inspection, through-hole assembly, cleaning, testing, and final handling.",
+          "line": 38
+        },
+        {
+          "text": "The challenge is that a small problem at one stage can easily become a much larger problem later.",
+          "line": 40
+        },
+        {
+          "text": "From my experience working with SMT and THT equipment, here are several common problems that electronics manufacturers face — and the equipment or process improvements that can help solve them.",
+          "line": 42
+        },
+        {
+          "text": "![Automated SMT production line with loader, pick-and-place machine, reflow oven and unloader](/uploads/2026/09/pcba-production-problems/intelligent-smt-production-line.png)",
+          "line": 44
+        },
+        {
+          "text": "## 1. Solder Paste Printing Problems",
+          "line": 46
+        },
+        {
+          "text": "Many PCBA defects actually begin before a single component is placed.",
+          "line": 48
+        },
+        {
+          "text": "Common problems include:",
+          "line": 50
+        },
+        {
+          "text": "- Too much or too little solder paste",
+          "line": 52
+        },
+        {
+          "text": "These issues may later cause insufficient solder joints, bridging, tombstoning, or open circuits.",
+          "line": 58
+        },
+        {
+          "text": "This is why many SMT lines use SPI — Solder Paste Inspection immediately after printing.",
+          "line": 60
+        },
+        {
+          "text": "SPI systems can measure solder paste height, area, volume, and position before the PCB enters the pick-and-place machine.",
+          "line": 62
+        },
+        {
+          "text": "Finding a printing problem early is much cheaper than finding it after reflow.",
+          "line": 64
+        },
+        {
+          "text": "## 2. Component Placement Errors",
+          "line": 66
+        },
+        {
+          "text": "Modern pick-and-place machines can place thousands of components per hour, but speed alone does not guarantee quality.",
+          "line": 68
+        },
+        {
+          "text": "Production problems can still happen because of:",
+          "line": 70
+        },
+        {
+          "text": "- Incorrect feeder setup",
+          "line": 72
+        },
+        {
+          "text": "For standard SMD components, these problems are normally managed through machine vision, feeder maintenance, and nozzle inspection.",
+          "line": 79
+        },
+        {
+          "text": "However, unusual components such as connectors, LEDs, transformers, switches, or odd-shaped parts may require customized feeders or gripper nozzles.",
+          "line": 81
+        },
+        {
+          "text": "This is especially common when manufacturers move from manual assembly toward higher automation.",
+          "line": 83
+        },
+        {
+          "text": "Sometimes the problem is not the placement machine itself.",
+          "line": 85
+        },
+        {
+          "text": "The real limitation is how the component is presented to the machine.",
+          "line": 87
+        },
+        {
+          "text": "## 3. Reflow Soldering Problems",
+          "line": 89
+        },
+        {
+          "text": "Reflow soldering is one of the most critical processes in SMT production.",
+          "line": 91
+        },
+        {
+          "text": "Typical defects include:",
+          "line": 93
+        },
+        {
+          "text": "- Cold solder joints",
+          "line": 95
+        },
+        {
+          "text": "The temperature profile is extremely important.",
+          "line": 103
+        },
+        {
+          "text": "The PCB needs to pass through preheating, soaking, reflow, and cooling stages under controlled conditions.",
+          "line": 105
+        },
+        {
+          "text": "For this reason, manufacturers often focus on:",
+          "line": 107
+        },
+        {
+          "text": "- Heating-zone stability",
+          "line": 109
+        },
+        {
+          "text": "Thin or large PCBs can also bend during heating.",
+          "line": 116
+        },
+        {
+          "text": "For some applications, center support systems or adjustable PCB support pins can help reduce deformation during reflow.",
+          "line": 118
+        },
+        {
+          "text": "For power electronics and semiconductor applications, the requirement may be even higher.",
+          "line": 120
+        },
+        {
+          "text": "Vacuum reflow technology can be used to reduce voids inside solder joints, especially for applications such as power modules, DBC or AMB substrates, and high-reliability electronics.",
+          "line": 122
+        },
+        {
+          "text": "## 4. Inspection Finds the Problem Too Late",
+          "line": 124
+        },
+        {
+          "text": "One of the most expensive situations in electronics manufacturing is discovering a defect after several downstream processes have already been completed.",
+          "line": 126
+        },
+        {
+          "text": "This is why inspection is increasingly integrated directly into the production line.",
+          "line": 128
+        },
+        {
+          "text": "Common inspection equipment includes:",
+          "line": 130
+        },
+        {
+          "text": "### Automatic Optical Inspection",
+          "line": 132
+        },
+        {
+          "text": "Automatic Optical Inspection can detect defects such as:",
+          "line": 134
+        },
+        {
+          "text": "- Missing components",
+          "line": 136
+        },
+        {
+          "text": "Both 2D and 3D AOI systems are widely used depending on the application.",
+          "line": 142
+        },
+        {
+          "text": "### X-Ray Inspection",
+          "line": 144
+        },
+        {
+          "text": "X-Ray inspection becomes important when the solder joint cannot be seen directly.",
+          "line": 146
+        },
+        {
+          "text": "Typical applications include:",
+          "line": 148
+        },
+        {
+          "text": "- BGA",
+          "line": 150
+        },
+        {
+          "text": "AOI and X-Ray do not replace process control.",
+          "line": 156
+        },
+        {
+          "text": "Their real value is helping manufacturers understand where the process is becoming unstable.",
+          "line": 158
+        },
+        {
+          "text": "## 5. THT Assembly Still Depends Too Much on Manual Labor",
+          "line": 160
+        },
+        {
+          "text": "Many people associate modern electronics production with SMT, but through-hole components are still widely used.",
+          "line": 162
+        },
+        {
+          "text": "Examples include:",
+          "line": 164
+        },
+        {
+          "text": "- Large capacitors",
+          "line": 166
+        },
+        {
+          "text": "These parts are common in automotive electronics, industrial control, power electronics, appliances, LED products, and many other applications.",
+          "line": 174
+        },
+        {
+          "text": "The challenge is that THT assembly can require a large amount of manual labor.",
+          "line": 176
+        },
+        {
+          "text": "For higher-volume production, manufacturers may consider:",
+          "line": 178
+        },
+        {
+          "text": "- Radial insertion machines",
+          "line": 180
+        },
+        {
+          "text": "Automation does not always mean automating every component.",
+          "line": 187
+        },
+        {
+          "text": "In many factories, the most practical strategy is to automate the repetitive components first and keep low-volume or complex components for manual assembly.",
+          "line": 189
+        },
+        {
+          "text": "This hybrid approach can often provide a better return on investment.",
+          "line": 191
+        },
+        {
+          "text": "## 6. Soldering After THT Insertion Creates New Challenges",
+          "line": 193
+        },
+        {
+          "text": "After through-hole insertion, the next challenge is soldering.",
+          "line": 195
+        },
+        {
+          "text": "Traditional wave soldering is still widely used for high-volume production.",
+          "line": 197
+        },
+        {
+          "text": "However, modern PCB designs are becoming more complex.",
+          "line": 199
+        },
+        {
+          "text": "Some boards contain both SMT and THT components, while certain areas cannot be exposed to a full wave soldering process.",
+          "line": 201
+        },
+        {
+          "text": "In these situations, selective soldering can be a useful solution.",
+          "line": 203
+        },
+        {
+          "text": "Selective soldering applies flux and solder only to specific areas of the PCB.",
+          "line": 205
+        },
+        {
+          "text": "It is especially suitable for:",
+          "line": 207
+        },
+        {
+          "text": "- Mixed SMT/THT assemblies",
+          "line": 209
+        },
+        {
+          "text": "The correct choice between wave soldering and selective soldering depends heavily on the PCB design, production volume, component layout, and quality requirements.",
+          "line": 215
+        },
+        {
+          "text": "## 7. PCB Cleaning Is Often Overlooked",
+          "line": 217
+        },
+        {
+          "text": "Cleaning is sometimes treated as a secondary process.",
+          "line": 219
+        },
+        {
+          "text": "But contamination can create long-term reliability problems.",
+          "line": 221
+        },
+        {
+          "text": "PCBA contamination may include:",
+          "line": 223
+        },
+        {
+          "text": "- Flux residue",
+          "line": 225
+        },
+        {
+          "text": "For high-reliability electronics, medical electronics, automotive electronics, industrial control, and conformal coating applications, cleanliness can become especially important.",
+          "line": 232
+        },
+        {
+          "text": "Different applications may require different cleaning methods, including:",
+          "line": 234
+        },
+        {
+          "text": "- Inline PCB cleaning",
+          "line": 236
+        },
+        {
+          "text": "There is no single cleaning machine suitable for every PCBA.",
+          "line": 243
+        },
+        {
+          "text": "The first question should always be:",
+          "line": 245
+        },
+        {
+          "text": "What contamination are you trying to remove?",
+          "line": 247
+        },
+        {
+          "text": "Only after answering that question does it make sense to select the cleaning process.",
+          "line": 249
+        },
+        {
+          "text": "## Final Takeaway",
+          "line": 251
+        },
+        {
+          "text": "When a factory experiences production defects, replacing one machine is not always the answer.",
+          "line": 253
+        },
+        {
+          "text": "A reflow defect may actually begin with solder paste printing.",
+          "line": 255
+        },
+        {
+          "text": "A placement problem may come from the feeder rather than the placement machine.",
+          "line": 257
+        },
+        {
+          "text": "A soldering defect may actually come from PCB design or component lead condition.",
+          "line": 259
+        },
+        {
+          "text": "A cleaning problem may be caused by the wrong flux chemistry.",
+          "line": 261
+        },
+        {
+          "text": "This is why PCBA production should be viewed as a complete process rather than a collection of individual machines.",
+          "line": 263
+        },
+        {
+          "text": "The best equipment solution usually starts with understanding:",
+          "line": 265
+        },
+        {
+          "text": "- PCB size and structure",
+          "line": 267
+        },
+        {
+          "text": "Once these factors are clear, equipment selection becomes much easier.",
+          "line": 276
+        },
+        {
+          "text": "For EMS and electronics manufacturers, the goal is not simply to add more machines.",
+          "line": 278
+        },
+        {
+          "text": "The goal is to make the production process more stable, repeatable, and efficient.",
+          "line": 280
+        }
+      ],
+      "source": "commit",
+      "commit": "f1beb5aa76b0"
+    },
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": {
       "items": [
         "This week, several signals stood out across the electronics manufacturing industry: AI demand is reaching PCB and substrate production, manufacturers continue expanding geographically, and material costs are becoming more important for high-performance electronics.",
