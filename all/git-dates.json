@@ -4,7 +4,7 @@
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T16:06:53+08:00",
     "custom-juki-gripper-nozzle-line-choke-case-study.md": "2026-09-11T09:37:52+08:00",
     "light-first-blog.md": "2026-09-07T16:21:04+08:00",
-    "september-7-13-electronics-manufacturing-weekly-brief.md": "2026-09-14T06:38:10.732Z"
+    "september-7-13-electronics-manufacturing-weekly-brief.md": "2026-09-14T14:48:43+08:00"
   },
   "published": {
     "7-common-problems-in-pcba-production-and-equipment-solutions.md": "2026-09-12T02:30:34.389Z",
@@ -1237,6 +1237,319 @@
       ],
       "source": "commit",
       "commit": "b21b5dab845d"
+    },
+    "september-7-13-electronics-manufacturing-weekly-brief.md": {
+      "items": [
+        "This week, the clearest signals came from advanced packaging expansion, semiconductor-equipment capacity, AI-driven PCB/substrate demand, and continued EMS factory expansion.",
+        "Amkor Expands Arizona Advanced Packaging Project to $12 Billion",
+        "Publication date: September 8, 2026",
+        "Source: Amkor Technology",
+        "Amkor announced Phase 2 of its advanced packaging and test campus in Arizona after customer commitments exceeded the capacity originally planned for Phase 1.",
+        "The new phase will add approximately 60,000 square meters of cleanroom space, bringing the campus total to around 93,000 square meters. Planned investment has now increased to approximately US\\$12 billion. The campus will support wafer bumping, probe, assembly and semiconductor testing.",
+        "This is an important manufacturing signal. AI chips increasingly depend on sophisticated packaging and testing processes, meaning semiconductor capacity expansion is no longer just about adding wafer fabs.",
+        "Impact",
+        "The expansion strengthens U.S. advanced packaging capacity and supports demand for semiconductor equipment, substrates, precision automation, inspection and high-performance electronics manufacturing.",
+        "ASML Starts Major New Manufacturing Expansion in the Netherlands",
+        "Publication date: September 8, 2026",
+        "Source: Reuters",
+        "ASML broke ground on a major new manufacturing site near its headquarters in Veldhoven as it prepares for continued growth in semiconductor-equipment demand.",
+        "The 35-hectare BIC North development will include logistics, office and cleanroom facilities. Its new \"Flow Factory\" concept will support assembly of advanced lithography equipment, with the first phase expected to be completed in 2029. The wider development could eventually accommodate up to 20,000 workers.",
+        "The timing is significant: ASML's EUV capacity is largely booked through 2027, while AI and high-performance computing continue pushing chipmakers toward more advanced processes. ASML is also working with major chipmakers to adapt High-NA EUV technology for larger data-center processors.",
+        "Impact",
+        "Semiconductor-equipment expansion indicates that major chipmakers are still planning substantial long-term capacity, benefiting precision manufacturing, automation, electronics, sensors and equipment-component suppliers.",
+        "AI Pushes High-End IC Substrate Demand Higher",
+        "Publication date: September 10, 2026",
+        "Source: TPCA / I-Connect007",
+        "The Taiwan Printed Circuit Association highlighted continued acceleration in high-end IC substrates driven by AI servers, GPUs, ASICs, high-speed switches and high-end memory.",
+        "According to the industry data, global IC-substrate output is projected to reach approximately US\\$19.51 billion in 2026, up 32.3% year-on-year. The expansion is being accompanied by tighter supplies of critical materials and more demanding advanced-packaging specifications.",
+        "This connects directly with what we saw in the previous week's PCB news. AI investment is moving steadily downstream—from GPUs and HBM into substrates, high-layer PCBs, networking boards, power systems and complete server assemblies.",
+        "Impact",
+        "Higher substrate demand supports advanced PCB manufacturing, inspection, precision process equipment and the wider PCBA supply chain serving AI infrastructure.",
+        "Scanfil Expands Electronics Manufacturing Capacity in Poland",
+        "Publication date: September 11, 2026",
+        "Source: IN Electronics & Design",
+        "EMS manufacturer Scanfil is expanding its Mysłowice plant in Poland by approximately 6,000 square meters, increasing the facility to roughly 36,000 square meters.",
+        "The approximately 20% expansion follows new customer wins and additional system-integration projects. It will increase capacity for system integration, warehousing and logistics, with the new space expected to become operational during the first quarter of 2028.",
+        "This is a different side of the electronics expansion story. Semiconductor investment receives most of the attention, but EMS providers are also adding capacity for increasingly complex system-level manufacturing.",
+        "Impact",
+        "European EMS expansion supports demand for SMT/THT assembly, PCB handling, inspection, testing, box-build automation and production-line integration.",
+        "Southern Machinery Customization Starts With the Production Problem",
+        "One point from this week's news is especially relevant to electronics factories: more production capacity also means more process complexity.",
+        "A new PCB or PCBA project may require a component that a standard feeder cannot handle, an unusual connector that still has to be inserted manually, a special PCB transfer method, or a THT process that prevents the rest of an automated line from reaching its target output.",
+        "This is where Southern Machinery's customized approach becomes useful.",
+        "Rather than starting with a standard machine model, we can evaluate the customer's PCB, components, production volume and existing process, then determine what is actually required. The solution could be a customized feeder, nozzle, fixture or gripper; an odd-form or terminal insertion system; or additional PCB handling and automation equipment.",
+        "For larger projects, Southern Machinery can also support complete SMT/THT production-line planning, connecting loading, PCB handling, insertion, inspection, soldering, cleaning and unloading according to the customer's actual process.",
+        "The principle is straightforward:",
+        "A production problem does not always need another standard machine. Sometimes it needs a solution designed around the process.",
+        "Materials & Cost Watch",
+        "For the weekly comparison, the latest fully verifiable LME settlement data available in the covered period is compared with the previous Friday close.",
+        "Copper: +0.13%",
+        "Copper moved from approximately US\\14,390/ton on September 10. More importantly, copper reached new record territory during the week before retreating. Tight mine supply and uncertainty around U.S. tariffs contributed to the volatility.",
+        "Tin: +0.41%",
+        "LME cash tin increased from approximately US\\54,750/ton on September 10.",
+        "Nickel: -0.36%",
+        "LME cash nickel moved from approximately US\\16,630/ton over the same comparison period.",
+        "Silver: -2.3% for the week",
+        "Silver finished the week around US\\$64.55/oz, according to the latest market close.",
+        "Direct impact",
+        "Copper remains the most important material-cost signal for PCB manufacturers. Even after the late-week pullback, record-level copper prices can increase pressure on copper foil, PCB fabrication, cables, transformers, motors and data-center power infrastructure. Tin remains directly relevant to SMT/THT soldering costs, while lower nickel and silver provided some relief in plating, contacts and selected conductive materials.",
+        "Key Takeaway",
+        "Three signals stood out this week.",
+        "First, advanced packaging is becoming a manufacturing sector of its own. Amkor increasing its Arizona project to US\\$12 billion shows how much capital is now moving into semiconductor back-end production.",
+        "Second, AI demand continues moving downstream into PCB and substrates. High-end IC-substrate growth reinforces the opportunity for PCB, PCBA, inspection and manufacturing-equipment suppliers.",
+        "Third, electronics factories themselves are expanding. From ASML's equipment manufacturing capacity to Scanfil's EMS expansion, more production creates demand not only for machines but also for better integration between processes.",
+        "For Southern Machinery, this is where we see the opportunity: customized SMT/THT automation, complete production-line support, and practical solutions for components or processes that standard equipment cannot easily handle.",
+        "Show us the PCB, component or production bottleneck — and start from the problem, not from the machine.",
+        "What is the most difficult process to automate on your production line today?"
+      ],
+      "targets": [
+        {
+          "text": "This week, the clearest signals came from advanced packaging expansion, semiconductor-equipment capacity, AI-driven PCB/substrate demand, and continued EMS factory expansion.",
+          "line": 36
+        },
+        {
+          "text": "## Amkor Expands Arizona Advanced Packaging Project to $12 Billion",
+          "line": 38
+        },
+        {
+          "text": "Publication date: September 8, 2026",
+          "line": 40
+        },
+        {
+          "text": "Source: Amkor Technology",
+          "line": 42
+        },
+        {
+          "text": "Amkor announced Phase 2 of its advanced packaging and test campus in Arizona after customer commitments exceeded the capacity originally planned for Phase 1.",
+          "line": 44
+        },
+        {
+          "text": "The new phase will add approximately 60,000 square meters of cleanroom space, bringing the campus total to around 93,000 square meters. Planned investment has now increased to approximately US\\$12 billion. The campus will support wafer bumping, probe, assembly and semiconductor testing.",
+          "line": 46
+        },
+        {
+          "text": "This is an important manufacturing signal. AI chips increasingly depend on sophisticated packaging and testing processes, meaning semiconductor capacity expansion is no longer just about adding wafer fabs.",
+          "line": 48
+        },
+        {
+          "text": "### Impact",
+          "line": 50
+        },
+        {
+          "text": "**The expansion strengthens U.S. advanced packaging capacity and supports demand for semiconductor equipment, substrates, precision automation, inspection and high-performance electronics manufacturing.**",
+          "line": 52
+        },
+        {
+          "text": "## ASML Starts Major New Manufacturing Expansion in the Netherlands",
+          "line": 54
+        },
+        {
+          "text": "Publication date: September 8, 2026",
+          "line": 56
+        },
+        {
+          "text": "Source: Reuters",
+          "line": 58
+        },
+        {
+          "text": "ASML broke ground on a major new manufacturing site near its headquarters in Veldhoven as it prepares for continued growth in semiconductor-equipment demand.",
+          "line": 60
+        },
+        {
+          "text": "The 35-hectare BIC North development will include logistics, office and cleanroom facilities. Its new \"Flow Factory\" concept will support assembly of advanced lithography equipment, with the first phase expected to be completed in 2029. The wider development could eventually accommodate up to 20,000 workers.",
+          "line": 62
+        },
+        {
+          "text": "The timing is significant: ASML's EUV capacity is largely booked through 2027, while AI and high-performance computing continue pushing chipmakers toward more advanced processes. ASML is also working with major chipmakers to adapt High-NA EUV technology for larger data-center processors.",
+          "line": 64
+        },
+        {
+          "text": "### Impact",
+          "line": 66
+        },
+        {
+          "text": "**Semiconductor-equipment expansion indicates that major chipmakers are still planning substantial long-term capacity, benefiting precision manufacturing, automation, electronics, sensors and equipment-component suppliers.**",
+          "line": 68
+        },
+        {
+          "text": "## AI Pushes High-End IC Substrate Demand Higher",
+          "line": 70
+        },
+        {
+          "text": "Publication date: September 10, 2026",
+          "line": 72
+        },
+        {
+          "text": "Source: TPCA / I-Connect007",
+          "line": 74
+        },
+        {
+          "text": "The Taiwan Printed Circuit Association highlighted continued acceleration in high-end IC substrates driven by AI servers, GPUs, ASICs, high-speed switches and high-end memory.",
+          "line": 76
+        },
+        {
+          "text": "According to the industry data, global IC-substrate output is projected to reach approximately US\\$19.51 billion in 2026, up 32.3% year-on-year. The expansion is being accompanied by tighter supplies of critical materials and more demanding advanced-packaging specifications.",
+          "line": 78
+        },
+        {
+          "text": "This connects directly with what we saw in the previous week's PCB news. AI investment is moving steadily downstream—from GPUs and HBM into substrates, high-layer PCBs, networking boards, power systems and complete server assemblies.",
+          "line": 80
+        },
+        {
+          "text": "### Impact",
+          "line": 82
+        },
+        {
+          "text": "**Higher substrate demand supports advanced PCB manufacturing, inspection, precision process equipment and the wider PCBA supply chain serving AI infrastructure.**",
+          "line": 84
+        },
+        {
+          "text": "## Scanfil Expands Electronics Manufacturing Capacity in Poland",
+          "line": 86
+        },
+        {
+          "text": "Publication date: September 11, 2026",
+          "line": 88
+        },
+        {
+          "text": "Source: IN Electronics & Design",
+          "line": 90
+        },
+        {
+          "text": "EMS manufacturer Scanfil is expanding its Mysłowice plant in Poland by approximately 6,000 square meters, increasing the facility to roughly 36,000 square meters.",
+          "line": 92
+        },
+        {
+          "text": "The approximately 20% expansion follows new customer wins and additional system-integration projects. It will increase capacity for system integration, warehousing and logistics, with the new space expected to become operational during the first quarter of 2028.",
+          "line": 94
+        },
+        {
+          "text": "This is a different side of the electronics expansion story. Semiconductor investment receives most of the attention, but EMS providers are also adding capacity for increasingly complex system-level manufacturing.",
+          "line": 96
+        },
+        {
+          "text": "### Impact",
+          "line": 98
+        },
+        {
+          "text": "**European EMS expansion supports demand for SMT/THT assembly, PCB handling, inspection, testing, box-build automation and production-line integration.**",
+          "line": 100
+        },
+        {
+          "text": "## Southern Machinery | Customization Starts With the Production Problem",
+          "line": 102
+        },
+        {
+          "text": "One point from this week's news is especially relevant to electronics factories: more production capacity also means more process complexity.",
+          "line": 104
+        },
+        {
+          "text": "A new PCB or PCBA project may require a component that a standard feeder cannot handle, an unusual connector that still has to be inserted manually, a special PCB transfer method, or a THT process that prevents the rest of an automated line from reaching its target output.",
+          "line": 106
+        },
+        {
+          "text": "This is where Southern Machinery's customized approach becomes useful.",
+          "line": 108
+        },
+        {
+          "text": "Rather than starting with a standard machine model, we can evaluate the customer's PCB, components, production volume and existing process, then determine what is actually required. The solution could be a customized feeder, nozzle, fixture or gripper; an odd-form or terminal insertion system; or additional PCB handling and automation equipment.",
+          "line": 110
+        },
+        {
+          "text": "For larger projects, Southern Machinery can also support complete SMT/THT production-line planning, connecting loading, PCB handling, insertion, inspection, soldering, cleaning and unloading according to the customer's actual process.",
+          "line": 112
+        },
+        {
+          "text": "The principle is straightforward:",
+          "line": 114
+        },
+        {
+          "text": "**A production problem does not always need another standard machine. Sometimes it needs a solution designed around the process.**",
+          "line": 116
+        },
+        {
+          "text": "## Materials & Cost Watch",
+          "line": 118
+        },
+        {
+          "text": "For the weekly comparison, the latest fully verifiable LME settlement data available in the covered period is compared with the previous Friday close.",
+          "line": 120
+        },
+        {
+          "text": "### Copper: +0.13%",
+          "line": 122
+        },
+        {
+          "text": "Copper moved from approximately US\\$14,371/ton on September 4 to US\\$14,390/ton on September 10. More importantly, copper reached new record territory during the week before retreating. Tight mine supply and uncertainty around U.S. tariffs contributed to the volatility.",
+          "line": 124
+        },
+        {
+          "text": "### Tin: +0.41%",
+          "line": 126
+        },
+        {
+          "text": "LME cash tin increased from approximately US\\$54,525/ton on September 4 to US\\$54,750/ton on September 10.",
+          "line": 128
+        },
+        {
+          "text": "### Nickel: -0.36%",
+          "line": 130
+        },
+        {
+          "text": "LME cash nickel moved from approximately US\\$16,690/ton to US\\$16,630/ton over the same comparison period.",
+          "line": 132
+        },
+        {
+          "text": "### Silver: -2.3% for the week",
+          "line": 134
+        },
+        {
+          "text": "Silver finished the week around US\\$64.55/oz, according to the latest market close.",
+          "line": 136
+        },
+        {
+          "text": "### Direct impact",
+          "line": 138
+        },
+        {
+          "text": "**Copper remains the most important material-cost signal for PCB manufacturers. Even after the late-week pullback, record-level copper prices can increase pressure on copper foil, PCB fabrication, cables, transformers, motors and data-center power infrastructure. Tin remains directly relevant to SMT/THT soldering costs, while lower nickel and silver provided some relief in plating, contacts and selected conductive materials.**",
+          "line": 140
+        },
+        {
+          "text": "## Key Takeaway",
+          "line": 142
+        },
+        {
+          "text": "Three signals stood out this week.",
+          "line": 144
+        },
+        {
+          "text": "First, advanced packaging is becoming a manufacturing sector of its own. Amkor increasing its Arizona project to US\\$12 billion shows how much capital is now moving into semiconductor back-end production.",
+          "line": 146
+        },
+        {
+          "text": "Second, AI demand continues moving downstream into PCB and substrates. High-end IC-substrate growth reinforces the opportunity for PCB, PCBA, inspection and manufacturing-equipment suppliers.",
+          "line": 148
+        },
+        {
+          "text": "Third, electronics factories themselves are expanding. From ASML's equipment manufacturing capacity to Scanfil's EMS expansion, more production creates demand not only for machines but also for better integration between processes.",
+          "line": 150
+        },
+        {
+          "text": "For Southern Machinery, this is where we see the opportunity: customized SMT/THT automation, complete production-line support, and practical solutions for components or processes that standard equipment cannot easily handle.",
+          "line": 152
+        },
+        {
+          "text": "**Show us the PCB, component or production bottleneck — and start from the problem, not from the machine.**",
+          "line": 154
+        },
+        {
+          "text": "**What is the most difficult process to automate on your production line today?**",
+          "line": 156
+        }
+      ],
+      "source": "commit",
+      "commit": "4c49fb8c6786"
     }
   }
 }
