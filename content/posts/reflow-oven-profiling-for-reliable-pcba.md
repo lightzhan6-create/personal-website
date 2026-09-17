@@ -21,9 +21,9 @@ keywords:
   - SAC305 reflow profile
   - SMT thermocouple placement
   - PCBA process control
-cover: /uploads/2026/09/reflow-oven-profiling/reflow-oven-profiling-cover.svg
+cover: /uploads/2026/09/reflow-oven-profiling/reflow-oven-production-line-cover.webp
 cover_width: 1600
-cover_height: 900
+cover_height: 1200
 gallery:
   - /uploads/2026/09/reflow-oven-profiling/thermocouple-placement.svg
   - /uploads/2026/09/reflow-oven-profiling/reflow-window.svg
@@ -44,9 +44,9 @@ That distinction matters when one board combines a large BGA, fine-pitch devices
 
 This guide turns reflow profiling into a practical engineering workflow for EMS and PCBA teams. It focuses on how to measure the real assembly, set a defensible thermal window and keep the oven under control without treating a generic chart as a universal recipe.
 
-![Original technical illustration of PCB reflow profiling](/uploads/2026/09/reflow-oven-profiling/reflow-oven-profiling-cover.svg)
+![Electronics manufacturing production line used for reflow process-control illustration](/uploads/2026/09/reflow-oven-profiling/reflow-oven-production-line-cover.webp)
 
-*Original technical illustration by Light, created for this article.*
+*Production-line image supplied by Light for this article.*
 
 # Start With the Product, Not the Oven Display
 
