@@ -7,7 +7,8 @@ const PRODUCT_ROUTES = [
     '/products/sc-900-multi-blades-v-cut-pcb-separator/',
     '/products/s-d602-led-depaneler/',
     '/products/turnover-box-interactive-3d/',
-    '/products/reflow-oven-s-sr-sa/'
+    '/products/reflow-oven-s-sr-sa/',
+    '/products/s4020a-axial-insertion-machine/'
 ];
 
 // RSS / AI 检索文件的文章数上限。理由：
