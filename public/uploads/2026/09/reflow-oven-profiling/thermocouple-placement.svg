@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">A practical thermocouple placement plan</title>
+  <desc id="desc">An original diagram of a populated PCB showing thermocouple locations at a high-mass package, a low-mass area, a temperature-sensitive part and an air reference.</desc>
+  <rect width="1200" height="675" fill="#f6fafc"/>
+  <text x="60" y="78" fill="#123d55" font-family="Arial, sans-serif" font-size="39" font-weight="700">Profile the thermal extremes on the real assembly</text>
+  <text x="60" y="119" fill="#527082" font-family="Arial, sans-serif" font-size="22">A placement plan is a hypothesis to test — use the product build, fixture and transport condition.</text>
+  <g transform="translate(150 194)">
+    <rect width="710" height="322" rx="17" fill="#0f766e"/><path d="M45 45H665M45 277H665M42 50V272M668 50V272" fill="none" stroke="#6ee7b7" stroke-width="3" opacity=".7"/>
+    <g fill="#d9f8eb"><rect x="62" y="78" width="84" height="50" rx="4"/><rect x="166" y="80" width="58" height="46" rx="4"/><rect x="508" y="60" width="120" height="94" rx="7"/><rect x="318" y="187" width="194" height="79" rx="8"/><rect x="570" y="218" width="63" height="42" rx="4"/><rect x="75" y="198" width="153" height="62" rx="5"/></g>
+    <circle cx="414" cy="226" r="33" fill="#22a28b"/><circle cx="568" cy="107" r="38" fill="#22a28b"/>
+    <g stroke="#ffd46d" stroke-width="5" fill="#fff5c6"><circle cx="112" cy="103" r="10"/><circle cx="414" cy="226" r="10"/><circle cx="568" cy="107" r="10"/></g>
+    <path d="M112 93L112 -32H-48M414 216V-66H258M568 97L568 -31H745" fill="none" stroke="#e5ac24" stroke-width="4" stroke-dasharray="8 8"/>
+    <circle cx="665" cy="286" r="10" fill="#85dcff"/><path d="M665 276L665 376H762" fill="none" stroke="#3b93bc" stroke-width="4" stroke-dasharray="8 8"/>
+  </g>
+  <g font-family="Arial, sans-serif"><text x="60" y="174" fill="#a96f00" font-size="24" font-weight="700">TC 1</text><text x="60" y="205" fill="#28495b" font-size="22">Low-mass / fast-heating area</text><text x="408" y="145" fill="#a96f00" font-size="24" font-weight="700">TC 2</text><text x="408" y="176" fill="#28495b" font-size="22">High-mass package or hidden joint</text><text x="927" y="174" fill="#a96f00" font-size="24" font-weight="700">TC 3</text><text x="927" y="205" fill="#28495b" font-size="22">Temperature-sensitive component</text><text x="912" y="603" fill="#2878a0" font-size="24" font-weight="700">Air reference</text><text x="912" y="634" fill="#28495b" font-size="22">Optional oven-behaviour check</text></g>
+  <text x="60" y="626" fill="#527082" font-family="Arial, sans-serif" font-size="20">Add more TCs where board size, mass spread, shielding or component limits make the thermal response less predictable.</text>
+</svg>
