@@ -9,7 +9,8 @@ const PRODUCT_ROUTES = [
     '/products/turnover-box-interactive-3d/',
     '/products/reflow-oven-s-sr-sa/',
     '/products/s4020a-axial-insertion-machine/',
-    '/products/s7020t-terminal-insertion-machine/'
+    '/products/s7020t-terminal-insertion-machine/',
+    '/products/automatic-tube-feeder/'
 ];
 
 // RSS / AI 检索文件的文章数上限。理由：
