@@ -8,7 +8,8 @@ const PRODUCT_ROUTES = [
     '/products/s-d602-led-depaneler/',
     '/products/turnover-box-interactive-3d/',
     '/products/reflow-oven-s-sr-sa/',
-    '/products/s4020a-axial-insertion-machine/'
+    '/products/s4020a-axial-insertion-machine/',
+    '/products/s7020t-terminal-insertion-machine/'
 ];
 
 // RSS / AI 检索文件的文章数上限。理由：
