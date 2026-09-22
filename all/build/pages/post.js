@@ -470,6 +470,9 @@ function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skip
             author: frontmatter.author,
             authorUrl: frontmatter.authorUrl,
             noindex: frontmatter.noindex,
+            seoTitle: frontmatter.seoTitle ? autoSpacing(frontmatter.seoTitle) : '',
+            seoDescription: frontmatter.seoDescription ? autoSpacing(frontmatter.seoDescription) : '',
+            seoKeywords: frontmatter.seoKeywords,
             faq: faqItems,
             content,
             rawTitle: frontmatter.title
@@ -494,6 +497,7 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
     const finalContentHtml = annotatedLatestUpdate.html;
     const toc = renderedPostContent.toc;
     const safeTitle = shared.escapeHtml(post.title);
+    const safeSeoTitle = shared.escapeHtml(post.seoTitle || post.title);
 
     const tags = normalizePostTags(post);
     const tagsHtml = tags.map(t => shared.renderTagSpan(t)).join('\n');
@@ -559,18 +563,19 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
         ? '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
         : '';
 
-    const pageTitle = `${post.title} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
+    const pageTitle = post.seoTitle || `${post.title} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
     const sharePublishDate = post.date.tz('Asia/Shanghai').format('YYYY.MM.DD');
     const seoHead = seo.renderHeadTags({
         title: pageTitle,
-        description: seo.articleSummary(post),
+        description: post.seoDescription || seo.articleSummary(post),
+        fullDescription: Boolean(post.seoDescription),
         canonicalPath: post.link,
         siteConfig,
         seoConfig,
         type: 'article',
         image: rawCover || seo.defaultImage(siteConfig, seoConfig),
         noindex: post.noindex,
-        tags,
+        tags: post.seoKeywords && post.seoKeywords.length ? post.seoKeywords : tags,
         publishedTime: post.date.toISOString(),
         publishedDisplayDate: sharePublishDate,
         modifiedTime: post.modifiedDate.toISOString(),
@@ -580,6 +585,7 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
 
     const html = replacePlaceholders(template, [
         [/<!-- TITLE_PLACEHOLDER -->/g, safeTitle],
+        ['<!-- SEO_TITLE_PLACEHOLDER -->', safeSeoTitle],
         [/<!-- TITLE_H1_PLACEHOLDER -->/g, shared.processTitleHtml(safeTitle)],
         ['<!-- TAGS_PLACEHOLDER -->', tagsHtml],
         ['<!-- DATE_PLACEHOLDER -->', post.date.tz('Asia/Shanghai').format('YYYY-MM-DD')],
