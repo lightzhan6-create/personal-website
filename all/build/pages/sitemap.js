@@ -12,7 +12,8 @@ const PRODUCT_ROUTES = [
     '/products/s7020t-terminal-insertion-machine/',
     '/products/automatic-tube-feeder/',
     '/products/sme5600d-pcba-cleaning-machine/',
-    '/products/sme5200-fixture-pallet-cleaning-machine/'
+    '/products/sme5200-fixture-pallet-cleaning-machine/',
+    '/products/servo-motor-timing-belts/'
 ];
 
 // RSS / AI 检索文件的文章数上限。理由：
