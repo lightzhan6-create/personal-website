@@ -2,7 +2,7 @@
   "modified": {
     "7-common-problems-in-pcba-production-and-equipment-solutions.md": "2026-09-12T10:37:04+08:00",
     "august-31-september-6-electronics-manufacturing-weekly-brief.md": "2026-09-07T16:06:53+08:00",
-    "common-reflow-oven-spare-parts-guide.md": "2026-09-23T15:21:56.605+08:00",
+    "common-reflow-oven-spare-parts-guide.md": "2026-09-23T15:34:09+08:00",
     "custom-juki-gripper-nozzle-line-choke-case-study.md": "2026-09-11T09:37:52+08:00",
     "light-first-blog.md": "2026-09-07T16:21:04+08:00",
     "reflow-oven-profiling-for-reliable-pcba.md": "2026-09-17T11:30:39+08:00",
@@ -816,6 +816,349 @@
       ],
       "source": "commit",
       "commit": "c573777a4f12"
+    },
+    "common-reflow-oven-spare-parts-guide.md": {
+      "items": [
+        "Reflow ovens work in a demanding combination of heat, flux residue and continuous mechanical movement. A small issue in a conveyor, heater or airflow path can interrupt a production run even when the oven controller itself is healthy. That is why practical reflow oven maintenance includes both inspection and an organised approach to replacement parts.",
+        "Many reflow oven spare parts look simple when they are removed from a machine. Similar-looking chains can have different pitch or pin geometry; a guide wheel may use a different thread, bearing arrangement or working diameter; and an electrical component needs its own voltage, power and connection checks. Matching by appearance alone is a weak basis for ordering.",
+        "Overview: Parts That Need Attention During Reflow Oven Maintenance",
+        "The table below is a maintenance map, not a fixed replacement schedule. Inspection frequency depends on operating hours, process temperature, flux loading, cleaning practice and the condition found on the machine.",
+        "1. Stainless Steel Mesh Conveyor Belt",
+        "A reflow oven mesh belt carries PCB or PCBA assemblies through the heating and cooling sections. The supplied example is a 304 stainless steel mesh belt. Stainless steel mesh is commonly selected for high-temperature conveyor service, but the correct belt is still defined by the specific oven and conveyor arrangement.",
+        "What it does",
+        "The belt provides a continuous transport surface. Its tracking, tension and condition influence whether boards move through the machine consistently. A belt that has accumulated flux residue, stretched, distorted or worn can require closer investigation before it affects day-to-day handling.",
+        "What to inspect and provide when ordering",
+        "Check for contamination, uneven tracking, visible deformation, damaged links and changes in tension. For a replacement, provide the original belt photo, overall width and length, mesh construction details, edge treatment, drive arrangement and machine model. Wire diameter, pitch and belt width should be confirmed from the original machine or sample; they should not be guessed from a general product image.",
+        "2. Conveyor Speed Controller",
+        "Conveyor speed is one of the machine settings that influences the time a board spends travelling through the oven. It therefore contributes to the actual reflow profile together with zone temperatures, airflow, loading and the board itself.",
+        "The photo shows a Panasonic-type speed controller. Panasonic speed controllers are commonly found in some conveyor systems, but this is not a statement of Southern Machinery authorisation, original-part status or universal compatibility. The exact controller, wiring and machine requirements must be checked before replacement.",
+        "Common signs to inspect",
+        "An abnormal or unstable conveyor speed, failure to start, intermittent response, or a speed setting that no longer gives repeatable movement deserves investigation. The controller is only one possible cause; motor condition, mechanical resistance, wiring and the rest of the control circuit also matter.",
+        "Ordering information",
+        "Send clear photographs of the label, connector or terminal layout, the old unit, machine model and any available electrical documentation. Do not select an electrical replacement from its front-panel appearance alone.",
+        "3. Conveyor and Rail Support Rods",
+        "Long rod assemblies like these can act as conveyor support rods, rail support components or width-adjustment components, depending on the original conveyor design. A photo alone does not reliably establish their exact installation position, so the replacement conversation should stay tied to the machine structure.",
+        "Inspect for bending, damaged threads, loose end fittings, worn mounting points and loss of smooth adjustment. When ordering, give the overall length, usable stroke where applicable, mounting-hole size and position, end fitting, thread, machine photos and a photo of the part installed. An old sample is particularly useful where several visually similar rod assemblies are used on one machine.",
+        "4. Reflow Oven Conveyor Chain / Pin Chain",
+        "Chain-type conveyors use a reflow oven conveyor chain or pin chain to move and support PCB edges. Chain condition is important because the chain must travel through the conveyor path consistently without creating avoidable mechanical resistance or alignment issues.",
+        "The supplied chain image shows a useful example: 16 mm overall reference width, 9.5 mm pitch, 3.5 mm pin diameter and 5 mm roller diameter. These dimensions are shown as an example from the supplied sample and should not be treated as a universal reflow oven chain specification.",
+        "What to check",
+        "Look for pin wear, chain elongation, stiff joints, roller condition, debris, corrosion or uneven travel. Follow the original machine maker’s instructions for any cleaning or lubrication practice, because materials and permitted lubricants vary by conveyor design.",
+        "What is needed for a chain replacement",
+        "Provide the reflow oven brand and model, chain photos from more than one angle, pitch, pin diameter, roller size, pin length, total chain width, material information if known, connecting-link details and the old sample. A chain that appears close in a photograph may still have an incompatible mounting structure or board-support geometry.",
+        "5. Chain Sprockets, Guide Wheels and Idlers",
+        "The terms chain sprocket, guide wheel, idler wheel, conveyor roller and bearing wheel describe related but not identical conveyor parts. A sprocket drives or engages a chain through its teeth. A guide or idler wheel generally guides, supports or helps maintain the chain path. A bearing wheel describes the bearing-supported arrangement inside a wheel or roller. The correct name should follow the actual function and drawing, not just the shape of a removed component.",
+        "The supplied reference shows 25 mm and 30 mm outside-diameter examples and an M6 thread. The accompanying drawing shows an example 30 mm outside diameter, 25 mm inner reference diameter, 6 mm wheel width and M6 thread. These are reference dimensions for the supplied sample—not a universal specification for every reflow oven guide wheel.",
+        "For a useful replacement check, include photos of the installed part and mating chain, outside diameter, width, bore or thread size, shaft dimensions, bearing markings where visible, tooth count for a sprocket, mounting position and old sample. Bearing noise, free play, uneven rotation, wheel-surface wear or a chain that no longer tracks cleanly are reasons to inspect the associated parts together.",
+        "6. Heating Elements",
+        "Heating elements produce the thermal energy in a reflow oven’s heating zones. If an element or its connection is damaged, the observed symptoms can include slow heating, unstable zone temperature or a temperature deviation that needs troubleshooting. Those symptoms do not prove that the heater alone is at fault, but they make the heating circuit and its related controls worth checking.",
+        "Electrical replacement parts require more than a physical comparison. Confirm voltage, power, overall dimensions, heated length, connection method, installation structure and clear photos of the original heater. Qualified personnel should isolate the equipment and follow the machine’s electrical documentation before testing or replacing heating components.",
+        "7. Reflow Oven Filters",
+        "Depending on the machine design, a reflow oven filter may serve an exhaust, flux-residue, cooling or circulation path. Stainless mesh filter panels can help capture flux residue, reduce contamination reaching downstream components and support a cleaner airflow path.",
+        "The correct cleaning or replacement interval depends on the flux system, loading, process conditions and actual residue level. Check filters for blockage, accumulated residue, damaged mesh, distorted frames and poor seating. If filters are neglected, airflow can be reduced, flux accumulation can increase and cooling or circulation performance may need more maintenance attention. These outcomes should be assessed on the actual machine rather than assumed from a calendar interval.",
+        "When requesting a replacement, send outside dimensions, frame depth, mesh details if known, handle position, mounting arrangement, quantity and a photo of the installed filter.",
+        "What Information Should You Provide When Ordering Reflow Oven Parts?",
+        "For older or discontinued reflow ovens, matching by dimensions and original samples is often more reliable than matching by appearance alone. A useful enquiry package includes:",
+        "Reflow oven brand and machine model. Serial number, if available. Clear photos of the original part and its installation position. Dimensions, including the critical width, length, pitch, diameter, hole, shaft or thread details. Voltage, power, label and connection information for electrical parts. Quantity required and an old sample where available.",
+        "The machine name gives context; the old part, dimensions and installation details establish the fit. This is especially important for SMT reflow oven parts such as chains, mesh belts, guide wheels and heaters that may look familiar but use machine-specific geometry.",
+        "Can Reflow Oven Spare Parts Be Customized?",
+        "Southern Machinery can support replacement and customised reflow soldering machine spare parts for different equipment according to drawings, dimensions, photos or original samples. The practical scope can include conveyor parts, chains, mesh belts, guide wheels, rollers, filters, heating components, mechanical replacement parts and selected electrical parts.",
+        "Compatibility should be reviewed part by part. A replacement supplied according to a sample or drawing is not automatically an original part, and the final fit should be confirmed against the specific machine before installation.",
+        "FAQ: Reflow Oven Spare Parts",
+        "What are the most common reflow oven spare parts?",
+        "Common examples include mesh conveyor belts, conveyor chains or pin chains, sprockets and guide wheels, speed controllers, heating elements, filters and mechanical support or adjustment components.",
+        "How do I identify the correct conveyor chain?",
+        "Provide the machine model, clear chain photos, pitch, pin diameter, roller size, pin length, overall width, connection details and an old sample if possible. Do not identify a chain by appearance alone.",
+        "Can reflow oven chains be customised?",
+        "Replacement chains can be evaluated from a drawing, measured dimensions, photographs and an original sample. The correct design depends on the specific conveyor and board-support structure.",
+        "How do I select a replacement guide wheel?",
+        "Confirm its actual role first: sprocket, guide wheel, idler or bearing-supported roller. Then provide outside diameter, width, bore or thread size, bearing details, mounting position and photos of the mating chain.",
+        "What information is required for a replacement heating element?",
+        "Provide voltage, power, overall and heated length, connection method, mounting structure, original label and photographs. Do not select a heater only by its visible shape.",
+        "How often should reflow oven filters be cleaned?",
+        "There is no single interval that fits every oven. Set inspection and cleaning practice according to the flux system, operating conditions, residue level and the machine maker’s maintenance guidance.",
+        "Can you make parts for older reflow oven models?",
+        "For older or discontinued machines, parts can often be evaluated using the machine information, installed-part photos, dimensions, drawings and an old sample. A final compatibility check is still required before supply.",
+        "Need Help Identifying a Reflow Oven Spare Part?",
+        "If you are replacing a conveyor chain, guide wheel, mesh belt, heater, filter or another reflow oven component, send the machine model, part photos and dimensions. We can help check the replacement options.",
+        "Southern Machinery / SMTHelp",
+        "Email Part InformationWhatsApp UsContact Us",
+        "Image and Information Scope",
+        "Product photographs, dimension examples and technical drawing: supplied for this article. The chain and guide-wheel dimensions shown above are examples from the supplied samples, not universal reflow-oven specifications. Electrical, mechanical and compatibility details should be confirmed against the original machine, drawing or sample before an order is placed.",
+        "{ \"@context\": \"https://schema.org\", \"@type\": \"FAQPage\", \"mainEntity\": [ {\"@type\":\"Question\",\"name\":\"What are the most common reflow oven spare parts?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Common examples include mesh conveyor belts, conveyor chains or pin chains, sprockets and guide wheels, speed controllers, heating elements, filters and mechanical support or adjustment components.\"}}, {\"@type\":\"Question\",\"name\":\"How do I identify the correct conveyor chain?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Provide the machine model, clear chain photos, pitch, pin diameter, roller size, pin length, overall width, connection details and an old sample if possible. Do not identify a chain by appearance alone.\"}}, {\"@type\":\"Question\",\"name\":\"Can reflow oven chains be customised?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Replacement chains can be evaluated from a drawing, measured dimensions, photographs and an original sample. The correct design depends on the specific conveyor and board-support structure.\"}}, {\"@type\":\"Question\",\"name\":\"How do I select a replacement guide wheel?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Confirm whether the part is a sprocket, guide wheel, idler or bearing-supported roller. Then provide outside diameter, width, bore or thread size, bearing details, mounting position and photos of the mating chain.\"}}, {\"@type\":\"Question\",\"name\":\"What information is required for a replacement heating element?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Provide voltage, power, overall and heated length, connection method, mounting structure, original label and photographs. Do not select a heater only by its visible shape.\"}}, {\"@type\":\"Question\",\"name\":\"How often should reflow oven filters be cleaned?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"There is no single interval that fits every oven. Set inspection and cleaning practice according to the flux system, operating conditions, residue level and the machine maker’s maintenance guidance.\"}}, {\"@type\":\"Question\",\"name\":\"Can you make parts for older reflow oven models?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"For older or discontinued machines, parts can often be evaluated using the machine information, installed-part photos, dimensions, drawings and an old sample. A final compatibility check is still required before supply.\"}} ] }"
+      ],
+      "targets": [
+        {
+          "text": "Reflow ovens work in a demanding combination of heat, flux residue and continuous mechanical movement. A small issue in a conveyor, heater or airflow path can interrupt a production run even when the oven controller itself is healthy. That is why practical **reflow oven maintenance** includes both inspection and an organised approach to replacement parts.",
+          "line": 43
+        },
+        {
+          "text": "Many **reflow oven spare parts** look simple when they are removed from a machine. Similar-looking chains can have different pitch or pin geometry; a guide wheel may use a different thread, bearing arrangement or working diameter; and an electrical component needs its own voltage, power and connection checks. Matching by appearance alone is a weak basis for ordering.",
+          "line": 45
+        },
+        {
+          "text": "# Overview: Parts That Need Attention During Reflow Oven Maintenance",
+          "line": 52
+        },
+        {
+          "text": "The table below is a maintenance map, not a fixed replacement schedule. Inspection frequency depends on operating hours, process temperature, flux loading, cleaning practice and the condition found on the machine.",
+          "line": 54
+        },
+        {
+          "text": "# 1. Stainless Steel Mesh Conveyor Belt",
+          "line": 66
+        },
+        {
+          "text": "A **reflow oven mesh belt** carries PCB or PCBA assemblies through the heating and cooling sections. The supplied example is a 304 stainless steel mesh belt. Stainless steel mesh is commonly selected for high-temperature conveyor service, but the correct belt is still defined by the specific oven and conveyor arrangement.",
+          "line": 68
+        },
+        {
+          "text": "## What it does",
+          "line": 70
+        },
+        {
+          "text": "The belt provides a continuous transport surface. Its tracking, tension and condition influence whether boards move through the machine consistently. A belt that has accumulated flux residue, stretched, distorted or worn can require closer investigation before it affects day-to-day handling.",
+          "line": 72
+        },
+        {
+          "text": "## What to inspect and provide when ordering",
+          "line": 74
+        },
+        {
+          "text": "Check for contamination, uneven tracking, visible deformation, damaged links and changes in tension. For a replacement, provide the original belt photo, overall width and length, mesh construction details, edge treatment, drive arrangement and machine model. Wire diameter, pitch and belt width should be confirmed from the original machine or sample; they should not be guessed from a general product image.",
+          "line": 76
+        },
+        {
+          "text": "# 2. Conveyor Speed Controller",
+          "line": 78
+        },
+        {
+          "text": "Conveyor speed is one of the machine settings that influences the time a board spends travelling through the oven. It therefore contributes to the actual reflow profile together with zone temperatures, airflow, loading and the board itself.",
+          "line": 85
+        },
+        {
+          "text": "The photo shows a Panasonic-type speed controller. Panasonic speed controllers are commonly found in some conveyor systems, but this is not a statement of Southern Machinery authorisation, original-part status or universal compatibility. The exact controller, wiring and machine requirements must be checked before replacement.",
+          "line": 87
+        },
+        {
+          "text": "## Common signs to inspect",
+          "line": 89
+        },
+        {
+          "text": "An abnormal or unstable conveyor speed, failure to start, intermittent response, or a speed setting that no longer gives repeatable movement deserves investigation. The controller is only one possible cause; motor condition, mechanical resistance, wiring and the rest of the control circuit also matter.",
+          "line": 91
+        },
+        {
+          "text": "## Ordering information",
+          "line": 93
+        },
+        {
+          "text": "Send clear photographs of the label, connector or terminal layout, the old unit, machine model and any available electrical documentation. Do not select an electrical replacement from its front-panel appearance alone.",
+          "line": 95
+        },
+        {
+          "text": "# 3. Conveyor and Rail Support Rods",
+          "line": 97
+        },
+        {
+          "text": "Long rod assemblies like these can act as **conveyor support rods**, rail support components or width-adjustment components, depending on the original conveyor design. A photo alone does not reliably establish their exact installation position, so the replacement conversation should stay tied to the machine structure.",
+          "line": 104
+        },
+        {
+          "text": "Inspect for bending, damaged threads, loose end fittings, worn mounting points and loss of smooth adjustment. When ordering, give the overall length, usable stroke where applicable, mounting-hole size and position, end fitting, thread, machine photos and a photo of the part installed. An old sample is particularly useful where several visually similar rod assemblies are used on one machine.",
+          "line": 106
+        },
+        {
+          "text": "# 4. Reflow Oven Conveyor Chain / Pin Chain",
+          "line": 108
+        },
+        {
+          "text": "Chain-type conveyors use a **reflow oven conveyor chain** or pin chain to move and support PCB edges. Chain condition is important because the chain must travel through the conveyor path consistently without creating avoidable mechanical resistance or alignment issues.",
+          "line": 115
+        },
+        {
+          "text": "The supplied chain image shows a useful example: 16 mm overall reference width, 9.5 mm pitch, 3.5 mm pin diameter and 5 mm roller diameter. **These dimensions are shown as an example from the supplied sample and should not be treated as a universal reflow oven chain specification.**",
+          "line": 117
+        },
+        {
+          "text": "## What to check",
+          "line": 119
+        },
+        {
+          "text": "Look for pin wear, chain elongation, stiff joints, roller condition, debris, corrosion or uneven travel. Follow the original machine maker’s instructions for any cleaning or lubrication practice, because materials and permitted lubricants vary by conveyor design.",
+          "line": 121
+        },
+        {
+          "text": "## What is needed for a chain replacement",
+          "line": 123
+        },
+        {
+          "text": "Provide the reflow oven brand and model, chain photos from more than one angle, pitch, pin diameter, roller size, pin length, total chain width, material information if known, connecting-link details and the old sample. A chain that appears close in a photograph may still have an incompatible mounting structure or board-support geometry.",
+          "line": 125
+        },
+        {
+          "text": "# 5. Chain Sprockets, Guide Wheels and Idlers",
+          "line": 127
+        },
+        {
+          "text": "The terms **chain sprocket**, **guide wheel**, **idler wheel**, **conveyor roller** and **bearing wheel** describe related but not identical conveyor parts. A sprocket drives or engages a chain through its teeth. A guide or idler wheel generally guides, supports or helps maintain the chain path. A bearing wheel describes the bearing-supported arrangement inside a wheel or roller. The correct name should follow the actual function and drawing, not just the shape of a removed component.",
+          "line": 134
+        },
+        {
+          "text": "The supplied reference shows 25 mm and 30 mm outside-diameter examples and an M6 thread. The accompanying drawing shows an example 30 mm outside diameter, 25 mm inner reference diameter, 6 mm wheel width and M6 thread. These are reference dimensions for the supplied sample—not a universal specification for every reflow oven guide wheel.",
+          "line": 141
+        },
+        {
+          "text": "For a useful replacement check, include photos of the installed part and mating chain, outside diameter, width, bore or thread size, shaft dimensions, bearing markings where visible, tooth count for a sprocket, mounting position and old sample. Bearing noise, free play, uneven rotation, wheel-surface wear or a chain that no longer tracks cleanly are reasons to inspect the associated parts together.",
+          "line": 148
+        },
+        {
+          "text": "# 6. Heating Elements",
+          "line": 150
+        },
+        {
+          "text": "Heating elements produce the thermal energy in a reflow oven’s heating zones. If an element or its connection is damaged, the observed symptoms can include slow heating, unstable zone temperature or a temperature deviation that needs troubleshooting. Those symptoms do not prove that the heater alone is at fault, but they make the heating circuit and its related controls worth checking.",
+          "line": 157
+        },
+        {
+          "text": "Electrical replacement parts require more than a physical comparison. Confirm voltage, power, overall dimensions, heated length, connection method, installation structure and clear photos of the original heater. Qualified personnel should isolate the equipment and follow the machine’s electrical documentation before testing or replacing heating components.",
+          "line": 159
+        },
+        {
+          "text": "# 7. Reflow Oven Filters",
+          "line": 161
+        },
+        {
+          "text": "Depending on the machine design, a **reflow oven filter** may serve an exhaust, flux-residue, cooling or circulation path. Stainless mesh filter panels can help capture flux residue, reduce contamination reaching downstream components and support a cleaner airflow path.",
+          "line": 168
+        },
+        {
+          "text": "The correct cleaning or replacement interval depends on the flux system, loading, process conditions and actual residue level. Check filters for blockage, accumulated residue, damaged mesh, distorted frames and poor seating. If filters are neglected, airflow can be reduced, flux accumulation can increase and cooling or circulation performance may need more maintenance attention. These outcomes should be assessed on the actual machine rather than assumed from a calendar interval.",
+          "line": 170
+        },
+        {
+          "text": "When requesting a replacement, send outside dimensions, frame depth, mesh details if known, handle position, mounting arrangement, quantity and a photo of the installed filter.",
+          "line": 172
+        },
+        {
+          "text": "# What Information Should You Provide When Ordering Reflow Oven Parts?",
+          "line": 174
+        },
+        {
+          "text": "For older or discontinued reflow ovens, matching by dimensions and original samples is often more reliable than matching by appearance alone. A useful enquiry package includes:",
+          "line": 176
+        },
+        {
+          "text": "- Reflow oven brand and machine model.",
+          "line": 178
+        },
+        {
+          "text": "The machine name gives context; the old part, dimensions and installation details establish the fit. This is especially important for **SMT reflow oven parts** such as chains, mesh belts, guide wheels and heaters that may look familiar but use machine-specific geometry.",
+          "line": 185
+        },
+        {
+          "text": "# Can Reflow Oven Spare Parts Be Customized?",
+          "line": 187
+        },
+        {
+          "text": "Southern Machinery can support replacement and customised **reflow soldering machine spare parts** for different equipment according to drawings, dimensions, photos or original samples. The practical scope can include conveyor parts, chains, mesh belts, guide wheels, rollers, filters, heating components, mechanical replacement parts and selected electrical parts.",
+          "line": 189
+        },
+        {
+          "text": "Compatibility should be reviewed part by part. A replacement supplied according to a sample or drawing is not automatically an original part, and the final fit should be confirmed against the specific machine before installation.",
+          "line": 191
+        },
+        {
+          "text": "# FAQ: Reflow Oven Spare Parts",
+          "line": 193
+        },
+        {
+          "text": "## What are the most common reflow oven spare parts?",
+          "line": 195
+        },
+        {
+          "text": "Common examples include mesh conveyor belts, conveyor chains or pin chains, sprockets and guide wheels, speed controllers, heating elements, filters and mechanical support or adjustment components.",
+          "line": 197
+        },
+        {
+          "text": "## How do I identify the correct conveyor chain?",
+          "line": 199
+        },
+        {
+          "text": "Provide the machine model, clear chain photos, pitch, pin diameter, roller size, pin length, overall width, connection details and an old sample if possible. Do not identify a chain by appearance alone.",
+          "line": 201
+        },
+        {
+          "text": "## Can reflow oven chains be customised?",
+          "line": 203
+        },
+        {
+          "text": "Replacement chains can be evaluated from a drawing, measured dimensions, photographs and an original sample. The correct design depends on the specific conveyor and board-support structure.",
+          "line": 205
+        },
+        {
+          "text": "## How do I select a replacement guide wheel?",
+          "line": 207
+        },
+        {
+          "text": "Confirm its actual role first: sprocket, guide wheel, idler or bearing-supported roller. Then provide outside diameter, width, bore or thread size, bearing details, mounting position and photos of the mating chain.",
+          "line": 209
+        },
+        {
+          "text": "## What information is required for a replacement heating element?",
+          "line": 211
+        },
+        {
+          "text": "Provide voltage, power, overall and heated length, connection method, mounting structure, original label and photographs. Do not select a heater only by its visible shape.",
+          "line": 213
+        },
+        {
+          "text": "## How often should reflow oven filters be cleaned?",
+          "line": 215
+        },
+        {
+          "text": "There is no single interval that fits every oven. Set inspection and cleaning practice according to the flux system, operating conditions, residue level and the machine maker’s maintenance guidance.",
+          "line": 217
+        },
+        {
+          "text": "## Can you make parts for older reflow oven models?",
+          "line": 219
+        },
+        {
+          "text": "For older or discontinued machines, parts can often be evaluated using the machine information, installed-part photos, dimensions, drawings and an old sample. A final compatibility check is still required before supply.",
+          "line": 221
+        },
+        {
+          "text": "# Need Help Identifying a Reflow Oven Spare Part?",
+          "line": 223
+        },
+        {
+          "text": "If you are replacing a conveyor chain, guide wheel, mesh belt, heater, filter or another reflow oven component, send the machine model, part photos and dimensions. We can help check the replacement options.",
+          "line": 225
+        },
+        {
+          "text": "Southern Machinery / SMTHelp",
+          "line": 227
+        },
+        {
+          "text": "<p style=\"display:flex;flex-wrap:wrap;gap:.75rem;margin:1.25rem 0 0\"><a href=\"mailto:light@smthelp.com?subject=Reflow%20Oven%20Spare%20Part%20Check\" style=\"display:inline-block;padding:.7rem 1rem;border-radius:.5rem;background:#0f766e;color:#fff;font-weight:700;text-decoration:none\">Email Part Information</a><a href=\"https://wa.me/8617688548420\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:inline-block;padding:.7rem 1rem;border:1px solid #0f766e;border-radius:.5rem;color:#0f766e;font-weight:700;text-decoration:none\">WhatsApp Us</a><a href=\"https://www.smthelp.com\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:inline-block;padding:.7rem 1rem;border:1px solid #0f766e;border-radius:.5rem;color:#0f766e;font-weight:700;text-decoration:none\">Contact Us</a></p>",
+          "line": 229
+        },
+        {
+          "text": "# Image and Information Scope",
+          "line": 231
+        },
+        {
+          "text": "- Product photographs, dimension examples and technical drawing: supplied for this article.",
+          "line": 233
+        },
+        {
+          "text": "<script type=\"application/ld+json\">",
+          "line": 237
+        }
+      ],
+      "source": "commit",
+      "commit": "9bea7d3a0618"
     },
     "custom-juki-gripper-nozzle-line-choke-case-study.md": {
       "items": [
