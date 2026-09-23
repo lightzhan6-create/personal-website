@@ -14,7 +14,8 @@ const PRODUCT_ROUTES = [
     '/products/sme5600d-pcba-cleaning-machine/',
     '/products/sme5200-fixture-pallet-cleaning-machine/',
     '/products/servo-motor-timing-belts/',
-    '/products/s1688-pneumatic-stencil-cleaning-machine/'
+    '/products/s1688-pneumatic-stencil-cleaning-machine/',
+    '/products/bc320-stencil-cleaning-machine/'
 ];
 
 // RSS / AI 检索文件的文章数上限。理由：
