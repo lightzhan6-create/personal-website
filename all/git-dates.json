@@ -10,7 +10,7 @@
     "soldering-iron-tips-for-automatic-soldering-machines.md": "2026-09-16T10:28:48+08:00",
     "timing-belts-servo-motor-guide.md": "2026-09-22T14:15:04+08:00",
     "wave-soldering-titanium-fingers-standard-custom-pcb-conveyor-fingers.md": "2026-09-16T14:02:24+08:00",
-    "yamaha-smt-feeder-spare-parts-guide.md": "2026-09-24T10:30:00.000+08:00"
+    "yamaha-smt-feeder-spare-parts-guide.md": "2026-09-24T12:15:54+08:00"
   },
   "published": {
     "7-common-problems-in-pcba-production-and-equipment-solutions.md": "2026-09-12T02:30:34.389Z",
@@ -3058,6 +3058,264 @@
       ],
       "source": "commit",
       "commit": "c20ad9570798"
+    },
+    "yamaha-smt-feeder-spare-parts-guide.md": {
+      "items": [
+        "An SMT feeder delivers components from carrier tape to the pick-and-place machine, one indexed position at a time. In a busy line, feeders are loaded, removed, adjusted and handled repeatedly. Over time, small mechanical parts can wear, crack, deform, loosen or go missing because of normal use, tape friction, spring fatigue, accidental impact or incorrect installation.",
+        "That does not automatically mean the complete feeder needs replacement. Where the main mechanism remains serviceable, identifying one Yamaha SMT feeder spare part can be a practical maintenance option. This guide groups common SS, ZS and ZSY feeder components by function and explains what to check before requesting a replacement. It is a reference for feeder identification rather than a claim that visually similar parts are interchangeable.",
+        "Why Do Small Feeder Parts Matter?",
+        "Small feeder components can influence the day-to-day mechanical condition of a feeder. Covers and pressing parts help guide and retain carrier tape; pins and fixing components help the feeder mount repeatedly in the intended position; catches, springs and clamps support controlled locking and release; and wire-pull or waste-tape parts manage the tape path after components are picked.",
+        "When these parts are damaged or incorrectly fitted, the result may be less stable tape movement, poor cover alignment, loose mounting, awkward loading or abnormal resistance. The observed symptom should be investigated in context: a feeder problem can also come from the tape, the feeder setup, the machine interface or the main mechanism. Still, a simple visual inspection of the smaller mechanical parts is often an appropriate first check.",
+        "Common Yamaha SMT Feeder Spare Parts",
+        "1. Feeder Covers and Protective Parts",
+        "Feeder covers protect internal mechanisms and help maintain the intended carrier-tape path. In the supplied references, these include rear plastic covers, protective covers, material feed covers, side-cover or housing parts, pressure covers and cover plates. Cracked plastic, deformed edges, broken mounting points, loose fit and worn tape-contact areas are practical conditions to inspect.",
+        "Several visible references can be used as an initial identification aid: KHJ-MC162-01 is labelled as an 8 mm rear plastic cover; KHJ-MC161-01 is labelled as a rear plastic cover; KHJ-MC1A1-00 as a protective cover; and KHJ-MC141-00 as an 8 mm material feed or pressure cover. The supplied labels for KHJ-MC167-00 describe it as a housing or side-cover plate, while KHJ-MC1A2-00 is visibly a separate cover plate. Confirm the installed feeder series and mounting arrangement before selecting any of them.",
+        "2. Positioning and Fixing Components",
+        "Positioning and fixing parts determine how the feeder is held and located at the machine interface. A supplied photo clearly identifies KHJ-MC105-00 as a locating or positioning pin. The reference image for KLJ-MC10W-00 is labelled as a front fixing block for SS/ZS 8–72 mm feeders. Another supplied image marks KHJ-MC104-00 as a locating component, while the illustrated feeder reference describes that same part number as a fixed guide rail. Because such labels can describe a part by position as well as function, confirm the original part, installed location and feeder revision before ordering.",
+        "Bent pins, damaged seating faces, worn locking contact areas and poor repeatability when mounting a feeder are reasons to examine these components. A damaged locating part may affect how securely and consistently the feeder is mounted; it should not be assumed from a photo alone to be the cause of every placement issue.",
+        "3. Safety Catches, Clips and Springs",
+        "Safety catches, clips and springs are small parts, but they take part in locking, release and return action. The feeder reference identifies a safety catch (KHJ-MC145-00), a safety-catch spring (KHJ-MC147-02), a pressure-cover clip (KHJ-MC144-00), a pressure-cover spring (KHJ-MC146-00) and other springs. The supplied clamp image also labels KHJ-MC144-00 for an 8 mm cover clamp and KHJ-MC244-00 for a 12–72 mm cover clamp reference.",
+        "Check for weak or broken springs, deformation, cracks, loose clips and an abnormal locking feel. Do not substitute a spring by visual size alone: wire diameter, free length, coil count, end form and the original function can all matter. The supplied safety-clip chart shows references for 8, 12/16, 24, 32, 44, 56 and 72 mm feeder widths; this is useful identification context, not proof that every feeder series uses the same clip geometry.",
+        "4. Feeder Handles and Handle Screws",
+        "Handles are used frequently when operators load, unload and service feeders. The supplied images show handle references for ZSY 8 mm, ZSY 12 mm and YS 8–72 mm applications, as well as handle screws. Where clearly visible, the labels include KLJ-MC181-00, KLJ-MC281-00, KHJ-MC181-00 and KHJ-MC185-00. The different KHJ/KLJ prefixes and width labels should be copied exactly from the original part or its label; the appearance of a handle alone does not confirm cross-series fit.",
+        "Inspect handles for cracks, looseness, damaged pivots, missing hardware and interference during loading. A handle can be a small part of the feeder, but its condition matters for safe, repeatable day-to-day handling.",
+        "5. Wire Pull Cord and Tape-Handling Parts",
+        "The supplied 8 mm steel wire rope is labelled KHJ-MC186-00 and is described in the feeder reference as a wire pull cord. Parts in this area can contribute to carrier-tape or cover-tape handling, depending on the feeder design. Check for fraying, kinks, corrosion, deformation, abnormal resistance and loose end fittings. Photos of the full tape path are useful, because a wire assembly that looks similar can have different length, termination or routing.",
+        "6. Waste-Tape Containers",
+        "As component tape advances through a feeder, the carrier-tape waste needs a controlled path. The supplied SSY End Waste Container image shows labels for 8, 12, 16, 24, 32, 44 and 56 mm sizes. Feeder width can affect the container shape and mounting, so an order should include the feeder width and photos of the container installed on the feeder.",
+        "Parts Reference Table",
+        "Part typeExample part numberFunction or identification contextTypical inspection point Rear plastic coverKHJ-MC162-01 / KHJ-MC161-01Protection and tape-path coverCracks, mounting points, deformation Protective or cover partKHJ-MC1A1-00 / KHJ-MC1A2-00Cover protection; exact fit varies by feederFit, wear and mounting features Positioning pinKHJ-MC105-00Locating componentBending, seating faces, wear Safety catch / springKHJ-MC145-00 / KHJ-MC147-02Locking and return actionLocking feel, fatigue, breakage Wire pull cordKHJ-MC186-00Tape-handling referenceFraying, routing, tension, fittings Feeder handleKHJ-MC181-00 / KLJ-MC181-00 / KLJ-MC281-00Feeder handling; series and width must matchCracks, pivot, looseness, hardware Handle screwKHJ-MC185-00Handle hardware referenceLoss, wear and secure engagement Waste-tape containerVaries by feeder modelCollects tape wasteCorrect width, fit and tape path",
+        "How Do You Identify the Correct Feeder Spare Part?",
+        "The most reliable request is based on the installed part, not only a general description such as “8 mm feeder cover.” Different feeder series, widths and revisions can use different geometry even when the outside shape seems familiar. For a practical spare-part check, provide:",
+        "Machine brand and model — for example, Yamaha SMT pick-and-place equipment. Feeder series — SS, ZS, ZSY or another clearly identified feeder family. Feeder width — such as 8 mm, 12 mm, 16 mm or the actual marked width. Original part number — photograph the label or engraving before removal where possible. Clear photos of the part — front, rear, mounting side and any damaged area. A photo of the complete feeder — this helps establish the installed location and surrounding interfaces. Quantity required — including whether the request is a one-off repair or planned maintenance stock.",
+        "A sample or a measurement can be especially useful for pins, clamps, springs and wire assemblies. It prevents a selection based only on an image title or a partially readable number.",
+        "When Should Feeder Parts Be Replaced?",
+        "Use condition-based maintenance rather than a fixed calendar interval. A closer inspection is appropriate when you see visible cracks, loose mounting, bent positioning features, weak or broken springs, damaged handles, worn tape-contact areas, abnormal tape movement, frayed wire cord or a locking mechanism that does not feel normal.",
+        "Replacement should be based on the actual part condition, feeder model and the maintenance requirements of the line. Before refitting a component, check the tape path, fasteners, mating surfaces and free movement of the mechanism. If the feeder remains unreliable after the visible part is corrected, investigate the wider feeder and machine setup rather than assuming one item is the entire cause.",
+        "Should You Repair the Feeder or Replace the Whole Feeder?",
+        "When the feeder body, electronic system, drive and main mechanical structure remain in good working condition, replacement of an individual cover, spring, handle, pin or clamp is worth evaluating. The right decision depends on the fault, availability of the correct component, the condition of the remaining feeder and the factory’s own maintenance standard. A part-level repair should still include a suitable function check before the feeder returns to production.",
+        "Need Help Identifying a Yamaha Feeder Part?",
+        "Southern Machinery supports SMT/THT equipment and replacement components for electronics manufacturing. Send the feeder model, series, width, readable part number and clear photos of both the component and complete feeder. We can help check the available information and provide a reference for a compatible replacement component.",
+        "Send Feeder DetailsWhatsApp UsContact SMTHelp",
+        "Frequently Asked Questions",
+        "What are the most common Yamaha SMT feeder spare parts?",
+        "Common mechanical parts include feeder covers, material feed or pressure covers, handles, handle screws, locating pins, fixing blocks, safety catches, springs, cover clamps, wire pull cords and waste-tape containers. The correct component depends on the feeder series, width and revision.",
+        "How do I identify the correct Yamaha feeder part number?",
+        "Use the original part number when it is readable, then cross-check it with the feeder series, feeder width, photos of the installed part and a complete-feeder photo. A physical sample or critical dimensions help when the marking is missing.",
+        "Are Yamaha 8 mm feeder parts interchangeable between different feeder series?",
+        "Not necessarily. An 8 mm width describes the tape format, but SS, ZS, ZSY and different feeder revisions can have different covers, handles, clips or interfaces. Confirm the original part and feeder details before replacement.",
+        "What information should I provide when requesting an SMT feeder spare part?",
+        "Provide the machine brand and model, feeder series, feeder width, original part number, clear component photos, a complete-feeder photo and quantity required. Include measurements or an old sample when available.",
+        "Can individual feeder mechanical parts be replaced instead of replacing the complete feeder?",
+        "Often, an individual mechanical part can be evaluated for replacement when the feeder’s main structure and system remain serviceable. The final decision should follow the actual fault, correct component identification and a functional check after repair.",
+        "References and Trademark Notice",
+        "Component photographs and readable part labels: supplied for this article. Compatibility check: confirm feeder series, width, part number, revision and the installed part before ordering a replacement. Trademark notice: Yamaha and related product names are trademarks of their respective owners. References here are used for compatibility and identification purposes only.",
+        "{ \"@context\": \"https://schema.org\", \"@type\": \"FAQPage\", \"mainEntity\": [ {\"@type\":\"Question\",\"name\":\"What are the most common Yamaha SMT feeder spare parts?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Common mechanical parts include feeder covers, material feed or pressure covers, handles, handle screws, locating pins, fixing blocks, safety catches, springs, cover clamps, wire pull cords and waste-tape containers. The correct component depends on the feeder series, width and revision.\"}}, {\"@type\":\"Question\",\"name\":\"How do I identify the correct Yamaha feeder part number?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Use the original part number when it is readable, then cross-check it with the feeder series, feeder width, photos of the installed part and a complete-feeder photo. A physical sample or critical dimensions help when the marking is missing.\"}}, {\"@type\":\"Question\",\"name\":\"Are Yamaha 8 mm feeder parts interchangeable between different feeder series?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Not necessarily. An 8 mm width describes the tape format, but SS, ZS, ZSY and different feeder revisions can have different covers, handles, clips or interfaces. Confirm the original part and feeder details before replacement.\"}}, {\"@type\":\"Question\",\"name\":\"What information should I provide when requesting an SMT feeder spare part?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Provide the machine brand and model, feeder series, feeder width, original part number, clear component photos, a complete-feeder photo and quantity required. Include measurements or an old sample when available.\"}}, {\"@type\":\"Question\",\"name\":\"Can individual feeder mechanical parts be replaced instead of replacing the complete feeder?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Often, an individual mechanical part can be evaluated for replacement when the feeder’s main structure and system remain serviceable. The final decision should follow the actual fault, correct component identification and a functional check after repair.\"}} ] }"
+      ],
+      "targets": [
+        {
+          "text": "An SMT feeder delivers components from carrier tape to the pick-and-place machine, one indexed position at a time. In a busy line, feeders are loaded, removed, adjusted and handled repeatedly. Over time, small mechanical parts can wear, crack, deform, loosen or go missing because of normal use, tape friction, spring fatigue, accidental impact or incorrect installation.",
+          "line": 53
+        },
+        {
+          "text": "That does not automatically mean the complete feeder needs replacement. Where the main mechanism remains serviceable, identifying one **Yamaha SMT feeder** spare part can be a practical maintenance option. This guide groups common SS, ZS and ZSY feeder components by function and explains what to check before requesting a replacement. It is a reference for feeder identification rather than a claim that visually similar parts are interchangeable.",
+          "line": 55
+        },
+        {
+          "text": "# Why Do Small Feeder Parts Matter?",
+          "line": 62
+        },
+        {
+          "text": "Small feeder components can influence the day-to-day mechanical condition of a feeder. Covers and pressing parts help guide and retain carrier tape; pins and fixing components help the feeder mount repeatedly in the intended position; catches, springs and clamps support controlled locking and release; and wire-pull or waste-tape parts manage the tape path after components are picked.",
+          "line": 64
+        },
+        {
+          "text": "When these parts are damaged or incorrectly fitted, the result may be less stable tape movement, poor cover alignment, loose mounting, awkward loading or abnormal resistance. The observed symptom should be investigated in context: a feeder problem can also come from the tape, the feeder setup, the machine interface or the main mechanism. Still, a simple visual inspection of the smaller mechanical parts is often an appropriate first check.",
+          "line": 66
+        },
+        {
+          "text": "# Common Yamaha SMT Feeder Spare Parts",
+          "line": 68
+        },
+        {
+          "text": "## 1. Feeder Covers and Protective Parts",
+          "line": 70
+        },
+        {
+          "text": "Feeder covers protect internal mechanisms and help maintain the intended carrier-tape path. In the supplied references, these include rear plastic covers, protective covers, material feed covers, side-cover or housing parts, pressure covers and cover plates. Cracked plastic, deformed edges, broken mounting points, loose fit and worn tape-contact areas are practical conditions to inspect.",
+          "line": 72
+        },
+        {
+          "text": "Several visible references can be used as an initial identification aid: **KHJ-MC162-01** is labelled as an 8 mm rear plastic cover; **KHJ-MC161-01** is labelled as a rear plastic cover; **KHJ-MC1A1-00** as a protective cover; and **KHJ-MC141-00** as an 8 mm material feed or pressure cover. The supplied labels for **KHJ-MC167-00** describe it as a housing or side-cover plate, while **KHJ-MC1A2-00** is visibly a separate cover plate. Confirm the installed feeder series and mounting arrangement before selecting any of them.",
+          "line": 74
+        },
+        {
+          "text": "## 2. Positioning and Fixing Components",
+          "line": 86
+        },
+        {
+          "text": "Positioning and fixing parts determine how the feeder is held and located at the machine interface. A supplied photo clearly identifies **KHJ-MC105-00** as a locating or positioning pin. The reference image for **KLJ-MC10W-00** is labelled as a front fixing block for SS/ZS 8–72 mm feeders. Another supplied image marks **KHJ-MC104-00** as a locating component, while the illustrated feeder reference describes that same part number as a fixed guide rail. Because such labels can describe a part by position as well as function, confirm the original part, installed location and feeder revision before ordering.",
+          "line": 88
+        },
+        {
+          "text": "Bent pins, damaged seating faces, worn locking contact areas and poor repeatability when mounting a feeder are reasons to examine these components. A damaged locating part may affect how securely and consistently the feeder is mounted; it should not be assumed from a photo alone to be the cause of every placement issue.",
+          "line": 90
+        },
+        {
+          "text": "## 3. Safety Catches, Clips and Springs",
+          "line": 98
+        },
+        {
+          "text": "Safety catches, clips and springs are small parts, but they take part in locking, release and return action. The feeder reference identifies a safety catch (**KHJ-MC145-00**), a safety-catch spring (**KHJ-MC147-02**), a pressure-cover clip (**KHJ-MC144-00**), a pressure-cover spring (**KHJ-MC146-00**) and other springs. The supplied clamp image also labels **KHJ-MC144-00** for an 8 mm cover clamp and **KHJ-MC244-00** for a 12–72 mm cover clamp reference.",
+          "line": 100
+        },
+        {
+          "text": "Check for weak or broken springs, deformation, cracks, loose clips and an abnormal locking feel. Do not substitute a spring by visual size alone: wire diameter, free length, coil count, end form and the original function can all matter. The supplied safety-clip chart shows references for 8, 12/16, 24, 32, 44, 56 and 72 mm feeder widths; this is useful identification context, not proof that every feeder series uses the same clip geometry.",
+          "line": 102
+        },
+        {
+          "text": "## 4. Feeder Handles and Handle Screws",
+          "line": 110
+        },
+        {
+          "text": "Handles are used frequently when operators load, unload and service feeders. The supplied images show handle references for ZSY 8 mm, ZSY 12 mm and YS 8–72 mm applications, as well as handle screws. Where clearly visible, the labels include **KLJ-MC181-00**, **KLJ-MC281-00**, **KHJ-MC181-00** and **KHJ-MC185-00**. The different KHJ/KLJ prefixes and width labels should be copied exactly from the original part or its label; the appearance of a handle alone does not confirm cross-series fit.",
+          "line": 112
+        },
+        {
+          "text": "Inspect handles for cracks, looseness, damaged pivots, missing hardware and interference during loading. A handle can be a small part of the feeder, but its condition matters for safe, repeatable day-to-day handling.",
+          "line": 114
+        },
+        {
+          "text": "## 5. Wire Pull Cord and Tape-Handling Parts",
+          "line": 123
+        },
+        {
+          "text": "The supplied 8 mm steel wire rope is labelled **KHJ-MC186-00** and is described in the feeder reference as a wire pull cord. Parts in this area can contribute to carrier-tape or cover-tape handling, depending on the feeder design. Check for fraying, kinks, corrosion, deformation, abnormal resistance and loose end fittings. Photos of the full tape path are useful, because a wire assembly that looks similar can have different length, termination or routing.",
+          "line": 125
+        },
+        {
+          "text": "## 6. Waste-Tape Containers",
+          "line": 132
+        },
+        {
+          "text": "As component tape advances through a feeder, the carrier-tape waste needs a controlled path. The supplied **SSY End Waste Container** image shows labels for 8, 12, 16, 24, 32, 44 and 56 mm sizes. Feeder width can affect the container shape and mounting, so an order should include the feeder width and photos of the container installed on the feeder.",
+          "line": 134
+        },
+        {
+          "text": "# Parts Reference Table",
+          "line": 141
+        },
+        {
+          "text": "<div style=\"overflow-x:auto;margin:1.5rem 0;border:1px solid #cbd5e1;border-radius:.75rem\">",
+          "line": 143
+        },
+        {
+          "text": "# How Do You Identify the Correct Feeder Spare Part?",
+          "line": 159
+        },
+        {
+          "text": "The most reliable request is based on the installed part, not only a general description such as “8 mm feeder cover.” Different feeder series, widths and revisions can use different geometry even when the outside shape seems familiar. For a practical spare-part check, provide:",
+          "line": 161
+        },
+        {
+          "text": "1. **Machine brand and model** — for example, Yamaha SMT pick-and-place equipment.",
+          "line": 163
+        },
+        {
+          "text": "A sample or a measurement can be especially useful for pins, clamps, springs and wire assemblies. It prevents a selection based only on an image title or a partially readable number.",
+          "line": 171
+        },
+        {
+          "text": "# When Should Feeder Parts Be Replaced?",
+          "line": 173
+        },
+        {
+          "text": "Use condition-based maintenance rather than a fixed calendar interval. A closer inspection is appropriate when you see visible cracks, loose mounting, bent positioning features, weak or broken springs, damaged handles, worn tape-contact areas, abnormal tape movement, frayed wire cord or a locking mechanism that does not feel normal.",
+          "line": 175
+        },
+        {
+          "text": "Replacement should be based on the actual part condition, feeder model and the maintenance requirements of the line. Before refitting a component, check the tape path, fasteners, mating surfaces and free movement of the mechanism. If the feeder remains unreliable after the visible part is corrected, investigate the wider feeder and machine setup rather than assuming one item is the entire cause.",
+          "line": 177
+        },
+        {
+          "text": "# Should You Repair the Feeder or Replace the Whole Feeder?",
+          "line": 179
+        },
+        {
+          "text": "When the feeder body, electronic system, drive and main mechanical structure remain in good working condition, replacement of an individual cover, spring, handle, pin or clamp is worth evaluating. The right decision depends on the fault, availability of the correct component, the condition of the remaining feeder and the factory’s own maintenance standard. A part-level repair should still include a suitable function check before the feeder returns to production.",
+          "line": 181
+        },
+        {
+          "text": "# Need Help Identifying a Yamaha Feeder Part?",
+          "line": 183
+        },
+        {
+          "text": "Southern Machinery supports SMT/THT equipment and replacement components for electronics manufacturing. Send the feeder model, series, width, readable part number and clear photos of both the component and complete feeder. We can help check the available information and provide a reference for a compatible replacement component.",
+          "line": 185
+        },
+        {
+          "text": "<p style=\"display:flex;flex-wrap:wrap;gap:.75rem;margin:1.25rem 0 0\"><a href=\"mailto:light@smthelp.com?subject=Yamaha%20SMT%20Feeder%20Spare%20Part%20Check\" style=\"display:inline-block;padding:.7rem 1rem;border-radius:.5rem;background:#0f766e;color:#fff;font-weight:700;text-decoration:none\">Send Feeder Details</a><a href=\"https://wa.me/8617688548420\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:inline-block;padding:.7rem 1rem;border:1px solid #0f766e;border-radius:.5rem;color:#0f766e;font-weight:700;text-decoration:none\">WhatsApp Us</a><a href=\"https://www.smthelp.com\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:inline-block;padding:.7rem 1rem;border:1px solid #0f766e;border-radius:.5rem;color:#0f766e;font-weight:700;text-decoration:none\">Contact SMTHelp</a></p>",
+          "line": 187
+        },
+        {
+          "text": "# Frequently Asked Questions",
+          "line": 189
+        },
+        {
+          "text": "## What are the most common Yamaha SMT feeder spare parts?",
+          "line": 191
+        },
+        {
+          "text": "Common mechanical parts include feeder covers, material feed or pressure covers, handles, handle screws, locating pins, fixing blocks, safety catches, springs, cover clamps, wire pull cords and waste-tape containers. The correct component depends on the feeder series, width and revision.",
+          "line": 193
+        },
+        {
+          "text": "## How do I identify the correct Yamaha feeder part number?",
+          "line": 195
+        },
+        {
+          "text": "Use the original part number when it is readable, then cross-check it with the feeder series, feeder width, photos of the installed part and a complete-feeder photo. A physical sample or critical dimensions help when the marking is missing.",
+          "line": 197
+        },
+        {
+          "text": "## Are Yamaha 8 mm feeder parts interchangeable between different feeder series?",
+          "line": 199
+        },
+        {
+          "text": "Not necessarily. An 8 mm width describes the tape format, but SS, ZS, ZSY and different feeder revisions can have different covers, handles, clips or interfaces. Confirm the original part and feeder details before replacement.",
+          "line": 201
+        },
+        {
+          "text": "## What information should I provide when requesting an SMT feeder spare part?",
+          "line": 203
+        },
+        {
+          "text": "Provide the machine brand and model, feeder series, feeder width, original part number, clear component photos, a complete-feeder photo and quantity required. Include measurements or an old sample when available.",
+          "line": 205
+        },
+        {
+          "text": "## Can individual feeder mechanical parts be replaced instead of replacing the complete feeder?",
+          "line": 207
+        },
+        {
+          "text": "Often, an individual mechanical part can be evaluated for replacement when the feeder’s main structure and system remain serviceable. The final decision should follow the actual fault, correct component identification and a functional check after repair.",
+          "line": 209
+        },
+        {
+          "text": "# References and Trademark Notice",
+          "line": 211
+        },
+        {
+          "text": "- **Component photographs and readable part labels:** supplied for this article.",
+          "line": 213
+        },
+        {
+          "text": "<script type=\"application/ld+json\">",
+          "line": 217
+        }
+      ],
+      "source": "commit",
+      "commit": "048a2a67e150"
     }
   }
 }
