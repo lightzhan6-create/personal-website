@@ -9,6 +9,7 @@ const seo = require('../seo.js');
 const { replacePlaceholders } = require('../template-engine.js');
 const { normalizePostFrontmatter, normalizePostTags } = require('../article-model.js');
 const { renderCopyButton } = require('../copy-button.js');
+const { renderIcon } = require('../icons.js');
 const {
     contentFileSlug,
     isContentFile,
@@ -17,17 +18,6 @@ const {
 
 function fileSlug(file) {
     return contentFileSlug(file);
-}
-
-function legacyPostLink(frontmatter, fallbackSlug) {
-    const rawSlug = String(frontmatter.slug || '').trim();
-    const rawLocale = String(frontmatter.locale || '').trim();
-    if (!rawSlug && !rawLocale) return '';
-
-    const slug = (rawSlug || fallbackSlug).replace(/^\/+|\/+$/g, '');
-    // Chinese is the site's default locale; older URLs omitted that segment.
-    const locale = rawLocale === 'zh-CN' ? '' : rawLocale.replace(/^\/+|\/+$/g, '');
-    return `/posts/${[locale, slug].filter(Boolean).join('/')}/`;
 }
 
 function readPostId(postIds, file) {
@@ -54,7 +44,7 @@ function removeEmptyTocAside(html, toc) {
 
     return html.replace(
         /\s*<aside\b[^>]*\bgroup\/toc\b[\s\S]*?<\/aside>/,
-        '\n                        <div class="w-72 2xl:w-80 flex-shrink-0" aria-hidden="true"></div>'
+        ''
     );
 }
 
@@ -363,28 +353,17 @@ function renderLatestUpdatePanel(post) {
         })
         .join('\n                                            ');
 
-    return `<div class="freecat-post-latest-update-shell">
-                        <aside class="freecat-post-latest-update-panel w-72 2xl:w-80 flex-shrink-0">
-                            <div class="h-full">
-                                <div class="freecat-post-latest-update-scroll h-full min-h-0">
-                                    <div id="latest-update-container" class="h-full overflow-x-hidden">
-                                        <div class="freecat-post-latest-update-content">
-                                            <h3 class="freecat-sidebar-recent-heading text-sm tracking-wider text-slate-500 dark:text-slate-400 mb-3">
-                                                <span class="freecat-post-latest-update-title-note">最后更新内容</span>
-                                            </h3>
-                                        <div class="freecat-post-latest-update-body">
-                                            ${itemsHtml}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
-                    </div>`;
+    // 宽屏时显示在正文左侧，窄屏随正文排列；默认收起，避免抢占阅读空间。
+    return `<details class="freecat-post-latest-update-shell">
+                <summary class="freecat-post-toc-title">Recent updates${renderIcon('chevron-down', 'freecat-update-chevron')}</summary>
+                <div id="latest-update-container" class="freecat-post-latest-update-body">
+                    ${itemsHtml}
+                </div>
+            </details>`;
 }
 
 /**
- * 读取 content/posts/ 目录下的所有 Markdown 文章并归一化为 post 对象数组。
+ * 读取 writing/ 目录下的所有 Markdown 文章并归一化为 post 对象数组。
  * 跳过 frontmatter 标记 show: false 的文件。已按"置顶在前 + 时间倒序"排序。
  */
 function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skipMissingGitDates = false }) {
@@ -447,7 +426,6 @@ function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skip
             title: autoSpacing(titleRaw),
             slug,
             postId,
-            legacyLink: legacyPostLink(data, slug),
             date: publishDate,
             modifiedDate,
             excerpt: autoSpacing(excerptRaw),
@@ -470,9 +448,6 @@ function loadPosts({ postsDir, gitDates, postDates, postIds, latestUpdates, skip
             author: frontmatter.author,
             authorUrl: frontmatter.authorUrl,
             noindex: frontmatter.noindex,
-            seoTitle: frontmatter.seoTitle ? autoSpacing(frontmatter.seoTitle) : '',
-            seoDescription: frontmatter.seoDescription ? autoSpacing(frontmatter.seoDescription) : '',
-            seoKeywords: frontmatter.seoKeywords,
             faq: faqItems,
             content,
             rawTitle: frontmatter.title
@@ -497,7 +472,6 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
     const finalContentHtml = annotatedLatestUpdate.html;
     const toc = renderedPostContent.toc;
     const safeTitle = shared.escapeHtml(post.title);
-    const safeSeoTitle = shared.escapeHtml(post.seoTitle || post.title);
 
     const tags = normalizePostTags(post);
     const tagsHtml = tags.map(t => shared.renderTagSpan(t)).join('\n');
@@ -519,7 +493,6 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
     const ogImage = seo.absoluteUrl(siteConfig, rawCover || seo.defaultImage(siteConfig, seoConfig));
 
     // 按需加载：扫描渲染后的 HTML，只为真正用到的特性引入对应 CSS/JS
-    const needsHighlight = /<pre[^>]*><code/i.test(finalContentHtml);
     const needsKatex = /class="katex/i.test(finalContentHtml);
     const needsMermaid = /data-diagram-type="mermaid"|class="(?:[^"]*\s)?mermaid-block(?:\s[^"]*)?"/i.test(finalContentHtml);
     const needsEcharts = /class="(?:[^"]*\s)?echarts-block(?:\s[^"]*)?"|data-chart-options=/i.test(finalContentHtml);
@@ -533,9 +506,6 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
         needsMermaid ? '<script src="https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js"></script>' : '',
         needsEcharts ? '<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>' : ''
     ].filter(Boolean).join('\n    ');
-    const highlightCss = needsHighlight
-        ? '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />'
-        : '';
     const katexCss = needsKatex
         ? '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />'
         : '';
@@ -563,19 +533,18 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
         ? '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
         : '';
 
-    const pageTitle = post.seoTitle || `${post.title} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
+    const pageTitle = `${post.title} - ${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'}`;
     const sharePublishDate = post.date.tz('Asia/Shanghai').format('YYYY.MM.DD');
     const seoHead = seo.renderHeadTags({
         title: pageTitle,
-        description: post.seoDescription || seo.articleSummary(post),
-        fullDescription: Boolean(post.seoDescription),
+        description: seo.articleSummary(post),
         canonicalPath: post.link,
         siteConfig,
         seoConfig,
         type: 'article',
         image: rawCover || seo.defaultImage(siteConfig, seoConfig),
         noindex: post.noindex,
-        tags: post.seoKeywords && post.seoKeywords.length ? post.seoKeywords : tags,
+        tags,
         publishedTime: post.date.toISOString(),
         publishedDisplayDate: sharePublishDate,
         modifiedTime: post.modifiedDate.toISOString(),
@@ -585,7 +554,6 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
 
     const html = replacePlaceholders(template, [
         [/<!-- TITLE_PLACEHOLDER -->/g, safeTitle],
-        ['<!-- SEO_TITLE_PLACEHOLDER -->', safeSeoTitle],
         [/<!-- TITLE_H1_PLACEHOLDER -->/g, shared.processTitleHtml(safeTitle)],
         ['<!-- TAGS_PLACEHOLDER -->', tagsHtml],
         ['<!-- DATE_PLACEHOLDER -->', post.date.tz('Asia/Shanghai').format('YYYY-MM-DD')],
@@ -597,7 +565,8 @@ function renderPostPage({ post, template, siteConfig, seoConfig, assetVersion = 
         ['<!-- CONTENT_PLACEHOLDER -->', finalContentHtml],
         ['<!-- TOC_PLACEHOLDER -->', toc],
         ['<!-- POST_SEO_HEAD -->', seoHead],
-        ['<!-- POST_HIGHLIGHT_CSS -->', highlightCss],
+        ['<!-- POST_HIGHLIGHT_CSS -->', /<code\b[^>]*\bhljs\b/.test(finalContentHtml)
+            ? `<link rel="stylesheet" href="${versionedAssetUrl('/assets/code-highlight.css', assetVersion)}" />` : ''],
         ['<!-- POST_KATEX_CSS -->', katexCss],
         ['<!-- POST_FONT_PRELOADS -->', renderPostFontPreloads(post.postId, assetVersion)],
         ['<!-- POST_FONT_FACE_CSS -->', renderPostFontFaceCss(post.postId, assetVersion)],
@@ -620,17 +589,11 @@ function generateAll({ posts, template, siteConfig, seoConfig, outputDir, assetV
 
     posts.forEach(post => {
         const html = renderPostPage({ post, template, siteConfig, seoConfig, assetVersion });
-        const routes = [`/posts/${post.postId}/`];
-        if (post.legacyLink && !routes.includes(post.legacyLink)) routes.push(post.legacyLink);
-
-        routes.forEach(route => {
-            const routeParts = String(route).split('/').filter(Boolean);
-            const postDir = path.join(outputDir, ...routeParts);
-            fs.mkdirSync(postDir, { recursive: true });
-            const outFile = path.join(postDir, 'index.html');
-            fs.writeFileSync(outFile, html, 'utf-8');
-            console.log(`  Generated: ${routeParts.join('/')}/index.html`);
-        });
+        const postDir = path.join(outputDir, 'posts', post.postId);
+        fs.mkdirSync(postDir, { recursive: true });
+        const outFile = path.join(postDir, 'index.html');
+        fs.writeFileSync(outFile, html, 'utf-8');
+        console.log(`  Generated: posts/${post.postId}/index.html`);
     });
 }
 

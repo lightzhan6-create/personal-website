@@ -125,12 +125,9 @@ function renderHeadTags({
     publishedDisplayDate = '',
     modifiedTime = '',
     author = '',
-    pagination = null,
-    fullDescription = false
+    pagination = null
 }) {
-    const desc = fullDescription
-        ? text(description || defaultDescription(siteConfig, seoConfig))
-        : truncate(description || defaultDescription(siteConfig, seoConfig));
+    const desc = truncate(description || defaultDescription(siteConfig, seoConfig));
     const canonical = pageUrl(siteConfig, canonicalPath);
     const ogImage = absoluteUrl(siteConfig, image || defaultImage(siteConfig, seoConfig));
     const siteName = text(siteConfig.site_title || siteConfig.site_name);
