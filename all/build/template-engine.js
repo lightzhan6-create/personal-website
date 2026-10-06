@@ -4,7 +4,6 @@ const shared = require('../shared/shared.js');
 const seo = require('./seo.js');
 const { autoSpacing, parseImageStyleAudioList } = require('./markdown.js');
 const { SOCIAL_PLATFORM_ORDER } = require('./social-defaults.js');
-const { renderIcon } = require('./icons.js');
 
 /**
  * 模板引擎：partial 注入、SITE_* 占位替换、Logo / Theme / Social 渲染。
@@ -38,15 +37,6 @@ function safeUrl(value) {
 function autoLineBreak(text) {
     if (!text) return '';
     return text.replace(/([\.。])\s*(?=[^ \.。\n\r\t<])/g, '$1<br />');
-}
-
-function renderHomeHeroText(value) {
-    const formatted = autoLineBreak(escapeText(autoSpacing(value)));
-    const lines = formatted.split('<br />');
-    // Keep configurable monolingual or multi-sentence copy unchanged; split only Latin + Chinese pairs.
-    if (lines.length !== 2 || !/[㐀-鿿]/.test(lines[1]) || /[㐀-鿿]/.test(lines[0])) return formatted;
-    return '<span class="freecat-hero-line-first">' + lines[0] + '</span>' +
-        '<br class="freecat-hero-break" /><span class="freecat-hero-line-second">' + lines[1] + '</span>';
 }
 
 function generateThemeScript(siteConfig) {
@@ -151,25 +141,46 @@ function generateThemeScript(siteConfig) {
 }
 
 function generateShellBootstrapScript() {
-    // Initial pages and playback keep their original DOM. This bootstrap only
-    // resolves old hash links; persistent navigation is initialized in main.js.
     return `(function () {
-        if (window.self !== window.top || window.__FREECAT_SHELL_DOCUMENT__) return;
-        // Keep old shared hash links working after removing the automatic shell upgrade.
-        var entryPath = window.location.pathname;
-        var legacy = (window.location.hash || "").slice(1);
-        if ((entryPath === "/" || entryPath === "/index.html" || entryPath === "/index") && legacy.startsWith("/") && !legacy.startsWith("//")) {
-            var target = new URL(legacy, window.location.origin);
-            if (target.origin === window.location.origin) {
-                window.location.replace(target.pathname + target.search + target.hash);
-                return;
+            if (window.self !== window.top) return;
+            if (window.__FREECAT_SHELL_DOCUMENT__) return;
+            // 搜索引擎渲染器会执行 JS：若在这里把内容页整页换成外壳，
+            // 渲染后的 DOM 会覆盖静态 HTML，导致全站页面被搜索引擎按空壳归并。
+            // 爬虫 / 预览机器人 / 站长诊断工具（GSC URL 检查、Lighthouse）
+            // 一律停留在静态内容页，看到与普通抓取一致的完整内容。
+            if (/bot|spider|crawl|slurp|yandex|sogou|facebookexternalhit|whatsapp|google-inspectiontool|lighthouse/i.test(navigator.userAgent)) return;
+
+            var path = window.location.pathname || '/';
+            var publicPath = path + (window.location.search || '') + (window.location.hash || '');
+
+            // /（index.html）与 /home 是同一份首页内容，统一归位到规范地址 /。
+            if (path === '/index.html' || path === '/index' || path === '/home.html' || path === '/home') {
+                publicPath = '/' + (window.location.search || '') + (window.location.hash || '');
+                try { history.replaceState(history.state, '', publicPath); } catch (e) {}
             }
-        }
-    })();`;
+
+            if (!/^\\/(?!\\/)/.test(publicPath)) return;
+
+            fetch('/shell', { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.text();
+                })
+                .then(function (htmlText) {
+                    // Only the persistent shell carries this marker. Keep the
+                    // pattern split with [-] so content pages embedding this
+                    // bootstrap cannot contain the exact marker by accident.
+                    if (!/data-freecat-shell[-]root=["']true["']/.test(htmlText)) return;
+                    document.open();
+                    document.write(htmlText);
+                    document.close();
+                })
+                .catch(function () {});
+        })();`;
 }
 
 function generateLogoIcon(siteConfig) {
-    const defaultIcon = renderIcon('feather');
+    const defaultIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><title>quill-pen-ai-fill</title><path d="m4.713 7.128l-.246.566a.506.506 0 0 1-.934 0l-.246-.566a4.36 4.36 0 0 0-2.22-2.25l-.759-.339a.53.53 0 0 1 0-.963l.717-.319A4.37 4.37 0 0 0 3.276.931L3.53.32a.506.506 0 0 1 .942 0l.253.61a4.37 4.37 0 0 0 2.25 2.327l.718.32a.53.53 0 0 1 0 .962l-.76.338a4.36 4.36 0 0 0-2.219 2.251m-1.65 14.485C4.09 15.422 6.312 1.997 21 1.997c-1.496 3-2.5 4.5-3.5 5.5l-1 1l1.5 1c-1 3-4 6.5-8 7q-4.003.5-5.002 5.5H3z"/></svg>`;
 
     const logoUrl = siteConfig.site_logo_icon && String(siteConfig.site_logo_icon).trim();
     if (logoUrl && /^https?:\/\//i.test(logoUrl)) {
@@ -179,8 +190,8 @@ function generateLogoIcon(siteConfig) {
     return defaultIcon;
 }
 
-const NAV_AUDIO_IDLE_ICON = renderIcon('player-play');
-const NAV_AUDIO_PLAYING_ICON = renderIcon('player-pause');
+const NAV_AUDIO_IDLE_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8.48216V15.518L15.0307 12.0001L9 8.48216ZM7.75194 5.43872L18.2596 11.5682C18.4981 11.7073 18.5787 12.0135 18.4396 12.252C18.3961 12.3265 18.3341 12.3885 18.2596 12.432L7.75194 18.5615C7.51341 18.7006 7.20725 18.62 7.06811 18.3815C7.0235 18.305 7 18.2181 7 18.1296V5.87061C7 5.59446 7.22386 5.37061 7.5 5.37061C7.58853 5.37061 7.67547 5.39411 7.75194 5.43872Z"></path></svg>`;
+const NAV_AUDIO_PLAYING_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 3V17C20 19.2091 18.2091 21 16 21C13.7909 21 12 19.2091 12 17C12 14.7909 13.7909 13 16 13C16.7286 13 17.4117 13.1948 18 13.5351V6H9V17C9 19.2091 7.20914 21 5 21C2.79086 21 1 19.2091 1 17C1 14.7909 2.79086 13 5 13C5.72857 13 6.41165 13.1948 7 13.5351V3H20Z"></path></svg>`;
 
 function parseBooleanControl(value) {
     if (value === true) return true;
@@ -223,14 +234,14 @@ function generateNavAudioButton(siteConfig) {
     const autoplay = parseBooleanControl(siteConfig.nav_audio_autoplay) ? 'true' : 'false';
     return `<div id="nav-audio-control" class="nav-audio-control" data-playing="false">
                 <button type="button" aria-label="Play audio" aria-pressed="false"
-                    class="freecat-header-action"
+                    class="t-btn-icon group relative flex items-center justify-center rounded-full size-9 md:size-10 bg-[#f0f2f4] dark:bg-gray-800 text-[#1e293b] dark:text-slate-200 hover:text-primary dark:hover:text-primary"
                     id="nav-audio-toggle"
                     data-audio-src="${safeSrc}"
                     data-audio-title="${safeTitle}"
                     data-audio-playlist="${safePlaylist}"
                     data-audio-autoplay="${autoplay}">
-                    <span class="nav-audio-icon nav-audio-icon-idle" aria-hidden="true">${NAV_AUDIO_IDLE_ICON}</span>
-                    <span class="nav-audio-icon nav-audio-icon-playing hidden" aria-hidden="true">${NAV_AUDIO_PLAYING_ICON}</span>
+                    <span class="nav-audio-icon nav-audio-icon-idle icon-breathe text-lg md:text-xl text-gray-700 dark:text-gray-400 group-hover:rotate-12" aria-hidden="true">${NAV_AUDIO_IDLE_ICON}</span>
+                    <span class="nav-audio-icon nav-audio-icon-playing icon-breathe hidden text-lg md:text-xl text-gray-700 dark:text-gray-400 group-hover:rotate-6" aria-hidden="true">${NAV_AUDIO_PLAYING_ICON}</span>
                 </button>
                 <div class="nav-audio-volume-slider-wrapper">
                     <input type="range" id="nav-audio-volume" class="nav-audio-volume-slider" min="0" max="1" step="0.01" value="0.5" aria-label="Audio volume">
@@ -275,7 +286,7 @@ function generateSocialLinks(socialConfig, siteConfig) {
         const iconHtml = isSafeIconUrl
             ? `<img src="${shared.escapeHtml(rawIconUrl)}" alt="${safeAria}" class="w-full h-full object-contain" loading="lazy" />`
             : platform.iconSvg;
-        return `<a class="freecat-social-link"
+        return `<a class="block w-6 h-6 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-[color,opacity] duration-300 ease-out hover:opacity-95"
                 href="${safeHref}"
                 aria-label="${safeAria}"
                 target="_blank"
@@ -416,13 +427,6 @@ function createEngine({ templatesDir, partialsDir, siteConfig, seoConfig = {}, s
     const navAudioButton = generateNavAudioButton(siteConfig);
     const shellBootstrapScript = generateShellBootstrapScript();
     const partialsCache = loadPartialsCache(partialsDir);
-    const headerIcons = {
-        HEADER_SEARCH_ICON: renderIcon('search'),
-        HEADER_TAG_ICON: renderIcon('tag'),
-        HEADER_SUN_ICON: renderIcon('sun', 'freecat-theme-sun'),
-        HEADER_MOON_ICON: renderIcon('moon', 'freecat-theme-moon'),
-        HEADER_CLOSE_ICON: renderIcon('x')
-    };
 
     function applySiteConfig(template) {
         // 文本字段（出现在 HTML 文本节点 / title / meta content 中）必须 escape
@@ -436,19 +440,16 @@ function createEngine({ templatesDir, partialsDir, siteConfig, seoConfig = {}, s
         out = replacePlaceholder(out, /<!-- SITE_TITLE -->/g, escapeText(autoSpacing(siteConfig.site_title)));
         out = replacePlaceholder(out, /<!-- SITE_NAME -->/g, escapeText(autoSpacing(siteConfig.site_name)));
         out = replacePlaceholder(out, /<!-- FOOTER_COPYRIGHT -->/g, escapeText(autoSpacing(siteConfig.footer_copyright)));
-        out = replacePlaceholder(out, /<!-- HERO_TITLE -->/g, renderHomeHeroText(siteConfig.hero_title));
-        out = replacePlaceholder(out, /<!-- HERO_SUBTITLE -->/g, renderHomeHeroText(siteConfig.hero_subtitle));
+        out = replacePlaceholder(out, /<!-- HERO_TITLE -->/g, autoLineBreak(escapeText(autoSpacing(siteConfig.hero_title))));
+        out = replacePlaceholder(out, /<!-- HERO_SUBTITLE -->/g, autoLineBreak(escapeText(autoSpacing(siteConfig.hero_subtitle))));
         out = replacePlaceholder(out, /<!-- HERO_AVATAR -->/g, safeAvatar);
         out = replacePlaceholder(out, /<!-- SITE_FAVICON -->/g, safeFavicon);
         out = replacePlaceholder(out, /<!-- SITE_LOGO_ICON -->/g, logoIcon);
-        for (const [marker, svg] of Object.entries(headerIcons)) {
-            // 同一图标可同时用于导航入口和展开后的搜索栏。
-            out = replacePlaceholder(out, new RegExp('<!-- ' + marker + ' -->', 'g'), svg);
-        }
         out = replacePlaceholder(out, /<!-- NAV_AUDIO_BUTTON -->/g, navAudioButton);
         out = replacePlaceholder(out, /<!-- THEME_SCRIPT -->/g, themeScript);
         out = replacePlaceholder(out, /<!-- SHELL_BOOTSTRAP_SCRIPT -->/g, shellBootstrapScript);
         out = replacePlaceholder(out, /<!-- SOCIAL_LINKS -->/g, socialLinks);
+        out = replacePlaceholder(out, /<!-- SIDEBAR_SOCIAL_LINKS -->/g, socialLinks);
         out = replacePlaceholder(out, /<!-- TAG_MENU_ITEMS -->/g, tagMenuItemsHtml);
         out = replacePlaceholder(out, /<!-- DISCOVERY_LINKS -->/g, discoveryLinks);
         out = replacePlaceholder(out, /<!-- SEARCH_ENGINE_HTML_MARKERS -->/g, searchEngineHtmlMarkers);

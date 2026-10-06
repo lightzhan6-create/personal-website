@@ -1,8 +1,22 @@
 const fs = require('fs');
 const path = require('path');
 const seo = require('../seo.js');
-const { getTotalPages } = require('../pagination.js');
 const { renderPostContent } = require('./post-content.js');
+
+const PRODUCT_ROUTES = [
+    '/products/sc-900-multi-blades-v-cut-pcb-separator/',
+    '/products/s-d602-led-depaneler/',
+    '/products/turnover-box-interactive-3d/',
+    '/products/reflow-oven-s-sr-sa/',
+    '/products/s4020a-axial-insertion-machine/',
+    '/products/s7020t-terminal-insertion-machine/',
+    '/products/automatic-tube-feeder/',
+    '/products/sme5600d-pcba-cleaning-machine/',
+    '/products/sme5200-fixture-pallet-cleaning-machine/',
+    '/products/servo-motor-timing-belts/',
+    '/products/s1688-pneumatic-stencil-cleaning-machine/',
+    '/products/bc320-stencil-cleaning-machine/'
+];
 
 // RSS / AI 检索文件的文章数上限。理由：
 //   - RSS 设计本质是“推送增量更新”，不是“历史归档”（归档由 sitemap.xml + /all.html 承担）。
@@ -69,7 +83,7 @@ function prepareFeedHtml(html, baseUrl) {
     return output;
 }
 
-function generateSitemap({ posts, siteConfig, outputDir, postsPerPage = 8 }) {
+function generateSitemap({ posts, siteConfig, outputDir }) {
     const baseUrl = seo.normalizeBaseUrl(siteConfig);
     if (!baseUrl) {
         return;
@@ -105,9 +119,13 @@ function generateSitemap({ posts, siteConfig, outputDir, postsPerPage = 8 }) {
     lines.push('    <priority>0.5</priority>');
     lines.push('  </url>');
 
-    for (let page = 2; page <= getTotalPages(posts.length, postsPerPage); page++) {
-        lines.push('  <url>', '    <loc>' + xmlEscape(baseUrl + '/page/' + page + '/') + '</loc>', '  </url>');
-    }
+    PRODUCT_ROUTES.forEach(productRoute => {
+        lines.push('  <url>');
+        lines.push(`    <loc>${xmlEscape(baseUrl + productRoute)}</loc>`);
+        lines.push('    <priority>0.8</priority>');
+        lines.push('    <changefreq>monthly</changefreq>');
+        lines.push('  </url>');
+    });
 
     indexedPosts.forEach(post => {
         lines.push('  <url>');
@@ -127,8 +145,9 @@ function generateRobotsTxt({ siteConfig, seoConfig = {}, outputDir }) {
     const baseUrl = seo.normalizeBaseUrl(siteConfig);
     let robots = 'User-agent: *\nAllow: /\n';
 
-    { // AI access is independent from ordinary search crawling.
+    if (seoConfig.allow_ai_crawlers !== false) {
         const aiAgents = [
+            'Googlebot',
             'Google-Extended',
             'OAI-SearchBot',
             'GPTBot',
@@ -139,8 +158,7 @@ function generateRobotsTxt({ siteConfig, seoConfig = {}, outputDir }) {
             'Claude-SearchBot'
         ];
         robots += '\n';
-        const directive = seoConfig.allow_ai_crawlers === false ? 'Disallow' : 'Allow';
-        robots += aiAgents.map(agent => `User-agent: ${agent}\n${directive}: /\n`).join('\n');
+        robots += aiAgents.map(agent => `User-agent: ${agent}\nAllow: /\n`).join('\n');
     }
 
     if (baseUrl) robots += `\nSitemap: ${baseUrl}/sitemap.xml\n`;

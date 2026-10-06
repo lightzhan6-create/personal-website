@@ -5,8 +5,7 @@
     'use strict';
 
     var CODE_COLLAPSED_HEIGHT = 400;
-    // 与 post-code.css 的展开时长保持一致，及时解除按钮过渡状态。
-    var CODE_FOLD_TRANSITION_MS = 220;
+    var CODE_FOLD_TRANSITION_MS = 420;
 
     function resetCodeControlsPosition(controls) {
         if (!controls) return;
@@ -220,12 +219,6 @@
             var isFolded = foldContainer.classList.contains('collapsed-code');
             var expandIcon = foldBtn.querySelector('.fold-icon-expand');
             var collapseIcon = foldBtn.querySelector('.fold-icon-collapse');
-            var foldLabel = foldBtn.querySelector('.fold-toggle-label');
-            var actionLabel = isFolded ? '收起内容' : '展开内容';
-            foldBtn.setAttribute('aria-expanded', String(isFolded));
-            foldBtn.setAttribute('aria-label', actionLabel);
-            // 展开后的收起入口只显示图标，可访问名称仍说明按钮用途。
-            if (foldLabel) foldLabel.hidden = isFolded;
 
             if (isFolded) {
                 var startHeight = wrapper.getBoundingClientRect().height || CODE_COLLAPSED_HEIGHT;

@@ -294,7 +294,7 @@ test('post page renders latest update panel only when update snapshot exists', (
         modifiedDate: dayjs.tz('2026-05-03T09:00:00+08:00'),
         postId: '2026050209000002'
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const siteConfig = { site_name: 'Example', site_title: 'Example Blog', site_url: 'https://example.com' };
 
     const withUpdate = renderPostPage({
@@ -310,16 +310,18 @@ test('post page renders latest update panel only when update snapshot exists', (
         seoConfig: {}
     });
 
-    assert.match(withUpdate, /<details class="freecat-post-latest-update-shell">/);
-    assert.match(withUpdate, /<summary class="freecat-post-toc-title">最近更新<svg\b/);
-    assert.doesNotMatch(withUpdate, /<details[^>]*\bopen\b/);
+    assert.match(withUpdate, /freecat-post-latest-update-panel/);
+    assert.match(withUpdate, /class="freecat-sidebar-recent-heading text-sm tracking-wider text-slate-500 dark:text-slate-400 mb-3"/);
+    assert.match(withUpdate, /freecat-post-latest-update-content[\s\S]*最后更新内容[\s\S]*freecat-post-latest-update-body/);
+    assert.match(withUpdate, />\s*最后更新内容\s*</);
+    assert.match(withUpdate, /class="freecat-post-latest-update-title-note">最后更新内容<\/span>/);
     assert.match(withUpdate, /最后新增的正文内容/);
     assert.match(withUpdate, /class="freecat-post-latest-update-link"/);
     assert.match(withUpdate, /href="#latest-update-1"/);
     assert.match(withUpdate, /data-latest-update-text="最后新增的正文内容"/);
     assert.doesNotMatch(withUpdate, /title="最后新增的正文内容"/);
     assert.doesNotMatch(withUpdate, /freecat-post-latest-update-date/);
-    assert.doesNotMatch(withoutUpdate, /freecat-post-latest-update-shell/);
+    assert.doesNotMatch(withoutUpdate, /freecat-post-latest-update-panel/);
     assert.doesNotMatch(withoutUpdate, />\s*Update\s*</);
 });
 
@@ -344,7 +346,7 @@ test('post page binds latest update links to rendered table row targets', () => 
             }]
         }
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const html = renderPostPage({
         post,
         template,
@@ -384,7 +386,7 @@ test('post page binds latest update links to formatted list and table targets', 
             ]
         }
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const html = renderPostPage({
         post,
         template,
@@ -427,7 +429,7 @@ test('post page binds latest update heading to exact title text', () => {
             }]
         }
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const html = renderPostPage({
         post,
         template,
@@ -438,33 +440,7 @@ test('post page binds latest update heading to exact title text', () => {
     assert.match(html, /href="#灵感"/);
     assert.match(html, /<h3 id="灵感"[^>]*>\s*灵感\s*<\/h3>/);
     assert.match(html, /<h3 id="灵感必去网站"[^>]*>\s*灵感必去网站\s*<\/h3>/);
-    const updateLink = html.match(/<a class="freecat-post-latest-update-link"[^>]*>/)[0];
-    assert.match(updateLink, /href="#灵感"/);
-    assert.doesNotMatch(updateLink, /href="#灵感必去网站"/);
-});
-
-test('latest update heading links resolve to exact linked headings instead of missing fallback anchors', () => {
-    const { parseHTML } = require('linkedom');
-    for (const title of ['WindowsDeveloperConfig', '**工具** `Config`', '工具 & 配置']) {
-        const targetText = `#### [${title}](https://example.com/tool)`;
-        const html = renderPostPage({
-            post: {
-                title: 'Linked heading', tag: [], link: '/posts/linked-heading', cover: '',
-                content: `#### [${title} Extended](https://example.com/other)\n\n${targetText}`,
-                date: dayjs(PUBLISHED_AT), modifiedDate: dayjs(MODIFIED_AT),
-                postId: '2026050209000008',
-                latestUpdate: { items: [{ text: title, targetText }] }
-            },
-            template: '<html><body><!-- POST_READING_PANEL --><article><!-- CONTENT_PLACEHOLDER --></article></body></html>',
-            siteConfig: { site_name: 'Example', site_url: 'https://example.com' },
-            seoConfig: {}
-        });
-        const { document } = parseHTML(html);
-        const link = document.querySelector('.freecat-post-latest-update-link');
-        const target = document.getElementById(link.getAttribute('href').slice(1));
-        assert.ok(target, `${title}: update link must resolve to an existing element`);
-        assert.equal(target, document.querySelectorAll('article h5')[1]);
-    }
+    assert.doesNotMatch(html, /href="#灵感必去网站"/);
 });
 
 test('post page binds latest update links to rendered code block targets', () => {
@@ -490,7 +466,7 @@ test('post page binds latest update links to rendered code block targets', () =>
             }]
         }
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const html = renderPostPage({
         post,
         template,
@@ -524,7 +500,7 @@ test('post page binds latest update links to rendered image targets', () => {
             ]
         }
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const html = renderPostPage({
         post,
         template,
@@ -560,7 +536,7 @@ test('post page binds latest update links to rendered external embed targets', (
             ]
         }
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const html = renderPostPage({
         post,
         template,
@@ -590,7 +566,7 @@ test('post page binds latest update links to rendered empty link targets', () =>
             ]
         }
     };
-    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- POST_READING_PANEL --><!-- CONTENT_PLACEHOLDER --></body></html>';
+    const template = '<!doctype html><html><head><!-- POST_SEO_HEAD --><!-- POST_JSONLD --></head><body><!-- LATEST_UPDATE_PLACEHOLDER --><!-- CONTENT_PLACEHOLDER --></body></html>';
     const html = renderPostPage({
         post,
         template,

@@ -59,16 +59,17 @@ function assertPreviewReady() {
     }
 }
 
-function resolveFilePath(requestUrl) {
-    let pathname;
+function safeDecode(value) {
     try {
-        const url = new URL(requestUrl, `http://${host}:${port}`);
-        pathname = decodeURIComponent(url.pathname);
+        return decodeURIComponent(value);
     } catch {
-        // 畸形 URL 按未找到处理，不能让单次请求终止服务或误返回首页。
-        return null;
+        return '';
     }
-    if (pathname.includes('\0')) return null;
+}
+
+function resolveFilePath(requestUrl) {
+    const url = new URL(requestUrl, `http://${host}:${port}`);
+    const pathname = safeDecode(url.pathname);
     const cleanPath = path.normalize(pathname).replace(/^([/\\])+/, '');
     const candidate = path.resolve(distDir, cleanPath);
     const relative = path.relative(distDir, candidate);

@@ -21,6 +21,10 @@ function normalizePostTags(post = {}) {
 }
 
 function normalizePostFrontmatter(data = {}) {
+    // The override is opt-in so legacy post metadata and generated pages retain
+    // their current SEO output. It is used when a post needs a separately
+    // supplied search title, full description, or keyword set.
+    const seoOverride = data.seo_override === true;
     return {
         show: data.show,
         title: data.title,
@@ -39,6 +43,9 @@ function normalizePostFrontmatter(data = {}) {
         author: data.author || '',
         authorUrl: firstDefined(data.author_url, data.authorUrl, ''),
         noindex: data.noindex === true,
+        seoTitle: seoOverride ? firstDefined(data.seo_title, data.seoTitle, '') : '',
+        seoDescription: seoOverride ? firstDefined(data.seo_description, data.seoDescription, '') : '',
+        seoKeywords: seoOverride ? normalizeTags(firstDefined(data.seo_keywords, data.keywords, [])) : [],
         faq: data.faq,
         enableImageCaptions: data.show_image_captions === true
             || data.enable_image_captions === true

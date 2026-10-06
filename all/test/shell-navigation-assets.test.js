@@ -178,13 +178,10 @@ test('fixed header has a stable css height before runtime measurement', () => {
     assert.doesNotMatch(transitionsCss, /(?:^|\n)header\s*\{[\s\S]*height:\s*var\(--freecat-header-height\);/);
 });
 
-test('header has one navigation and one control for each action across screen sizes', () => {
-    for (const id of ['nav-links', 'search-toggle', 'search-input', 'search-close', 'tag-menu-toggle', 'theme-toggle']) {
-        assert.equal((header.match(new RegExp(`id="${id}"`, 'g')) || []).length, 1);
-    }
-    assert.equal((header.match(/href="\/about"/g) || []).length, 1);
-    assert.equal((header.match(/href="\/all"/g) || []).length, 1);
-    assert.doesNotMatch(header, /hover:opacity|group-hover:rotate/);
+test('mobile fixed header lets the brand title shrink before nav buttons overflow', () => {
+    assert.match(transitionsCss, /@media \(max-width:\s*767px\)\s*\{[\s\S]*header\.fixed\s*\{[\s\S]*padding-left:\s*0\.5rem\s*!important;[\s\S]*padding-right:\s*0\.5rem\s*!important;/);
+    assert.match(transitionsCss, /header\.fixed\s+\.header-blur-target\s*>\s*a:first-child\s*\{[\s\S]*flex:\s*1 1 auto;[\s\S]*max-width:\s*none;[\s\S]*min-width:\s*0;/);
+    assert.match(transitionsCss, /header\.fixed\s+\.header-blur-target\s*>\s*div:first-of-type\s*\{[\s\S]*flex:\s*0 0 auto;[\s\S]*gap:\s*0\.375rem;/);
 });
 
 test('header offset sync ignores impossible measured heights', () => {
@@ -242,6 +239,7 @@ test('shell history back marks framed pages for scroll restoration', () => {
     assert.match(shellRouterJs, /if \(options\.restoreScroll\) \{\s*requestFrameScrollRestore\(target\);\s*\}/, 'history navigation writes the restore request');
     assert.doesNotMatch(shellRouterJs, /setTimeout\([\s\S]{0,80}clearFrameScrollRestore/, 'no timer-delayed clear: it deletes requests rewritten by a quick second back navigation');
     assert.match(shellRouterJs, /function navigateShell\(targetHref, options = \{\}\)\s*\{[\s\S]*?clearFrameScrollRestore\(contentPath\);/, 'forward navigations clear stale restore requests so fresh visits start at the top');
+    assert.match(shellRouterJs, /window\.addEventListener\('popstate', \(\) => \{\s*syncFrameToLocation\(\{\s*restoreScroll:\s*true\s*\}\);\s*\}\);/);
 });
 
 test('frame replacement freezes the old document before its scroll resets to zero', () => {
@@ -252,6 +250,7 @@ test('frame replacement freezes the old document before its scroll resets to zer
     assert.match(shellRouterJs, /window\.addEventListener\('pagehide', freezeFrameScrollSaves\);/, 'shell unload freezes the frame before child pagehide fires');
     assert.match(scrollMemoryJs, /if \(savesFrozen \|\| restoreInProgress\) return;/, 'frozen documents skip every save path');
     assert.match(scrollMemoryJs, /runtime\.setFreezeScrollSaves\(freezeScrollSaves\);/, 'freeze is exposed through the runtime bridge');
+    assert.match(scrollMemoryJs, /window\.addEventListener\('pageshow', \(event\) => \{\s*savesFrozen = false;/, 'bfcache revival lifts the freeze');
     assert.match(runtimeJs, /setFreezeScrollSaves\(fn\)\s*\{[\s\S]*FreecatFreezeScrollSaves/);
 });
 
@@ -309,8 +308,8 @@ test('header search opens a blank overlay and closes from blank space', () => {
     assert.match(headerSearchJs, /if \(!resultsContent \|\| !resultsContent\.contains\(e\.target\)\) \{\s*closeHeaderSearch\(true\);/);
     assert.match(headerSearchJs, /const keepBlankOverlay = searchContainer[\s\S]*doc\.body\.classList\.contains\('search-active'\)/);
     assert.match(headerSearchJs, /overlay\.innerHTML = '';\s*updateSearchOverlayOffset\(overlay\);\s*overlay\.dataset\.open = 'true';/);
-    assert.match(headerSearchJs, /<div data-search-results-content class="freecat-search-results">/);
-    assert.match(headerSearchJs, /<div class="freecat-search-result-list">\s*\$\{resultsHtml\}\s*<\/div>/);
+    assert.match(headerSearchJs, /<div data-search-results-content class="max-w-\[1200px\]/);
+    assert.match(headerSearchJs, /<div class="freecat-post-card-list">\s*\$\{resultsHtml\}\s*<\/div>/);
     assert.match(mainJs, /headerSearchModule\.init\(\{[\s\S]*fitTagRows,/);
     assert.match(headerSearchJs, /const fitTagRows = deps\.fitTagRows;/);
     assert.match(headerSearchJs, /initDeferredImages\(\);\s*fitTagRows\(\);/);
@@ -354,6 +353,6 @@ test('main delegates copy and floating navigation to focused assets', () => {
     assert.doesNotMatch(mainJs, /function touchesVisibleContentEdge/, 'floating nav 实现不再出现在 main.js');
     assert.match(codeCopyJs, /checkbox\.getAttribute\('data-copy-source'\)/);
     assert.match(codeCopyJs, /checkbox\.getAttribute\('data-copy-target'\)/);
-    assert.match(codeCopyJs, /textFromSource\(button\) \|\| textFromTarget\(button\) \|\| textFromCodeBlock\(button\)/);
+    assert.match(codeCopyJs, /textFromSource\(checkbox\) \|\| textFromTarget\(checkbox\) \|\| textFromCodeBlock\(checkbox\)/);
     assert.match(floatingNavJs, /function touchesVisibleContentEdge\(\)/);
 });

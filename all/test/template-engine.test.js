@@ -89,23 +89,18 @@ test('404 template includes the theme bootstrap only once', () => {
     assert.equal(count, 1);
 });
 
-test('content templates keep their first render passive until playback', () => {
+test('content templates include the shell bootstrap for direct clean URLs', () => {
     const engine = createTestEngine('https://example.com');
     const indexHtml = engine.loadTemplate('template_index.html');
     const postHtml = engine.loadTemplate('template_post.html');
 
     for (const html of [indexHtml, postHtml]) {
-        const { document } = require('linkedom').parseHTML(html);
-        const scripts = [...document.querySelectorAll('script')].filter(node => node.textContent.includes('legacy.startsWith'));
-        assert.equal(scripts.length, 1);
-        const listeners = [];
-        const window = { location: new URL('https://example.com/') };
-        window.self = window.top = window;
-        new Function('window', 'document', scripts[0].textContent)(window, {
-            addEventListener(type) { listeners.push(type); },
-            write() { assert.fail('The first render must not replace the article'); }
-        });
-        assert.deepEqual(listeners, []);
+        assert.equal(html.includes('window.__FREECAT_SHELL_DOCUMENT__'), true);
+        assert.equal(html.includes("fetch('/shell', { credentials: 'same-origin' })"), true);
+        assert.equal(html.includes('data-freecat-shell-root="true"'), false);
+        assert.equal(html.includes('data-freecat-shell[-]root'), true);
+        assert.equal(html.includes('htmlText.indexOf(\'id="freecat-content-frame"\')'), false);
+        assert.equal(html.includes('document.write(htmlText)'), true);
     }
 });
 
@@ -175,13 +170,13 @@ test('root asset urls receive the build asset version', () => {
     assert.equal(html.includes('src="/assets/main.js?v=test-version"'), true);
 });
 
-test('shared text fonts preload matching versioned faces while code fonts load on demand', () => {
+test('shared font preloads and font faces use the same versioned urls', () => {
     const html = createTestEngine('https://example.com', { assetVersion: 'test-version' }).loadTemplate('template_index.html');
     const preloads = new Set(preloadFontHrefs(html));
     const fontFaces = new Set(fontFaceSrcUrls(html));
 
-    assert.deepEqual(preloads, new Set([...fontFaces].filter(href => !href.includes('freecat-jetbrains-mono-'))));
-    assert.equal([...fontFaces].every(href => href.endsWith('?v=test-version')), true);
+    assert.deepEqual(preloads, fontFaces);
+    assert.equal([...preloads].every(href => href.endsWith('?v=test-version')), true);
 });
 
 test('theme bootstrap prevents initial restored scroll on normal entry and reload', () => {
@@ -433,28 +428,4 @@ test('nav audio normalizes feijipan share pages to playable parser urls', () => 
     const parserUrl = 'https://lz.qaiu.top/parser?url=https%3A%2F%2Fshare.feijipan.com%2Fs%2Fgmbl4ECj';
     assert.equal(html.includes(`data-audio-src="${parserUrl}"`), true);
     assert.equal(html.includes('&quot;src&quot;:&quot;' + parserUrl + '&quot;'), true);
-});
-
-test('home hero keeps bilingual title and description distinct and safe', () => {
-    const siteConfig = {
-        hero_title: 'Hi, I am FreeCat.创作 <script>alert(1)</script>',
-        hero_subtitle: 'Explore freely.自由探索。'
-    };
-    const { document } = require('linkedom').parseHTML(
-        createTestEngine('https://example.com', { siteConfig }).loadTemplate('template_index.html')
-    );
-    const title = document.querySelector('.freecat-sidebar-slogan');
-    const description = document.querySelector('.freecat-sidebar-description');
-    assert.equal(title.querySelector('.freecat-hero-line-first').textContent, 'Hi, I am FreeCat.');
-    assert.ok(title.querySelector('.freecat-hero-line-second').textContent.includes('<script>alert(1)</script>'));
-    assert.equal(description.querySelector('.freecat-hero-line-first').textContent, 'Explore freely.');
-    assert.equal(description.querySelector('.freecat-hero-line-second').textContent, '自由探索。');
-    assert.equal(title.querySelector('script'), null);
-
-    const mono = require('linkedom').parseHTML(createTestEngine('https://example.com', {
-        siteConfig: { hero_title: 'One headline', hero_subtitle: 'Single sentence' }
-    }).loadTemplate('template_index.html')).document;
-    assert.equal(mono.querySelector('.freecat-sidebar-slogan').textContent, 'One headline');
-    assert.equal(mono.querySelector('.freecat-sidebar-description').textContent, 'Single sentence');
-    assert.equal(mono.querySelector('.freecat-hero-line-first'), null);
 });

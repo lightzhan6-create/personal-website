@@ -1,15 +1,15 @@
 /* ===== Refined code block surface ===== */
 .prose .code-block-container {
-    --code-surface: #fafafb;
-    --code-surface-soft: #f7f8fa;
-    --code-border: #d8e0e9;
+    --code-surface: #f8fafc;
+    --code-surface-soft: #f3f6fa;
+    --code-border: #d8e1eb;
     --code-rule: #e5ebf2;
     --code-text: #182233;
-    --code-muted: #596a80;
+    --code-muted: #6f7b8c;
     --code-shadow: none;
     position: relative;
     overflow: hidden !important;
-    border: 1px solid var(--code-rule) !important;
+    border: 1px solid var(--code-border) !important;
     border-radius: 8px !important;
     background: var(--code-surface) !important;
     box-shadow: var(--code-shadow) !important;
@@ -22,7 +22,7 @@
     --code-border: #2a3648;
     --code-rule: #253244;
     --code-text: #d9e2ee;
-    --code-muted: #a4b1c3;
+    --code-muted: #8c9aad;
     --code-shadow: none;
 }
 
@@ -44,9 +44,9 @@
 }
 
 .prose .code-block-container > .flex:first-child {
-    min-height: 44px;
+    min-height: 38px;
     padding: 0 10px 0 18px !important;
-    background: var(--code-surface) !important;
+    background: var(--code-surface-soft) !important;
     border-bottom: 1px solid var(--code-rule) !important;
 }
 
@@ -54,7 +54,7 @@
 .prose .code-block-container > .flex:first-child > span:first-child {
     color: var(--code-muted) !important;
     font-family: inherit !important;
-    font-size: 0.875rem !important;
+    font-size: 0.68rem !important;
     line-height: 1 !important;
     font-weight: 500 !important;
     letter-spacing: 0.04em !important;
@@ -66,14 +66,18 @@
 }
 
 .prose .code-content {
-    --code-fold-duration: 220ms;
+    --code-fold-duration: 420ms;
     --code-fold-ease: cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
-    padding: 1.125rem 1.25rem !important;
+    padding: 1.35rem 1.55rem !important;
     background: var(--code-surface) !important;
-    transition: max-height var(--code-fold-duration) var(--code-fold-ease) !important;
+    scrollbar-color: #c5cfdb transparent;
+    scrollbar-width: thin;
+    transition:
+        max-height var(--code-fold-duration) var(--code-fold-ease),
+        scrollbar-color 220ms ease-out !important;
     box-sizing: border-box;
-    overflow: clip !important;
+    overflow-x: hidden !important;
     overflow-anchor: none;
     will-change: max-height;
 }
@@ -85,26 +89,26 @@
     bottom: 0;
     left: 0;
     display: block;
-    /* 覆盖数行文字再进入纯色区域，避免裁切点看起来像一条硬边。 */
-    height: 7rem;
-    z-index: 1;
-    background: linear-gradient(to bottom,
-        color-mix(in srgb, var(--code-surface) 0%, transparent),
-        color-mix(in srgb, var(--code-surface) 35%, transparent) 30%,
-        color-mix(in srgb, var(--code-surface) 85%, transparent) 70%,
-        var(--code-surface) 92%);
+    height: 5.25rem;
+    background: linear-gradient(to bottom, rgba(247, 249, 252, 0), var(--code-surface) 86%);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .prose .collapsed-code .code-content::after {
     opacity: 1;
 }
 
+.dark .prose .code-content::after {
+    background: linear-gradient(to bottom, rgba(15, 23, 36, 0), var(--code-surface) 86%);
+}
+
 .prose .expanded-code .code-content {
     padding-bottom: 5.2rem !important;
-    overflow: visible !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    scrollbar-width: none;
 }
 
 .prose .code-expanding .code-content {
@@ -115,13 +119,35 @@
     overflow: hidden !important;
 }
 
+.dark .prose .code-content {
+    scrollbar-color: #3a4a61 transparent;
+}
+
+.prose .expanded-code .code-content::-webkit-scrollbar {
+    display: none;
+}
+
 .prose .expanded-code .code-content pre {
     overflow: visible !important;
 }
 
+.prose .code-content::-webkit-scrollbar {
+    height: 8px;
+}
+
+.prose .code-content::-webkit-scrollbar-thumb {
+    border: 2px solid var(--code-surface);
+    border-radius: 999px;
+    background: #c5cfdb;
+}
+
+.dark .prose .code-content::-webkit-scrollbar-thumb {
+    background: #3a4a61;
+}
+
 .prose .code-content pre {
     color: var(--code-text) !important;
-    font-family: "Freecat JetBrains Mono", "Freecat Noto Sans SC", "Freecat Noto Emoji", "Freecat Noto Symbols", monospace !important;
+    font-family: inherit !important;
     width: auto;
     min-width: 0;
     max-width: 100%;
@@ -132,9 +158,9 @@
 
 .prose .code-content pre code {
     color: var(--code-text) !important;
-    font-family: "Freecat JetBrains Mono", "Freecat Noto Sans SC", "Freecat Noto Emoji", "Freecat Noto Symbols", monospace !important;
-    font-size: 1rem !important;
-    line-height: 1.75 !important;
+    font-family: inherit !important;
+    font-size: 0.9rem !important;
+    line-height: 1.72 !important;
     font-weight: 400 !important;
     white-space: pre-wrap !important;
     overflow-wrap: anywhere !important;
@@ -149,7 +175,12 @@
 .prose .code-fold-controls {
     gap: 0;
     background:
-        linear-gradient(to top, var(--code-surface) 16%, color-mix(in srgb, var(--code-surface) 92%, transparent) 58%, transparent) !important;
+        linear-gradient(to top, var(--code-surface) 16%, rgba(247, 249, 252, 0.92) 58%, rgba(247, 249, 252, 0)) !important;
+}
+
+.dark .prose .code-fold-controls {
+    background:
+        linear-gradient(to top, var(--code-surface) 16%, rgba(15, 23, 36, 0.92) 58%, rgba(15, 23, 36, 0)) !important;
 }
 
 .prose .code-fold-controls:not(.absolute) {
@@ -221,9 +252,9 @@
 .prose .code-fold-controls.code-controls-opening {
     transition:
         opacity 180ms ease-out,
-        top 220ms cubic-bezier(0.22, 1, 0.36, 1),
-        left 220ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        top 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        left 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
         background-color 180ms ease-out,
         border-color 180ms ease-out;
 }
@@ -249,15 +280,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    min-width: 40px;
+    height: 26px;
+    min-width: 38px;
     margin: 0 1px;
     padding: 0 0.65rem;
     border: 0;
     border-radius: 999px;
     color: var(--code-muted);
     background: transparent;
-    font-size: 0.875rem;
+    font-size: 0.76rem;
     line-height: 1;
     font-weight: 400;
     letter-spacing: 0;
@@ -302,6 +333,7 @@
 .prose .code-fold-controls .fold-toggle-btn:focus-visible {
     color: var(--code-text) !important;
     background: transparent !important;
+    outline: none;
 }
 
 .dark .prose .code-nav-btn {
@@ -314,17 +346,12 @@
 .dark .prose .code-fold-controls .fold-toggle-btn:focus-visible {
     color: #e2e8f0 !important;
     background: transparent !important;
+    outline: none;
 }
 
 .prose .fold-toggle-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.375rem;
-    width: auto !important;
-    min-width: 40px;
-    padding: 0 0.75rem;
-    height: 40px !important;
+    width: 30px !important;
+    height: 26px !important;
     margin: 0 1px !important;
     color: var(--code-muted) !important;
     border: 0 !important;
@@ -347,24 +374,7 @@
 
 .prose .fold-toggle-btn span {
     color: currentColor !important;
-    font-size: 0.875rem !important;
-    white-space: nowrap;
-}
-
-/* 键盘焦点有独立轮廓，不依赖轻微颜色变化。 */
-.prose .code-fold-controls :is(.code-nav-btn, .fold-toggle-btn):focus-visible {
-    outline: 2px solid var(--code-text);
-    outline-offset: 2px;
-}
-
-@media (max-width: 767px) {
-    .prose .code-content {
-        padding: 1rem !important;
-    }
-
-    .prose .code-content pre code {
-        font-size: 0.9375rem !important;
-    }
+    font-size: 0.98rem !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -386,21 +396,3 @@
 .prose .collapsed-code .code-fold-controls {
     display: flex !important;
 }
-
-/* 复制按钮只显示居中图标，状态文字沿用共享按钮的读屏提示。 */
-.code-copy-btn {
-    width: 32px;
-    min-width: 0;
-    height: 32px;
-    padding: 0;
-    border-radius: 6px;
-}
-
-/* 视觉外框缩小，但保留工具栏内完整的触屏点击范围。 */
-.code-copy-btn::after {
-    content: '';
-    position: absolute;
-    inset: -6px -4px;
-}
-
-.code-copy-btn svg { width: 0.875rem; height: 0.875rem; }

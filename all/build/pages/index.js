@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const shared = require('../../shared/shared.js');
 const postCardTemplate = require('../../shared/post-card-template.js');
-const { generatePaginationHtml, getTotalPages } = require('../pagination.js');
+const { generatePaginationHtml } = require('../pagination.js');
 const seo = require('../seo.js');
 const { replacePlaceholders } = require('../template-engine.js');
 const { normalizePostTags } = require('../article-model.js');
@@ -25,7 +25,7 @@ function renderPostCardForList(post, index = 0, options = {}) {
         ? Number(cardOptions.animationDelayStep)
         : 50;
     const previewText = post.preview || post.excerpt;
-    const desktopTitleLayout = cardOptions.layout === 'compact-grid' || cardOptions.layout === 'reading-list'
+    const desktopTitleLayout = cardOptions.layout === 'compact-grid'
         ? null
         : getDesktopTitleLayout(post.title, { hasCover: !!post.cover });
 
@@ -42,7 +42,6 @@ function renderPostCardForList(post, index = 0, options = {}) {
         sortDate: post.date.valueOf(),
         sortModifiedDate: post.modifiedDate.valueOf(),
         tagsHtml,
-        tags,
         cover: post.cover,
         coverWidth: post.coverWidth,
         coverHeight: post.coverHeight,
@@ -54,19 +53,20 @@ function renderPostCardForList(post, index = 0, options = {}) {
 }
 
 function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, outputDir, recentPostsSidebarHtml }) {
-    const totalPages = getTotalPages(posts.length, postsPerPage);
+    const totalPages = postsPerPage === 0 ? 1 : Math.ceil(posts.length / postsPerPage);
 
     for (let page = 1; page <= totalPages; page++) {
         const start = (page - 1) * postsPerPage;
         const pagePosts = postsPerPage === 0 ? posts : posts.slice(start, start + postsPerPage);
 
-        const postsHtml = pagePosts.map((post, index) => renderPostCardForList(post, index, { layout: 'reading-list' })).join('');
+        const postsHtml = pagePosts.map(renderPostCardForList).join('');
         const paginationBtns = generatePaginationHtml(page, totalPages);
         const title = page === 1
             ? (siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog')
             : `${siteConfig.site_title || siteConfig.site_name || 'FreeCat Blog'} - Page ${page}`;
         const canonicalPath = page === 1 ? '/' : `/page/${page}/`;
-        // 每页包含不同文章，保留自身 canonical 与可抓取的前后页链接。
+        // 分页页（page > 1）打 noindex,follow：让爬虫顺着链接发现文章页本身,
+        // 但不让分页页与首页产生重复内容信号互相稀释排名。
         const isPagination = page > 1;
         const pagination = isPagination
             ? {
@@ -81,6 +81,7 @@ function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, out
             siteConfig,
             seoConfig,
             image: seo.defaultImage(siteConfig, seoConfig),
+            noindex: isPagination,
             pagination
         });
         const jsonLd = page === 1 ? seo.renderWebsiteJsonLd({ siteConfig, seoConfig }) : '';
@@ -90,7 +91,6 @@ function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, out
             ['<!-- HOME_SEO_HEAD -->', seoHead],
             ['<!-- HOME_JSONLD -->', jsonLd],
             ['<!-- POSTS_LIST_PLACEHOLDER -->', postsHtml],
-            ['<!-- HOME_POST_COUNT -->', String(posts.length)],
             ['<!-- PAGINATION_BUTTONS_PLACEHOLDER -->', paginationBtns],
             ['<!-- PAGINATION_PLACEHOLDER -->', ''],
             ['<!-- RECENT_POSTS_SIDEBAR_PLACEHOLDER -->', recentPostsSidebarHtml || '']
@@ -100,7 +100,7 @@ function generateAll({ posts, template, postsPerPage, siteConfig, seoConfig, out
             // 首页内容同一份 HTML 落两个地址：
             //   /     (index.html) —— 站点规范首页，内容直出，爬虫与无 JS 访客直接读到文章列表；
             //   /home (home.html)  —— 外壳 iframe 的默认内容页，canonical 归并到 /。
-            // 首次访问与播放保留完整正文；站内导航时保留顶栏和播放器。
+            // 真人浏览器访问任一地址时，由 SHELL_BOOTSTRAP_SCRIPT 换壳升级为外壳（顶栏音频无缝）体验。
             fs.writeFileSync(path.join(outputDir, 'index.html'), outputHtml, 'utf-8');
             fs.writeFileSync(path.join(outputDir, 'home.html'), outputHtml, 'utf-8');
         } else {
