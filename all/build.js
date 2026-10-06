@@ -43,6 +43,8 @@ const indexPage = require('./build/pages/index.js');
 const allPage = require('./build/pages/all.js');
 const searchPage = require('./build/pages/search.js');
 const aboutPage = require('./build/pages/about.js');
+const videosPage = require('./build/pages/videos.js');
+const galleryPage = require('./build/pages/gallery.js');
 const notFoundPage = require('./build/pages/notfound.js');
 const shellPage = require('./build/pages/shell.js');
 const { generateSitemap, generateRobotsTxt, generateLlmsTxt, generateFeed, generateOpenSearchXml } = require('./build/pages/sitemap.js');
@@ -51,10 +53,17 @@ const { generateSitemap, generateRobotsTxt, generateLlmsTxt, generateFeed, gener
 const DEFAULT_POSTS_PER_PAGE = 8;
 const DEFAULT_RECENT_POSTS_LIMIT = 8;
 const DIRS = {
-    posts: path.join(__dirname, '..', 'writing'),
+    // Site content continues to live in the project's original content tree.
+    // `writing` is the upstream demo source and has no published blog posts.
+    posts: path.join(__dirname, '..', 'content', 'posts'),
     assets: path.join(__dirname, 'src', 'assets'),
     shared: path.join(__dirname, 'shared'),
     images: path.join(__dirname, 'image'),
+    products: path.join(__dirname, '..', 'public', 'products'),
+    productUploads: path.join(__dirname, '..', 'public', 'uploads', 'products'),
+    publicUploads: path.join(__dirname, '..', 'public', 'uploads'),
+    videos: path.join(__dirname, '..', 'videos'),
+    gallery: path.join(__dirname, '..', 'content', 'gallery'),
     output: path.join(__dirname, 'dist'),
     templates: path.join(__dirname, 'src'),
     partials: path.join(__dirname, 'src', 'partials'),
@@ -230,6 +239,9 @@ const tplPost = engine.loadTemplate('template_post.html');
 const tplIndexAll = engine.loadTemplate('template_index_all.html');
 const tplSearch = engine.loadTemplate('template_index_search.html');
 const tplAbout = engine.loadTemplate('template_index_About.html');
+const tplVideos = engine.loadTemplate('template_videos.html');
+const tplVideo = engine.loadTemplate('template_video.html');
+const tplGallery = engine.loadTemplate('template_gallery.html');
 const tplNotFound = engine.loadTemplate('template_index_404.html');
 const tplShell = engine.loadTemplate('template_shell.html');
 
@@ -269,6 +281,8 @@ shellPage.generate({ template: tplShell, siteConfig, seoConfig, outputDir: DIRS.
 allPage.generate({ posts: allPosts, template: tplIndexAll, siteConfig, seoConfig, outputDir: DIRS.output });
 searchPage.generate({ posts: allPosts, template: tplSearch, siteConfig, seoConfig, outputDir: DIRS.output, recentPostsSidebarHtml: recentPostsSidebarHomeWrapperHtml });
 aboutPage.generate({ template: tplAbout, siteConfig, seoConfig, aboutConfig, outputDir: DIRS.output });
+videosPage.generate({ videosDir: DIRS.videos, listTemplate: tplVideos, detailTemplate: tplVideo, siteConfig, seoConfig, outputDir: DIRS.output });
+galleryPage.generate({ galleryDir: DIRS.gallery, listTemplate: tplGallery, siteConfig, seoConfig, outputDir: DIRS.output });
 notFoundPage.generateNotFoundPage({ template: tplNotFound, outputDir: DIRS.output });
 generateSitemap({ posts: allPosts, siteConfig, seoConfig, postsPerPage: POSTS_PER_PAGE, outputDir: DIRS.output });
 generateRobotsTxt({ siteConfig, seoConfig, outputDir: DIRS.output });
@@ -292,6 +306,9 @@ fs.writeFileSync(path.join(katexOutputDir, 'katex.min.css'), katexCss.replace(',
 fs.copyFileSync(path.join(katexPackageDir, 'LICENSE'), path.join(katexOutputDir, 'LICENSE'));
 if (fs.existsSync(DIRS.shared)) copyDir(DIRS.shared, path.join(DIRS.output, 'assets'));
 if (fs.existsSync(DIRS.images)) copyDir(DIRS.images, path.join(DIRS.output, 'image'));
+if (fs.existsSync(DIRS.publicUploads)) copyDir(DIRS.publicUploads, path.join(DIRS.output, 'uploads'), { ignore: ['products'] });
+if (fs.existsSync(DIRS.products)) copyDir(DIRS.products, path.join(DIRS.output, 'products'));
+if (fs.existsSync(DIRS.productUploads)) copyDir(DIRS.productUploads, path.join(DIRS.output, 'uploads', 'products'));
 
 // ===== 6.6 生成 JS bundle（CSS bundle 需等 Tailwind 编译完成，见第 8 步之后）=====
 console.log('🧩 Writing JS bundles...');
