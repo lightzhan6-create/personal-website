@@ -93,11 +93,14 @@ test('image alt, title, and caption are rendered as text', () => {
     assert.equal(html.includes('&lt;b&gt;caption&lt;/b&gt;'), true);
 });
 
-test('markdown images render the loading spinner element', () => {
-    const html = parseMarkdown('![Freecat](/image/freecat.png)');
+test('markdown images use the native lazy-loading path without a script-gated placeholder', () => {
+    const html = parseMarkdown('![Freecat](/image/freecat.png "1200x800")');
 
-    assert.equal(html.includes('class="post-image-loader placeholder-loader"'), true);
-    assert.equal(html.includes('<span class="loader"></span>'), true);
+    assert.equal(html.includes('src="/image/freecat.png"'), true);
+    assert.equal(html.includes('data-src='), false);
+    assert.equal(html.includes('loading="lazy" decoding="async"'), true);
+    assert.equal(html.includes('width="1200" height="800"'), true);
+    assert.equal(html.includes('class="post-image-loader placeholder-loader"'), false);
 });
 
 test('markdown image syntax marks every rendered block for unified centering', () => {
@@ -520,7 +523,8 @@ test('markdown image syntax renders image resource URLs without extensions as im
         assert.equal(html.includes('class="external-embed external-embed-link'), false);
     }
 
-    assert.equal(googleThumbnailHtml.includes('data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFswDLYwh-h2EQ2KuTTnlitYwx-qseXtx7F4idCEFg2A&amp;s=10"'), true);
+    assert.equal(googleThumbnailHtml.includes('src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFswDLYwh-h2EQ2KuTTnlitYwx-qseXtx7F4idCEFg2A&amp;s=10"'), true);
+    assert.equal(googleThumbnailHtml.includes('data-src='), false);
 });
 
 test('inline-code headings keep their own text in the table of contents', () => {

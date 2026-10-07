@@ -510,8 +510,8 @@ test('post page binds latest update links to rendered image targets', () => {
 
     assert.match(html, /href="#latest-update-1"/);
     assert.match(html, /href="#latest-update-2"/);
-    assert.match(html, /<figure id="latest-update-1" class="post-image markdown-image-block[\s\S]*data-src="\/image\/new-cover\.png"[\s\S]*<\/figure>/);
-    assert.match(html, /<figure id="latest-update-2" class="post-image markdown-image-block[\s\S]*data-src="\/image\/cover\.png"[\s\S]*<\/figure>/);
+    assert.match(html, /<figure id="latest-update-1" class="post-image markdown-image-block[\s\S]*src="\/image\/new-cover\.png"[\s\S]*<\/figure>/);
+    assert.match(html, /<figure id="latest-update-2" class="post-image markdown-image-block[\s\S]*src="\/image\/cover\.png"[\s\S]*<\/figure>/);
     assert.match(html, /<figure id="latest-update-2" class="post-image markdown-image-block[\s\S]*alt="封面"[\s\S]*<\/figure>/);
 });
 

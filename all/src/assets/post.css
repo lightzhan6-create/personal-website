@@ -262,20 +262,9 @@ article {
     margin-inline: auto !important;
 }
 
-.prose figure.post-image .post-image-placeholder {
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: center;
-}
-
-.prose figure.post-image .post-image-loaded {
-    aspect-ratio: auto;
+.prose figure.post-image .post-image-img {
+    display: block;
     object-fit: contain;
-}
-
-.prose figure.post-image .post-image-loaded+.post-image-loader,
-.prose figure.post-image .post-image-failed+.post-image-loader {
-    display: none;
 }
 
 .prose figure.external-embed {

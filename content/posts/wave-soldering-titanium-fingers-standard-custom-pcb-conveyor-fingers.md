@@ -15,16 +15,16 @@ tags:
   - Custom Titanium Finger
   - THT Automation
   - Southern Machinery
-cover: /uploads/2026/09/wave-soldering-titanium-fingers/wave-soldering-titanium-fingers-cover.png
+cover: /uploads/2026/09/wave-soldering-titanium-fingers/wave-soldering-titanium-fingers-cover.webp
 cover_width: 2244
 cover_height: 1263
 gallery:
-  - /uploads/2026/09/wave-soldering-titanium-fingers/titanium-fingers-on-conveyor-chain.png
-  - /uploads/2026/09/wave-soldering-titanium-fingers/l-type-titanium-finger-dimensions.png
-  - /uploads/2026/09/wave-soldering-titanium-fingers/custom-titanium-finger-dimensions.png
-  - /uploads/2026/09/wave-soldering-titanium-fingers/reference-technical-drawing.png
-  - /uploads/2026/09/wave-soldering-titanium-fingers/bulk-packed-titanium-fingers.png
-  - /uploads/2026/09/wave-soldering-titanium-fingers/rohs-sample-test-documentation.png
+  - /uploads/2026/09/wave-soldering-titanium-fingers/titanium-fingers-on-conveyor-chain.webp
+  - /uploads/2026/09/wave-soldering-titanium-fingers/l-type-titanium-finger-dimensions.webp
+  - /uploads/2026/09/wave-soldering-titanium-fingers/custom-titanium-finger-dimensions.webp
+  - /uploads/2026/09/wave-soldering-titanium-fingers/reference-technical-drawing.webp
+  - /uploads/2026/09/wave-soldering-titanium-fingers/bulk-packed-titanium-fingers.webp
+  - /uploads/2026/09/wave-soldering-titanium-fingers/rohs-sample-test-documentation.webp
 author: Light
 youtube:
 seo_title: "Custom Titanium Fingers for Wave Soldering Machines | L-Type, V-Type, Flat-Top, Ultra-Thin & J-Hook"
@@ -40,7 +40,7 @@ In a wave soldering line, the PCB does not simply travel through the fluxer, pre
 
 This guide explains designs, replacement checks and machine matching.
 
-![Wave soldering titanium finger samples](/uploads/2026/09/wave-soldering-titanium-fingers/titanium-finger-samples.png)
+![Wave soldering titanium finger samples](/uploads/2026/09/wave-soldering-titanium-fingers/titanium-finger-samples.webp "1245x936")
 
 *Examples of wave soldering titanium finger profiles.*
 
@@ -81,7 +81,7 @@ An L-type titanium finger uses a bent profile to create its mounting and clampin
 
 The supplied L-type example shows why a complete dimensional check is useful. It identifies an approximately 56 mm overall height, 18 mm and 23 mm upper dimensions, 1.5 mm material thickness and a 5 mm lower feature. Those values describe that reference part only; they should not be treated as a universal L-type standard.
 
-![L-type titanium finger reference dimensions](/uploads/2026/09/wave-soldering-titanium-fingers/l-type-titanium-finger-dimensions.png)
+![L-type titanium finger reference dimensions](/uploads/2026/09/wave-soldering-titanium-fingers/l-type-titanium-finger-dimensions.webp "885x477")
 
 *L-type titanium finger reference dimensions supplied for matching.*
 
@@ -118,7 +118,7 @@ The key details are finger width and height, material thickness, upper mounting 
 
 The image below illustrates two views of a customised profile. It gives a 20 mm upper dimension, 17 mm face width, 44 mm vertical section and 10 mm lower feature. It is a useful example of the way a part can be defined from measurable geometry, rather than evidence that every finger uses the same specification.
 
-![Custom titanium finger dimension reference](/uploads/2026/09/wave-soldering-titanium-fingers/custom-titanium-finger-dimensions.png)
+![Custom titanium finger dimension reference](/uploads/2026/09/wave-soldering-titanium-fingers/custom-titanium-finger-dimensions.webp "1536x1024")
 
 *A customised titanium finger reference defined by key dimensions.*
 
@@ -128,7 +128,7 @@ An engineering drawing can provide details that a photograph cannot: bend radius
 
 The technical drawing shown below is a customer/reference drawing for replacement matching. It includes legacy machine context such as VITRONICS, DOOVER and SOLTEC, and is shown only as an example of how a drawing can support a custom fit. It does not indicate a partnership, authorisation or OEM relationship with any of those brands.
 
-![Reference technical drawing for wave soldering titanium finger matching](/uploads/2026/09/wave-soldering-titanium-fingers/reference-technical-drawing.png)
+![Reference technical drawing for wave soldering titanium finger matching](/uploads/2026/09/wave-soldering-titanium-fingers/reference-technical-drawing.webp "711x491")
 
 *Reference drawing used as an example for drawing-based replacement matching.*
 
@@ -148,11 +148,11 @@ This sequence is particularly worthwhile where the equipment is old, the origina
 
 Wave soldering titanium fingers are used in wave soldering machines, lead-free lines, PCB conveyor systems, THT assembly, EMS production, spare-parts replacement and customised board-transport fixtures. Batch packing helps protect the formed profiles during handling and supports practical spare-parts management.
 
-![Titanium fingers installed on a wave soldering conveyor chain](/uploads/2026/09/wave-soldering-titanium-fingers/titanium-fingers-on-conveyor-chain.png)
+![Titanium fingers installed on a wave soldering conveyor chain](/uploads/2026/09/wave-soldering-titanium-fingers/titanium-fingers-on-conveyor-chain.webp "714x933")
 
 *Titanium fingers installed on a PCB conveyor chain.*
 
-![Batch-packed titanium fingers for wave soldering spare-parts supply](/uploads/2026/09/wave-soldering-titanium-fingers/bulk-packed-titanium-fingers.png)
+![Batch-packed titanium fingers for wave soldering spare-parts supply](/uploads/2026/09/wave-soldering-titanium-fingers/bulk-packed-titanium-fingers.webp "1122x1402")
 
 *Batch-packed titanium fingers prepared for spare-parts supply.*
 
@@ -162,7 +162,7 @@ For applicable wave soldering titanium alloy finger products, Southern Machinery
 
 The supplied certificate is based on testing of a submitted sample. Documentation should therefore be confirmed against the requested configuration rather than treated as a blanket statement for every customised geometry or all products.
 
-![RoHS sample-test documentation for wave soldering titanium alloy fingers](/uploads/2026/09/wave-soldering-titanium-fingers/rohs-sample-test-documentation.png)
+![RoHS sample-test documentation for wave soldering titanium alloy fingers](/uploads/2026/09/wave-soldering-titanium-fingers/rohs-sample-test-documentation.webp "996x1365")
 
 *Supplied RoHS sample-test documentation for wave soldering titanium alloy fingers.*
 

@@ -669,7 +669,6 @@ function buildRenderer() {
         if (isAudioUrl(href) || hasAudioMarker(text)) return addClassToRenderedBlock(renderAudioEmbed(href, text, { force: hasAudioMarker(text) }), 'markdown-image-block');
         if (!isLikelyImageUrl(href)) return addClassToRenderedBlock(renderExternalEmbed(href, text), 'markdown-image-block');
 
-        const fallbackSrc = '/image/404.png';
         const safeHref = escapeHtml(normalizeImageHref(href));
         const safeAlt = escapeRenderedText(text || '');
 
@@ -680,13 +679,13 @@ function buildRenderer() {
         const dims = parseImageDimensions(title);
         const visibleTitle = dims.cleanTitle;
         const safeTitle = visibleTitle ? ` title="${escapeRenderedText(visibleTitle)}"` : '';
+        const dimAttrs = dims.width && dims.height ? ` width="${dims.width}" height="${dims.height}"` : '';
         const caption = visibleTitle || (text || '').trim();
         const enableCaption = Boolean(activePostOptions && activePostOptions.enableImageCaptions);
 
         return `
     <figure class="post-image markdown-image-block relative w-full">
-        <img class="post-image-img post-image-placeholder" src="${fallbackSrc}" data-src="${safeHref}" alt="${safeAlt}"${safeTitle} loading="lazy" decoding="async" />
-        <div class="post-image-loader placeholder-loader" aria-hidden="true"><span class="loader"></span></div>
+        <img class="post-image-img" src="${safeHref}" alt="${safeAlt}"${safeTitle}${dimAttrs} loading="lazy" decoding="async" />
         ${(enableCaption && caption) ? `<figcaption class="image-caption block text-center text-sm text-slate-500 dark:text-slate-400">${escapeRenderedText(caption)}</figcaption>` : ''}
     </figure>`;
     };
