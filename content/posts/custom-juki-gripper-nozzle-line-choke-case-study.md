@@ -17,16 +17,16 @@ tags:
   - SMT Automation
   - Component Handling
   - Southern Machinery
-cover: /uploads/2026/09/juki-gripper-line-choke.png
-cover_width: 2048
-cover_height: 1536
+cover: /uploads/2026/09/juki-gripper-line-choke.webp
+cover_width: 1600
+cover_height: 1200
 gallery:
-  - /uploads/2026/09/line-choke-power-supply-board.png
-  - /uploads/2026/09/line-choke-component-views.png
-  - /uploads/2026/09/juki-gripper-line-choke.png
-  - /uploads/2026/09/custom-gripper-nozzle-close-up.png
-  - /uploads/2026/09/gripper-line-choke-dimensions.png
-  - /uploads/2026/09/juki-gripper-bench-pickup-test.png
+  - /uploads/2026/09/line-choke-power-supply-board.webp
+  - /uploads/2026/09/line-choke-component-views.webp
+  - /uploads/2026/09/juki-gripper-line-choke.webp
+  - /uploads/2026/09/custom-gripper-nozzle-close-up.webp
+  - /uploads/2026/09/gripper-line-choke-dimensions.webp
+  - /uploads/2026/09/juki-gripper-bench-pickup-test.webp
 author: Light
 youtube:
 seo_title: "Custom JUKI Gripper Nozzle for Line Choke Handling | SMT Case Study"
@@ -46,7 +46,7 @@ This was the situation with a line choke used on a power supply board. The compo
 
 It has exposed leads, copper windings, uneven surfaces, and very little flat area for a conventional vacuum nozzle.
 
-![Power supply board with line choke component](/uploads/2026/09/line-choke-power-supply-board.png)
+![Power supply board with line choke component](/uploads/2026/09/line-choke-power-supply-board.webp "507x365")
 
 So instead of starting with the question, “Which nozzle should we use?”, the better question was:
 
@@ -60,7 +60,7 @@ A top view alone does not tell you enough.
 
 From the bottom and side views, you can see the lead positions, winding height, structural gaps, and the areas that could potentially be used for gripping.
 
-![Line choke component views showing windings and leads](/uploads/2026/09/line-choke-component-views.png)
+![Line choke component views showing windings and leads](/uploads/2026/09/line-choke-component-views.webp "1200x1600")
 
 That matters because a vacuum nozzle needs a reasonably flat and sealed contact surface.
 
@@ -80,7 +80,7 @@ Instead of relying on an air seal, it holds the component mechanically from sele
 
 For this JUKI application, we used a custom pneumatic gripper nozzle with opposing jaws.
 
-![Custom JUKI-compatible gripper holding a line choke](/uploads/2026/09/juki-gripper-line-choke.png)
+![Custom JUKI-compatible gripper holding a line choke](/uploads/2026/09/juki-gripper-line-choke.webp "1600x1200")
 
 The goal was not simply to make something that could “grab” the component.
 
@@ -99,13 +99,13 @@ The jaws need enough opening clearance to approach the component without touchin
 
 At the same time, the closing stroke needs to be controlled well enough to hold the component without applying unnecessary force.
 
-![Custom gripper nozzle close-up](/uploads/2026/09/custom-gripper-nozzle-close-up.png)
+![Custom gripper nozzle close-up](/uploads/2026/09/custom-gripper-nozzle-close-up.webp "1600x1200")
 
 This is why actual samples are so useful.
 
 A drawing gives dimensions, but a real part often shows details that are easy to miss on paper.
 
-![Gripper and line choke shown with a measurement reference](/uploads/2026/09/gripper-line-choke-dimensions.png)
+![Gripper and line choke shown with a measurement reference](/uploads/2026/09/gripper-line-choke-dimensions.webp "1200x1600")
 
 ## Bench Pickup Test
 
@@ -115,7 +115,7 @@ The test was simple:
 
 **approach → grip → lift → hold → release**
 
-![Bench pickup test sequence for the line choke](/uploads/2026/09/juki-gripper-bench-pickup-test.png)
+![Bench pickup test sequence for the line choke](/uploads/2026/09/juki-gripper-bench-pickup-test.webp "1600x326")
 
 The gripper was able to pick up and hold the line choke under the demonstrated test conditions.
 

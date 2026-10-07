@@ -17,9 +17,9 @@ tags:
   - Supply Chain
   - PCB Materials
   - Southern Machinery
-cover: /uploads/2026/09/southern-machinery-smt-total-line-solutions.png
-cover_width: 1672
-cover_height: 941
+cover: /uploads/2026/09/southern-machinery-smt-total-line-solutions.webp
+cover_width: 1600
+cover_height: 900
 gallery:
 author: Light
 youtube:

@@ -18,7 +18,7 @@ tags:
   - Selective Soldering
   - PCB Cleaning
   - SMT Automation
-cover: /uploads/2026/09/pcba-production-problems/intelligent-smt-production-line.png
+cover: /uploads/2026/09/pcba-production-problems/intelligent-smt-production-line.webp
 cover_width: 1536
 cover_height: 1024
 gallery:
@@ -41,7 +41,7 @@ The challenge is that a small problem at one stage can easily become a much larg
 
 From my experience working with SMT and THT equipment, here are several common problems that electronics manufacturers face — and the equipment or process improvements that can help solve them.
 
-![Automated SMT production line with loader, pick-and-place machine, reflow oven and unloader](/uploads/2026/09/pcba-production-problems/intelligent-smt-production-line.png)
+![Automated SMT production line with loader, pick-and-place machine, reflow oven and unloader](/uploads/2026/09/pcba-production-problems/intelligent-smt-production-line.webp "1536x1024")
 
 ## 1. Solder Paste Printing Problems
 

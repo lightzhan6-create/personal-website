@@ -18,7 +18,7 @@ tags:
   - AI Infrastructure
   - Southern Machinery
   - Materials
-cover: /uploads/2026/09/electronics-manufacturing-weekly-brief-september-7-13.png
+cover: /uploads/2026/09/electronics-manufacturing-weekly-brief-september-7-13.webp
 cover_width: 1448
 cover_height: 1086
 gallery:

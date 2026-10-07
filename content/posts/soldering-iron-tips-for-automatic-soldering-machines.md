@@ -15,14 +15,14 @@ tags:
   - Soldering Machine Spare Parts
   - Southern Machinery
   - Custom Soldering Tip
-cover: /uploads/2026/09/soldering-iron-tips/soldering-iron-tips-cover.png
-cover_width: 2259
-cover_height: 1281
+cover: /uploads/2026/09/soldering-iron-tips/soldering-iron-tips-cover.webp
+cover_width: 1600
+cover_height: 907
 gallery:
-  - /uploads/2026/09/soldering-iron-tips/soldering-iron-tip-shapes.png
-  - /uploads/2026/09/soldering-iron-tips/pc-d-dv1-dv2-soldering-tip-dimensions.jpg
-  - /uploads/2026/09/soldering-iron-tips/soldering-iron-tip-layer-structure.png
-  - /uploads/2026/09/soldering-iron-tips/soldering-tip-in-automatic-soldering-machine.png
+  - /uploads/2026/09/soldering-iron-tips/soldering-iron-tip-shapes.webp
+  - /uploads/2026/09/soldering-iron-tips/pc-d-dv1-dv2-soldering-tip-dimensions.webp
+  - /uploads/2026/09/soldering-iron-tips/soldering-iron-tip-layer-structure.webp
+  - /uploads/2026/09/soldering-iron-tips/soldering-tip-in-automatic-soldering-machine.webp
 author: Light
 youtube:
 seo_title: "Automatic Soldering Machine Soldering Iron Tips: Types and Custom Solutions"
@@ -46,7 +46,7 @@ A soldering iron tip is the removable working end of a soldering tool. In an aut
 
 The tip has two jobs at once. It must carry heat quickly from the heating system, and it must present that heat to a very specific area without disturbing nearby parts. That is why it is more than a simple metal point. Its geometry, contact area, internal material and plated working surface are selected to balance heat transfer, durability and wetting.
 
-![Different soldering iron tip shapes for different soldering applications](/uploads/2026/09/soldering-iron-tips/soldering-iron-tip-shapes.png)
+![Different soldering iron tip shapes for different soldering applications](/uploads/2026/09/soldering-iron-tips/soldering-iron-tip-shapes.webp "1421x1107")
 
 *Different soldering iron tip shapes for different soldering applications.*
 
@@ -93,7 +93,7 @@ DV2 tips are another angled style that can provide a different contact direction
 
 In the dimensional drawing below, **A** refers to width, **B** to thickness and **C** to tinned length where applicable. The drawing contains the full model range, so there is no need to reproduce every size as a separate table here.
 
-![Examples of PC, D, DV1 and DV2 soldering iron tip dimensions and models](/uploads/2026/09/soldering-iron-tips/pc-d-dv1-dv2-soldering-tip-dimensions.jpg)
+![Examples of PC, D, DV1 and DV2 soldering iron tip dimensions and models](/uploads/2026/09/soldering-iron-tips/pc-d-dv1-dv2-soldering-tip-dimensions.webp "527x1600")
 
 *Examples of PC, D, DV1 and DV2 soldering iron tip dimensions and models.*
 
@@ -103,7 +103,7 @@ Although the visible working end is small, a soldering iron tip is usually a lay
 
 The exact materials, layer sequence and thickness vary by tip design and manufacturer. In practical terms, the important balance is between thermal conductivity, wear resistance, oxidation resistance and tinning performance. Good heat transfer is valuable, but the working face also needs to remain stable under normal operating conditions. A tip that wets solder properly but wears too quickly, or one that lasts but transfers heat poorly, is not a useful production solution.
 
-![Typical multilayer structure of a soldering iron tip](/uploads/2026/09/soldering-iron-tips/soldering-iron-tip-layer-structure.png)
+![Typical multilayer structure of a soldering iron tip](/uploads/2026/09/soldering-iron-tips/soldering-iron-tip-layer-structure.webp "1600x1204")
 
 *Typical multilayer structure of a soldering iron tip.*
 
@@ -121,7 +121,7 @@ Inside an automatic soldering machine, the tip normally works together with a he
 
 The exact sequence varies with the product, but position, temperature, solder quantity and dwell time are all controlled together. The tip is therefore a small consumable with a large influence on the machine's final soldering performance. If its surface is oxidised, damaged or mismatched to the joint, it can affect wetting, cycle time and repeatability even when the rest of the system is operating normally.
 
-![Soldering iron tip working inside an automatic soldering machine](/uploads/2026/09/soldering-iron-tips/soldering-tip-in-automatic-soldering-machine.png)
+![Soldering iron tip working inside an automatic soldering machine](/uploads/2026/09/soldering-iron-tips/soldering-tip-in-automatic-soldering-machine.webp "830x1077")
 
 *Soldering iron tip working inside an automatic soldering machine.*
 
