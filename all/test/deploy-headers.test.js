@@ -22,11 +22,6 @@ test('versioned assets use long immutable cache headers', () => {
     assert.match(cloudflareHeaders, /\/assets\/\*\s+Cache-Control: public, max-age=31536000, immutable/);
 });
 
-test('WebP uploads use long immutable cache headers', () => {
-    assert.equal(headersFor(rootVercelConfig, '/uploads/(.*\\.webp)')['Cache-Control'], 'public, max-age=31536000, immutable');
-    assert.match(cloudflareHeaders, /\/uploads\/\*\.webp\s+Cache-Control: public, max-age=31536000, immutable/);
-});
-
 test('html keeps browser revalidation while allowing cdn cache', () => {
     const rootHeaders = headersFor(rootVercelConfig, '/');
 

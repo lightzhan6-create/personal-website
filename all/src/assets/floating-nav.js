@@ -114,8 +114,9 @@
             return document.querySelectorAll([
                 'article',
                 '.post-card',
+                '.freecat-post-reading-panel',
                 '.freecat-post-toc-panel',
-                '.freecat-post-latest-update-panel',
+                '.freecat-post-latest-update-shell',
                 isHomePage ? null : '.freecat-home-sidebar',
                 isHomePage ? null : '.freecat-home-posts-inner',
                 '.layout-content-container',
