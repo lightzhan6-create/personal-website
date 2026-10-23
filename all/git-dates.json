@@ -6,7 +6,7 @@
     "custom-juki-gripper-nozzle-line-choke-case-study.md": "2026-10-07T11:26:09+08:00",
     "light-first-blog.md": "2026-09-07T16:21:04+08:00",
     "reflow-oven-profiling-for-reliable-pcba.md": "2026-09-17T11:30:39+08:00",
-    "replacement-custom-smt-nozzles-selection-guide.md": "2026-10-23T05:45:55.694Z",
+    "replacement-custom-smt-nozzles-selection-guide.md": "2026-10-23T13:47:12+08:00",
     "scm5600d-offline-pcba-cleaning-machine.md": "2026-10-23T10:59:04+08:00",
     "september-7-13-electronics-manufacturing-weekly-brief.md": "2026-10-07T11:26:09+08:00",
     "soldering-iron-tips-for-automatic-soldering-machines.md": "2026-10-07T11:26:09+08:00",
@@ -817,6 +817,129 @@
       ],
       "source": "commit",
       "commit": "979e05fd255a"
+    },
+    "replacement-custom-smt-nozzles-selection-guide.md": {
+      "items": [
+        "An SMT nozzle is a small part with an important job: it holds a component during pickup and placement. When a nozzle is worn, damaged or unsuitable for the component, the result can be inconsistent pickup, dropped parts or interruptions that need investigation.",
+        "Choosing a replacement starts with more than the size of the opening. The nozzle must match the machine and placement head, while its tip must suit the component's pickup surface. For unusual components, a custom nozzle or pickup tool may be a better fit after the application has been reviewed.",
+        "Replacement nozzles: start with the exact application",
+        "A replacement nozzle can be considered when an existing nozzle is damaged, worn, missing or needed as a spare. A compatible alternative is selected against a particular machine, head and nozzle reference; two parts that look similar in a photograph are not automatically interchangeable.",
+        "Before ordering, check:",
+        "Where available, send the machine manual reference or an original sample as well. Product origin, compatibility, available quantity and lead time should be confirmed for the specific quotation.",
+        "The photos above carry FUJI markings and are shown as identification references. The markings alone do not establish whether a supplied replacement is an original part, its origin, or compatibility with a particular head. FUJI is the property of its respective owner; the images do not imply manufacturer authorisation or affiliation.",
+        "Matching the nozzle tip to the component",
+        "Vacuum pickup relies on the contact between the nozzle tip and the component. A suitable tip needs enough usable contact area while avoiding sensitive surfaces, leads and neighbouring features. Component size is useful, but the flat pickup area, surface finish and centre of mass also matter.",
+        "For narrow, uneven or delicate parts, share a component drawing and photos from several angles. Include the permitted pickup area, component height, orientation in the feeder and any surfaces that must not be touched. The machine's vision, pickup and placement settings should be reviewed alongside the mechanical design.",
+        "When to consider a custom nozzle",
+        "A custom design may be useful when a standard nozzle cannot reach a suitable pickup area, when the component has an unusual shape, or when a special tip profile is needed to avoid contact with exposed features. The starting point is the actual component and the machine interface, not a generic nozzle outline.",
+        "Depending on the application, the review may cover tip geometry, contact material, overall length, mounting details and air passage. Where vacuum pickup is not practical, a mechanical gripper may be worth evaluating if the machine can support it. See our custom gripper case study for a line-choke example; its design is specific to that application.",
+        "The drawing illustrates the sort of information that can help a nozzle discussion: a pickup feature, component outline and relative heights. A drawing alone may not show all mounting and operating requirements, so samples and machine details remain important.",
+        "Using nozzle charts and dimensions",
+        "The reference image below shows nozzles labelled 500, 502, 504, 505, 506, 507 and 508, with different tip profiles and dimensions. It can help start a conversation about the intended shape. Treat the labels, dimensions and illustrations as reference information until they are checked against the actual nozzle, machine documentation or an approved drawing.",
+        "Validate before production use",
+        "Once a candidate nozzle has been selected or a custom sample has been made, verify the mounting fit and operation on the intended head. Run a controlled pickup and placement trial with representative components. Check pickup consistency, component orientation, placement results and whether the tip contacts or damages any sensitive area. Use the machine's approved maintenance and setup procedures throughout.",
+        "The number of samples and acceptance criteria should be agreed for the application. A successful trial on one component does not establish suitability for every part or machine configuration.",
+        "Request a replacement or custom-nozzle review",
+        "To help Southern Machinery review your requirement, send:",
+        "Machine brand, model, placement head and the existing nozzle code or part number. Clear photos of the nozzle tip, side, mounting end and markings, plus an old sample if available. Component part number, dimensions and drawings, including the preferred pickup area. The problem to solve, expected quantity and any required inspection or trial conditions.",
+        "Contact light@smthelp.com or visit Southern Machinery to discuss replacement and custom SMT nozzle options."
+      ],
+      "targets": [
+        {
+          "text": "An SMT nozzle is a small part with an important job: it holds a component during pickup and placement. When a nozzle is worn, damaged or unsuitable for the component, the result can be inconsistent pickup, dropped parts or interruptions that need investigation.",
+          "line": 40
+        },
+        {
+          "text": "Choosing a replacement starts with more than the size of the opening. The nozzle must match the machine and placement head, while its tip must suit the component's pickup surface. For unusual components, a custom nozzle or pickup tool may be a better fit after the application has been reviewed.",
+          "line": 42
+        },
+        {
+          "text": "## Replacement nozzles: start with the exact application",
+          "line": 49
+        },
+        {
+          "text": "A replacement nozzle can be considered when an existing nozzle is damaged, worn, missing or needed as a spare. A compatible alternative is selected against a particular machine, head and nozzle reference; two parts that look similar in a photograph are not automatically interchangeable.",
+          "line": 51
+        },
+        {
+          "text": "Before ordering, check:",
+          "line": 53
+        },
+        {
+          "text": "Where available, send the machine manual reference or an original sample as well. Product origin, compatibility, available quantity and lead time should be confirmed for the specific quotation.",
+          "line": 63
+        },
+        {
+          "text": "The photos above carry FUJI markings and are shown as identification references. The markings alone do not establish whether a supplied replacement is an original part, its origin, or compatibility with a particular head. FUJI is the property of its respective owner; the images do not imply manufacturer authorisation or affiliation.",
+          "line": 70
+        },
+        {
+          "text": "## Matching the nozzle tip to the component",
+          "line": 72
+        },
+        {
+          "text": "Vacuum pickup relies on the contact between the nozzle tip and the component. A suitable tip needs enough usable contact area while avoiding sensitive surfaces, leads and neighbouring features. Component size is useful, but the flat pickup area, surface finish and centre of mass also matter.",
+          "line": 74
+        },
+        {
+          "text": "For narrow, uneven or delicate parts, share a component drawing and photos from several angles. Include the permitted pickup area, component height, orientation in the feeder and any surfaces that must not be touched. The machine's vision, pickup and placement settings should be reviewed alongside the mechanical design.",
+          "line": 76
+        },
+        {
+          "text": "## When to consider a custom nozzle",
+          "line": 78
+        },
+        {
+          "text": "A custom design may be useful when a standard nozzle cannot reach a suitable pickup area, when the component has an unusual shape, or when a special tip profile is needed to avoid contact with exposed features. The starting point is the actual component and the machine interface, not a generic nozzle outline.",
+          "line": 80
+        },
+        {
+          "text": "Depending on the application, the review may cover tip geometry, contact material, overall length, mounting details and air passage. Where vacuum pickup is not practical, a mechanical gripper may be worth evaluating if the machine can support it. See our [custom gripper case study](/posts/2026091109333001/) for a line-choke example; its design is specific to that application.",
+          "line": 82
+        },
+        {
+          "text": "The drawing illustrates the sort of information that can help a nozzle discussion: a pickup feature, component outline and relative heights. A drawing alone may not show all mounting and operating requirements, so samples and machine details remain important.",
+          "line": 89
+        },
+        {
+          "text": "## Using nozzle charts and dimensions",
+          "line": 91
+        },
+        {
+          "text": "The reference image below shows nozzles labelled 500, 502, 504, 505, 506, 507 and 508, with different tip profiles and dimensions. It can help start a conversation about the intended shape. Treat the labels, dimensions and illustrations as reference information until they are checked against the actual nozzle, machine documentation or an approved drawing.",
+          "line": 93
+        },
+        {
+          "text": "## Validate before production use",
+          "line": 100
+        },
+        {
+          "text": "Once a candidate nozzle has been selected or a custom sample has been made, verify the mounting fit and operation on the intended head. Run a controlled pickup and placement trial with representative components. Check pickup consistency, component orientation, placement results and whether the tip contacts or damages any sensitive area. Use the machine's approved maintenance and setup procedures throughout.",
+          "line": 102
+        },
+        {
+          "text": "The number of samples and acceptance criteria should be agreed for the application. A successful trial on one component does not establish suitability for every part or machine configuration.",
+          "line": 104
+        },
+        {
+          "text": "## Request a replacement or custom-nozzle review",
+          "line": 106
+        },
+        {
+          "text": "To help Southern Machinery review your requirement, send:",
+          "line": 108
+        },
+        {
+          "text": "- Machine brand, model, placement head and the existing nozzle code or part number.",
+          "line": 110
+        },
+        {
+          "text": "Contact **light@smthelp.com** or visit [Southern Machinery](https://www.smthelp.com/) to discuss replacement and custom SMT nozzle options.",
+          "line": 115
+        }
+      ],
+      "source": "commit",
+      "commit": "ded9f55d04bd"
     },
     "scm5600d-offline-pcba-cleaning-machine.md": {
       "items": [
