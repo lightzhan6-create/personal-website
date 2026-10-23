@@ -24,16 +24,8 @@ function truncate(value, max = 160) {
 
 function normalizeBaseUrl(siteConfig) {
     const raw = text(siteConfig && siteConfig.site_url);
-    if (!raw) return '';
-    // All generated routes start at /. Reject values that would publish wrong canonicals.
-    try {
-        const url = new URL(raw);
-        if (!/^https?:$/.test(url.protocol) || url.username || url.password ||
-            url.search || url.hash || /[^/]/.test(url.pathname)) throw new Error();
-        return url.origin;
-    } catch {
-        throw new Error('site_url 必须是完整网站域名，例如 https://example.com，不能含子路径、查询参数或登录信息。');
-    }
+    if (!/^https?:\/\//i.test(raw)) return '';
+    return raw.replace(/\/+$/, '');
 }
 
 function absoluteUrl(siteConfig, url) {
@@ -133,9 +125,12 @@ function renderHeadTags({
     publishedDisplayDate = '',
     modifiedTime = '',
     author = '',
-    pagination = null
+    pagination = null,
+    fullDescription = false
 }) {
-    const desc = truncate(description || defaultDescription(siteConfig, seoConfig));
+    const desc = fullDescription
+        ? text(description || defaultDescription(siteConfig, seoConfig))
+        : truncate(description || defaultDescription(siteConfig, seoConfig));
     const canonical = pageUrl(siteConfig, canonicalPath);
     const ogImage = absoluteUrl(siteConfig, image || defaultImage(siteConfig, seoConfig));
     const siteName = text(siteConfig.site_title || siteConfig.site_name);
@@ -144,9 +139,7 @@ function renderHeadTags({
     const lines = [];
 
     lines.push(`<meta name="description" content="${escapeAttr(desc)}" />`);
-    lines.push(noindex
-        ? '<meta name="robots" content="noindex,follow" />'
-        : '<meta name="robots" content="index,follow,max-image-preview:large" />');
+    if (noindex) lines.push('<meta name="robots" content="noindex,follow" />');
     if (canonical) lines.push(`<link rel="canonical" href="${escapeAttr(canonical)}" />`);
     if (pagination && pagination.prevUrl) {
         lines.push(`<link rel="prev" href="${escapeAttr(pagination.prevUrl)}" />`);
@@ -211,7 +204,7 @@ function renderWebsiteJsonLd({ siteConfig, seoConfig }) {
             }
         },
         {
-            '@type': 'Person',
+            '@type': author.url ? 'Person' : 'Organization',
             '@id': `${baseUrl}/#publisher`,
             name: author.name
         }
@@ -250,15 +243,15 @@ function renderFaqHtml(faqItems) {
 function renderArticleJsonLd({ post, siteConfig, seoConfig, canonical, ogImage, tags, faqItems }) {
     const baseUrl = normalizeBaseUrl(siteConfig);
     const author = getAuthor(siteConfig, seoConfig, post);
-    // Article pages must define their publisher without relying on the home page graph.
-    const publisher = getAuthor(siteConfig, seoConfig);
-    if (baseUrl) publisher['@id'] = `${baseUrl}/#publisher`;
+    const publisher = baseUrl
+        ? { '@id': `${baseUrl}/#publisher` }
+        : { '@type': 'Organization', name: text(siteConfig.site_name || siteConfig.site_title || 'FreeCat') };
     const wordCount = countWords(post.content || '');
     const readingMinutes = estimateReadingTime(post.content || '');
     const article = {
         '@type': 'BlogPosting',
         headline: post.title,
-        description: truncate(articleSummary(post)),
+        description: truncate(post.excerpt),
         datePublished: post.date.toISOString(),
         dateModified: post.modifiedDate.toISOString(),
         inLanguage: seoConfig.site_language || 'zh-CN',

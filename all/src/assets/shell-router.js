@@ -5,35 +5,6 @@
         root.FreecatShellRouter = factory();
     }
 }(typeof self !== 'undefined' ? self : this, function () {
-    // Independent pages also use soft pagination/sorting. Back/forward must restore
-    // their HTML and metadata; hash-only article navigation remains native.
-    function initStandaloneHistory({ window, runtime, isActive = () => true, onRestore = () => window.location.reload() }) {
-        const pageKey = () => window.location.pathname + window.location.search;
-        let renderedPage = pageKey();
-        const sync = () => { renderedPage = pageKey(); };
-        runtime.setSyncFrameHistory(sync);
-        window.addEventListener('popstate', () => {
-            if (isActive() && pageKey() !== renderedPage) onRestore();
-        });
-        return sync;
-    }
-
-    // Keep this frame detached until a navigation actually needs it. Playback and
-    // the first render must leave the original article DOM completely untouched.
-    function createContentFrame(document) {
-        const frame = document.createElement('iframe');
-        frame.id = 'freecat-content-frame';
-        frame.title = '页面内容';
-        frame.setAttribute('allow', 'autoplay; fullscreen; clipboard-write');
-        frame.style.visibility = 'hidden';
-        return frame;
-    }
-
-    // Keep feeds, downloads and external links outside the persistent HTML reader.
-    function isContentPath(pathname) {
-        return /^\/(?:$|(?:index|home|shell|about|all|search)(?:\.html)?\/?$|posts\/[^/.]+(?:\.html|\/(?:index\.html)?)?$|page\/\d+\/(?:index\.html)?$)/.test(pathname);
-    }
-
     function initFramedNavigationBridge({ window, document, runtime }) {
         document.addEventListener('click', (event) => {
             const link = event.target.closest && event.target.closest('a[href]');
@@ -44,7 +15,7 @@
 
             const rawHref = link.getAttribute('href') || '';
             const url = new URL(link.href, window.location.href);
-            if (url.origin !== window.location.origin || !isContentPath(url.pathname)) return;
+            if (url.origin !== window.location.origin) return;
             if (rawHref.charAt(0) === '#' && url.pathname === window.location.pathname && url.search === window.location.search) return;
 
             event.preventDefault();
@@ -63,28 +34,15 @@
         closeHeaderSearch,
         closeTagMenu,
         resolveThemeIsDark,
-        syncFrameTheme,
-        initialContent = false
+        syncFrameTheme
     }) {
         const frame = contentFrame;
         if (!frame) return;
-        let showingInitialContent = initialContent;
-        let initialNavigation = null;
-        let requestedContentPath = '';
-        const syncStandalone = initialContent ? initStandaloneHistory({
-            window, runtime,
-            isActive: () => showingInitialContent,
-            onRestore: () => navigateShell(getPublicLocation(), { replace: true, restoreScroll: true })
-        }) : null;
 
         const HOME_CONTENT = '/home';
         const SCROLL_RESTORE_REQUEST_KEY = 'freecat-scroll-restore-requests-v1';
         const SHELL_HISTORY_INDEX_KEY = 'freecatShellIndex';
         const headerEl = document.querySelector('header.fixed');
-        let observedFrameRoot = null;
-        const frameSizeObserver = typeof window.ResizeObserver === 'function'
-            ? new window.ResizeObserver(syncFrameOffset)
-            : null;
 
         function getPublicLocation() {
             return window.location.pathname + window.location.search + window.location.hash;
@@ -116,10 +74,6 @@
         function publicPathToContentPath(raw) {
             const path = parseSameOriginPath(raw, '/');
             const url = new URL(path, window.location.origin);
-            url.pathname = shared.normalizeScrollPageKey(url.pathname, '');
-            // Request the generated directory URL directly, so a hosting redirect
-            // cannot make the first loaded article look like an obsolete response.
-            if (/^\/posts\/[^/]+$/.test(url.pathname)) url.pathname += '/';
             if (isHomePathname(url.pathname)) {
                 return HOME_CONTENT + url.search + url.hash;
             }
@@ -188,7 +142,6 @@
 
         function setFrameLocation(path) {
             const target = publicPathToContentPath(path);
-            requestedContentPath = target;
             freezeFrameScrollSaves();
             try {
                 frame.contentWindow.location.replace(target);
@@ -239,13 +192,8 @@
         }
 
         function syncHistoryToFrame(options = {}) {
-            if (showingInitialContent) {
-                syncStandalone();
-                return;
-            }
             const framePath = getFramePath();
             if (!framePath) return;
-            shared.syncPageMetadata(document, frame.contentDocument);
             const publicPath = contentPathToPublicPath(framePath);
             if (publicPath === getPublicLocation()) return;
             const method = options.push ? 'pushState' : 'replaceState';
@@ -253,30 +201,8 @@
         }
 
         function navigateShell(targetHref, options = {}) {
-            const targetUrl = new URL(targetHref, window.location.href);
-            if (targetUrl.origin !== window.location.origin || !isContentPath(targetUrl.pathname)) {
-                window.location.href = targetUrl.href;
-                return;
-            }
-            if (showingInitialContent && targetUrl.pathname === window.location.pathname && targetUrl.search === window.location.search && targetUrl.hash) {
-                window.location.hash = targetUrl.hash;
-                return;
-            }
             const contentPath = publicPathToContentPath(targetHref);
             const publicPath = contentPathToPublicPath(contentPath);
-            if (showingInitialContent) {
-                if (initialNavigation && initialNavigation.contentPath === contentPath && initialNavigation.sourcePath === getPublicLocation()) return;
-                // The current article and address stay in place until the new page
-                // has loaded. The original header and audio node are never replaced.
-                initialNavigation = { contentPath, publicPath, options, sourcePath: getPublicLocation() };
-                if (options.restoreScroll) {
-                    requestFrameScrollRestore(contentPath);
-                    runtime.freezeScrollSaves();
-                } else clearFrameScrollRestore(contentPath);
-                setFrameLocation(contentPath);
-                if (!frame.isConnected) document.body.appendChild(frame);
-                return;
-            }
             // 前进导航 = 全新访问，必须从顶部开始：清掉同 key 残留的恢复请求
             // （返回导航被中断、加载被放弃时会遗留），避免新访问被错误恢复。
             clearFrameScrollRestore(contentPath);
@@ -290,7 +216,6 @@
         }
 
         function syncFrameToLocation(options = {}) {
-            if (showingInitialContent) return;
             const framePath = getFramePath();
             if (!framePath) return;
             const target = publicPathToContentPath(getPublicLocation());
@@ -310,14 +235,6 @@
             let doc;
             try { doc = frame.contentDocument; } catch (err) { return; }
             if (!doc || !doc.documentElement) return;
-            // stable gutter 可能缩小实际排版区域却不改变 clientWidth；用根元素的布局宽度同步顶栏。
-            const scrollbarWidth = Math.max(0, frame.contentWindow.innerWidth - doc.documentElement.getBoundingClientRect().width);
-            document.documentElement.style.setProperty('--freecat-frame-scrollbar-width', `${scrollbarWidth}px`);
-            if (frameSizeObserver && observedFrameRoot !== doc.documentElement) {
-                frameSizeObserver.disconnect();
-                observedFrameRoot = doc.documentElement;
-                frameSizeObserver.observe(observedFrameRoot);
-            }
             const h = normalizeHeaderHeight(Math.ceil(headerEl.getBoundingClientRect().height));
             const gap = window.innerWidth < 768 ? 16 : 24;
             const rs = doc.documentElement.style;
@@ -326,52 +243,7 @@
             rs.setProperty('--freecat-page-top-offset', `${h + gap}px`);
         }
 
-        function onFrameReady() {
-            const framePath = getFramePath();
-            if (!framePath || frame.contentDocument.readyState === 'loading') return;
-            // A late load event from the page being left must not undo a newer click.
-            if (requestedContentPath && publicPathToContentPath(framePath) !== requestedContentPath) return;
-            if (showingInitialContent) {
-                if (!initialNavigation || publicPathToContentPath(getFramePath()) !== initialNavigation.contentPath) return;
-                if (getPublicLocation() !== initialNavigation.sourcePath) {
-                    initialNavigation = null;
-                    requestedContentPath = '';
-                    frame.remove();
-                    return;
-                }
-                if (!initialNavigation.options.restoreScroll) {
-                    runtime.saveScrollPosition();
-                    runtime.freezeScrollSaves();
-                }
-                showingInitialContent = false;
-                window.__FREECAT_SHELL_DOCUMENT__ = true;
-                document.documentElement.classList.add('freecat-shell-active');
-                document.body.setAttribute('data-freecat-shell-root', 'true');
-                // Remove only the page being left; retain the initialized player,
-                // header controls and their event handlers for all future pages.
-                const overlay = document.getElementById('search-results-overlay');
-                function removePageContent(parent) {
-                    for (const child of Array.from(parent.children)) {
-                        if (child === headerEl || child === overlay || child === frame || ['SCRIPT', 'STYLE', 'LINK'].includes(child.tagName)) continue;
-                        // Content templates wrap header and main together. Keep the
-                        // ancestor chain connected: even reparenting media can pause it.
-                        if ((headerEl && child.contains(headerEl)) || (overlay && child.contains(overlay))) removePageContent(child);
-                        else {
-                            child.querySelectorAll('audio,video').forEach(media => media.pause());
-                            child.remove();
-                        }
-                    }
-                }
-                removePageContent(document.body);
-                const method = initialNavigation.options.replace ? 'replaceState' : 'pushState';
-                if (initialNavigation.publicPath !== getPublicLocation()) {
-                    window.history[method](nextShellHistoryState(method), '', initialNavigation.publicPath);
-                }
-                initialNavigation = null;
-                window.scrollTo(0, 0);
-                frame.style.visibility = '';
-            }
-            requestedContentPath = '';
+        function onFrameLoad() {
             try {
                 const t = frame.contentDocument && frame.contentDocument.title;
                 if (t) document.title = t;
@@ -388,18 +260,16 @@
             if (link.target && link.target.toLowerCase() !== '_self') return;
             if (link.hasAttribute('download')) return;
             const url = new URL(link.href, window.location.href);
-            if (url.origin !== window.location.origin || !isContentPath(url.pathname)) return;
-            if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
+            if (url.origin !== window.location.origin) return;
             event.preventDefault();
             if (typeof closeHeaderSearch === 'function') closeHeaderSearch(true);
             if (typeof closeTagMenu === 'function') closeTagMenu();
             navigateShell(url.pathname + url.search + url.hash);
         }
 
-        frame.addEventListener('load', onFrameReady);
+        frame.addEventListener('load', onFrameLoad);
         ensureShellHistoryState();
         window.addEventListener('popstate', () => {
-            if (showingInitialContent) return;
             syncFrameToLocation({ restoreScroll: true });
         });
         // 外壳整页卸载（关标签/跳出站外）连带销毁 iframe 文档，同样进入
@@ -416,17 +286,11 @@
             navigateShell(targetHref, options);
         });
         runtime.setSyncFrameHistory(function (options = {}) {
-            // Child main.js announces interactive content before images/media finish.
-            // Use document identity as well as the requested URL to reject stale pages.
-            if (options.readyDocument) {
-                if (options.readyDocument === frame.contentDocument) onFrameReady();
-                return;
-            }
             syncHistoryToFrame(options);
         });
 
         try {
-            if (frame.contentDocument && frame.contentDocument.readyState === 'complete') onFrameReady();
+            if (frame.contentDocument && frame.contentDocument.readyState === 'complete') onFrameLoad();
             else {
                 syncFrameToLocation();
                 syncFrameOffset();
@@ -434,5 +298,5 @@
         } catch (err) {}
     }
 
-    return { createContentFrame, initStandaloneHistory, initFramedNavigationBridge, initShellRouter };
+    return { initFramedNavigationBridge, initShellRouter };
 }));

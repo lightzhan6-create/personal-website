@@ -59,25 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //              这里要跳过音频初始化与自身上边距测量（上边距由外壳喂入）。
     //   IS_SHELL —— 当前是常驻外壳文档（顶层且含内容 iframe），由它承载顶栏音频并驱动 iframe 路由。
     const FRAMED = window.self !== window.top;
-    if (FRAMED) {
-        // Only the retained parent player plays music. Cancel the hidden copy's
-        // automatic preload so a slow music host cannot hold up article loading.
-        const framedAudio = document.getElementById('nav-audio');
-        if (framedAudio) {
-            framedAudio.preload = 'none';
-            framedAudio.removeAttribute('src');
-            framedAudio.load();
-        }
-    }
-    const existingFrame = document.getElementById('freecat-content-frame');
-    const IS_SHELL = !FRAMED && !!existingFrame;
-    const contentFrame = existingFrame || (!FRAMED ? shellRouter.createContentFrame(document) : null);
+    const contentFrame = document.getElementById('freecat-content-frame');
+    const IS_SHELL = !FRAMED && !!contentFrame;
 
     function syncParentFrameHistory(options = {}) {
-        if (!FRAMED) {
-            if (!IS_SHELL) runtime.syncFrameHistory(options);
-            return;
-        }
+        if (!FRAMED) return;
         try {
             const parentRuntime = window.parent && window.parent.FreecatRuntime;
             if (parentRuntime && typeof parentRuntime.syncFrameHistory === 'function') {
@@ -222,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         getCssDurationMs,
         fitTagRows,
         navigateWithinSite,
-        isShell: !!contentFrame,
+        isShell: IS_SHELL,
         contentFrame
     });
     const { closeHeaderSearch, closeTagMenu } = headerSearch;
@@ -240,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
             platform,
             navAudioToggle: document.getElementById('nav-audio-toggle'),
             navAudio: document.getElementById('nav-audio'),
-            isShell: !!contentFrame,
+            isShell: IS_SHELL,
             contentFrame,
             closeTagMenu,
             closeHeaderSearch
@@ -253,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         shellRouter.initFramedNavigationBridge({ window, document, runtime });
     }
     if (FRAMED) initFramedNavigationBridge();
-    if (!FRAMED) {
+    if (IS_SHELL) {
         shellRouter.initShellRouter({
             window,
             document,
@@ -264,13 +250,11 @@ document.addEventListener('DOMContentLoaded', () => {
             closeHeaderSearch,
             closeTagMenu,
             resolveThemeIsDark,
-            syncFrameTheme,
-            initialContent: !IS_SHELL
+            syncFrameTheme
         });
     }
 
     seamlessPagination.init({
-        shared,
         window,
         document,
         platform,
@@ -307,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
             applyTheme();
             layoutMetrics.updateContentTopOffset();
             layoutMetrics.scheduleHomeHeroMeasure();
-            layoutMetrics.scheduleSidebarFooterAvoid();
+            layoutMetrics.scheduleHomeSidebarFooterAvoid();
         }
     });
 
@@ -317,7 +301,4 @@ document.addEventListener('DOMContentLoaded', () => {
             applyTheme({ animate: true });
         }
     });
-
-    // Navigation needs usable content, not the load event of every image or embed.
-    if (FRAMED) syncParentFrameHistory({ readyDocument: document });
 });

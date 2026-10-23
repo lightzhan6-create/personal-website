@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Light placeholder avatar</title>
+  <desc id="desc">A neutral Light monogram placeholder for the personal website.</desc>
+  <rect width="512" height="512" rx="128" fill="#f8fafc"/>
+  <circle cx="256" cy="256" r="188" fill="#ffffff" stroke="#dbeafe" stroke-width="16"/>
+  <path d="M212 128h72l-44 108h88L200 384l34-116h-72z" fill="#22c55e"/>
+  <path d="M284 128l-44 108h88L218 362l28-94h-84l50-140z" fill="#2563eb" opacity=".82"/>
+  <text x="256" y="430" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" fill="#1e293b">Light</text>
+</svg>

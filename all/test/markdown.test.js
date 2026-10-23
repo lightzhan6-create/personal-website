@@ -93,11 +93,14 @@ test('image alt, title, and caption are rendered as text', () => {
     assert.equal(html.includes('&lt;b&gt;caption&lt;/b&gt;'), true);
 });
 
-test('markdown images render the loading spinner element', () => {
-    const html = parseMarkdown('![Freecat](/image/freecat.png)');
+test('markdown images use the native lazy-loading path without a script-gated placeholder', () => {
+    const html = parseMarkdown('![Freecat](/image/freecat.png "1200x800")');
 
-    assert.equal(html.includes('class="post-image-loader placeholder-loader"'), true);
-    assert.equal(html.includes('<span class="loader"></span>'), true);
+    assert.equal(html.includes('src="/image/freecat.png"'), true);
+    assert.equal(html.includes('data-src='), false);
+    assert.equal(html.includes('loading="lazy" decoding="async"'), true);
+    assert.equal(html.includes('width="1200" height="800"'), true);
+    assert.equal(html.includes('class="post-image-loader placeholder-loader"'), false);
 });
 
 test('markdown image syntax marks every rendered block for unified centering', () => {
@@ -227,7 +230,7 @@ test('markdown image syntax renders direct audio URLs as complete audio players'
     assert.equal(html.includes('class="media-player-loading-chrome"'), false);
     assert.equal(html.includes('data-audio-src="https://example.com/audio.ogg"'), true);
     assert.equal(html.includes('data-audio-title="Audio"'), true);
-    assert.equal(html.includes('<audio preload="metadata">'), true);
+    assert.equal(html.includes('<audio preload="auto">'), true);
 });
 
 test('audio emoji forces image-link syntax to render as an audio player', () => {
@@ -378,8 +381,6 @@ test('markdown tables preserve source column proportions as col widths', () => {
 
     assert.match(html, /<table data-md-table-widths="21\.053%,63\.158%,15\.789%">/);
     assert.match(html, /<colgroup><col style="width:21\.053%"><col style="width:63\.158%"><col style="width:15\.789%"><\/colgroup>/);
-    assert.match(html, /<div class="markdown-table-scroll" role="region" aria-label="表格"><table/);
-    assert.match(html, /<\/table>\s*<\/div>/);
 });
 
 test('single-column tables keep col widths aligned with following tables', () => {
@@ -423,7 +424,7 @@ test('code blocks are syntax-highlighted at build time with hljs token markup', 
     assert.doesNotMatch(html, /<code class="language-js">const total/);
 });
 
-test('auto-detected and unknown code languages safely escape HTML', () => {
+test('code blocks without a known language stay escaped plain text', () => {
     const autoHtml = parseMarkdown([
         '```',
         'just some words & <tags>',
@@ -460,42 +461,6 @@ test('short code blocks stay expanded without fold controls', () => {
     assert.doesNotMatch(html, /code-fold-controls/);
     assert.doesNotMatch(html, /max-height:400px/);
     assert.match(html, /style="contain-intrinsic-size: auto \d+px"/);
-});
-
-test('long single-line prompts and JSON fold after estimated wrapping without losing their content', () => {
-    for (const [language, content] of [
-        ['', '保持阅读清晰。'.repeat(300)],
-        ['json', JSON.stringify({ prompt: 'readable '.repeat(400) })]
-    ]) {
-        const html = parseMarkdown('```' + language + '\n' + content + '\n```');
-        assert.match(html, /code-fold collapsed-code/);
-        assert.match(html, /aria-label="展开内容" aria-expanded="false"/);
-        assert.match(html, /class="fold-toggle-label">展开内容/);
-        assert.match(html, /aria-label="复制代码" title="复制代码"/);
-        assert.match(html, /class="copy-btn-text sr-only"[^>]*><\/span>/);
-        assert.ok(html.includes(language ? 'readable '.repeat(100) : '保持阅读清晰。'.repeat(100)));
-    }
-});
-
-test('unlabelled code is highlighted while explicit plaintext preserves prose', () => {
-    const code = 'function greet(name) { return "Hello, " + name; }';
-    const html = parseMarkdown('```\n' + code + '\n```');
-    assert.match(html, /class="hljs-/);
-    assert.match(html, /class="code-language-label">Auto/);
-    for (const language of ['text', 'plaintext']) {
-        const plain = parseMarkdown('```' + language + '\nCreate a poster. class Title { return <text> & words; }\n```');
-        assert.doesNotMatch(plain, /class="hljs-/);
-        assert.match(plain, /&lt;text&gt; &amp; words/);
-    }
-});
-
-test('markdown image dimensions and visible captions are retained', () => {
-    for (const title of ['Caption 320x240', 'Caption width=320 height=240', 'Caption height=240 width=320']) {
-        const html = parseMarkdown('![Photo](/image/photo.png "' + title + '")');
-        assert.match(html, /<img\b[^>]*width="320" height="240"/);
-        assert.match(html, /title="Caption"/);
-        assert.doesNotMatch(html, /Caption (?:320x240|width=|height=)/);
-    }
 });
 
 test('mermaid code blocks render as diagram containers with detected kinds', () => {
@@ -558,7 +523,8 @@ test('markdown image syntax renders image resource URLs without extensions as im
         assert.equal(html.includes('class="external-embed external-embed-link'), false);
     }
 
-    assert.equal(googleThumbnailHtml.includes('data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFswDLYwh-h2EQ2KuTTnlitYwx-qseXtx7F4idCEFg2A&amp;s=10"'), true);
+    assert.equal(googleThumbnailHtml.includes('src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFswDLYwh-h2EQ2KuTTnlitYwx-qseXtx7F4idCEFg2A&amp;s=10"'), true);
+    assert.equal(googleThumbnailHtml.includes('data-src='), false);
 });
 
 test('inline-code headings keep their own text in the table of contents', () => {

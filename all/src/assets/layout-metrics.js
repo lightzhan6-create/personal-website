@@ -1,5 +1,5 @@
 /* layout-metrics.js
- * 页面布局测量：顶栏对齐、首页 hero 高度测量、侧栏完整显示。
+ * 页面布局测量：顶栏高度同步、首页 hero 高度测量、侧栏底部清理。
  * 依赖全局：无（所有依赖经 init 注入）。
  * 由 main.js 在 DOMContentLoaded 后调用 init() 装配。
  */
@@ -10,19 +10,6 @@
         const win = deps.window;
         const doc = deps.document;
         const framed = !!deps.framed;
-        const recent = doc.querySelector('.freecat-home-recent-details');
-        let recentIsDesktop = null;
-
-        // 只在跨越布局断点时重置，手机横竖屏切换保留读者的展开选择。
-        function syncHomeRecentDisclosure() {
-            if (!recent) return;
-            const desktop = win.innerWidth >= 1280;
-            if (desktop !== recentIsDesktop) {
-                recent.open = desktop;
-                recentIsDesktop = desktop;
-            }
-            recent.querySelector('summary').tabIndex = desktop ? -1 : 0;
-        }
 
         // ============================================================
         // [Fix] 固定顶栏遮挡内容：按实际 header 高度动态同步内容区上边距
@@ -61,7 +48,7 @@
                 if (el.style.marginTop) el.style.marginTop = '';
             });
             scheduleHomeHeroMeasure();
-            scheduleSidebarFooterAvoid();
+            scheduleHomeSidebarFooterAvoid();
         }
 
         function observeHeaderOffsetChanges() {
@@ -103,68 +90,34 @@
         }
 
         // ============================================================
-        // 按完整窗口的高度等比缩放侧栏；保留页脚空间，文章列表仍在侧栏内滚动。
-        // 记录本次访问的最大高度，手动缩小窗口不会反复缩放侧栏。
+        // [Fix] 首页 / 搜索页：fixed sidebar 始终铺满视口高度。
+        // footer 自身层级更高，会自然盖在 sidebar 背景之上；这里仅清理旧版
+        // 动态避让逻辑可能留下的 inline bottom，避免无感分页后高度卡住。
         // ============================================================
         let sidebarFooterAvoidFrame = 0;
-        let sidebarMaxViewportHeight = win.innerHeight;
-        const readingPanel = doc.querySelector('.freecat-post-reading-panel');
-        const sidebar = doc.querySelector('.freecat-home-sidebar') || readingPanel;
-        // 首页缩放内层；文章页现有面板已包含切换按钮和列表，可直接整体缩放。
-        const sidebarContent = doc.querySelector('.freecat-home-sidebar-content') || readingPanel;
-        function updateSidebarFooterAvoid() {
+        function updateHomeSidebarFooterAvoid() {
             sidebarFooterAvoidFrame = 0;
+            const sidebar = doc.querySelector('.freecat-home-sidebar');
             if (!sidebar) return;
             sidebar.style.bottom = '';
-            if (win.innerWidth < 1280) {
-                sidebar.style.removeProperty('--freecat-sidebar-scale');
-                sidebar.style.removeProperty('--freecat-sidebar-viewport-height');
-                return;
-            }
-            const content = sidebarContent;
-            if (!content) return;
-            sidebarMaxViewportHeight = Math.max(sidebarMaxViewportHeight, win.innerHeight);
-            // 滚动列表的高度也沿用最大窗口，避免缩矮窗口时改变比例。
-            const viewportHeight = `${sidebarMaxViewportHeight}px`;
-            if (readingPanel && sidebar.style.getPropertyValue('--freecat-sidebar-viewport-height') !== viewportHeight) {
-                sidebar.style.setProperty('--freecat-sidebar-viewport-height', viewportHeight);
-            }
-            if (!content.scrollHeight) return;
-            const footer = doc.querySelector('.freecat-site-footer');
-            const padding = parseFloat(win.getComputedStyle(sidebar).paddingTop) || 0;
-            const available = Math.max(1, sidebarMaxViewportHeight - sidebar.getBoundingClientRect().top
-                - padding - (footer ? footer.offsetHeight : 0) - 24);
-            const value = String(Math.min(1, available / content.scrollHeight));
-            if (sidebar.style.getPropertyValue('--freecat-sidebar-scale') !== value) {
-                sidebar.style.setProperty('--freecat-sidebar-scale', value);
-            }
         }
-        function scheduleSidebarFooterAvoid() {
+        function scheduleHomeSidebarFooterAvoid() {
             if (sidebarFooterAvoidFrame) return;
-            sidebarFooterAvoidFrame = win.requestAnimationFrame(updateSidebarFooterAvoid);
+            sidebarFooterAvoidFrame = win.requestAnimationFrame(updateHomeSidebarFooterAvoid);
         }
 
         // 初始测量 + 持续监听（从 main.js 的装配段整体迁入）。
-        syncHomeRecentDisclosure();
-        if (recent) recent.addEventListener('toggle', () => {
-            if (recentIsDesktop && !recent.open) recent.open = true;
-            scheduleSidebarFooterAvoid();
-        });
         updateContentTopOffset();
         observeHeaderOffsetChanges();
         observeHomeHeroContentChanges();
         scheduleHomeHeroMeasure();
-        scheduleSidebarFooterAvoid();
+        scheduleHomeSidebarFooterAvoid();
 
-        if (sidebarContent && typeof ResizeObserver !== 'undefined') {
-            new ResizeObserver(scheduleSidebarFooterAvoid).observe(sidebarContent);
-        }
-
-        win.addEventListener('resize', syncHomeRecentDisclosure);
         win.addEventListener('resize', updateContentTopOffset);
-        win.addEventListener('resize', scheduleSidebarFooterAvoid);
+        win.addEventListener('resize', scheduleHomeSidebarFooterAvoid);
+        win.addEventListener('scroll', scheduleHomeSidebarFooterAvoid, { passive: true });
         win.addEventListener('load', updateContentTopOffset);
-        win.addEventListener('load', scheduleSidebarFooterAvoid);
+        win.addEventListener('load', scheduleHomeSidebarFooterAvoid);
         win.requestAnimationFrame(() => {
             updateContentTopOffset();
             win.requestAnimationFrame(updateContentTopOffset);
@@ -173,14 +126,13 @@
             doc.fonts.ready.then(() => {
                 updateContentTopOffset();
                 scheduleHomeHeroMeasure();
-                scheduleSidebarFooterAvoid();
             });
         }
 
         return {
             updateContentTopOffset,
             scheduleHomeHeroMeasure,
-            scheduleSidebarFooterAvoid
+            scheduleHomeSidebarFooterAvoid
         };
     }
 

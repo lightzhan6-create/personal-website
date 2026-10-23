@@ -90,13 +90,14 @@
         const encodedForClick = encodeTagQueryValue(tag);
         const searchUrl = '/search?tag=' + encodedForClick;
         const visibleText = options.escapeText === false ? tag : escapeHtml(tag);
+        const extraClass = options.darkHover ? ' dark:hover:brightness-110' : '';
         const themed = options.themed !== false;
         const tagSpanClass = themed ? 'tag-span ' : '';
         const styleAttr = themed
             ? 'style="' + renderTagThemeVars(colors) + '"'
             : 'style="background: ' + colors.bg + '; color: ' + colors.text + ';"';
         return (
-            '<span class="' + tagSpanClass + 'freecat-tag-text freecat-tag-badge" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();event.stopPropagation();this.click();}" ' +
+            '<span class="' + tagSpanClass + 'freecat-tag-text relative z-10 inline-flex items-center px-2.5 py-0.5 rounded-[4px] text-[10px] font-medium tracking-wider cursor-pointer hover:brightness-95' + extraClass + ' transition-[filter] duration-200 ease-out whitespace-nowrap" ' +
             styleAttr + ' ' +
             "onclick=\"event.preventDefault(); event.stopPropagation(); if (window.FreecatNavigate) window.FreecatNavigate('" + searchUrl + "'); else window.location.href='" + searchUrl + "';\">" +
             visibleText +
@@ -206,18 +207,6 @@
         }).join('');
     }
 
-    // Replace page-specific metadata together with soft navigation content. Preserve
-    // shell assets and ownership markers; in particular never inherit noindex.
-    function syncPageMetadata(target, source) {
-        if (!target.head || !source.head) return;
-        const selector = 'meta[name="description"],meta[name="robots"],meta[name="author"],meta[name="keywords"],meta[property^="og:"],meta[property^="article:"],meta[name^="twitter:"],link[rel="canonical"],link[rel="prev"],link[rel="next"],script[type="application/ld+json"]';
-        const nodes = Array.from(source.head.querySelectorAll(selector), node => node.cloneNode(true));
-        target.head.querySelectorAll(selector).forEach(node => node.remove());
-        nodes.forEach(node => target.head.appendChild(node));
-        target.title = source.title;
-        target.documentElement.lang = source.documentElement.lang;
-    }
-
     function copyText(text) {
         if (typeof navigator !== 'undefined' && navigator.clipboard && typeof window !== 'undefined' && window.isSecureContext) {
             return navigator.clipboard.writeText(text);
@@ -253,7 +242,6 @@
         normalizeScrollPageKey,
         collectMenuTags,
         renderTagMenuItemsHtml,
-        syncPageMetadata,
         copyText
     };
 }));

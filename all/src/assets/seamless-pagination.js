@@ -105,7 +105,6 @@
             unobserveDeferredImages(postsList);
             postsList.innerHTML = newPosts;
             paginationContainer.innerHTML = newPagination;
-            deps.shared.syncPageMetadata(doc, docNext);
             fitTagRows();
             initDeferredImages();
 
@@ -115,10 +114,7 @@
                 postsList.classList.remove('page-transitioning-in');
             }, pageTransitionInMs + 40);
 
-            // 阅读列表只保留整体翻页过渡，不逐项推入文字。
-            if (!postsList.classList.contains('freecat-home-post-list')) {
-                applyStaggeredAnimations('#posts-list .post-card');
-            }
+            applyStaggeredAnimations('#posts-list .post-card');
 
             // 更新浏览器地址栏，并同步外壳历史；这样从文章页返回时能回到当前分页。
             // 外壳模式下历史条目只能由外壳创建（syncParentFrameHistory push），
@@ -131,26 +127,21 @@
             win.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 后发导航优先：旧响应、旧失败和旧动画都不能覆盖用户最后选择的页码。
-        let navigationSeq = 0;
+        // 核心跳转逻辑复用
         async function navigateTo(url) {
-            const requestSeq = ++navigationSeq;
             // 淡出延后触发：缓存命中（< 100ms）时直接跳过整段 transition，
             // 视觉上"秒切"；只有真的需要等网络才让用户看到 fade。
             postsList.classList.remove('page-transitioning-in');
             const fadeTimer = setTimeout(() => {
-                if (requestSeq !== navigationSeq) return;
                 postsList.classList.add('page-transitioning-out');
             }, FADE_DELAY_MS);
 
             try {
                 const htmlText = await prefetchPage(url);
                 clearTimeout(fadeTimer);
-                if (requestSeq !== navigationSeq) return;
                 applyFetchedPage(htmlText, url);
             } catch (err) {
                 clearTimeout(fadeTimer);
-                if (requestSeq !== navigationSeq) return;
                 postsList.classList.remove('page-transitioning-out');
                 console.error('Seamless pagination failed:', err);
                 win.location.href = url; // 失败时降级到普通跳转
@@ -159,8 +150,6 @@
 
         // 监听点击（上一页、下一页、数字页码）
         paginationContainer.addEventListener('click', (e) => {
-            // 保留 Ctrl/Cmd/Shift 点击等浏览器原生打开方式。
-            if (e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
             const link = e.target.closest('a');
             if (!link || link.getAttribute('href') === '#' || link.classList.contains('opacity-50')) return;
 

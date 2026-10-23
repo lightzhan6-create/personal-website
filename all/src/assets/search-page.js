@@ -50,7 +50,7 @@
         function renderSearchPageResults(results, searchResultsContainer) {
             if (!searchResultsContainer) return;
 
-            const html = searchCore.renderSearchResultCards(results, { layout: 'reading-list' });
+            const html = searchCore.renderSearchResultCards(results);
 
             unobserveDeferredImages(searchResultsContainer);
             searchResultsContainer.innerHTML = html;

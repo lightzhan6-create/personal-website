@@ -1,12 +1,8 @@
 name: Sync upstream template files
 
-# 每周二北京时间 02:17 自动从主仓库 OUBIGFA/Freecat-Blog 同步模板文件
-# 同步范围:all/ 文件夹 + README.md + README.en.md
-# 北京时间(UTC+8) 周二 02:17 = UTC 周一 18:17
-# GitHub Actions 的 schedule 触发可能有几分钟到十几分钟的延迟，属于正常现象
+# 此博客的 all/ 包含定制的文章、产品、视频和图库构建逻辑。
+# 上游自动同步会覆盖这些定制并发布空站，暂停同步；升级需人工审查合并。
 on:
-  schedule:
-    - cron: '17 18 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -14,6 +10,8 @@ permissions:
 
 jobs:
   sync-upstream-template:
+    # Keep manual dispatch harmless until a compatible sync strategy is implemented.
+    if: ${{ false }}
     runs-on: ubuntu-latest
 
     steps:

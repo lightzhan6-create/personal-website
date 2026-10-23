@@ -1,6 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const {
@@ -185,20 +186,9 @@ test('latest update extraction keeps fenced code block content', () => {
     );
 });
 
-test('latest updates skip first publication and metadata changes but retain later body edits', (t) => {
-    const tempRoot = path.resolve(__dirname, '../../.test');
-    fs.mkdirSync(tempRoot, { recursive: true });
-    const repoRoot = fs.mkdtempSync(path.join(tempRoot, 'latest-update-'));
-    t.after(() => {
-        assert.equal(path.dirname(fs.realpathSync(repoRoot)), fs.realpathSync(tempRoot));
-        if (process.platform === 'win32') {
-            execFileSync('powershell.exe', ['-NoProfile', '-Command',
-                'Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory($env:FREECAT_TEST_REPO, "OnlyErrorDialogs", "SendToRecycleBin")'
-            ], { env: { ...process.env, FREECAT_TEST_REPO: repoRoot }, stdio: ['ignore', 'pipe', 'pipe'] });
-        } else {
-            fs.rmSync(repoRoot, { recursive: true, force: true });
-        }
-    });
+test('latest update extraction ignores working tree whitespace-only body changes', (t) => {
+    const repoRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'freecat-latest-update-'));
+    t.after(() => fs.rmSync(repoRoot, { recursive: true, force: true }));
 
     const postsDir = path.join(repoRoot, 'writing');
     const file = 'Example.md';
@@ -210,7 +200,7 @@ test('latest updates skip first publication and metadata changes but retain late
         'show_latest_update: false',
         '---',
         '',
-        'Initial publication.'
+        'Committed body update.'
     ].join('\n'), 'utf-8');
 
     execFileSync('git', ['init'], { cwd: repoRoot, stdio: 'ignore' });
@@ -218,22 +208,6 @@ test('latest updates skip first publication and metadata changes but retain late
     execFileSync('git', ['config', 'user.name', 'Test User'], { cwd: repoRoot });
     execFileSync('git', ['add', '.'], { cwd: repoRoot });
     execFileSync('git', ['commit', '-m', 'initial'], { cwd: repoRoot, stdio: 'ignore' });
-
-    assert.equal(collectLatestUpdates({ repoRoot, postsDir })[file], undefined, 'first publication is not an update');
-    const newFile = path.join(postsDir, 'New.md');
-    fs.writeFileSync(newFile, '# New article\n\nFirst publication in an existing repository.\n', 'utf-8');
-    assert.equal(collectLatestUpdates({ repoRoot, postsDir })['New.md'], undefined, 'an untracked article is not an update');
-    execFileSync('git', ['add', 'writing/New.md'], { cwd: repoRoot });
-    assert.equal(collectLatestUpdates({ repoRoot, postsDir })['New.md'], undefined, 'a staged new article is not an update');
-    fs.writeFileSync(filePath, fs.readFileSync(filePath, 'utf-8').replace('show_latest_update: false', 'show_latest_update: true'), 'utf-8');
-    execFileSync('git', ['add', '.'], { cwd: repoRoot });
-    execFileSync('git', ['commit', '-m', 'enable updates'], { cwd: repoRoot, stdio: 'ignore' });
-    assert.equal(collectLatestUpdates({ repoRoot, postsDir })[file], undefined, 'metadata edits must not fall back to the first publication');
-    assert.equal(collectLatestUpdates({ repoRoot, postsDir })['New.md'], undefined, 'first publication in a non-root commit is not an update');
-    fs.writeFileSync(filePath, fs.readFileSync(filePath, 'utf-8').replace('Initial publication.', 'Committed body update.'), 'utf-8');
-    assert.equal(collectLatestUpdates({ repoRoot, postsDir })[file].source, 'working-tree', 'later local body edits remain visible');
-    execFileSync('git', ['add', '.'], { cwd: repoRoot });
-    execFileSync('git', ['commit', '-m', 'edit body'], { cwd: repoRoot, stdio: 'ignore' });
 
     fs.writeFileSync(filePath, [
         '---',
