@@ -6,7 +6,7 @@
     "custom-juki-gripper-nozzle-line-choke-case-study.md": "2026-10-07T11:26:09+08:00",
     "light-first-blog.md": "2026-09-07T16:21:04+08:00",
     "reflow-oven-profiling-for-reliable-pcba.md": "2026-09-17T11:30:39+08:00",
-    "scm5600d-offline-pcba-cleaning-machine.md": "2026-10-23T02:57:05.932Z",
+    "scm5600d-offline-pcba-cleaning-machine.md": "2026-10-23T10:59:04+08:00",
     "september-7-13-electronics-manufacturing-weekly-brief.md": "2026-10-07T11:26:09+08:00",
     "soldering-iron-tips-for-automatic-soldering-machines.md": "2026-10-07T11:26:09+08:00",
     "timing-belts-servo-motor-guide.md": "2026-09-22T14:15:04+08:00",
@@ -814,6 +814,129 @@
       ],
       "source": "commit",
       "commit": "979e05fd255a"
+    },
+    "scm5600d-offline-pcba-cleaning-machine.md": {
+      "items": [
+        "Flux residues, solder-paste particles and other contamination can remain on an assembled PCB after soldering. The right cleaning process depends on the assembly, the residue and the materials on the board. It also needs a way to rinse and dry the assembly without leaving trapped liquid around components or connectors.",
+        "The SCM5600D PCBA cleaning machine is an offline batch system that combines chemical spray cleaning, deionised (DI) water rinsing and hot-air drying in one automatic cycle. It is intended for SMT, THT and mixed-technology PCB assemblies, with process settings adjusted to suit a validated application.",
+        "A controlled clean, rinse and dry cycle",
+        "Operators load the assemblies into the two-level fixture and select the approved recipe on the touch-screen control. The machine then sequences chemical spray cleaning, DI-water rinsing and hot-air drying. After the cycle, the assemblies are unloaded and inspected according to the agreed process.",
+        "The cleaning liquid is recirculated through a filtration loop. The rinse stage uses DI-water spray, and the machine monitors rinsing-water resistivity. Process variables such as time, temperature, rinse cycles and spray pressure can be adjusted during process development.",
+        "Applications and residues to evaluate",
+        "The system is presented for SMT assemblies, through-hole assemblies and mixed SMT/THT boards. Double-sided assemblies can also be considered, subject to fixture suitability and validation. Potential applications include high-value electronics in automotive, medical, aerospace and new-energy production, where the cleaning process and acceptance criteria must be defined for the actual product.",
+        "The presentation identifies rosin, water-soluble and no-clean flux residues, solder-paste balls and mixed organic or inorganic contamination as residue profiles for evaluation. A trial is needed to determine whether the selected chemistry and settings are suitable for a particular board and residue.",
+        "Three rotating spray levels and two loading levels",
+        "The machine uses upper, middle and lower rotating spray bars around a two-level loading fixture. The upper bar sprays towards the upper level, the middle bar supports access between the levels, and the lower bar sprays towards the lower level. Representative boards are needed to check actual coverage, particularly around tall components and areas that can trap liquid.",
+        "The SUS304 stainless-steel fixture and basket provide two loading levels. The specified basket size is 610 × 560 × 100 mm per level. The number of boards per batch and available component-height clearance depend on board dimensions, spacing and fixture arrangement.",
+        "Adjustable process settings",
+        "The PLC and touch screen provide access to the following ranges shown in the product specifications. They are machine adjustment ranges, not recommended settings for every assembly.",
+        "The specification page also lists 10–20 minutes for cleaning, 1–2 minutes per rinse and 15–30 minutes for drying. These are narrower reference values than the adjustable ranges above; the actual recipe must be established through testing.",
+        "Tanks, fluid monitoring and utilities",
+        "The fluid system includes a 30 L concentrate tank, a 60 L dilution tank and an 18 L spray tank. Pressure gauges support monitoring of fluid circuits. The specification states a rinsing-water resistivity monitoring range of 0–18 MΩ; it does not specify a temperature basis or normalised unit, so confirm the instrument details during engineering review. Resistivity monitoring supports process control, while board cleanliness acceptance should follow the agreed inspection method.",
+        "Power standard, connections, heater and pump ratings, and the current general-arrangement drawing should be confirmed for the final machine configuration before ordering.",
+        "How to validate a PCBA cleaning process",
+        "Before setting a production recipe, review board size, component height and expected loading quantity. Identify materials that may be sensitive to cleaning chemistry, temperature, pressure or moisture, including relays, connectors, labels, plastics and adhesives.",
+        "Run trials on representative uncleaned assemblies using controlled starting conditions. Inspect for remaining residue, trapped liquid, material changes and drying performance, then perform the agreed electrical or functional checks. Release the recipe only after the representative samples pass the agreed criteria.",
+        "For a useful evaluation, share the following with Southern Machinery:",
+        "Representative uncleaned PCB assemblies and photographs of sensitive areas. Board dimensions, maximum component height and target batch quantity. Flux or solder-paste information and the cleaning agent under consideration. Sensitive components, cleanliness requirements and the intended inspection method.",
+        "To discuss a sample trial or request the current SCM5600D configuration, contact light@smthelp.com or visit Southern Machinery."
+      ],
+      "targets": [
+        {
+          "text": "Flux residues, solder-paste particles and other contamination can remain on an assembled PCB after soldering. The right cleaning process depends on the assembly, the residue and the materials on the board. It also needs a way to rinse and dry the assembly without leaving trapped liquid around components or connectors.",
+          "line": 38
+        },
+        {
+          "text": "The **SCM5600D PCBA cleaning machine** is an offline batch system that combines chemical spray cleaning, deionised (DI) water rinsing and hot-air drying in one automatic cycle. It is intended for SMT, THT and mixed-technology PCB assemblies, with process settings adjusted to suit a validated application.",
+          "line": 40
+        },
+        {
+          "text": "## A controlled clean, rinse and dry cycle",
+          "line": 47
+        },
+        {
+          "text": "Operators load the assemblies into the two-level fixture and select the approved recipe on the touch-screen control. The machine then sequences chemical spray cleaning, DI-water rinsing and hot-air drying. After the cycle, the assemblies are unloaded and inspected according to the agreed process.",
+          "line": 49
+        },
+        {
+          "text": "The cleaning liquid is recirculated through a filtration loop. The rinse stage uses DI-water spray, and the machine monitors rinsing-water resistivity. Process variables such as time, temperature, rinse cycles and spray pressure can be adjusted during process development.",
+          "line": 51
+        },
+        {
+          "text": "## Applications and residues to evaluate",
+          "line": 58
+        },
+        {
+          "text": "The system is presented for SMT assemblies, through-hole assemblies and mixed SMT/THT boards. Double-sided assemblies can also be considered, subject to fixture suitability and validation. Potential applications include high-value electronics in automotive, medical, aerospace and new-energy production, where the cleaning process and acceptance criteria must be defined for the actual product.",
+          "line": 60
+        },
+        {
+          "text": "The presentation identifies rosin, water-soluble and no-clean flux residues, solder-paste balls and mixed organic or inorganic contamination as residue profiles for evaluation. A trial is needed to determine whether the selected chemistry and settings are suitable for a particular board and residue.",
+          "line": 62
+        },
+        {
+          "text": "## Three rotating spray levels and two loading levels",
+          "line": 69
+        },
+        {
+          "text": "The machine uses upper, middle and lower rotating spray bars around a two-level loading fixture. The upper bar sprays towards the upper level, the middle bar supports access between the levels, and the lower bar sprays towards the lower level. Representative boards are needed to check actual coverage, particularly around tall components and areas that can trap liquid.",
+          "line": 71
+        },
+        {
+          "text": "The SUS304 stainless-steel fixture and basket provide two loading levels. The specified basket size is **610 × 560 × 100 mm per level**. The number of boards per batch and available component-height clearance depend on board dimensions, spacing and fixture arrangement.",
+          "line": 78
+        },
+        {
+          "text": "## Adjustable process settings",
+          "line": 85
+        },
+        {
+          "text": "The PLC and touch screen provide access to the following ranges shown in the product specifications. They are machine adjustment ranges, not recommended settings for every assembly.",
+          "line": 87
+        },
+        {
+          "text": "The specification page also lists **10–20 minutes** for cleaning, **1–2 minutes per rinse** and **15–30 minutes** for drying. These are narrower reference values than the adjustable ranges above; the actual recipe must be established through testing.",
+          "line": 100
+        },
+        {
+          "text": "## Tanks, fluid monitoring and utilities",
+          "line": 102
+        },
+        {
+          "text": "The fluid system includes a 30 L concentrate tank, a 60 L dilution tank and an 18 L spray tank. Pressure gauges support monitoring of fluid circuits. The specification states a rinsing-water resistivity monitoring range of **0–18 MΩ**; it does not specify a temperature basis or normalised unit, so confirm the instrument details during engineering review. Resistivity monitoring supports process control, while board cleanliness acceptance should follow the agreed inspection method.",
+          "line": 104
+        },
+        {
+          "text": "Power standard, connections, heater and pump ratings, and the current general-arrangement drawing should be confirmed for the final machine configuration before ordering.",
+          "line": 120
+        },
+        {
+          "text": "## How to validate a PCBA cleaning process",
+          "line": 122
+        },
+        {
+          "text": "Before setting a production recipe, review board size, component height and expected loading quantity. Identify materials that may be sensitive to cleaning chemistry, temperature, pressure or moisture, including relays, connectors, labels, plastics and adhesives.",
+          "line": 124
+        },
+        {
+          "text": "Run trials on representative uncleaned assemblies using controlled starting conditions. Inspect for remaining residue, trapped liquid, material changes and drying performance, then perform the agreed electrical or functional checks. Release the recipe only after the representative samples pass the agreed criteria.",
+          "line": 126
+        },
+        {
+          "text": "For a useful evaluation, share the following with Southern Machinery:",
+          "line": 128
+        },
+        {
+          "text": "- Representative uncleaned PCB assemblies and photographs of sensitive areas.",
+          "line": 130
+        },
+        {
+          "text": "To discuss a sample trial or request the current SCM5600D configuration, contact **light@smthelp.com** or visit [Southern Machinery](https://www.smthelp.com/).",
+          "line": 135
+        }
+      ],
+      "source": "commit",
+      "commit": "1fad2fa50d6c"
     },
     "september-7-13-electronics-manufacturing-weekly-brief.md": {
       "items": [
