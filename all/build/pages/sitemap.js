@@ -4,6 +4,7 @@ const seo = require('../seo.js');
 const { renderPostContent } = require('./post-content.js');
 
 const PRODUCT_ROUTES = [
+    '/products/pcb-magazine-loader-sld390/',
     '/products/sc-900-multi-blades-v-cut-pcb-separator/',
     '/products/s-d602-led-depaneler/',
     '/products/turnover-box-interactive-3d/',
