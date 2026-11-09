@@ -4,6 +4,11 @@ const seo = require('../seo.js');
 const { renderPostContent } = require('./post-content.js');
 
 const PRODUCT_ROUTES = [
+    '/products/s350c-pcb-link-conveyor/',
+    '/products/s350dlc-cooling-inspection-conveyor/',
+    '/products/90-degree-pcb-turning-conveyor/',
+    '/products/wave-solder-infeed-conveyor/',
+    '/products/wave-solder-outfeed-cooling-conveyor/',
     '/products/srt7001-reel-terminal-feeder/',
     '/products/pcb-magazine-loader-sld390/',
     '/products/sc-900-multi-blades-v-cut-pcb-separator/',
