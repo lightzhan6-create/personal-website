@@ -4,6 +4,7 @@ const seo = require('../seo.js');
 const { renderPostContent } = require('./post-content.js');
 
 const PRODUCT_ROUTES = [
+    '/products/sir5000b-smart-smt-reel-rack/',
     '/products/s350c-pcb-link-conveyor/',
     '/products/s350dlc-cooling-inspection-conveyor/',
     '/products/90-degree-pcb-turning-conveyor/',
