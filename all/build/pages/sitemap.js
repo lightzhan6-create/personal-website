@@ -3,10 +3,27 @@ const path = require('path');
 const seo = require('../seo.js');
 const { renderPostContent } = require('./post-content.js');
 
+const FEATURED_EQUIPMENT = [
+    {
+        route: '/products/s-300b-radial-lead-forming-taping-machine/',
+        name: 'S-300B Radial Lead Forming & Taping Machine',
+        summary: 'Standard formed lead pitches, carrier tape hole pitch, tooling review and manufacturer STEP drawing.'
+    },
+    {
+        route: '/products/s-100b-desktop-selective-soldering-machine/',
+        name: 'S-100B Desktop Selective Soldering Machine',
+        summary: 'Selective soldering for through-hole joints, with standard nozzle sizes, XYZ positioning and sample-board review.'
+    },
+    {
+        route: '/products/x3100-offline-x-ray-component-counter/',
+        name: 'X3100 Offline X-ray Component Counter',
+        summary: 'Reel size limits, counting time for four reels of 0201 chips, and quantity label examples for SMT inventory.'
+    }
+];
+
 const PRODUCT_ROUTES = [
-    '/products/s-300b-radial-lead-forming-taping-machine/',
-    '/products/s-100b-desktop-selective-soldering-machine/',
-    '/products/x3100-offline-x-ray-component-counter/',
+    '/products/',
+    ...FEATURED_EQUIPMENT.map(product => product.route),
     '/products/sir5000b-smart-smt-reel-rack/',
     '/products/s350c-pcb-link-conveyor/',
     '/products/s350dlc-cooling-inspection-conveyor/',
@@ -194,6 +211,10 @@ function generateLlmsTxt({ posts, siteConfig, seoConfig = {}, outputDir }) {
         `- Home: ${baseUrl}/`,
         `- All Articles: ${baseUrl}/all`,
         `- About: ${baseUrl}/about`,
+        '',
+        '## SMT and THT Equipment',
+        `- [Southern Machinery equipment catalog](${baseUrl}/products/)`,
+        ...FEATURED_EQUIPMENT.map(product => `- [${product.name}](${baseUrl}${product.route}) — ${product.summary}`),
         '',
         '## Articles'
     ];
