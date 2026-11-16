@@ -5,6 +5,11 @@ const { renderPostContent } = require('./post-content.js');
 
 const FEATURED_EQUIPMENT = [
     {
+        route: '/products/sir4000b-compact-mobile-smt-reel-rack/',
+        name: 'SIR4000B Compact Mobile SMT Reel Rack',
+        summary: 'A one-metre mobile rack with 300 positions for 7-inch reels and 23 for 13-inch reels. Includes a reel capacity check and catalog dimensions.'
+    },
+    {
         route: '/products/s-300b-radial-lead-forming-taping-machine/',
         name: 'S-300B Radial Lead Forming & Taping Machine',
         summary: 'Standard formed lead pitches, carrier tape hole pitch, tooling review and manufacturer STEP drawing.'
