@@ -4,6 +4,9 @@ const seo = require('../seo.js');
 const { renderPostContent } = require('./post-content.js');
 
 const PRODUCT_ROUTES = [
+    '/products/s-300b-radial-lead-forming-taping-machine/',
+    '/products/s-100b-desktop-selective-soldering-machine/',
+    '/products/x3100-offline-x-ray-component-counter/',
     '/products/sir5000b-smart-smt-reel-rack/',
     '/products/s350c-pcb-link-conveyor/',
     '/products/s350dlc-cooling-inspection-conveyor/',
