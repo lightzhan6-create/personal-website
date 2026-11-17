@@ -5,6 +5,11 @@ const { renderPostContent } = require('./post-content.js');
 
 const FEATURED_EQUIPMENT = [
     {
+        route: '/products/sir5000c-mobile-smt-reel-storage-trolley/',
+        name: 'SIR5000C Mobile SMT Reel Storage Trolley',
+        summary: 'Four-level, 400 mm wide mobile reel trolley. The catalog lists 390 positions for 7-inch reels up to 18 mm thick and 36 for 13-inch reels up to 37 mm thick.'
+    },
+    {
         route: '/products/sir4000b-compact-mobile-smt-reel-rack/',
         name: 'SIR4000B Compact Mobile SMT Reel Rack',
         summary: 'A one-metre mobile rack with 300 positions for 7-inch reels and 23 for 13-inch reels. Includes a reel capacity check and catalog dimensions.'
