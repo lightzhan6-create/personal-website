@@ -5,6 +5,16 @@ const { renderPostContent } = require('./post-content.js');
 
 const FEATURED_EQUIPMENT = [
     {
+        route: '/products/hd-series-automatic-roll-cutting-machines/',
+        name: 'HD Series Roll Cutting Machines | HD-400 to HD-1200',
+        summary: 'Seven tabletop models in one specifications table, with 34 or 80 m/min listed speeds, material applications, operating videos and export packing data. HD-500 effective width requires confirmation.'
+    },
+    {
+        route: '/products/hd-600-700-800-roll-cutting-machines/',
+        name: 'HD-600, HD-700 & HD-800 Roll Cutting Machines',
+        summary: 'Compare three 600–800 mm tabletop roll cutters with an interactive model selector, material applications, operating videos and packing dimensions.'
+    },
+    {
         route: '/products/sir5000c-mobile-smt-reel-storage-trolley/',
         name: 'SIR5000C Mobile SMT Reel Storage Trolley',
         summary: 'Four-level, 400 mm wide mobile reel trolley. The catalog lists 390 positions for 7-inch reels up to 18 mm thick and 36 for 13-inch reels up to 37 mm thick.'
