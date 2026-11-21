@@ -5,6 +5,11 @@ const { renderPostContent } = require('./post-content.js');
 
 const FEATURED_EQUIPMENT = [
     {
+        route: '/products/nbhz-5331-automatic-soldering-machine/',
+        name: 'NBHZ-5331 Automatic Soldering Machine',
+        summary: 'Double-head, double-station automatic soldering machine with a 500/300/300/100 mm work plan, ±0.02 mm repeat accuracy and a room-temperature to 480°C temperature range.'
+    },
+    {
         route: '/products/hd-series-automatic-roll-cutting-machines/',
         name: 'HD Series Roll Cutting Machines | HD-400 to HD-1200',
         summary: 'Seven tabletop models in one specifications table, with 34 or 80 m/min listed speeds, material applications, operating videos and export packing data. HD-500 effective width requires confirmation.'
